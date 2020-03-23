@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "uni-ui基础项目",
-  "usingComponents": {}
+  "usingComponents": {
+    "ad-tabbar": "/components/andy-ADTabbar/andy-ADTabbar",
+    "ad-tabbar-item": "/components/andy-ADTabbar/andy-ADTabbarItem"
+  }
 }
