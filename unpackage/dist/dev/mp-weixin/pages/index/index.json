@@ -1,7 +1,12 @@
 {
-  "navigationBarTitleText": "uni-ui基础项目",
+  "navigationBarTitleText": "自定义tabbar",
+  "enablePullDownRefresh": true,
+  "bounce": "none",
   "usingComponents": {
-    "ad-tabbar": "/components/andy-ADTabbar/andy-ADTabbar",
-    "ad-tabbar-item": "/components/andy-ADTabbar/andy-ADTabbarItem"
+    "tab-game": "/components/tabBar/game",
+    "tab-discovery": "/components/tabBar/discovery",
+    "tab-information": "/components/tabBar/information",
+    "tab-data": "/components/tabBar/Data",
+    "tab-mycenter": "/components/tabBar/mycenter"
   }
 }

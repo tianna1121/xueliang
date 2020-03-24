@@ -104,11 +104,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/andy-ADTabbar/andy-ADTabbar":1,"components/andy-ADTabbar/andy-ADTabbarItem":1};
+/******/ 		var cssChunks = {"components/tabBar/Data":1,"components/tabBar/discovery":1,"components/tabBar/game":1,"components/tabBar/information":1,"components/tabBar/mycenter":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/andy-ADTabbar/andy-ADTabbar":"components/andy-ADTabbar/andy-ADTabbar","components/andy-ADTabbar/andy-ADTabbarItem":"components/andy-ADTabbar/andy-ADTabbarItem"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/tabBar/Data":"components/tabBar/Data","components/tabBar/discovery":"components/tabBar/discovery","components/tabBar/game":"components/tabBar/game","components/tabBar/information":"components/tabBar/information","components/tabBar/mycenter":"components/tabBar/mycenter"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {
