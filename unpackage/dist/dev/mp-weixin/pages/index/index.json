@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "自定义tabbar",
+  "navigationBarTitleText": "雪亮工程",
   "enablePullDownRefresh": true,
   "bounce": "none",
   "usingComponents": {
