@@ -43,6 +43,7 @@
           flex: 1;
 }
 .login-box {
+  z-index: 100;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -55,18 +56,21 @@
           flex: 1;
 }
 .logo-img {
+  z-index: 100;
   width: 330rpx;
   height: 330rpx;
   margin: 128rpx auto 0;
   border-radius: 50%;
 }
 .title {
+  z-index: 100;
   font-size: 70rpx;
   font-weight: 500;
   color: #FFFFFF;
   text-align: center;
 }
 .acount-box {
+  z-index: 100;
   width: 630rpx;
   height: 50rpx;
   margin: 88rpx auto 12rpx;
@@ -85,6 +89,7 @@
   padding: 20rpx 30rpx;
 }
 .account-title {
+  z-index: 100;
   color: #DAE1EC;
   font-size: 34rpx;
   display: -webkit-box;
@@ -130,6 +135,7 @@
   border-radius: 10rpx;
 }
 .jump-reg {
+  z-index: 100;
   width: 136rpx;
   height: 68rpx;
   font-size: 34rpx;

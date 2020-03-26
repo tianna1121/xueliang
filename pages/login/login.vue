@@ -13,7 +13,7 @@
 				<text class="account-title">密码：</text>
 				<input v-model="passData" class="ipt-tel " placeholder="初始密码为身份证后六位"  type="text" placeholder-class="placeholder"/>	
 			</view>
-			<button type="primary" class="btn-login" >登录</button>
+			<button type="primary" class="btn-login" @tap="loginJump">登录</button>
 			<view class="jump-reg" @tap="jumpRegster">注册账号</view>
 		</view>
 		 
@@ -42,8 +42,17 @@
 				    url: '../register/register',
 					
 				});
+			},
+			loginJump(){
+				console.log("denglu")
+				uni.redirectTo({
+				    url: '../index/index',
+					
+				});
 			}
 		}
+			
+		
 	
 	}
 	
@@ -66,11 +75,13 @@
 			
 		}
 		.login-box{
+			z-index: 100;
 			display: flex;
 			flex-direction: column;
 			flex: 1;
 		}
 		.logo-img{
+			z-index: 100;
 			width: 330rpx;
 			height: 330rpx;
 			margin: 128rpx auto 0;
@@ -78,6 +89,7 @@
 			
 		}
 		.title{
+			z-index: 100;
 			font-size:70rpx;
 			font-weight: 500;
 			color: #FFFFFF;
@@ -85,6 +97,7 @@
 		}
 			
 		.acount-box{
+			z-index: 100;
 			width: 630rpx;
 			height: 50rpx;
 			margin: 88rpx auto 12rpx;
@@ -97,6 +110,7 @@
 		}
 			
 		.account-title{
+			z-index: 100;
 			color: #DAE1EC;
 			font-size:34rpx;
 			display: flex;
@@ -131,6 +145,7 @@
 		}
 				
 			.jump-reg{
+				z-index: 100;
 				width:136rpx;
 				height:68rpx;
 				font-size:34rpx;
