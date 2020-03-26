@@ -1,20 +1,20 @@
 <template>
 	<view class="login_box">
-		<image  mode="widthFix"  class="bg_img" src="../../static/img/news/login_bg.png"></image>
+		<image  mode="widthFix"  class="bg-img" src="../../static/img/news/login_bg.png"></image>
 	    <!-- logo图 -->
 		<view class="main">
-			<image class="logo_img" src="../../static/img/news/bg.png"></image>
+			<image class="logo-img" src="../../static/img/news/bg.png"></image>
 			<view class="title">雪亮工程</view>
-			<view class="acount_box">
-				<text class="account_title">账号：</text>
-				<input v-model="tel" class="ipt_tel" placeholder="请输入注册手机号"  type="number" placeholder-class="placeholder"/>	
+			<view class="acount-box">
+				<text class="account-title">账号：</text>
+				<input v-model="tel" class="ipt-tel" placeholder="请输入注册手机号"  type="number" placeholder-class="placeholder"/>	
 			</view>
-			<view class="acount_box passwd">
-				<text class="account_title">密码：</text>
-				<input v-model="passData" class="ipt_tel " placeholder="初始密码为身份证后六位"  type="text" placeholder-class="placeholder"/>	
+			<view class="acount-box passwd">
+				<text class="account-title">密码：</text>
+				<input v-model="passData" class="ipt-tel " placeholder="初始密码为身份证后六位"  type="text" placeholder-class="placeholder"/>	
 			</view>
-			<button type="primary" class="btn_login" >登录</button>
-			<view class="jump_reg" @tap="jumpRegster">注册账号</view>
+			<button type="primary" class="btn-login" >登录</button>
+			<view class="jump-reg" @tap="jumpRegster">注册账号</view>
 		</view>
 		 
 	</view>
@@ -51,9 +51,10 @@
 
 <style lang='scss'>
 			
-		.bg_img{
+		.bg-img{
 			width: 750rpx;
 			position: absolute;
+			height: 1334rpx;
 			
 		}
 			
@@ -64,12 +65,12 @@
 			flex: 1;
 			
 		}
-		.login_box{
+		.login-box{
 			display: flex;
 			flex-direction: column;
 			flex: 1;
 		}
-		.logo_img{
+		.logo-img{
 			width: 330rpx;
 			height: 330rpx;
 			margin: 128rpx auto 0;
@@ -83,7 +84,7 @@
 			text-align: center;
 		}
 			
-		.acount_box{
+		.acount-box{
 			width: 630rpx;
 			height: 50rpx;
 			margin: 88rpx auto 12rpx;
@@ -95,7 +96,7 @@
 			padding: 20rpx 30rpx;
 		}
 			
-		.account_title{
+		.account-title{
 			color: #DAE1EC;
 			font-size:34rpx;
 			display: flex;
@@ -103,7 +104,7 @@
 			justify-content: center;
 		}
 		
-		.ipt_tel{
+		.ipt-tel{
 			color: #FFFFFF;
 			font-size: 34rpx;
 			display: flex;
@@ -119,7 +120,7 @@
 		.passwd{
 			margin-top: 25rpx;
 		}
-		.btn_login{
+		.btn-login{
 			margin: 72rpx auto;
 			color: #FFFFFF;
 			font-size:36rpx;
@@ -129,7 +130,7 @@
 			border-radius:10rpx;
 		}
 				
-			.jump_reg{
+			.jump-reg{
 				width:136rpx;
 				height:68rpx;
 				font-size:34rpx;

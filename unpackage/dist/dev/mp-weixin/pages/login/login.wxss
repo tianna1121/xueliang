@@ -24,9 +24,10 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.bg_img {
+.bg-img {
   width: 750rpx;
   position: absolute;
+  height: 1334rpx;
 }
 .main {
   z-index: 100;
@@ -41,7 +42,7 @@
   -webkit-flex: 1;
           flex: 1;
 }
-.login_box {
+.login-box {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -53,7 +54,7 @@
   -webkit-flex: 1;
           flex: 1;
 }
-.logo_img {
+.logo-img {
   width: 330rpx;
   height: 330rpx;
   margin: 128rpx auto 0;
@@ -65,7 +66,7 @@
   color: #FFFFFF;
   text-align: center;
 }
-.acount_box {
+.acount-box {
   width: 630rpx;
   height: 50rpx;
   margin: 88rpx auto 12rpx;
@@ -83,7 +84,7 @@
           flex: 1;
   padding: 20rpx 30rpx;
 }
-.account_title {
+.account-title {
   color: #DAE1EC;
   font-size: 34rpx;
   display: -webkit-box;
@@ -97,7 +98,7 @@
   -webkit-justify-content: center;
           justify-content: center;
 }
-.ipt_tel {
+.ipt-tel {
   color: #FFFFFF;
   font-size: 34rpx;
   display: -webkit-box;
@@ -119,7 +120,7 @@
 .passwd {
   margin-top: 25rpx;
 }
-.btn_login {
+.btn-login {
   margin: 72rpx auto;
   color: #FFFFFF;
   font-size: 36rpx;
@@ -128,7 +129,7 @@
   background: #2256D8 !important;
   border-radius: 10rpx;
 }
-.jump_reg {
+.jump-reg {
   width: 136rpx;
   height: 68rpx;
   font-size: 34rpx;
