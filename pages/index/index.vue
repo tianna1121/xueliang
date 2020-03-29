@@ -1,5 +1,5 @@
 <template>
-	<view class="content">
+	<view class="">
 		<!-- 比赛 -->
 		<tab-game :style="{'display':show_index == 0 ?'block':'none'}" ref="game"></tab-game>
 		<!-- 发现 -->
@@ -104,7 +104,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 	.tabBar{ width:100%;height: 98rpx;background: #fff;border-top:1px solid #E5E5E5;position: fixed;bottom:0px;left:0px;right:0px;display: flex;align-items: center;justify-content: center;
 		.tabBar_list{ width:95%;display: flex;justify-content: space-between;
 			image{ width:44rpx;height: 44rpx;margin-bottom:2rpx}

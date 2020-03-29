@@ -135,7 +135,7 @@
 </script>
 
 <style lang="scss">
-	.main{}
+	.main{ background-color: #FFFFFF;}
 	// padding-bottom:120rpx;box-sizing: border-box;重要*************************保证页面底部内容不被隐藏也不会出现多余的滚动条
 	.main_box{width:100vw;height: 100vh;padding-bottom:120rpx;box-sizing: border-box;}
 	.main_centent{width: 100%;height: 100vh;color: #fff;letter-spacing: 4rpx;display: flex;align-items: center;justify-content: center;}
