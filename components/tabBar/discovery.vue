@@ -387,9 +387,7 @@ export default {
 		
 	}
 	.item-title1 {
-		
 		margin-right: 0rpx;
-		
 	}
 
 	.it1 {
@@ -425,82 +423,6 @@ export default {
 		width: 100%;
 		display: flex;
 		flex-direction: row;
-	}
-	.bot {
-		flex-direction: row;
-	}
-	.author {
-		font-size: 26upx;
-		color: #aaa;
-	}
-	.time {
-		font-size: 26upx;
-		color: #aaa;
-		margin-left: 20upx;
-	}
-	.img-list {
-		flex-shrink: 0;
-		flex-direction: row;
-		background-color: #fff;
-		width: 220upx;
-		height: 140upx;
-	}
-	.img-wrapper {
-		flex: 1;
-		flex-direction: row;
-		height: 140upx;
-		position: relative;
-		overflow: hidden;
-	}
-	.img {
-		flex: 1;
-	}
-	.img-empty {
-		height: 20upx;
-	}
-
-	/* 图在左 */
-	.img-list1 {
-		position: absolute;
-		left: 30upx;
-		top: 24upx;
-	}
-	.title1 {
-		padding-left: 240upx;
-	}
-	.bot1 {
-		padding-left: 240upx;
-		margin-top: 20upx;
-	}
-	/* 图在右 */
-	.img-list2 {
-		position: absolute;
-		right: 30upx;
-		top: 24upx;
-	}
-	.title2 {
-		padding-right: 210upx;
-	}
-	.bot2 {
-		margin-top: 20upx;
-	}
-	/* 底部3图 */
-	.img-list3 {
-		width: 700upx;
-		margin: 16upx 0upx;
-	}
-	.img-wrapper3 {
-		margin-right: 4upx;
-	}
-	/* 底部大图 */
-	.img-list-single {
-		width: 690upx;
-		height: 240upx;
-		margin: 16upx 0upx;
-	}
-	.img-wrapper-single {
-		height: 240upx;
-		margin-right: 0upx;
 	}
 
 	.video-tip {

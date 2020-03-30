@@ -33,10 +33,6 @@
 	 */
   /* 修改结束 */
   /* 新闻列表  emmm 仅供参考 */
-  /* 图在左 */
-  /* 图在右 */
-  /* 底部3图 */
-  /* 底部大图 */
 }
 .bigBox page,
   .bigBox .content {
@@ -162,91 +158,6 @@
     -webkit-box-direction: normal;
     -webkit-flex-direction: row;
             flex-direction: row;
-}
-.bigBox .bot {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-            flex-direction: row;
-}
-.bigBox .author {
-    font-size: 26rpx;
-    color: #aaa;
-}
-.bigBox .time {
-    font-size: 26rpx;
-    color: #aaa;
-    margin-left: 20rpx;
-}
-.bigBox .img-list {
-    -webkit-flex-shrink: 0;
-            flex-shrink: 0;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-            flex-direction: row;
-    background-color: #fff;
-    width: 220rpx;
-    height: 140rpx;
-}
-.bigBox .img-wrapper {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-            flex: 1;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-            flex-direction: row;
-    height: 140rpx;
-    position: relative;
-    overflow: hidden;
-}
-.bigBox .img {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-            flex: 1;
-}
-.bigBox .img-empty {
-    height: 20rpx;
-}
-.bigBox .img-list1 {
-    position: absolute;
-    left: 30rpx;
-    top: 24rpx;
-}
-.bigBox .title1 {
-    padding-left: 240rpx;
-}
-.bigBox .bot1 {
-    padding-left: 240rpx;
-    margin-top: 20rpx;
-}
-.bigBox .img-list2 {
-    position: absolute;
-    right: 30rpx;
-    top: 24rpx;
-}
-.bigBox .title2 {
-    padding-right: 210rpx;
-}
-.bigBox .bot2 {
-    margin-top: 20rpx;
-}
-.bigBox .img-list3 {
-    width: 700rpx;
-    margin: 16rpx 0rpx;
-}
-.bigBox .img-wrapper3 {
-    margin-right: 4rpx;
-}
-.bigBox .img-list-single {
-    width: 690rpx;
-    height: 240rpx;
-    margin: 16rpx 0rpx;
-}
-.bigBox .img-wrapper-single {
-    height: 240rpx;
-    margin-right: 0rpx;
 }
 .bigBox .video-tip {
     position: absolute;
