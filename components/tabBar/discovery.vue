@@ -25,7 +25,7 @@
 									<text class="it1" space="emsp" decode="true">  {{ item.reporter }}</text>
 								</text>
 								<text class="item-title" space="emsp" :decode="trues">
-									 &ensp; &emsp;电 &ensp; &emsp;话: &ensp; &emsp;
+									 电话: 
 									<text class="it2">{{ item.phone }}</text>
 								</text>
 								<text class="item-title last-cild" space="emsp">
@@ -41,10 +41,15 @@
 							</view>
 							<view class="items it4">
 								<text class="item-title item-title1" space="emsp">
-									上报内容:
+									上报内容:  
 									</text>
 									<text class="it3">{{ item.content }}</text>
-								
+							</view>
+							<view class="items">
+								<text class="item-title" space="emsp">
+									上报时间: 
+									<text class="it1">{{ item.time }}</text>
+								</text>
 							</view>
 						</view>
 
@@ -371,7 +376,7 @@ export default {
 	/* 新闻列表  emmm 仅供参考 */
 	.news-item {
 		width: 750rpx;
-		padding: 20rpx;
+		padding: 20rpx 20rpx 1rpx 20rpx;
 		background-color: #fff;
 		margin-bottom: 20rpx;
 	}
