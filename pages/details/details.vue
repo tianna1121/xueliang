@@ -64,11 +64,22 @@
 			<view class="popup_title">我要反馈</view>
 			<view class="popup_textarea_item">
 				<textarea class="popup_textarea" focus placeholder="输入内容..." v-model="feedbackContent"></textarea>
-				<view @click="submitFeedback()"><button class="popup_button">提交反馈</button></view>
+				
+				<view  class="btn-box"><button class="popup_button1" @click="hideDiv()">关闭</button><button class="popup_button" @click="submitFeedback()">提交</button></view>
 			</view>
 		</view>
 		<view class="popup_overlay" :hidden="userFeedbackHidden" @click="hideDiv()"></view>
-	</view>
+<uni-popup ref="showtip" type="center" :mask-click="false">
+			<view class="uni-tip">
+				<text class="uni-tip-title">处理完成</text>
+				<text class="uni-tip-content">确认事件已经处理完成？</text>
+				<view class="uni-tip-group-button">
+					<text class="uni-tip-button uni-tip-button1 " @click="cancel('tip')">取消</text>
+					<text class="uni-tip-button" @click="cancel('tip')">处理完成</text>
+				</view>
+			</view>
+		</uni-popup>
+</view>
 </template>
 
 <script>
@@ -76,6 +87,7 @@ import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 import uniSteps from '@/components/uni-steps/uni-steps.vue';
 import uniList from '@/components/uni-list/uni-list.vue';
 import uniListItem from '@/components/uni-list-item/uni-list-item.vue';
+import uniPopup from '@/components/uni-popup/uni-popup.vue'
 import json from '@/json';
 
 export default {
@@ -83,7 +95,8 @@ export default {
 		uniNavBar,
 		uniSteps,
 		uniList,
-		uniListItem
+		uniListItem,
+		uniPopup
 	},
 	data() {
 		return {
@@ -151,6 +164,9 @@ export default {
 		},
 		submitMsg() {
 			console.log('確認完成');
+			this.$nextTick(() => {
+				this.$refs.showtip.open()
+			})
 		},
 		alertMsg() {
 			console.log('我要反馈');
@@ -162,11 +178,14 @@ export default {
 		},
 		submitFeedback() {
 			// 提交反馈
-
 			var _this = this;
 			// 提交反馈内容
 			console.log(_this.feedbackContent);
-		}
+			this.userFeedbackHidden = true;
+		},
+		cancel(type) {
+			this.$refs.showtip.close()
+		},
 	}
 };
 </script>
@@ -345,31 +364,28 @@ page {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	width: 520upx;
-	height: 550upx;
+	width: 540rpx;
+	height: 450rpx;
 	margin-left: -270upx;
 	margin-top: -270upx;
-	border: 10px solid white;
 	background-color: white;
 	z-index: 1002;
 	overflow: auto;
 	border-radius: 20upx;
+	padding-bottom: 16rpx;
 }
 
 .popup_title {
-	padding-top: 20upx;
+	padding-top: 30upx;
 	width: 480upx;
 	text-align: center;
 	font-size: 34upx;
 }
 
 .popup_textarea_item {
-	padding-top: 5upx;
 	height: 200upx;
-	width: 440upx;
-	background-color: #fff;
-	margin-top: 80upx;
-	margin-left: 20upx;
+	margin-top: 50upx;
+	margin-left: 30upx;
 }
 
 .popup_textarea {
@@ -378,11 +394,79 @@ page {
 	font-size: 28rpx;
 	margin-left: 30rpx;
 	border: 1px #F1F1F1 solid;
+	margin-bottom: 24rpx;
 }
-
+.btn-box{
+	width: 540rpx;
+	display: flex;
+	flex-direction: row;
+	margin-left: -30rpx;
+	flex: 1;
+	
+	
+}
 .popup_button {
-	color: white;
-	background-color: #4399fc;
-	border-radius: 20upx;
+	color: #4399fc;
+	width: 50%;
+	background-color: #fff;
+	border-radius: 0;
 }
+	
+.popup_button1{
+	color: #000;
+	width: 50%;
+	background-color: #fff;
+	border-radius: 0;
+}
+/* 提示窗口 */
+	.uni-tip {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		flex-direction: column;
+		/* #endif */
+		padding: 15rpx;
+		width: 540rpx;
+		height: 270rpx;
+		background-color: #fff;
+		border-radius: 14rpx;
+	}
+
+	.uni-tip-title {
+		margin-top:27rpx ;
+		margin-bottom: 10px;
+		text-align: center;
+		font-size: 36rpx;
+		color: #000;
+	}
+
+	.uni-tip-content {
+		/* padding: 15px;
+ */
+		font-size: 30rpx;
+		color: #888888;
+		text-align: center;
+	}
+
+	.uni-tip-group-button {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: center;
+			text-align: center;
+		margin-top: 20px;
+		height: 100rpx;
+		line-height: 100rpx;
+		border-top: 1rpx solid #F1F1F1;
+	}
+
+	.uni-tip-button {
+		flex: 1;
+		text-align: center;
+		font-size: 36rpx;
+		color: #0A0A0A;
+	}
+	.uni-tip-button1{
+		border-right:1rpx solid #F1F1F1; ;
+	}
 </style>

@@ -211,39 +211,116 @@ page {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 520rpx;
-  height: 550rpx;
+  width: 540rpx;
+  height: 450rpx;
   margin-left: -270rpx;
   margin-top: -270rpx;
-  border: 10px solid white;
   background-color: white;
   z-index: 1002;
   overflow: auto;
   border-radius: 20rpx;
+  padding-bottom: 16rpx;
 }
 .popup_title {
-  padding-top: 20rpx;
+  padding-top: 30rpx;
   width: 480rpx;
   text-align: center;
   font-size: 34rpx;
 }
 .popup_textarea_item {
-  padding-top: 5rpx;
   height: 200rpx;
-  width: 440rpx;
-  background-color: #fff;
-  margin-top: 80rpx;
-  margin-left: 20rpx;
+  margin-top: 50rpx;
+  margin-left: 30rpx;
 }
 .popup_textarea {
   width: 410rpx;
+  height: 200rpx;
   font-size: 28rpx;
   margin-left: 30rpx;
   border: 1px #F1F1F1 solid;
+  margin-bottom: 24rpx;
+}
+.btn-box {
+  width: 540rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  margin-left: -30rpx;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
 }
 .popup_button {
-  color: white;
-  background-color: #4399fc;
-  border-radius: 20rpx;
+  color: #4399fc;
+  width: 50%;
+  background-color: #fff;
+  border-radius: 0;
+}
+.popup_button1 {
+  color: #000;
+  width: 50%;
+  background-color: #fff;
+  border-radius: 0;
+}
+/* 提示窗口 */
+.uni-tip {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  padding: 15rpx;
+  width: 540rpx;
+  height: 270rpx;
+  background-color: #fff;
+  border-radius: 14rpx;
+}
+.uni-tip-title {
+  margin-top: 27rpx;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 36rpx;
+  color: #000;
+}
+.uni-tip-content {
+  /* padding: 15px;
+ */
+  font-size: 30rpx;
+  color: #888888;
+  text-align: center;
+}
+.uni-tip-group-button {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-top: 1rpx solid #F1F1F1;
+}
+.uni-tip-button {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  text-align: center;
+  font-size: 36rpx;
+  color: #0A0A0A;
+}
+.uni-tip-button1 {
+  border-right: 1rpx solid #F1F1F1;
 }
 
