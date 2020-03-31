@@ -418,7 +418,8 @@ export default {
 	}
 	.items {
 		margin-bottom: 20rpx;
-		padding-right: 20rpx;
+		padding-right: 20rpx;  
+		
 		
 	}
 	.it4{
