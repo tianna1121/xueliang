@@ -387,6 +387,7 @@ export default {
 		
 	}
 	.item-title1 {
+		
 		margin-right: 0rpx;
 	}
 
