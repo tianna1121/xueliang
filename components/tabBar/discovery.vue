@@ -397,6 +397,7 @@ export default {
 	.it2 {
 		padding-left: 10rpx;
 		font-weight: 500;
+		
 		color: #2256d8;
 	}
 
