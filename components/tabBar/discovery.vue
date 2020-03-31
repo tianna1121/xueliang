@@ -383,7 +383,7 @@ export default {
 	.item-title {
 		font-size: 28rpx;
 		color: #000;
-		margin-right: 55rpx;
+		margin-right: 45rpx;
 		
 	}
 	.item-title1 {
@@ -392,9 +392,10 @@ export default {
 
 	.it1 {
 		font-weight: 500;
-		margin-left: 5rpx;
+		padding-left: 10rpx;
 	}
 	.it2 {
+		padding-left: 10rpx;
 		font-weight: 500;
 		color: #2256d8;
 	}
@@ -403,6 +404,7 @@ export default {
 		margin-right: 0;
 	}
 	.it3 {
+		padding-left: 10rpx;
 		font-size: 28rpx;
 		color: #000;
 		width: 540rpx;

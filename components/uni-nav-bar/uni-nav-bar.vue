@@ -14,7 +14,7 @@
 				</view>
 				<view class="uni-navbar__header-container uni-navbar__content_view">
 					<view class="uni-navbar__header-container-inner uni-navbar__content_view" v-if="title.length">
-						<text class="uni-nav-bar-text" :style="{color: color }">{{ title }}</text>
+						<text class="uni-nav-bar-text" :style="{color: '#030303' }">{{ title }}</text>
 					</view>
 					<!-- 标题插槽 -->
 					<slot />

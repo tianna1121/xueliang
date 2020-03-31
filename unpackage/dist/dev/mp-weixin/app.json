@@ -4,7 +4,8 @@
     "pages/regresult/regresult",
     "pages/regres/regres",
     "pages/register/register",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/details/details"
   ],
   "subPackages": [],
   "window": {
