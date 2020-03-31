@@ -374,6 +374,7 @@ page {
 
 .popup_textarea {
 	width: 410upx;
+	height: 200rpx;
 	font-size: 28rpx;
 	margin-left: 30rpx;
 	border: 1px #F1F1F1 solid;
