@@ -59,6 +59,7 @@
 				</swiper-item>
 			</swiper>
 		</mix-pulldown-refresh>
+		
 	</view>
 </template>
 
@@ -446,4 +447,5 @@ export default {
 		height: 60upx;
 	}
 }
+
 </style>
