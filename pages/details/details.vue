@@ -64,12 +64,15 @@
 			<view class="popup_title">我要反馈</view>
 			<view class="popup_textarea_item">
 				<textarea class="popup_textarea" focus placeholder="输入内容..." v-model="feedbackContent"></textarea>
-				
-				<view  class="btn-box"><button class="popup_button1" @click="hideDiv()">关闭</button><button class="popup_button" @click="submitFeedback()">提交</button></view>
+
+				<view class="btn-box">
+					<button class="popup_button1" @click="hideDiv()">关闭</button>
+					<button class="popup_button" @click="submitFeedback()">提交</button>
+				</view>
 			</view>
 		</view>
 		<view class="popup_overlay" :hidden="userFeedbackHidden" @click="hideDiv()"></view>
-<uni-popup ref="showtip" type="center" :mask-click="false">
+		<uni-popup ref="showtip" type="center" :mask-click="false">
 			<view class="uni-tip">
 				<text class="uni-tip-title">处理完成</text>
 				<text class="uni-tip-content">确认事件已经处理完成？</text>
@@ -79,7 +82,7 @@
 				</view>
 			</view>
 		</uni-popup>
-</view>
+	</view>
 </template>
 
 <script>
@@ -87,7 +90,7 @@ import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 import uniSteps from '@/components/uni-steps/uni-steps.vue';
 import uniList from '@/components/uni-list/uni-list.vue';
 import uniListItem from '@/components/uni-list-item/uni-list-item.vue';
-import uniPopup from '@/components/uni-popup/uni-popup.vue'
+import uniPopup from '@/components/uni-popup/uni-popup.vue';
 import json from '@/json';
 
 export default {
@@ -165,8 +168,8 @@ export default {
 		submitMsg() {
 			console.log('確認完成');
 			this.$nextTick(() => {
-				this.$refs.showtip.open()
-			})
+				this.$refs.showtip.open();
+			});
 		},
 		alertMsg() {
 			console.log('我要反馈');
@@ -184,8 +187,8 @@ export default {
 			this.userFeedbackHidden = true;
 		},
 		cancel(type) {
-			this.$refs.showtip.close()
-		},
+			this.$refs.showtip.close();
+		}
 	}
 };
 </script>
@@ -393,17 +396,15 @@ page {
 	height: 200rpx;
 	font-size: 28rpx;
 	margin-left: 30rpx;
-	border: 1px #F1F1F1 solid;
+	border: 1px #f1f1f1 solid;
 	margin-bottom: 24rpx;
 }
-.btn-box{
+.btn-box {
 	width: 540rpx;
 	display: flex;
 	flex-direction: row;
 	margin-left: -30rpx;
 	flex: 1;
-	
-	
 }
 .popup_button {
 	color: #4399fc;
@@ -411,62 +412,62 @@ page {
 	background-color: #fff;
 	border-radius: 0;
 }
-	
-.popup_button1{
+
+.popup_button1 {
 	color: #000;
 	width: 50%;
 	background-color: #fff;
 	border-radius: 0;
 }
 /* 提示窗口 */
-	.uni-tip {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		flex-direction: column;
-		/* #endif */
-		padding: 15rpx;
-		width: 540rpx;
-		height: 270rpx;
-		background-color: #fff;
-		border-radius: 14rpx;
-	}
+.uni-tip {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	flex-direction: column;
+	/* #endif */
+	padding: 15rpx;
+	width: 540rpx;
+	height: 270rpx;
+	background-color: #fff;
+	border-radius: 14rpx;
+}
 
-	.uni-tip-title {
-		margin-top:27rpx ;
-		margin-bottom: 10px;
-		text-align: center;
-		font-size: 36rpx;
-		color: #000;
-	}
+.uni-tip-title {
+	margin-top: 27rpx;
+	margin-bottom: 10px;
+	text-align: center;
+	font-size: 36rpx;
+	color: #000;
+}
 
-	.uni-tip-content {
-		/* padding: 15px;
+.uni-tip-content {
+	/* padding: 15px;
  */
-		font-size: 30rpx;
-		color: #888888;
-		text-align: center;
-	}
+	font-size: 30rpx;
+	color: #888888;
+	text-align: center;
+}
 
-	.uni-tip-group-button {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: row;
-		justify-content: center;
-			text-align: center;
-		margin-top: 20px;
-		height: 100rpx;
-		line-height: 100rpx;
-		border-top: 1rpx solid #F1F1F1;
-	}
+.uni-tip-group-button {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	justify-content: center;
+	text-align: center;
+	margin-top: 20px;
+	height: 100rpx;
+	line-height: 100rpx;
+	border-top: 1rpx solid #f1f1f1;
+}
 
-	.uni-tip-button {
-		flex: 1;
-		text-align: center;
-		font-size: 36rpx;
-		color: #0A0A0A;
-	}
-	.uni-tip-button1{
-		border-right:1rpx solid #F1F1F1; ;
-	}
+.uni-tip-button {
+	flex: 1;
+	text-align: center;
+	font-size: 36rpx;
+	color: #0a0a0a;
+}
+.uni-tip-button1 {
+	border-right: 1rpx solid #f1f1f1;
+}
 </style>

@@ -152,16 +152,17 @@ export default {
 		},
 		//新闻详情
 		navToDetails(item) {
+			console.log(item)
 			let data = {
 				id: item.id,
-				title: item.title,
-				author: item.author,
-				time: item.time
+				title: item.nickname,
+				content: item.content,
+				status: item.status
 			};
-			let url = item.videoSrc ? 'videoDetails' : 'details';
+			let url =  'notificationDetail';
 
 			uni.navigateTo({
-				url: `/pages/details/${url}?data=${JSON.stringify(data)}`
+				url: `/pages/notificationDetail/${url}?data=${JSON.stringify(data)}`
 			});
 		},
 
