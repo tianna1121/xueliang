@@ -1,5 +1,8 @@
 <template>
 	<view class="bigBox">
+		<!-- 自定义标题 -->
+		<uni-nav-bar fixed="true" color="#007AFF" background-color="#F8F8F8" :status-bar="true" 
+		 title="通知/公告"  />
 		<!-- 顶部选项卡 -->
 		<scroll-view id="nav-bar" class="nav-bar" scroll-x scroll-with-animation :scroll-left="scrollLeft">
 			<view v-for="(item, index) in tabBars" :key="item.id" class="nav-item" :class="{ current: index === tabCurrentIndex }" :id="'tab' + index" @click="changeTab(index)">
@@ -49,6 +52,7 @@
 </template>
 
 <script>
+	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 import json from '@/json';
 import mixPulldownRefresh from '@/components/mix-pulldown-refresh/mix-pulldown-refresh';
 import mixLoadMore from '@/components/mix-load-more/mix-load-more';
@@ -58,7 +62,8 @@ let windowWidth = 0,
 export default {
 	components: {
 		mixPulldownRefresh,
-		mixLoadMore
+		mixLoadMore,
+		uniNavBar
 	},
 	data() {
 		return {
@@ -73,17 +78,12 @@ export default {
 	async onLoad() {
 		// 获取屏幕宽度
 		windowWidth = uni.getSystemInfoSync().windowWidth;
+		
 		this.loadTabbars();
 	},
 	onReady() {},
 	methods: {
 		ontrueGetList() {
-			uni.showToast({
-				title: "通知/公告"
-			});
-			uni.setNavigationBarTitle({
-				title: '通知/公告'
-			});
 			console.log('加载了通知/公告，可以把网络请求放这里');
 			// 获取屏幕宽度
 			windowWidth = uni.getSystemInfoSync().windowWidth;

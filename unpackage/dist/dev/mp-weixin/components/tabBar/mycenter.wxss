@@ -53,4 +53,8 @@ image {
   width: 750rpx;
   height: 750rpx;
 }
+.center-img {
+  width: 750rpx;
+  height: 460rpx;
+}
 

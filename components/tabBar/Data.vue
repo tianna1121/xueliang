@@ -1,5 +1,7 @@
 <template>
 	<view class="main">
+		<!-- 自定义标题 -->
+		<uni-nav-bar fixed="true" color="#007AFF" background-color="#F8F8F8" :status-bar="true"  title="我要上报"  />
 		<view class="item">
 			<view class="item-title">事件类型</view>
 			<view class="item-next">
@@ -49,8 +51,12 @@
 </template>
 
 <script>
-	
+	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	export default{
+		components: {
+			
+			uniNavBar
+		},
 		data() {
 			 const currentDate = this.getDate({
 			            format: true
@@ -78,12 +84,7 @@
 				 console.log("上报提交")
 			 },
 			ontrueGetList(){
-				uni.showToast({
-					title:'我要上报'
-				})
-				uni.setNavigationBarTitle({
-				    title: '我要上报'
-				});
+				
 				console.log("加载了第三个页面，可以把网络请求放这里")
 			},
 			sizeTypeChange(e){

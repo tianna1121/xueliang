@@ -1,5 +1,7 @@
 <template>
 	<view class="main">
+		<!-- 自定义标题 -->
+		<uni-nav-bar fixed="true" color="#007AFF" background-color="#F8F8F8" :status-bar="true" title="实时监控" />
 		 <scroll-view class="main_box" scroll-y="true"  @scrolltolower="lower">
 			<view class="jian-kong-box">
 				<view class="pick-box">
@@ -36,11 +38,12 @@
 </template>
 
 <script>
+	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import uniGrid from '@/components/uni-grid/uni-grid.vue'
 	import uniGridItem from '@/components/uni-grid-item/uni-grid-item.vue'
 	export default{
 		components: {
-			
+			uniNavBar,
 			uniGrid,
 			uniGridItem
 			
@@ -105,9 +108,7 @@
 		},
 		methods: {
 			ontrueGetList(){
-				uni.showToast({
-					title:'第1个页面'
-				})
+				
 				console.log("加载了第一个页面，可以把网络请求放这里")
 			},
 			lower(){

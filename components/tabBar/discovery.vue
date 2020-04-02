@@ -1,5 +1,7 @@
 <template>
 	<view class="bigBox">
+		<!-- 自定义标题 -->
+		<uni-nav-bar fixed="true" color="#007AFF" background-color="#F8F8F8" :status-bar="true" title="事件中心" />
 		<!-- 顶部选项卡 -->
 		<scroll-view id="nav-bar" class="nav-bar" scroll-x scroll-with-animation :scroll-left="scrollLeft">
 			<view v-for="(item, index) in tabBars" :key="item.id" class="nav-item" :class="{ current: index === tabCurrentIndex }" :id="'tab' + index" @click="changeTab(index)">
@@ -20,12 +22,12 @@
 						-->
 						<view v-for="(item, index) in tabItem.newsList" :key="index" class="news-item" @click="navToDetails(item)">
 							<view class="items">
-								<text class="item-title" >
-									上报人: 
-									<text class="it1" space="emsp" decode="true">  {{ item.reporter }}</text>
+								<text class="item-title">
+									上报人:
+									<text class="it1" space="emsp" decode="true">{{ item.reporter }}</text>
 								</text>
 								<text class="item-title" space="emsp" :decode="trues">
-									 电话: 
+									电话:
 									<text class="it2">{{ item.phone }}</text>
 								</text>
 								<text class="item-title last-cild" space="emsp">
@@ -35,19 +37,17 @@
 							</view>
 							<view class="items">
 								<text class="item-title" space="emsp">
-									事发地点: 
+									事发地点:
 									<text class="it1">{{ item.address }}</text>
 								</text>
 							</view>
 							<view class="items it4">
-								<text class="item-title item-title1" space="emsp">
-									上报内容:  
-									</text>
-									<text class="it3">{{ item.content }}</text>
+								<text class="item-title item-title1" space="emsp">上报内容:</text>
+								<text class="it3">{{ item.content }}</text>
 							</view>
 							<view class="items">
 								<text class="item-title" space="emsp">
-									上报时间: 
+									上报时间:
 									<text class="it1">{{ item.time }}</text>
 								</text>
 							</view>
@@ -59,11 +59,11 @@
 				</swiper-item>
 			</swiper>
 		</mix-pulldown-refresh>
-		
 	</view>
 </template>
 
 <script>
+import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 import json from '@/json';
 import mixPulldownRefresh from '@/components/mix-pulldown-refresh/mix-pulldown-refresh';
 import mixLoadMore from '@/components/mix-load-more/mix-load-more';
@@ -73,11 +73,12 @@ let windowWidth = 0,
 export default {
 	components: {
 		mixPulldownRefresh,
-		mixLoadMore
+		mixLoadMore,
+		uniNavBar
 	},
 	data() {
 		return {
-			trues:true,
+			trues: true,
 			tabCurrentIndex: 0, //当前选项卡索引
 			scrollLeft: 0, //顶部选项卡左滑距离
 			enableScroll: true,
@@ -93,12 +94,6 @@ export default {
 	onReady() {},
 	methods: {
 		ontrueGetList() {
-			uni.showToast({
-				title: '第2个页面'
-			});
-			uni.setNavigationBarTitle({
-				title: '事件中心'
-			});
 			console.log('加载了第二个页面，可以把网络请求放这里');
 			// 获取屏幕宽度
 			windowWidth = uni.getSystemInfoSync().windowWidth;
@@ -385,11 +380,8 @@ export default {
 		font-size: 28rpx;
 		color: #000;
 		margin-right: 45rpx;
-		
-		
 	}
 	.item-title1 {
-		
 		margin-right: 0rpx;
 	}
 
@@ -421,11 +413,9 @@ export default {
 	}
 	.items {
 		margin-bottom: 20rpx;
-		padding-right: 20rpx;  
-		
-		
+		padding-right: 20rpx;
 	}
-	.it4{
+	.it4 {
 		width: 100%;
 		display: flex;
 		flex-direction: row;
@@ -447,5 +437,4 @@ export default {
 		height: 60upx;
 	}
 }
-
 </style>

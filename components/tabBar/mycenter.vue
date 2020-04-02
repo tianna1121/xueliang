@@ -1,10 +1,7 @@
 <template>
 	<view class="main">
-		 <scroll-view class="main_box" scroll-y="true"  @scrolltolower="lower">
-			<view class="main_centent">第5个页面(上拉加载更多)</view>	
-			<image src="../../static/img/1.jpg" mode="aspectFit"></image>
-			<image src="../../static/img/2.jpg" mode="aspectFit"></image>
-		</scroll-view>
+		<!-- 背景图 -->
+		<image class="center-img" src="../../static/img/news/bg.png" mode=""></image>
 	</view>
 </template>
 
@@ -18,16 +15,14 @@
 		methods: {
 			ontrueGetList(){
 				uni.showToast({
-					title:'第2个页面'
+					title:'个人中心'
 				})
 				console.log("加载了第五个页面，可以把网络请求放这里")
+				uni.setNavigationBarTitle({
+					title: ''
+				});
 			},
-			lower(){
-				uni.showToast({
-					title:'scroll-view的加载更多'
-				})
-				console.log("分页数据可以放这里~~~~~~嘿嘿")
-			}
+			
 		}
 	}
 </script>
@@ -38,4 +33,9 @@
 	.main_box{width:100vw;height: 100vh;padding-bottom:120rpx;box-sizing: border-box;}
 	.main_centent{width: 100%;height: 100vh;color: #fff;letter-spacing: 4rpx;display: flex;align-items: center;justify-content: center;}
 	image{width:750rpx;height: 750rpx;}
+	.center-img{
+		width: 750rpx;
+		height: 460rpx;
+		
+	}
 </style>

@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "实时监控",
+  "navigationStyle": "custom",
   "enablePullDownRefresh": true,
   "bounce": "none",
   "usingComponents": {

@@ -1,1 +1,1 @@
-<view class="main"><scroll-view class="main_box" scroll-y="true" data-event-opts="{{[['scrolltolower',[['lower',['$event']]]]]}}" bindscrolltolower="__e"><view class="main_centent">第5个页面(上拉加载更多)</view><image src="../../static/img/1.jpg" mode="aspectFit"></image><image src="../../static/img/2.jpg" mode="aspectFit"></image></scroll-view></view>
+<view class="main"><image class="center-img" src="../../static/img/news/bg.png" mode></image></view>

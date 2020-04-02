@@ -6,7 +6,7 @@
 		"style": {
 			// #ifdef MP 
 			"navigationBarTitleText": "实时监控",
-			//"navigationStyle": "custom",
+			"navigationStyle": "custom",
 			// #endif 
 			"enablePullDownRefresh": true,
 			"bounce": "none"
