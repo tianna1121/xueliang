@@ -26,9 +26,9 @@
 									上报人:
 									<text class="it1" space="emsp" decode="true">{{ item.reporter }}</text>
 								</text>
-								<text class="item-title" space="emsp" :decode="trues">
+								<text class="item-title" space="emsp" :decode="trues" @tap.stop="callPhone(item.phone)">
 									电话:
-									<text class="it2">{{ item.phone }}</text>
+									<text class="it2"  >{{ item.phone }}</text>
 								</text>
 								<text class="item-title last-cild" space="emsp">
 									状态:
@@ -98,6 +98,13 @@ export default {
 			// 获取屏幕宽度
 			windowWidth = uni.getSystemInfoSync().windowWidth;
 			this.loadTabbars();
+		},
+		//打电话
+		callPhone(phone){
+			console.log(phone)
+			uni.makePhoneCall({
+			    phoneNumber: phone //仅为示例
+			});
 		},
 		statusChange(index) {
 			switch (index) {

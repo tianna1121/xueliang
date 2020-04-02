@@ -8,7 +8,7 @@
 			"navigationBarTitleText": "实时监控",
 			"navigationStyle": "custom",
 			// #endif 
-			"enablePullDownRefresh": true,
+			"enablePullDownRefresh": false,
 			"bounce": "none"
 			
 		}
@@ -33,6 +33,10 @@
         }
         ,{
             "path" : "pages/notificationDetail/notificationDetail",
+            "style" : {"navigationStyle":"custom"}
+        }
+        ,{
+            "path" : "pages/change-phone/change-phone",
             "style" : {"navigationStyle":"custom"}
         }
     ],

@@ -1,7 +1,7 @@
 {
   "navigationBarTitleText": "实时监控",
   "navigationStyle": "custom",
-  "enablePullDownRefresh": true,
+  "enablePullDownRefresh": false,
   "bounce": "none",
   "usingComponents": {
     "tab-game": "/components/tabBar/game",

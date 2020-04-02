@@ -90,16 +90,16 @@
 					this.$refs.mycenter.ontrueGetList()
 				}
 			},
-			onPullDownRefresh(){
-				uni.showToast({
-					title:`第${this.show_index+1}个页面的刷新`
-				})
-				setTimeout(function(){
-					uni.stopPullDownRefresh()
-				},2000)
-				console.log('下拉刷新四个组件公用的下拉刷新方法,根据在哪个页面下拉执行哪个页面的刷新方方法即可')
-				console.log('如果想要自定义刷新的话，插件市场就有一个   非常好用也非常容易入手')
-			}
+			// onPullDownRefresh(){
+			// 	uni.showToast({
+			// 		title:`第${this.show_index+1}个页面的刷新`
+			// 	})
+			// 	setTimeout(function(){
+			// 		uni.stopPullDownRefresh()
+			// 	},2000)
+			// 	console.log('下拉刷新四个组件公用的下拉刷新方法,根据在哪个页面下拉执行哪个页面的刷新方方法即可')
+			// 	console.log('如果想要自定义刷新的话，插件市场就有一个   非常好用也非常容易入手')
+			// }
 		}
 	}
 </script>

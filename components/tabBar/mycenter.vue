@@ -2,40 +2,241 @@
 	<view class="main">
 		<!-- 背景图 -->
 		<image class="center-img" src="../../static/img/news/bg.png" mode=""></image>
+		<view class="top-box">
+			<view class="avatar-box" @tap="changeAvatar" >
+				<image class="avatar" :src="userInfo.img" mode=""></image>
+				<image class="icon-avatar" src="../../static/img/news/avatar.png" mode=""></image>
+			</view>
+			<view class="name">{{userInfo.name}}</view>
+			<view class="unit">
+				单位：{{userInfo.unit}} | 角色：{{userInfo.jue}}
+			</view>
+		</view>
+		<view class="item">
+			<view class="item-title">账号</view>
+			<view class="item-next">{{userInfo.account}}</view>
+		</view>
+		<view class="item">
+			<view class="item-title">性别</view>
+			<view class="item-next">{{userInfo.sex=="M"?"男":"女"}}</view>
+		</view>
+		<view class="item">
+			<view class="item-title">身份证号</view>
+			<view class="item-next">{{userInfo.idCard}}</view>
+		</view>
+		<view class="item">
+			<view class="item-title">手机号码</view>
+			<view class="item-next" @tap="changePhone">
+				<view class="uni-input">{{userInfo.phone}}</view>
+				<uni-icons style="margin-top: 5rpx;" type="forward" color="#C7C7CC" size="22" />
+			</view>
+
+		</view>
+		<view class="item">
+			<view class="item-title">注册时间</view>
+			<view class="item-next">{{userInfo.creatTime}}</view>
+		</view>
+		<view class="myrport">我的上报</view>
+		<view class="myrport myrport1" @tap="loginOut">退出登录</view>
+		<uni-popup ref="showtip" type="center" :mask-click="false">
+			<view class="uni-tip">
+				<text class="uni-tip-title">退出登录</text>
+				<text class="uni-tip-content">您确定要退出登录吗？</text>
+				<view class="uni-tip-group-button">
+					<text class="uni-tip-button uni-tip-button1 " @click="cancel('tip')">取消</text>
+					<text class="uni-tip-button" @click="cancel('tip')">退出登录</text>
+				</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
-	export default{
+	 import img from '../../static/img/3.jpg'
+	export default {
 		data() {
-			return{
-				
+			return {
+				userInfo:{
+					 img:img,
+					 name:"吴彦祖",
+					 unit:"小金县八角乡",
+					 jue:"统治管理队员",
+					 account:"13540021548",
+					 sex:"M",
+					 idCard:'511255488963251145',
+					 phone:"13540025689",
+					 creatTime:"2019-12-10"
+				}
+                  
 			}
 		},
 		methods: {
-			ontrueGetList(){
+			ontrueGetList() {
 				uni.showToast({
-					title:'个人中心'
+					title: '个人中心'
 				})
-				console.log("加载了第五个页面，可以把网络请求放这里")
-				uni.setNavigationBarTitle({
-					title: ''
+				console.log("加载了个人中心，可以把网络请求放这里")
+
+			},
+			//修改头像
+			changeAvatar(){
+				var _this=this;
+				uni.chooseImage({
+				    count: 1, //默认9
+				    sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+				    // sourceType: ['album'], //从相册选择
+				    success: function (res) {
+						_this.userInfo.img=res.tempFilePaths[0]
+				        console.log(JSON.stringify(res.tempFilePaths[0]));
+				    }
 				});
 			},
+			//修改手机号
+			changePhone(){
+				let data = {
+					phone:this.userInfo.phone,
+					
+				};
+				let url =  'change-phone';
+				
+				uni.navigateTo({
+					url: `/pages/change-phone/${url}?data=${JSON.stringify(data)}`
+				});
+			},
+			loginOut(){
+				this.$refs.showtip.open();
+			},
+			cancel(type) {
 			
+				this.$refs.showtip.close();
+				
+			}
+
 		}
 	}
 </script>
 
 <style lang="scss">
-	.main{background-image: linear-gradient(45deg, #9000ff, #5e00ff);}
+	.main {
+		position: relative;
+	}
+
 	// padding-bottom:120rpx;box-sizing: border-box;重要*************************保证页面底部内容不被隐藏也不会出现多余的滚动条
-	.main_box{width:100vw;height: 100vh;padding-bottom:120rpx;box-sizing: border-box;}
-	.main_centent{width: 100%;height: 100vh;color: #fff;letter-spacing: 4rpx;display: flex;align-items: center;justify-content: center;}
-	image{width:750rpx;height: 750rpx;}
-	.center-img{
+	.main_box {
+		width: 100vw;
+		height: 100vh;
+		padding-bottom: 120rpx;
+		box-sizing: border-box;
+	}
+
+	.main_centent {
+		width: 100%;
+		height: 100vh;
+		color: #fff;
+		letter-spacing: 4rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	image {
+		width: 750rpx;
+		height: 750rpx;
+	}
+
+	.center-img {
 		width: 750rpx;
 		height: 460rpx;
+		position: absolute;
+		z-index: -1;
+
+	}
+
+	.top-box {
+		width: 750rpx;
+		height: 460rpx;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		z-index: 1000;
+		flex: 1;
+	}
+
+	.avatar-box {
+		position: relative;
+		text-align: center;
+		margin: 50rpx auto 0;
+	}
+
+	.icon-avatar {
+		position: absolute;
+		top: 160rpx;
+		left: 125rpx;
+		width: 30rpx;
+		height: 30rpx;
+
+	}
+
+	.avatar {
+		width: 190rpx;
+		height: 190rpx;
+		border-radius: 190rpx;
+
+	}
+
+	.name {
+		font-size: 36rpx;
+		color: #FFFFFF;
+		font-weight: 600;
+		margin: 32rpx auto 20rpx;
+	}
+
+	.unit {
+		font-size: 28rpx;
+		color: #FFFFFF;
+		font-weight: 600;
+		margin: 0rpx auto;
+	}
+
+	.item {
+		width: 690rpx;
+		height: 90rpx;
+		display: flex;
+		flex-direction: row;
+		flex: 1;
+		justify-content: space-between;
+		padding: 0 30rpx;
+		background-color: #ffffff;
+		//border-top: 1rpx #DDDDDD solid;
+		border-bottom: 1rpx #dddddd solid;
+		line-height: 90rpx;
+
+		.item-title {
+			font-size: 34rpx;
+			color: #000000;
+		}
+
+		.item-next {
+			color: #888888;
+			font-size: 32rpx;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+	.myrport{
+		width:750rpx;
+		height:90rpx;
+		margin: 20rpx auto;
+		color: #2256D8;
+		font-size: 32rpx;
+		text-align: center;
+		line-height: 90rpx;
+		background-color: #FFFFFF;
 		
+	}
+	.myrport1{
+		color: #000000;
 	}
 </style>

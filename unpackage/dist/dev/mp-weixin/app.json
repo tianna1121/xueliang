@@ -6,7 +6,8 @@
     "pages/register/register",
     "pages/login/login",
     "pages/details/details",
-    "pages/notificationDetail/notificationDetail"
+    "pages/notificationDetail/notificationDetail",
+    "pages/change-phone/change-phone"
   ],
   "subPackages": [],
   "window": {
