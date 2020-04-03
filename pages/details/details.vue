@@ -161,7 +161,10 @@
 			},
 			//图片预览
 			previewImage(e) {
+				
 				var current = e.target.dataset.src;
+				console.log('current')
+				console.log(current)
 				uni.previewImage({
 					current: current,
 					urls: this.imgList

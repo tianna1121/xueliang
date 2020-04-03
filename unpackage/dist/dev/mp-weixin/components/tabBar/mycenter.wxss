@@ -95,13 +95,13 @@ image {
 }
 .name {
   font-size: 36rpx;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 600;
   margin: 32rpx auto 20rpx;
 }
 .unit {
   font-size: 28rpx;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 600;
   margin: 0rpx auto;
 }
@@ -151,11 +151,11 @@ image {
   width: 750rpx;
   height: 90rpx;
   margin: 20rpx auto;
-  color: #2256D8;
+  color: #2256d8;
   font-size: 32rpx;
   text-align: center;
   line-height: 90rpx;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 .myrport1 {
   color: #000000;

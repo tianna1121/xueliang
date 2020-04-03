@@ -4,11 +4,12 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true
+    "urlCheck": true,
+    "minified": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.9.2",
-  "appid": "touristappid",
+  "appid": "wxbc89be44cef30fea",
   "projectname": "雪亮工程",
   "condition": {
     "search": {
