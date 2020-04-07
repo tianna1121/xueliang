@@ -28,7 +28,7 @@
 			<view class=" big-mm" v-for="(item, index) in list" :index="index" :key="index" >
 				
 	
-			<view class="grid-item-box"  >
+			<view class="grid-item-box" @tap="videoDetail(item.id)" >
 				<image class="image" :src="item.url" mode=""></image>
 			<text class="text">{{item.text}}</text>
 			</view>
@@ -60,47 +60,55 @@
 				   workIndex:0,
 				   dynamicList: [],
 				   list: [{
+					   id: 2,
 				   		url: '/static/img/news/bg.png',
 				   		text: '美兴镇-新街社区',
 				   		badge: '0',
 				   		type: "primary"
 				   	},
 				   	{
+						id: 21,
 				   		url: '/static/img/news/bg.png',
 				   		text: '美兴镇-新街社区',
 				   		badge: '1',
 				   		type: "success"
 				   	},
 				   	{
+						id: 23,
 				   		url: '/static/img/news/bg.png',
 				   		text: '美兴镇-新街社区',
 				   		badge: '99',
 				   		type: "warning"
 				   	},
 				   	{
+						id: 12,
 				   		url: '/static/img/news/bg.png',
 				   		text: '美兴镇-新街社区',
 				   		badge: '2',
 				   		type: "error"
 				   	},
 				   	{
+						id: 24,
 				   		url: '/static/img/news/bg.png',
 				   		text: '美兴镇-新街社区'
 				   	},
 				   	{
+						id: 29,
+				   		url: '/static/img/news/bg.png',
+				   		text: '美兴镇-新街社区'
+				   	},
+				   	{id: 221,
 				   		url: '/static/img/news/bg.png',
 				   		text: '美兴镇-新街社区'
 				   	},
 				   	{
+						id: 52,
 				   		url: '/static/img/news/bg.png',
 				   		text: '美兴镇-新街社区'
 				   	},
 				   	{
-				   		url: '/static/img/news/bg.png',
-				   		text: '美兴镇-新街社区'
-				   	},
-				   	{
-				   		url: '/static/img/news/bg.png',
+				   		id: 42,
+						url: '/static/img/news/bg.png',
 				   		text: '美兴镇-新街社区'
 				   	}
 				   ]
@@ -131,6 +139,17 @@
 					icon: 'none'
 				})
 			},
+			videoDetail(id){
+				let data = {
+					id:id,
+					
+				};
+				let url =  'video-details';
+				
+				uni.navigateTo({
+					url: `/pages/video-details/${url}?data=${JSON.stringify(data)}`
+				});
+			}
 		}
 	}
 </script>

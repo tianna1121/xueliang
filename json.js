@@ -89,6 +89,7 @@ const newsList = [{
 	
 ]
 const evaList = [{
+	id: 1,
 		src: 'http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg',
 		nickname: 'Ranth Allngal',
 		time: '2019-12-25 13:25:30',
@@ -96,6 +97,7 @@ const evaList = [{
 		content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。'
 	},
 	{
+		id: 2,
 		src: 'http://img0.imgtn.bdimg.com/it/u=2396068252,4277062836&fm=26&gp=0.jpg',
 		nickname: 'Ranth Allngal',
 		time: '09-20 12:54',

@@ -39,6 +39,10 @@
             "path" : "pages/change-phone/change-phone",
             "style" : {"navigationStyle":"custom"}
         }
+        ,{
+            "path" : "pages/video-details/video-details",
+            "style" : {"navigationStyle":"custom"}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
