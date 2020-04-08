@@ -8,7 +8,7 @@
 - 支持` typescript `、` javascript ` 版本(如果不使用ts版本，则可以把luch-request-ts 文件夹删除)
 - 下载后把 http-request 文件夹放到项目 utils/ 目录下
 - task 操作
-
+  
 
 **Example**
 ---
