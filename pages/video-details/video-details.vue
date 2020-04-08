@@ -48,9 +48,7 @@ export default {
 			console.log(event.detail.fullScreen);
 
 			// if (!event.detail.fullScreen) {
-			// 	uni.navigateBack({
-			// 		delta: 1
-			// 	});
+			// 	this.backup()
 			// }
 		},
 		backup() {
