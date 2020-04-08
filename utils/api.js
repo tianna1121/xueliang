@@ -5,6 +5,6 @@ const getNewTokenServe = () => {
   return http.get('/api/jwttoken/create')
 }
 
-export {
+export { 
   getNewTokenServe
 }
