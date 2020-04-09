@@ -9,7 +9,7 @@
 		left: 0;
 		right: 0;
 		
-		z-index: 99;
+		z-index: 999999;
 		
 }
 .uni-popup__mask.data-v-78801bbe {

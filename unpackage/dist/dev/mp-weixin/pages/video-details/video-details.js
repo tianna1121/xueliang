@@ -93,7 +93,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  "uni-popup": function() {
+    return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 162))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -131,38 +135,108 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniPopup = function uniPopup() {__webpack_require__.e(/*! require.ensure | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then((function () {return resolve(__webpack_require__(/*! @/components/uni-popup/uni-popup.vue */ 162));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
+  components: {
+
+    uniPopup: uniPopup },
+
   data: function data() {
     return {
+      list: [
+      { id: 1, adress: "美星镇-新街村" },
+      { id: 2, adress: "美星镇-新街村" },
+      { id: 3, adress: "美星镇-新街村" },
+      { id: 4, adress: "美星镇-新街村" },
+      { id: 5, adress: "美星镇-新街村" },
+      { id: 6, adress: "美星镇-新街村" },
+      { id: 7, adress: "美星镇-新街村" },
+      { id: 8, adress: "美星镇-新街村" },
+      { id: 111, adress: "美星镇-新街村" },
+      { id: 12, adress: "美星镇-新街村" },
+      { id: 13, adress: "美星镇-新街村" },
+      { id: 41, adress: "美星镇-新街村" },
+      { id: 15, adress: "美星镇-新街村" },
+      { id: 16, adress: "美星镇-新街村" },
+      { id: 17, adress: "美星镇-新街村" },
+      { id: 18, adress: "美星镇-新街村" }],
+
+      currentRate: 1, //当前播放id
+      rateShow: false, //右侧弹出选项
       detailData: {},
       title: '2019-12-12 13:24:30 星期三',
-      isMenu: false };
+      adress: "美星镇-新街村",
+      isMenu: false,
+      isshow: false,
+      isMenu1: true,
+      feedbackContent: "" };
 
   },
   onLoad: function onLoad(options) {
@@ -180,11 +254,9 @@ var _default =
     fullscreenchange: function fullscreenchange(event) {
       console.log(event.detail.fullScreen);
 
-      // if (!event.detail.fullScreen) {
-      // 	uni.navigateBack({
-      // 		delta: 1
-      // 	});
-      // }
+      // 	if (!event.detail.fullScreen) {
+      // 		this.backup()
+      // 	}
     },
     backup: function backup() {
       uni.navigateBack({
@@ -203,6 +275,38 @@ var _default =
         content: e.target.errMsg,
         showCancel: false });
 
+    },
+    //一键求助弹出框
+
+    sosPopup: function sosPopup() {var _this = this;
+      console.log('我要反馈');
+      this.videoContext.exitFullScreen();
+      this.$nextTick(function () {
+        _this.$refs.showtip1.open();
+        _this.isshow = true;
+      });;
+    },
+    cancel: function cancel(type) {
+      this.$refs.showtip1.close();
+      this.videoContext.requestFullScreen();
+      this.isshow = false;
+
+    },
+    choosed: function choosed() {
+      this.rateShow = true;
+      this.isMenu1 = false;
+    },
+    closeedMenu: function closeedMenu() {
+      this.rateShow = false;
+      this.isMenu1 = true;
+    },
+    //选择视频播放
+    switchRate: function switchRate(id) {
+      var that = this;
+      that.currentRate = id;
+      that.rateShow = false;
+      this.isMenu1 = true;
+      console.log(id);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
