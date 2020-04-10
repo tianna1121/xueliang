@@ -1,0 +1,1 @@
+<view class="big-box"><image class="img-res" src="../../static/img/news/reged.png"></image><view class="msg">注册信息提交成功!</view><view class="msg msg1">请您等待审核</view><view data-event-opts="{{[['tap',[['jumpRegster',['$event']]]]]}}" class="jump-reg" bindtap="__e">登录账号</view></view>

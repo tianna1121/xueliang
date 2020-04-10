@@ -75,10 +75,10 @@
 				</view>
 			</view>
 		</uni-popup>
-		<uni-popup ref="showtip1" type="center" :mask-click="false">
+		<uni-popup ref="showtip1" :type="showtip1" :mask-click="false">
 			<view class="uni-tip1">
 				<text class="uni-tip-title1">我要反馈</text>
-				<textarea class="popup_textarea" focus placeholder="输入内容..." v-model="feedbackContent"></textarea>
+				<textarea class="popup_textarea uni-input" cursor-spacing="20px" :adjust-position="true"  :show-confirm-bar="flase" placeholder="输入内容..." v-model="feedbackContent"></textarea>
 				<view class="uni-tip-group-button1">
 					<text class="uni-tip-buttons uni-tip-button11 " @click="cancel('tip')">关闭</text>
 					<text class="uni-tip-buttons" @click="cancel('tip')">提交</text>
@@ -106,6 +106,7 @@
 		},
 		data() {
 			return {
+				showtip1:'center',
 				detailData: {},
 				imgList: [],
 				active: 1,
@@ -188,7 +189,8 @@
 
 				this.$refs.showtip.close();
 				this.$refs.showtip1.close();
-			}
+			},
+			
 		}
 	};
 </script>

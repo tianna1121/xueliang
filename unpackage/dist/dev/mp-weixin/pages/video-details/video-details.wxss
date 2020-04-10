@@ -24,12 +24,6 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-video {
-  width: 100%;
-}
-video::-webkit-media-controls {
-  display: none !important;
-}
 .page {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
@@ -182,13 +176,23 @@ video::-webkit-media-controls {
   z-index: 999;
   box-sizing: border-box;
   padding: 21rpx;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 .multi-list.rate {
   padding: 25rpx 0;
 }
 .multi-list.active {
   width: 373rpx;
+}
+.blaks {
+  height: 66rpx;
+  width: 100%;
+}
+.list-box {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 1rpx;
+  overflow-y: scroll;
 }
 .multi-item {
   text-align: left;
@@ -212,10 +216,11 @@ video::-webkit-media-controls {
   color: #00d8ff;
 }
 .top-close {
+  z-index: 1000;
   width: 100%;
   height: 62rpx;
   padding-left: 18rpx;
-  z-index: 999;
+  position: fixed;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;

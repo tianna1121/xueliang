@@ -59,6 +59,7 @@
 				</swiper-item>
 			</swiper>
 		</mix-pulldown-refresh>
+	
 	</view>
 </template>
 

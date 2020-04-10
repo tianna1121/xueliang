@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/regresult/regresult",
+    "pages/regres/regres",
+    "pages/register/register",
+    "pages/login/login",
+    "pages/details/details",
+    "pages/notificationDetail/notificationDetail",
+    "pages/change-phone/change-phone",
+    "pages/video-details/video-details"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "实时监控",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "permission": {},
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

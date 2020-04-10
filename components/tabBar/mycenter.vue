@@ -33,7 +33,7 @@
 			<view class="item-title">注册时间</view>
 			<view class="item-next">{{ userInfo.creatTime }}</view>
 		</view>
-		<view class="myrport">我的上报</view>
+		<view class="myrport" @tap="myUpdata">我的上报</view>
 		<view class="myrport myrport1" @tap="loginOut">退出登录</view>
 		<uni-popup ref="showtip" type="center" :mask-click="false">
 			<view class="uni-tip">
@@ -41,7 +41,7 @@
 				<text class="uni-tip-content">您确定要退出登录吗？</text>
 				<view class="uni-tip-group-button">
 					<text class="uni-tip-button uni-tip-button1 " @click="cancel('tip')">取消</text>
-					<text class="uni-tip-button" @click="cancel('tip')">退出登录</text>
+					<text class="uni-tip-button" @click="loginout">退出登录</text>
 				</view>
 			</view>
 		</uni-popup>
@@ -79,7 +79,7 @@ export default {
 		//修改头像
 		changeAvatar(e) {
 			this.$refs.action.actionConfig = {
-				title: '选择',
+				 // title: '选择',
 				list: ['预览头像', '拍摄照片', '从相册选择'],
 				type: 0,
 				isBorderColor: false,
@@ -141,11 +141,23 @@ export default {
 				url: `/pages/change-phone/${url}?data=${JSON.stringify(data)}`
 			});
 		},
-		loginOut() {
+		loginOuts() {
 			this.$refs.showtip.open();
 		},
 		cancel(type) {
 			this.$refs.showtip.close();
+		},
+		//退出登陆
+		loginOut() {
+			uni.redirectTo({
+				url: `/pages/login/login`
+			});
+		},
+		//我的上报
+		myUpdata(){
+			uni.navigateTo({
+				url: `/pages/my-report/my-report`
+			});
 		}
 	}
 };

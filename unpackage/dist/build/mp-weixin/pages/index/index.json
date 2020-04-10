@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "实时监控",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": false,
+  "bounce": "none",
+  "usingComponents": {
+    "tab-game": "/components/tabBar/game",
+    "tab-discovery": "/components/tabBar/discovery",
+    "tab-information": "/components/tabBar/information",
+    "tab-data": "/components/tabBar/Data",
+    "tab-mycenter": "/components/tabBar/mycenter"
+  }
+}

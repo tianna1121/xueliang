@@ -2,7 +2,7 @@
 	<view class="bigboxxs">
 		<video
 			id="myVideo"
-			src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4"
+			:src="src"
 			:show-center-play-btn="false"
 			@fullscreenchange="fullscreenchange"
 			:controls="false"
@@ -15,7 +15,7 @@
 			<cover-view class="video-control">
 				<cover-view class="video-control-back" @tap.native.stop="backup"><cover-image src="../../static/img/news/back.png"></cover-image></cover-view>
 				<cover-view class="video-control-text" @tap.native.stop="backup">{{ title }}</cover-view>
-				<cover-view class="video-control-more" @tap="choosed" >
+				<cover-view class="video-control-more" @tap="choosed">
 					<cover-view v-if="isMenu1">
 						<cover-image src="../../static/img/news/menu@2x.png"></cover-image>
 						<cover-view class="video-control-text1">视频选择</cover-view>
@@ -36,70 +36,64 @@
 					<cover-image class="close-img" src="../../static/img/news/close@2x.png"></cover-image>
 					<cover-view class="closeds">关闭</cover-view>
 				</cover-view>
-				
-				<cover-view
-					v-for="(item, index) in list"
-					:key="index"
-					class="multi-item rate"
-					@tap="switchRate(item.id)"
-					:class="{ active: item.id == currentRate }"
-				>
-					{{ item.adress }}
+				<cover-view class="blaks"></cover-view>
+				<cover-view class="list-box" scroll-top="50">
+					<cover-view v-for="(item, index) in list" :key="index" class="multi-item rate" @tap="switchRate(item.id)" :class="{ active: item.id == currentRate }">
+						{{ item.adress }}
+					</cover-view>
 				</cover-view>
 			</cover-view>
 		</video>
-		
-			<uni-popup ref="showtip1" type="center" :mask-click="false">
-				<view class="uni-tip1">
-					<text class="uni-tip-title1">一键求助</text>
-					<textarea class="popup_textarea" focus placeholder="输入内容..." v-model="feedbackContent"></textarea>
-					<view class="uni-tip-group-button1">
-						<text class="uni-tip-buttons uni-tip-button11 " @click="cancel('tip')">关闭</text>
-						<text class="uni-tip-buttons" @click="cancel('tip')">提交</text>
-					</view>
+
+		<uni-popup ref="showtip1" type="center" :mask-click="false">
+			<view class="uni-tip1">
+				<text class="uni-tip-title1">一键求助</text>
+				<textarea class="popup_textarea uni-input" :show-confirm-bar="flase" cursor-spacing="0" placeholder="输入内容..." v-model="feedbackContent"></textarea>
+				<view class="uni-tip-group-button1">
+					<text class="uni-tip-buttons uni-tip-button11 " @click="cancel('tip')">关闭</text>
+					<text class="uni-tip-buttons" @click="cancel('tip')">提交</text>
 				</view>
-			</uni-popup>
-		
-		
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
-	import uniPopup from '@/components/uni-popup/uni-popup.vue';
+import uniPopup from '@/components/uni-popup/uni-popup.vue';
 export default {
 	components: {
-
 		uniPopup
 	},
 	data() {
 		return {
-			list:[
-				{id:1,adress:"美星镇-新街村"},
-				{id:2,adress:"美星镇-新街村"},
-				{id:3,adress:"美星镇-新街村"},
-				{id:4,adress:"美星镇-新街村"},
-				{id:5,adress:"美星镇-新街村"},
-				{id:6,adress:"美星镇-新街村"},
-				{id:7,adress:"美星镇-新街村"},
-				{id:8,adress:"美星镇-新街村"},
-				{id:111,adress:"美星镇-新街村"},
-				{id:12,adress:"美星镇-新街村"},
-				{id:13,adress:"美星镇-新街村"},
-				{id:41,adress:"美星镇-新街村"},
-				{id:15,adress:"美星镇-新街村"},
-				{id:16,adress:"美星镇-新街村"},
-				{id:17,adress:"美星镇-新街村"},
-				{id:18,adress:"美星镇-新街村"}
-				],
-			currentRate: 1,//当前播放id
-			rateShow: false,//右侧弹出选项
+			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-01.mp4',
+			list: [
+				{ id: 1, adress: '美星镇-新街村' },
+				{ id: 2, adress: '美星镇-新街村' },
+				{ id: 3, adress: '美星镇-新街村' },
+				{ id: 4, adress: '美星镇-新街村' },
+				{ id: 5, adress: '美星镇-新街村' },
+				{ id: 6, adress: '美星镇-新街村' },
+				{ id: 7, adress: '美星镇-新街村' },
+				{ id: 8, adress: '美星镇-新街村' },
+				{ id: 111, adress: '美星镇-新街村' },
+				{ id: 12, adress: '美星镇-新街村' },
+				{ id: 13, adress: '美星镇-新街村' },
+				{ id: 41, adress: '美星镇-新街村' },
+				{ id: 15, adress: '美星镇-新街村' },
+				{ id: 16, adress: '美星镇-新街村' },
+				{ id: 17, adress: '美星镇-新街村' },
+				{ id: 18, adress: '美星镇-新街村' }
+			],
+			currentRate: 1, //当前播放id
+			rateShow: false, //右侧弹出选项
 			detailData: {},
 			title: '2019-12-12 13:24:30 星期三',
-			adress:"美星镇-新街村",
+			adress: '美星镇-新街村',
 			isMenu: false,
-			isshow:false,
+			isshow: false,
 			isMenu1: true,
-			feedbackContent:""
+			feedbackContent: ''
 		};
 	},
 	onLoad(options) {
@@ -117,9 +111,9 @@ export default {
 		fullscreenchange(event) {
 			console.log(event.detail.fullScreen);
 
-		// 	if (!event.detail.fullScreen) {
-		// 		this.backup()
-		// 	}
+			// 	if (!event.detail.fullScreen) {
+			// 		this.backup()
+			// 	}
 		},
 		backup() {
 			uni.navigateBack({
@@ -141,47 +135,40 @@ export default {
 		},
 		//一键求助弹出框
 
-		sosPopup(){
+		sosPopup() {
 			console.log('我要反馈');
-	    this.videoContext.exitFullScreen();
+			this.videoContext.exitFullScreen();
 			this.$nextTick(() => {
 				this.$refs.showtip1.open();
-				this.isshow=true
-			});;
+				this.isshow = true;
+			});
 		},
 		cancel(type) {
 			this.$refs.showtip1.close();
-			this.videoContext.requestFullScreen();
-			this.isshow=false
-			
+			//this.videoContext.requestFullScreen();
+			this.isshow = false;
 		},
-		choosed(){
+		choosed() {
 			this.rateShow = true;
-			this.isMenu1=false;
+			this.isMenu1 = false;
 		},
-		closeedMenu(){
+		closeedMenu() {
 			this.rateShow = false;
-			this.isMenu1=true;
+			this.isMenu1 = true;
 		},
 		//选择视频播放
 		switchRate(id) {
 			let that = this;
 			that.currentRate = id;
 			that.rateShow = false;
-			this.isMenu1=true
-			console.log(id)
-		},
+			this.isMenu1 = true;
+			console.log(id);
+		}
 	}
 };
 </script>
 
 <style lang="scss">
-video {
-	width: 100%;
-}
-video::-webkit-media-controls {
-	display: none !important;
-}
 .page {
 	flex: 1;
 	width: 750rpx;
@@ -191,15 +178,12 @@ video::-webkit-media-controls {
 }
 #myVideo {
 	width: 100%;
-	
 	flex: 1;
 	/* #ifndef APP-PLUS */
 	width: 100%;
 	/* #endif */
 }
-.aaa{
-	
-}
+
 .swiper-item {
 	flex: 1;
 }
@@ -308,7 +292,7 @@ video::-webkit-media-controls {
 // 侧面导航
 .multi-list {
 	position: absolute;
-	height:100%;
+	height: 100%;
 	width: 0;
 	background-color: rgba(0, 0, 0, 0.2);
 	top: 0;
@@ -317,8 +301,7 @@ video::-webkit-media-controls {
 	z-index: 999;
 	box-sizing: border-box;
 	padding: 21rpx;
-	overflow-y: scroll ,
-	
+	overflow: hidden;
 }
 .multi-list.rate {
 	padding: 25rpx 0;
@@ -326,6 +309,17 @@ video::-webkit-media-controls {
 .multi-list.active {
 	width: 373rpx;
 }
+.blaks {
+	height: 66rpx;
+	width: 100%;
+}
+.list-box {
+	box-sizing: border-box;
+	height: 100%;
+	padding: 1rpx;
+	overflow-y: scroll;
+}
+
 .multi-item {
 	text-align: left;
 	color: #fff;
@@ -346,11 +340,14 @@ video::-webkit-media-controls {
 .multi-item.active {
 	color: #00d8ff;
 }
+
 .top-close {
+	z-index: 1000;
 	width: 100%;
 	height: 62rpx;
 	padding-left: 18rpx;
-	z-index: 999;
+	position: fixed;
+
 	flex-direction: row;
 	display: flex;
 	justify-content: left;

@@ -18,8 +18,7 @@
 				<view class="action-summary" v-if="!!actionConfig.summary.length"><view class="summary-center">{{actionConfig.summary}}</view></view>
 				<view class="action-list">
 					<view class="action-item"  v-for="(item,index) of actionConfig.list" :key="index" @click="itemClick(index,actionConfig.type)" >
-						<view v-if='!!item.length'>{{item}}</view>
-						<view v-else :style='{"color":item.color,"background":item.background?item.background:"#fff"}'>{{item.title}}</view>
+						{{item}}
 					</view>
 				</view>
 				<view class="cancel" @click="cancelClick" v-if="!actionConfig.isCloseCancel" :style="{color:actionConfig.cancelColor}">取消</view>
@@ -141,11 +140,11 @@
 			.action-list{
 				background-color: #fff;
 				.action-item{
-					height: 88upx;
-					line-height: 88upx;
+					height: 88rpx;
+					line-height: 88rpx;
 					text-align: center;
 					color: #333;
-					border-top: 2upx solid #EBEBEB;
+					border-top: 2rpx solid #EBEBEB;
 				}
 			}
 			.cancel{

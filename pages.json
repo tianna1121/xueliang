@@ -43,6 +43,10 @@
             "path" : "pages/video-details/video-details",
             "style" : {"navigationStyle":"custom"}
         }
+        ,{
+            "path" : "pages/my-report/my-report",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

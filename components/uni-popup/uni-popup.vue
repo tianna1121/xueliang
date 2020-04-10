@@ -83,10 +83,13 @@
 						case 'bottom':
 							this.ani = ['slide-bottom']
 							this.transClass = {
+								'flexDirection': 'column',
 								'position': 'fixed',
 								'left': 0,
 								'right': 0,
-								'bottom': 0
+								'bottom': 0,
+								'justifyContent': 'center',
+								'alignItems': 'center'
 							}
 							break
 						case 'center':
@@ -97,10 +100,11 @@
 								'display': 'flex',
 								'flexDirection': 'column',
 								/* #endif */
-								'bottom': 0,
+								'bottom': 1,
 								'left': 0,
 								'right': 0,
-								'top': 0,
+								'top':0 ,
+								'margin-top':'130rpx',
 								'justifyContent': 'center',
 								'alignItems': 'center'
 							}

@@ -19,7 +19,7 @@
 		<uni-popup ref="showtip" type="center" :mask-click="false">
 			<view class="uni-tip">
 				<text class="uni-tip-title">我要反馈</text>
-				<textarea class="popup_textarea" focus placeholder="输入内容..." v-model="feedbackContent"></textarea>
+				<textarea class="popup_textarea"  placeholder="输入内容..." v-model="feedbackContent"></textarea>
 				<view class="uni-tip-group-button">
 					<text class="uni-tip-button uni-tip-button1 " @click="cancel('tip')">关闭</text>
 					<text class="uni-tip-button" @click="cancel('tip')">提交</text>
