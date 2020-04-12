@@ -1,17 +1,17 @@
 <template>
 	<view class="login_box">
-		<image  mode="widthFix"  class="bg-img" src="../../static/img/news/login_bg.png"></image>
+		<image  mode="scaleToFill"  class="bg-img" src="../../static/img/news/login_bg.png"></image>
 	    <!-- logo图 -->
 		<view class="main">
 			<image class="logo-img" src="../../static/img/news/bg.png"></image>
 			<view class="title">雪亮工程</view>
 			<view class="acount-box">
 				<text class="account-title">账号：</text>
-				<input v-model="tel" class="ipt-tel" placeholder="请输入注册手机号"  type="number" placeholder-class="placeholder"/>	
+				<input v-model="userInfo.username" class="ipt-tel" placeholder="请输入注册手机号"  type="number" placeholder-class="placeholder"/>	
 			</view>
 			<view class="acount-box passwd">
 				<text class="account-title">密码：</text>
-				<input v-model="passData" class="ipt-tel " placeholder="初始密码为身份证后六位"  type="text" placeholder-class="placeholder"/>	
+				<input v-model="userInfo.password" class="ipt-tel " placeholder="初始密码为身份证后六位"  type="text" placeholder-class="placeholder"/>	
 			</view>
 			<button type="primary" class="btn-login" @tap="loginJump">登录</button>
 			<view class="jump-reg" @tap="jumpRegster">注册账号</view>
@@ -21,13 +21,18 @@
 </template>
 
 <script>
-	
+	import {
+	  setTokenStorage,
+	  getTokenStorage,
+	  configHandle
+	} from '@/test/tool.js'
 	export default {
 		data() {
 			return {
-				tel:"",
-				passData:'', //密码
-				isRotate: false, //是否加载旋转
+				userInfo:{
+					username:"",
+					password:""
+				}
 			};
 		},
 		components:{
@@ -44,7 +49,45 @@
 				});
 			},
 			loginJump(){
-				console.log("denglu")
+				var that=this;
+				console.log(this.userInfo);
+				if(this.userInfo.username.length<1){
+					uni.showModal({
+						 // title: "登录提示",
+						content: "请输入账号!",
+						showCancel: false,
+						confirmText: "确定"
+					})
+					return
+				};
+				if(this.userInfo.password.length<1){
+					uni.showModal({
+						 // title: "登录提示",
+						content: "请输入密码!",
+						showCancel: false,
+						confirmText: "确定"
+					})
+					return
+				};
+				uni.showLoading({
+					title: 'loading'
+				});
+				//发起请求
+				this.$http.post('/interface/rest/http/xlgc/wb-test.htm',that.userInfo).then(res => {
+					console.log(res.data.list);
+					if(res.code==200){
+						uni.hideLoading();
+						//设置token
+						 setTokenStorage(res.data.data.token) // todo 储存token，可更换为自己的储存token逻辑
+						uni.redirectTo({
+						    url: '../index/index',
+							
+						});
+					}
+				}).catch(err => {
+					console.log(err);
+				})
+				//TODO
 				uni.redirectTo({
 				    url: '../index/index',
 					
@@ -59,11 +102,13 @@
 </script>
 
 <style lang='scss'>
-			
+			page{
+				position: relative;
+			}
 		.bg-img{
 			width: 750rpx;
 			position: absolute;
-			height: 1334rpx;
+			height: 100%;
 			
 		}
 			

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App'
-
+import { http } from '@/utils/luch-request/index.js' // 全局挂载引入，配置相关在该index.js文件里修改
 Vue.config.productionTip = false
 // 判断市场常见的几种刘海屏机型
 uni.getSystemInfo({
@@ -15,7 +15,7 @@ uni.getSystemInfo({
 	}
 });
 App.mpType = 'app'
-
+Vue.prototype.$http = http
 const app = new Vue({
     ...App
 })

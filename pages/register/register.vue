@@ -4,14 +4,15 @@
 		<view class="item">
 			<view class="item-title">头像</view>
 			<view class="item-next" @tap="chooseImage">
-				<text class="right-title">点击上传头像 </text> 				
+				<image v-if="userInfo.avatar.length>0" class="avatar" :src="userInfo.avatar" mode=""></image>
+				<text v-else class="right-title">点击上传头像 </text> 
 				<uni-icons type="forward" color="#C7C7CC" size="22" />
 			</view>
 		</view>
 		<view class="item">
 			<view class="item-title">姓名</view>
 			<view class="item-next1">
-				<input v-model="name" class="ipt" placeholder="请输入姓名"  type="text" placeholder-class="placeholder"/>
+				<input v-model="userInfo.username" class="ipt" placeholder="请输入姓名"  type="text" placeholder-class="placeholder"/>
 			</view>
 			
 		</view>
@@ -29,18 +30,18 @@
 		<view class="item">
 			<view class="item-title">身份证号</view>
 			<view class="item-next1">
-				<input v-model="idCard" class="ipt" placeholder="请输入身份证号"  type="text" placeholder-class="placeholder"/>
+				<input v-model="userInfo.idcard" class="ipt" placeholder="请输入身份证号"  type="text" placeholder-class="placeholder"/>
 			</view>
 		</view>
 		<view class="item">
 			<view class="item-title">手机号码</view>
 			<view class="item-next1">
-			<input v-model="phone" class="ipt" placeholder="请输入手机号码"  type="text" placeholder-class="placeholder"/>	
+			<input v-model="userInfo.phone" class="ipt" placeholder="请输入手机号码"  type="text" placeholder-class="placeholder"/>	
 			</view>
 			</view>
 			<view class="item">
 				<view class="item-title">所在单位</view>
-				<view class="item-next" @tap="chooseWork">
+				<view class="item-next" >
 					<picker :range="workList" @change="workListChange" :value="workIndex" mode="selector">
 						<view class="uni-input">{{workList[workIndex]}}</view>
 					</picker>
@@ -69,6 +70,14 @@
 				   sexIndex: 0,
 				   workList:['请选择','政府','国家电网','财务','路政','纪委'],
 				   workIndex:0,
+			userInfo:{
+				avatar:"",
+				username:"",
+				idcard:"",
+				sex:"",
+				phone:"",
+				unit:""
+			}
 			};
 		},
 		onShow(){
@@ -83,9 +92,79 @@
 			},
 				
 			submitMsg(){
+				console.log(this.userInfo)
+				
+				if(this.userInfo.avatar.length<1){
+					uni.showModal({
+						
+						content: "请上传头像!",
+						showCancel: false,
+						confirmText: "确定"
+					})
+					return
+				}
+				if(this.userInfo.avatar.username<1){
+					uni.showModal({
+						
+						content: "请输入姓名!",
+						showCancel: false,
+						confirmText: "确定"
+					})
+					return
+				}
+				if(this.userInfo.avatar.idcard<1){
+					uni.showModal({
+						
+						content: "请输入身份证号!",
+						showCancel: false,
+						confirmText: "确定"
+					})
+					return
+				}
+				if(this.userInfo.avatar.sex<1){
+					uni.showModal({
+						
+						content: "请选择性别!",
+						showCancel: false,
+						confirmText: "确定"
+					})
+					return
+				}
+				if(this.userInfo.avatar.phone<1){
+					uni.showModal({
+						
+						content: "请输入电话号码!",
+						showCancel: false,
+						confirmText: "确定"
+					})
+					return
+				}
+				if(this.userInfo.avatar.unit<1){
+					uni.showModal({
+				
+						content: "请选择所在单位!",
+						showCancel: false,
+						confirmText: "确定"
+					})
+					return
+				}
 				uni.showLoading({
-				    title: '数据请求中'
+					title: 'loading'
 				});
+				//发起请求
+				this.$http.post('/interface/rest/http/xlgc/wb-test.htm',this.userInfo).then(res => {
+					console.log(res.data.list);
+					if(res.code==200){
+						uni.hideLoading();
+						
+						uni.redirectTo({
+						    url: '../regres/regres',
+							
+						});
+					}
+				}).catch(err => {
+					console.log(err);
+				})
 				uni.redirectTo({
 				    url: '../regres/regres',
 					
@@ -97,7 +176,7 @@
 					count:1,
 					success: (res) => {
 						 console.log(JSON.stringify(res.tempFilePaths));
-						this.imageList = this.imageList.concat(res.tempFilePaths);
+						this.userInfo.avatar =res.tempFilePaths[0];
 					},
 					
 				})
@@ -105,10 +184,12 @@
 			//选择单位
 			workListChange(e){
 				this.workIndex = parseInt(e.detail.value)
+				this.userInfo.unit =this.workList[this.workIndex]
 			},
 				
 			sizeTypeChange(e){
-				this.sexIndex = parseInt(e.detail.value)
+				this.sexIndex= parseInt(e.detail.value)
+				this.userInfo.sex = parseInt(e.detail.value)==0?"M":"F"
 			}
 		}
 	}
@@ -121,18 +202,26 @@
 .item{
 	width: 690rpx;
 	height: 90rpx;
+	line-height: 90rpx;
 	display:flex;
 	flex-direction: row;
-	flex: 1;
+	justify-items: center;
 	justify-content: space-between;
 	padding: 0 30rpx;
+	
 	background-color: #FFFFFF;
 	//border-top: 1rpx #DDDDDD solid;
 	border-bottom: 1rpx #DDDDDD solid;
-	line-height: 90rpx;
+	
 		
 	.item-title{
 		font-size: 34rpx;
+	}
+		
+	.avatar{
+		width: 60rpx;
+		height: 60rpx;
+		margin-top:16rpx ;
 	}
 	.item-next{
 		color: #888888;

@@ -126,6 +126,9 @@
     font-weight: 500;
     color: #2256d8;
 }
+.bigBox .statusd {
+    color: #888888;
+}
 .bigBox .last-cild {
     margin-right: 0;
 }

@@ -1,8 +1,8 @@
 <template>
 	<view class="bigBox">
 		<!-- 自定义标题 -->
-		<uni-nav-bar fixed="true" color="#007AFF" background-color="#F8F8F8" :status-bar="true" title="事件中心" />
-		
+		<uni-nav-bar fixed="true" color="#007AFF" background-color="#F8F8F8" :status-bar="true" left-icon="arrowleft"
+		 left-text="返回" title="我的上报" @clickLeft="back" />
 		<!-- 下拉刷新组件 -->
 		<mix-pulldown-refresh ref="mixPulldownRefresh" class="panel-content" :top="90" @refresh="onPulldownReresh" @setEnableScroll="setEnableScroll">
 			<!-- 内容部分 -->
@@ -26,7 +26,7 @@
 								</text>
 								<text class="item-title last-cild" space="emsp">
 									状态:
-									<text class="it2">{{ statusChange(item.status) }}</text>
+									<text class="it2" :class="{'statusd':item.status==3}">{{ statusChange(item.status) }}</text>
 								</text>
 							</view>
 							<view class="items">
@@ -77,7 +77,8 @@ export default {
 			tabCurrentIndex: 0, //当前选项卡索引
 			scrollLeft: 0, //顶部选项卡左滑距离
 			enableScroll: true,
-			tabBars: []
+			tabBars: [],
+			
 		};
 	},
 
@@ -88,11 +89,17 @@ export default {
 	},
 	onReady() {},
 	methods: {
+		
 		ontrueGetList() {
 			console.log('加载了第二个页面，可以把网络请求放这里');
 			// 获取屏幕宽度
 			windowWidth = uni.getSystemInfoSync().windowWidth;
 			this.loadTabbars();
+		},
+		back(){
+			uni.navigateBack({
+				delta: 1
+			});
 		},
 		//打电话
 		callPhone(phone){
@@ -107,17 +114,11 @@ export default {
 					return '待处理';
 					break;
 				case 2:
-					return '待办';
+					return '处理中';
 					break;
 
 				case 3:
-					return '处理中';
-					break;
-				case 4:
-					return '代办结';
-					break;
-				case 5:
-					return '已办结';
+					return '已处理';
 					break;
 				default:
 					return '待处理';
@@ -289,7 +290,7 @@ export default {
 </script>
 
 <style lang="scss">
-.bigBox {
+
 	page,
 	.content {
 		background-color: #f8f8f8;
@@ -396,7 +397,10 @@ export default {
 		font-weight: 500;
 		color: #2256d8;
 	}
-
+	
+.statusd{
+	color: #888888;
+}
 	.last-cild {
 		margin-right: 0;
 	}
@@ -438,5 +442,5 @@ export default {
 		width: 60upx;
 		height: 60upx;
 	}
-}
+
 </style>

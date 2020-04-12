@@ -24,10 +24,13 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+page {
+  position: relative;
+}
 .bg-img {
   width: 750rpx;
   position: absolute;
-  height: 1334rpx;
+  height: 100%;
 }
 .main {
   z-index: 100;

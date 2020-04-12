@@ -32,7 +32,7 @@
 								</text>
 								<text class="item-title last-cild" space="emsp">
 									状态:
-									<text class="it2">{{ statusChange(item.status) }}</text>
+									<text class="it2" :class="{'statusd':item.status==3}">{{ statusChange(item.status) }}</text>
 								</text>
 							</view>
 							<view class="items">
@@ -113,17 +113,11 @@ export default {
 					return '待处理';
 					break;
 				case 2:
-					return '待办';
-					break;
-
-				case 3:
 					return '处理中';
 					break;
-				case 4:
-					return '代办结';
-					break;
-				case 5:
-					return '已办结';
+			
+				case 3:
+					return '已处理';
 					break;
 				default:
 					return '待处理';
@@ -402,7 +396,9 @@ export default {
 		font-weight: 500;
 		color: #2256d8;
 	}
-
+.statusd{
+	color: #888888;
+}
 	.last-cild {
 		margin-right: 0;
 	}

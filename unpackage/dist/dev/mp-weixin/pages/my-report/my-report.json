@@ -1,4 +1,5 @@
 {
+  "navigationStyle": "custom",
   "usingComponents": {
     "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar",
     "mix-pulldown-refresh": "/components/mix-pulldown-refresh/mix-pulldown-refresh",

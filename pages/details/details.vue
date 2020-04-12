@@ -7,15 +7,15 @@
 		<view class="main-title1">事件信息</view>
 		<view class="item">
 			<view class="item-title">上报终端</view>
-			<view class="item-next">小程序</view>
+			<view class="item-next">{{detailData.upReport}}</view>
 		</view>
 		<view class="item">
 			<view class="item-title">事件类型</view>
-			<view class="item-next">类型一</view>
+			<view class="item-next">{{detailData.type}}</view>
 		</view>
 		<view class="item">
 			<view class="item-title">事件类别</view>
-			<view class="item-next">类别1</view>
+			<view class="item-next">{{detailData.category}}1</view>
 		</view>
 		<view class="item">
 			<view class="item-title">事发时间</view>
@@ -23,19 +23,19 @@
 		</view>
 		<view class="item1">
 			<view class="item-title1">事件描述</view>
-			<view class="conents1">在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。</view>
+			<view class="conents1">{{ detailData.content }}</view>
 		</view>
 
 		<view class="item2">
 			<view class="item-title1">图片/视频</view>
 			<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll" scroll-left="120">
-				<image v-for="(image, index) in imgList" :key="index" class="uplaod-img" @tap="previewImage" :data-src="image" :src="image"></image>
+				<image v-for="(image, index) in detailData.imgList" :key="index" class="uplaod-img" @tap="previewImage" :data-src="image" :src="image"></image>
 			</scroll-view>
 		</view>
 		<view class="item">
 			<view class="item-title">事发地点</view>
 			<view class="item-next">
-				<view class="adresss">美兴镇-营盘村</view>
+				<view class="adresss">{{detailData.adress.addressContent}}</view>
 				<image class="address-icon" src="../../static/img/news/location1.png"></image>
 			</view>
 		</view>
@@ -44,22 +44,22 @@
 		<view class="main-title2">当前状态</view>
 		<view class="item">
 			<view class="item-title">当前状态</view>
-			<view class="item-next1">待办结</view>
+			<view class="item-next1">{{ statusChange(detailData.status) }}</view>
 		</view>
 		<view class="item1 item11">
 			<view class="item-title1">处理进程</view>
 			<view class="conents2">
-				<uni-steps :options="list2" active-color="#007AFF" :active="active" />
+				<uni-steps :options="detailData.processingProcess" active-color="#007AFF" :active="active" />
 			</view>
 		</view>
 		<view class="item1 ">
 			<view class="item-title1">反馈内容</view>
-			<view class="conents1">请更换附近队员进行处理,在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。</view>
-			<view class="times1">2019-10-21 13:20:30</view>
+			<view class="conents1">{{detailData.feedbackContent}}</view>
+			<view class="times1">{{detailData.feedbackTime}}</view>
 		</view>
 		<view class="main-title1">处理队员信息</view>
 		<uni-list>
-			<uni-list-item title="张三" rightText="13812345678" :show-arrow="false" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" />
+			<uni-list-item :title="detailData.userinfo.name" :rightText="detailData.userinfo.phone" :show-arrow="false" :thumb="detailData.userinfo.url" />
 		</uni-list>
 		<button type="primary" class="btn-login" @tap="submitMsg">处理完成</button>
 
@@ -81,7 +81,7 @@
 				<textarea class="popup_textarea uni-input" cursor-spacing="20px" :adjust-position="true"  :show-confirm-bar="flase" placeholder="输入内容..." v-model="feedbackContent"></textarea>
 				<view class="uni-tip-group-button1">
 					<text class="uni-tip-buttons uni-tip-button11 " @click="cancel('tip')">关闭</text>
-					<text class="uni-tip-buttons" @click="cancel('tip')">提交</text>
+					<text class="uni-tip-buttons" @click="submitFeedbackContent">提交</text>
 				</view>
 			</view>
 		</uni-popup>
@@ -106,51 +106,43 @@
 		},
 		data() {
 			return {
+				
 				showtip1:'center',
 				detailData: {},
 				imgList: [],
 				active: 1,
-				list2: [{
-						title: '待处理',
-						desc: '2018-11-11'
-					},
-					{
-						title: '待办',
-						desc: '2018-11-12'
-					},
-					{
-						title: '处理中',
-						desc: '2018-11-13'
-					},
-					{
-						title: '待办结',
-						desc: '2018-11-14'
-					},
-					{
-						title: '已办结',
-						desc: '2018-11-14'
-					}
-				],
+				
 				userFeedbackHidden: true, // 默认隐藏
 				feedbackContent: '' // 用户反馈内容
 			};
 		},
 		onLoad(options) {
-			this.detailData = JSON.parse(options.data);
+			// this.detailData = JSON.parse(options.data);
+			// this.detailData = json.detail.data;
 			this.loadNewsList();
 		},
 		methods: {
 			//获取推荐列表
 			async loadNewsList() {
+					this.detailData = json.detail.data;
 				console.log(this.detailData);
-				this.imgList = [
-					'http://fc-feed.cdn.bcebos.com/0/pic/9107b498a0cbea000842763091e833b6.jpg',
-					'http://fc-feed.cdn.bcebos.com/0/pic/dc4b0610241d7016279f4f4652ea0886.jpg',
-					'http://fc-feed.cdn.bcebos.com/0/pic/0f6effa42536fb5c2ca945bd46c59335.jpg',
-					'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2133231534,4242817610&fm=173&app=49&f=JPEG?w=218&h=146&s=4FB42BC55E2A26076B2D1301030060C6',
-					'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1276936674,3021787485&fm=173&app=49&f=JPEG?w=218&h=146&s=4FB02FC40B00064332AD45170300D0C7',
-					'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1909353310,863816541&fm=173&app=49&f=JPEG?w=218&h=146&s=25F67E844C002445437DE8810300E0D3'
-				];
+				
+			},
+			statusChange(index) {
+				switch (index) {
+					case 1:
+						return '待处理';
+						break;
+					case 2:
+						return '处理中';
+						break;
+				
+					case 3:
+						return '已处理';
+						break;
+					default:
+						return '待处理';
+				}
 			},
 			back() {
 				uni.navigateBack({
@@ -168,7 +160,7 @@
 				console.log(current)
 				uni.previewImage({
 					current: current,
-					urls: this.imgList
+					urls: this.detailData.imgList
 				});
 			},
 			submitMsg() {
@@ -184,7 +176,11 @@
 				});;
 			},
 
-
+submitFeedbackContent(){
+	this.detailData.feedbackContent=this.feedbackContent;
+	//发起请求
+	this.$refs.showtip1.close();
+},
 			cancel(type) {
 
 				this.$refs.showtip.close();

@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/regresult/regresult",
-    "pages/regres/regres",
     "pages/register/register",
     "pages/login/login",
+    "pages/regresult/regresult",
+    "pages/regres/regres",
     "pages/details/details",
     "pages/notificationDetail/notificationDetail",
     "pages/change-phone/change-phone",
