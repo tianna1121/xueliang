@@ -68,6 +68,7 @@
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
 	        flex: 1;
+	margin-left: 30rpx;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
@@ -92,6 +93,7 @@
 	font-size: 28rpx;
 	line-height: 16px;
 	text-align: center;
+	margin-bottom: 10rpx;
 }
 .uni-steps__column-title.data-v-5cb5b7f4 {
 	font-size: 28rpx;
@@ -107,6 +109,7 @@
 	font-size: 24rpx;
 	text-align: left;
 	line-height: 18px;
+	margin-top: 10rpx;
 }
 .uni-steps__row-container.data-v-5cb5b7f4 {
 	

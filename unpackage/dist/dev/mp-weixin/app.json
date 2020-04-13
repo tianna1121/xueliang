@@ -9,7 +9,8 @@
     "pages/notificationDetail/notificationDetail",
     "pages/change-phone/change-phone",
     "pages/video-details/video-details",
-    "pages/my-report/my-report"
+    "pages/my-report/my-report",
+    "pages/my-report-detail/my-report-detail"
   ],
   "subPackages": [],
   "window": {

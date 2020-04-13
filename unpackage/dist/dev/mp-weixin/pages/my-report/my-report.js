@@ -95,13 +95,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   "uni-nav-bar": function() {
-    return __webpack_require__.e(/*! import() | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @/components/uni-nav-bar/uni-nav-bar.vue */ 151))
+    return __webpack_require__.e(/*! import() | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @/components/uni-nav-bar/uni-nav-bar.vue */ 159))
   },
   "mix-pulldown-refresh": function() {
-    return __webpack_require__.e(/*! import() | components/mix-pulldown-refresh/mix-pulldown-refresh */ "components/mix-pulldown-refresh/mix-pulldown-refresh").then(__webpack_require__.bind(null, /*! @/components/mix-pulldown-refresh/mix-pulldown-refresh.vue */ 186))
+    return __webpack_require__.e(/*! import() | components/mix-pulldown-refresh/mix-pulldown-refresh */ "components/mix-pulldown-refresh/mix-pulldown-refresh").then(__webpack_require__.bind(null, /*! @/components/mix-pulldown-refresh/mix-pulldown-refresh.vue */ 194))
   },
   "mix-load-more": function() {
-    return __webpack_require__.e(/*! import() | components/mix-load-more/mix-load-more */ "components/mix-load-more/mix-load-more").then(__webpack_require__.bind(null, /*! @/components/mix-load-more/mix-load-more.vue */ 193))
+    return __webpack_require__.e(/*! import() | components/mix-load-more/mix-load-more */ "components/mix-load-more/mix-load-more").then(__webpack_require__.bind(null, /*! @/components/mix-load-more/mix-load-more.vue */ 201))
   }
 }
 var render = function() {
@@ -225,7 +225,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 73));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 151));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixPulldownRefresh = function mixPulldownRefresh() {__webpack_require__.e(/*! require.ensure | components/mix-pulldown-refresh/mix-pulldown-refresh */ "components/mix-pulldown-refresh/mix-pulldown-refresh").then((function () {return resolve(__webpack_require__(/*! @/components/mix-pulldown-refresh/mix-pulldown-refresh */ 186));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixLoadMore = function mixLoadMore() {__webpack_require__.e(/*! require.ensure | components/mix-load-more/mix-load-more */ "components/mix-load-more/mix-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/mix-load-more/mix-load-more */ 193));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 73));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 159));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixPulldownRefresh = function mixPulldownRefresh() {__webpack_require__.e(/*! require.ensure | components/mix-pulldown-refresh/mix-pulldown-refresh */ "components/mix-pulldown-refresh/mix-pulldown-refresh").then((function () {return resolve(__webpack_require__(/*! @/components/mix-pulldown-refresh/mix-pulldown-refresh */ 194));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixLoadMore = function mixLoadMore() {__webpack_require__.e(/*! require.ensure | components/mix-load-more/mix-load-more */ "components/mix-load-more/mix-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/mix-load-more/mix-load-more */ 201));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 var windowWidth = 0,
@@ -353,15 +353,13 @@ tabBar;var _default =
     //新闻详情
     navToDetails: function navToDetails(item) {
       var data = {
-        id: item.id,
-        title: item.title,
-        author: item.author,
-        time: item.time };
+        id: item.id };
 
-      var url = item.videoSrc ? 'videoDetails' : 'details';
+
+
 
       uni.navigateTo({
-        url: "/pages/details/".concat(url, "?data=").concat(JSON.stringify(data)) });
+        url: "/pages/my-report-detail/my-report-detail?data=".concat(JSON.stringify(data)) });
 
     },
 

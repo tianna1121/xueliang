@@ -48,6 +48,10 @@
             "path" : "pages/my-report/my-report",
             "style" : {"navigationStyle":"custom"}
         }
+        ,{
+            "path" : "pages/my-report-detail/my-report-detail",
+            "style" : {"navigationStyle":"custom"}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

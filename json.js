@@ -132,14 +132,14 @@ const subs = [{
 	url: "rtsp://www.baidu.com",
 	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
 	id: "1",
-	address: "小金真",
+	address: "金川县阿阿镇",
 	date: "2020-04-09 00:00:00"
 }, {
 	name: "监控点1",
 	url: "rtsp://www.baidu.com",
 	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
 	id: "2",
-	address: "小金真",
+	address: "金川县阿阿镇", 
 	date: "2020-04-09 00:00:00"
 }, ]
 
@@ -164,10 +164,7 @@ const detail = {
 			'latitude': 323.22
 		},
 		'status': 1,
-		'processingProcess': [{
-				title: '待办',
-				desc: '2018-11-12'
-			},
+		'processingProcess': [
 			{
 				'title': '待处理',
 				'desc': '2018-11-11'
@@ -177,8 +174,8 @@ const detail = {
 				desc: '2018-11-13'
 			},
 			{
-				title: '已办结',
-				desc: ''
+				title: '已处理',
+				desc: '2018-11-13'
 			}
 		],
 		'feedbackContent': "请更换附近队员进行处理,在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",

@@ -25,7 +25,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 page {
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
 }
 .item {
   width: 690rpx;
@@ -44,8 +44,8 @@ page {
   -webkit-justify-content: space-between;
           justify-content: space-between;
   padding: 0 30rpx;
-  background-color: #FFFFFF;
-  border-bottom: 1rpx #DDDDDD solid;
+  background-color: #ffffff;
+  border-bottom: 1rpx #dddddd solid;
   line-height: 90rpx;
 }
 .item .item-title {
@@ -109,8 +109,8 @@ page {
   -webkit-flex: 1;
           flex: 1;
   padding: 0 30rpx 70rpx;
-  background-color: #FFFFFF;
-  border-bottom: 1rpx #DDDDDD solid;
+  background-color: #ffffff;
+  border-bottom: 1rpx #dddddd solid;
 }
 .item1 .item-title1 {
     margin: 20rpx 0;
@@ -138,7 +138,7 @@ page {
   -webkit-flex: 1;
           flex: 1;
   padding: 0 30rpx 20rpx;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 .item2 .item-title1 {
     margin: 20rpx 0;
@@ -146,16 +146,16 @@ page {
 }
 .tip-uplaod {
   font-size: 20rpx;
-  color: #BBBBBB;
+  color: #bbbbbb;
   margin-top: 10rpx;
 }
 .btn-login {
   margin: 72rpx auto;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 36rpx;
   width: 690rpx;
   height: 94rpx;
-  background: #2256D8 !important;
+  background: #2256d8 !important;
   border-radius: 10rpx;
 }
 

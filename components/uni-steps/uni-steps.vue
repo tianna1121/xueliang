@@ -9,12 +9,12 @@
 			</view>
 			<view :class="[direction==='column'?'uni-steps__column-container':'uni-steps__row-container']">
 				<view :class="[direction==='column'?'uni-steps__column-line-item':'uni-steps__row-line-item']" v-for="(item,index) in options" :key="index">
-					<view :class="[direction==='column'?'uni-steps__column-line':'uni-steps__row-line',direction==='column'?'uni-steps__column-line--before':'uni-steps__row-line--before']" :style="{backgroundColor:index<=active&&index!==0?activeColor:index===0?'transparent':deactiveColor}"></view>
+					<view :class="[direction==='column'?'uni-steps__column-line':'uni-steps__row-line',direction==='column'?'uni-steps__column-line--before':'uni-steps__row-line--before']" :style="{backgroundColor:index<=active&&index!==0?activeColor1:index===0?'transparent':deactiveColor}"></view>
 					<view :class="[direction==='column'?'uni-steps__column-check':'uni-steps__row-check']" v-if="index === active">
-						<uni-icons :color="activeColor" type="checkbox-filled" size="14"></uni-icons>
+						<uni-icons :color="activeColor1" type="checkbox-filled" size="14"></uni-icons>
 					</view>
-					<view :class="[direction==='column'?'uni-steps__column-circle':'uni-steps__row-circle']" v-else :style="{backgroundColor:index<active?activeColor:deactiveColor}"></view>
-					<view :class="[direction==='column'?'uni-steps__column-line':'uni-steps__row-line',direction==='column'?'uni-steps__column-line--after':'uni-steps__row-line--after']" :style="{backgroundColor:index<active&&index!==options.length-1?activeColor:index===options.length-1?'transparent':deactiveColor}"></view>
+					<view :class="[direction==='column'?'uni-steps__column-circle':'uni-steps__row-circle']" v-else :style="{backgroundColor:index<active?activeColor1:deactiveColor}"></view>
+					<view :class="[direction==='column'?'uni-steps__column-line':'uni-steps__row-line',direction==='column'?'uni-steps__column-line--after':'uni-steps__row-line--after']" :style="{backgroundColor:index<active&&index!==options.length-1?activeColor1:index===options.length-1?'transparent':deactiveColor}"></view>
 				</view>
 			</view>
 		</view>
@@ -50,12 +50,17 @@
 			activeColor: {
 				// 激活状态颜色
 				type: String,
-				default: '#1aad19'
+				default: '#000000'
+			},
+			activeColor1: {
+				// 激活状态颜色
+				type: String,
+				default: '#007AFF'
 			},
 			deactiveColor: {
 				// 未激活状态颜色
 				type: String,
-				default: '#999999'
+				default: '#ABABAB'
 			},
 			active: {
 				// 当前步骤
@@ -121,8 +126,9 @@
 		display: inline-flex;
 		/* #endif */
 		flex: 1;
+		margin-left: 30rpx;
 		flex-direction: column;
-	}
+	}  
 
 	.uni-steps__column-text {
 		padding: 6px 0px;
@@ -139,6 +145,8 @@
 		font-size: 28rpx;
 		line-height: 16px;
 		text-align: center;
+		margin-bottom: 10rpx;
+
 	}
 
 	.uni-steps__column-title {
@@ -157,6 +165,7 @@
 		font-size: 24rpx;
 		text-align: left;
 		line-height: 18px;
+		margin-top: 10rpx;
 	}
 
 	.uni-steps__row-container {

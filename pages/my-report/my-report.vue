@@ -188,14 +188,12 @@ export default {
 		navToDetails(item) {
 			let data = {
 				id: item.id,
-				title: item.title,
-				author: item.author,
-				time: item.time
+				
 			};
-			let url = item.videoSrc ? 'videoDetails' : 'details';
+			
 
 			uni.navigateTo({
-				url: `/pages/details/${url}?data=${JSON.stringify(data)}`
+				url: `/pages/my-report-detail/my-report-detail?data=${JSON.stringify(data)}`
 			});
 		},
 
