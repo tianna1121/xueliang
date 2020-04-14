@@ -10,7 +10,7 @@
 	<view>
 		<view class="photo">
 			<image v-for="(item,index) in imgArr" @click="preImage(item.url,imgArr)" :key="index" :src="item.url" mode="scaleToFill">
-				<view class="del" @tap.stop="delImage(index)"></view>
+				<view v-if="imgArr.length>0" class="del" @tap.stop="delImage(index)"></view>
 			</image>
 			<video v-for="(item,index) in videoArr"  @fullscreenchange="screenchange" :key="index" :src="item.url" controls>
 				<cover-view class="del" @tap.stop="delVideo(index)"></cover-view>
