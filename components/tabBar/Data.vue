@@ -36,11 +36,12 @@
 		</view>
 		<view class="item1">
 			<view class="item-title1">事件描述</view>
-			<textarea maxlength="200" v-model="mark" class="mark-ipt" placeholder="请输入文字描述" type="text" auto-height placeholder-class="placeholder" />
+			<textarea maxlength="200" v-model="upData.content" class="mark-ipt" placeholder="请输入文字描述" type="text" auto-height placeholder-class="placeholder" />
 		</view>
 		<view class="item2">
 			<view class="item-title1">图片/视频</view>
-			<image class="uplaod-img" src="../../static/img/news/upload.png" @tap="upLoadImg"></image>
+			<hUpload @schange="schange" @upload="setAttachData"></hUpload>
+			<!-- <image class="uplaod-img" src="../../static/img/news/upload.png" @tap="upLoadImg"></image> -->
 			<view class="tip-uplaod">点击上传图片/视频</view>
 		</view>
 		<button type="primary" class="btn-login" @tap="updataJump">上报</button>
@@ -61,10 +62,11 @@
 
 <script>
 import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
-
+import hUpload from "@/components/h-upload/h-upload.vue"
 export default {
 	components: {
-		uniNavBar
+		uniNavBar,
+		hUpload
 	},
 	data() {
 		return {
@@ -72,10 +74,6 @@ export default {
 			type1Index: 0,
 			type2: ['点击选择', '类别1', '类别2'],
 			type2Index: 0,
-			locationAddress: '选择地点',
-			longitude:"",
-			latitude:"",
-			mark: '',
 			dates: '',
 			upData:{
 				type:"点击选择",
@@ -84,10 +82,9 @@ export default {
 				address:{
 					address_content:'选择地点',
 					longitude:"",
-					latitude:"",
-					content:"",
-					
+					latitude:"",	
 				},
+				content:"",
 				imgList:[]
 			}
 		};
@@ -101,8 +98,17 @@ export default {
 	},
 
 	methods: {
+		schange(val){
+			console.log(111)
+			console.log(val)
+		},
+		setAttachData(val){
+			console.log(222)
+			console.log(val)
+		},
 		updataJump() {
 			console.log('上报提交');
+			console.log(this.upData)
 		},
 		ontrueGetList() {
 			console.log('加载了第三个页面，可以把网络请求放这里');
@@ -137,8 +143,10 @@ export default {
 			this.upData.time = res.result;
 			console.log(res.result);
 		},
-		//上传图片
-		upLoadImg(){}
+		//上传图片/视频
+		upLoadImg(){
+			console.log("根据选择调用不同的api")
+		}
 	}
 };
 </script>
