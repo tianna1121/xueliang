@@ -23,7 +23,7 @@
 						-->
 						<view v-for="(item, index) in tabItem.newsList" :key="index" class="news-item" @click="navToDetails(item)">
 							<view class="notify-title">
-							<text class="titles1">	{{ item.nickname}}</text>
+							<text class="titles1">	{{statusChange(item.category) }}</text>
 							<view class="">
 								<template>
 									<image class="read-img" v-if="item.status==1" src="../../static/img/news/unread.png" mode=""></image>
@@ -83,6 +83,22 @@ export default {
 	},
 	onReady() {},
 	methods: {
+		statusChange(index) {
+			switch (index) {
+				case 1:
+					return '通知';
+					break;
+				case 2:
+					return '公告';
+					break;
+		
+				case 3:
+					return '工作';
+					break;
+				default:
+					return '通知';
+			}
+		},
 		ontrueGetList() {
 			console.log('加载了通知/公告，可以把网络请求放这里');
 			// 获取屏幕宽度
@@ -153,12 +169,7 @@ export default {
 		//新闻详情
 		navToDetails(item) {
 			console.log(item)
-			let data = {
-				id: item.id,
-				title: item.nickname,
-				content: item.content,
-				status: item.status
-			};
+			let data = item;
 			let url =  'notificationDetail';
 
 			uni.navigateTo({

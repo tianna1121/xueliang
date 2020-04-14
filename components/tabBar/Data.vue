@@ -6,7 +6,7 @@
 			<view class="item-title">事件类型</view>
 			<view class="item-next">
 				<picker :range="type1" @change="sizeTypeChange" :value="type1Index" mode="selector">
-					<view class="uni-input">{{ type1[type1Index] }}</view>
+					<view class="uni-input">{{upData.type}}</view>
 				</picker>
 				<uni-icons type="forward" color="#C7C7CC" size="22" />
 			</view>
@@ -15,7 +15,7 @@
 			<view class="item-title">事件类别</view>
 			<view class="item-next">
 				<picker :range="type2" @change="sizeType2Change" :value="type2Index" mode="selector">
-					<view class="uni-input">{{ type2[type2Index] }}</view>
+					<view class="uni-input">{{ upData.category }}</view>
 				</picker>
 				<uni-icons type="forward" color="#C7C7CC" size="22" />
 			</view>
@@ -23,14 +23,14 @@
 		<view class="item">
 			<view class="item-title">事发时间</view>
 			<view class="item-next" @tap="showPicker">
-				<view class="uni-input">{{ date }}</view>
+				<view class="uni-input">{{ upData.time }}</view>
 				<uni-icons type="forward" color="#C7C7CC" size="22" />
 			</view>
 		</view>
 		<view class="item">
 			<view class="item-title">事发地点</view>
 			<view class="item-next">
-				<view class="adresss" @tap="chooseLocation">{{ locationAddress }}</view>
+				<view class="adresss" @tap="chooseLocation">{{ upData.address.address_content }}</view>
 				<image class="address-icon" src="../../static/img/news/location1.png"></image>
 			</view>
 		</view>
@@ -40,7 +40,7 @@
 		</view>
 		<view class="item2">
 			<view class="item-title1">图片/视频</view>
-			<image class="uplaod-img" src="../../static/img/news/upload.png"></image>
+			<image class="uplaod-img" src="../../static/img/news/upload.png" @tap="upLoadImg"></image>
 			<view class="tip-uplaod">点击上传图片/视频</view>
 		</view>
 		<button type="primary" class="btn-login" @tap="updataJump">上报</button>
@@ -72,10 +72,24 @@ export default {
 			type1Index: 0,
 			type2: ['点击选择', '类别1', '类别2'],
 			type2Index: 0,
-			date: '点击选择',
 			locationAddress: '选择地点',
+			longitude:"",
+			latitude:"",
 			mark: '',
-			dates: ''
+			dates: '',
+			upData:{
+				type:"点击选择",
+				category:"点击选择",
+				time:"点击选择",
+				address:{
+					address_content:'选择地点',
+					longitude:"",
+					latitude:"",
+					content:"",
+					
+				},
+				imgList:[]
+			}
 		};
 	},
 	onReady() {
@@ -95,21 +109,24 @@ export default {
 		},
 		sizeTypeChange(e) {
 			this.type1Index = parseInt(e.detail.value);
+			this.upData.type=this.type1[parseInt(e.detail.value)]
 		},
 		sizeType2Change(e) {
 			this.type2Index = parseInt(e.detail.value);
+			this.upData.category=this.type2[parseInt(e.detail.value)]
 		},
-		bindDateChange: function(e) {
-			this.date = e.target.value;
-		},
-
+		
 		chooseLocation: function() {
 			uni.chooseLocation({
 				success: res => {
 					console.log(res.name);
 					console.log(res.address);
+					console.log(res.longitude);
+					console.log(res.latitude);
 					// this.location = formatLocation(res.longitude, res.latitude),
-					this.locationAddress = res.name;
+					this.upData.address.address_content = res.name;
+					this.upData.address.longitude = res.longitude;
+					this.upData.address.latitude = res.latitude;
 				}
 			});
 		},
@@ -117,9 +134,11 @@ export default {
 			this.$refs.date1.show();
 		},
 		onConfirm(res, type) {
-			this.date = res.result;
+			this.upData.time = res.result;
 			console.log(res.result);
-		}
+		},
+		//上传图片
+		upLoadImg(){}
 	}
 };
 </script>

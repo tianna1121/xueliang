@@ -757,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1685,9 +1685,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 15:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/utils/luch-request/index.js ***!
-  \******************************************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/utils/luch-request/index.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1872,9 +1872,9 @@ function (response) {// 请求错误做点什么
 /***/ }),
 
 /***/ 156:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/components/uni-icons/icons.js ***!
-  \********************************************************************************************/
+/*!**************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/components/uni-icons/icons.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2805,9 +2805,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 19:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/utils/luch-request/request.js ***!
-  \********************************************************************************************/
+/*!**************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/utils/luch-request/request.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8846,7 +8846,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8867,14 +8867,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8950,7 +8950,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9345,9 +9345,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/js_sdk/ccdzhang-dokey/md5.js ***!
-  \*******************************************************************************************/
+/*!*************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/js_sdk/ccdzhang-dokey/md5.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10037,7 +10037,7 @@ internalMixin(Vue);
     }
   }
 })();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/node-libs-browser/mock/process.js */ 21), __webpack_require__(/*! (webpack)/buildin/global.js */ 3)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/node-libs-browser/mock/process.js */ 21), __webpack_require__(/*! ./../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
 
 /***/ }),
 
@@ -10415,9 +10415,9 @@ module.exports = __webpack_amd_options__;
 /***/ }),
 
 /***/ 24:
-/*!****************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/test/index.js ***!
-  \****************************************************************************/
+/*!**********************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/test/index.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10433,9 +10433,9 @@ exports.currentCode = currentCode;
 /***/ }),
 
 /***/ 25:
-/*!***************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/utils/api.js ***!
-  \***************************************************************************/
+/*!*********************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/utils/api.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10450,9 +10450,9 @@ var getNewTokenServe = function getNewTokenServe() {
 /***/ }),
 
 /***/ 26:
-/*!***************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/test/tool.js ***!
-  \***************************************************************************/
+/*!*********************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/test/tool.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10516,9 +10516,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 304:
-/*!*******************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/components/w-picker/areadata/areadata.js ***!
-  \*******************************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/components/w-picker/areadata/areadata.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10528,9 +10528,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 4:
-/*!*************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/pages.json ***!
-  \*************************************************************************/
+/*!*******************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/pages.json ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -11437,9 +11437,9 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ }),
 
 /***/ 7:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/pages.json?{"type":"style"} ***!
-  \******************************************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/pages.json?{"type":"style"} ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11449,9 +11449,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 73:
-/*!**********************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/json.js ***!
-  \**********************************************************************/
+/*!****************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/json.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11563,25 +11563,41 @@ var evaList = [{
   content: '楼上说的好有道理。' }];
 
 
+/*
+                           *category:1、通知，2、公告，3、工作
+                           *status ：1、已读，2、未读
+                           */
 var evaList1 = [{
   id: 1,
-  nickname: '通知',
+  category: 1,
   time: '2019-12-25 13:25:30',
   status: 1,
+
   content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' },
 
 {
   id: 2,
-  nickname: '工作',
+  category: 2,
   time: '2019-11-25 11:24:30',
   status: 2,
   content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' },
 
 {
   id: 3,
-  nickname: '公告',
+  category: 3,
   time: '2019-11-25 11:24:30',
   status: 2,
+  feedback_content: "我是反馈内容啊啊啊啊啊啊啊啊啊啊啊啊",
+  'feedback_time': "2020-04-43 12:23:10",
+  content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' },
+
+{
+  id: 5,
+  category: 3,
+  time: '2019-11-25 11:24:30',
+  status: 2,
+  feedback_content: "",
+  'feedback_time': "",
   content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' }];
 
 
@@ -11659,9 +11675,9 @@ var detail = {
 /***/ }),
 
 /***/ 8:
-/*!*****************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/pages.json?{"type":"stat"} ***!
-  \*****************************************************************************************/
+/*!***********************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/pages.json?{"type":"stat"} ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

@@ -105,25 +105,41 @@ const evaList = [{
 		content: '楼上说的好有道理。'
 	}
 ]
+/*
+*category:1、通知，2、公告，3、工作
+*status ：1、已读，2、未读
+*/
 const evaList1 = [{
 		id: 1,
-		nickname: '通知',
+		category: 1,
 		time: '2019-12-25 13:25:30',
 		status: 1,
+		
 		content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。'
 	},
 	{
 		id: 2,
-		nickname: '工作',
+		category: 2,
 		time: '2019-11-25 11:24:30',
 		status: 2,
 		content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。'
 	},
 	{
 		id: 3,
-		nickname: '公告',
+		category: 3,
 		time: '2019-11-25 11:24:30',
 		status: 2,
+		feedback_content:"我是反馈内容啊啊啊啊啊啊啊啊啊啊啊啊",
+		'feedback_time':"2020-04-43 12:23:10",
+		content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。'
+	},
+	{
+		id: 5,
+		category: 3,
+		time: '2019-11-25 11:24:30',
+		status: 2,
+		feedback_content:"",
+		'feedback_time':"",
 		content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。'
 	}
 ]

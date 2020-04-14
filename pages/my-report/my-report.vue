@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
+
 import json from '@/json';
 import mixPulldownRefresh from '@/components/mix-pulldown-refresh/mix-pulldown-refresh';
 import mixLoadMore from '@/components/mix-load-more/mix-load-more';
@@ -69,7 +69,7 @@ export default {
 	components: {
 		mixPulldownRefresh,
 		mixLoadMore,
-		uniNavBar
+		
 	},
 	data() {
 		return {
