@@ -138,7 +138,27 @@ export default {
 				tabItem.refreshing = true;
 			}
 			// #endif
-
+           this.$http
+           	.get('/interface/rest/http/xlwb/xlgc-wb-xcx-tzgg-lb.htm', {
+           		params: {
+           			type: this.tabCurrentIndex+1
+           		}
+           	})
+           	.then(res => {
+           		console.log(res);
+           		if (res.statusCode == 200) {
+           			var list = res.data.list;
+           			console.log('list');
+           			console.log(list);
+           		} else {
+           			uni.showLoading({
+           				title: '请求失败'
+           			});
+           		}
+           	})
+           	.catch(err => {
+           		console.log(err);
+           	});
 			//setTimeout模拟异步请求数据
 			setTimeout(() => {
 				let list = json.evaList1;
@@ -166,7 +186,7 @@ export default {
 				}
 			}, 600);
 		},
-		//新闻详情
+		//详情
 		navToDetails(item) {
 			console.log(item)
 			let data = item;
@@ -235,13 +255,14 @@ export default {
 					this.tabCurrentIndex = index;
 				}
 				this.tabCurrentIndex = index;
-
+              
 				//第一次切换tab，动画结束后需要加载数据
 				let tabItem = this.tabBars[this.tabCurrentIndex];
-				if (this.tabCurrentIndex !== 0 && tabItem.loaded !== true) {
-					this.loadNewsList('add');
-					tabItem.loaded = true;
-				}
+				this.loadNewsList('add');
+				// if (this.tabCurrentIndex !== 0 && tabItem.loaded !== true) {
+				// 	this.loadNewsList('add');
+				// 	tabItem.loaded = true;
+				// }
 			}, 300);
 		},
 		//获得元素的size

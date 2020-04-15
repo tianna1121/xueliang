@@ -109,6 +109,16 @@ export default {
 		updataJump() {
 			console.log('上报提交');
 			console.log(this.upData)
+			uni.showLoading({
+				title: 'loading'
+			});
+			setTimeout(() => {
+				uni.hideLoading();
+				uni.showToast({
+				    title: '上报成功',
+				    duration: 2000
+				});
+			}, 1000);
 		},
 		ontrueGetList() {
 			console.log('加载了第三个页面，可以把网络请求放这里');

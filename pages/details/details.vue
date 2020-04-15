@@ -66,7 +66,7 @@
 				<text class="uni-tip-content">确认事件已经处理完成？</text>
 				<view class="uni-tip-group-button">
 					<text class="uni-tip-button uni-tip-button1 " @click="cancel('tip')">取消</text>
-					<text class="uni-tip-button" @click="cancel('tip')">处理完成</text>
+					<text class="uni-tip-button" @click="submitOver">处理完成</text>
 				</view>
 			</view>
 		</uni-popup>
@@ -108,6 +108,7 @@ export default {
 	},
 	data() {
 		return {
+			id:"",
 			showtip1: 'center',
 			detailData: {},
 			imgList: [],
@@ -129,7 +130,9 @@ export default {
 		};
 	},
 	onLoad(options) {
-		// this.detailData = JSON.parse(options.data);
+		var detailData = JSON.parse(options.data);
+		this.id=detailData.id;
+		console.log(this.id)
 		// this.detailData = json.detail.data;
 		this.loadNewsList();
 	},
@@ -138,6 +141,27 @@ export default {
 		async loadNewsList() {
 			this.detailData = json.detail.data;
 			console.log(this.detailData);
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjzx-sjxq.htm', {
+					params: {
+						id: this.id
+					}
+				})
+				.then(res => {
+					console.log(res);
+					if (res.statusCode == 200) {
+						var list = res.data.list;
+						console.log('list');
+						console.log(list);
+					} else {
+						uni.showLoading({
+							title: '请求失败'
+						});
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				});
 		},
 		statusChange(index) {
 			switch (index) {
@@ -190,6 +214,35 @@ export default {
 			this.detailData.feedbackContent = this.feedbackContent;
 			//发起请求
 			this.$refs.showtip1.close();
+		},
+		submitOver(){
+				this.$refs.showtip.close();
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjzx-clwc.htm', {
+					params: {
+						
+					}
+				})
+				.then(res => {
+					console.log(res);
+					if (res.statusCode == 200) {
+						uni.showToast({
+						    title: res.data.msg,
+						    duration: 2000
+						});
+						setTimeout(() => {
+							this.back()
+						}, 1000);
+						 
+					} else {
+						uni.showLoading({
+							title: '请求失败'
+						});
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				});
 		},
 		cancel(type) {
 			this.$refs.showtip.close();

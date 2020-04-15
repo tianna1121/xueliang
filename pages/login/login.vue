@@ -80,7 +80,7 @@
 						//设置token
 						 setTokenStorage(res.data.data.token) // todo 储存token，可更换为自己的储存token逻辑
 						uni.redirectTo({
-						    url: '../index/index',
+						    url: '../index/index?show_index=0',
 							
 						});
 					}

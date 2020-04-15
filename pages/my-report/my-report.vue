@@ -6,7 +6,7 @@
 		<!-- 下拉刷新组件 -->
 		<mix-pulldown-refresh ref="mixPulldownRefresh" class="panel-content" :top="90" @refresh="onPulldownReresh" @setEnableScroll="setEnableScroll">
 			<!-- 内容部分 -->
-			<swiper id="swiper" class="swiper-box" :duration="300" :current="tabCurrentIndex" @change="changeTab">
+			<swiper id="swiper" class="swiper-box" :duration="300" >
 				<swiper-item v-for="tabItem in tabBars" :key="tabItem.id">
 					<scroll-view class="panel-scroll-box" :scroll-y="enableScroll" @scrolltolower="loadMore">
 						<!-- 
@@ -83,22 +83,22 @@ export default {
 	},
 
 	async onLoad() {
+	
+	},
+	onReady() {
+		console.log('我的饿饿上报');
 		// 获取屏幕宽度
 		windowWidth = uni.getSystemInfoSync().windowWidth;
 		this.loadTabbars();
 	},
-	onReady() {},
 	methods: {
 		
-		ontrueGetList() {
-			console.log('加载了第二个页面，可以把网络请求放这里');
-			// 获取屏幕宽度
-			windowWidth = uni.getSystemInfoSync().windowWidth;
-			this.loadTabbars();
-		},
+		
 		back(){
-			uni.navigateBack({
-				delta: 1
+			console.log("___________________________________________________")
+			uni.redirectTo({
+			    url: '../index/index?show_index=4',
+				
 			});
 		},
 		//打电话
@@ -156,7 +156,27 @@ export default {
 				tabItem.refreshing = true;
 			}
 			// #endif
-
+  this.$http
+           	.get('/interface/rest/http/xlwb/xlgc-wb-xcx-grzx-wdsb.htm', {
+           		params: {
+           			
+           		}
+           	})
+           	.then(res => {
+           		console.log(res);
+           		if (res.statusCode == 200) {
+           			var list = res.data.list;
+           			console.log('list');
+           			console.log(list);
+           		} else {
+           			uni.showLoading({
+           				title: '请求失败'
+           			});
+           		}
+           	})
+           	.catch(err => {
+           		console.log(err);
+           	});
 			//setTimeout模拟异步请求数据
 			setTimeout(() => {
 				let list = json.newsList;
@@ -212,58 +232,7 @@ export default {
 			}
 		},
 
-		//tab切换
-		async changeTab(e) {
-			if (scrollTimer) {
-				//多次切换只执行最后一次
-				clearTimeout(scrollTimer);
-				scrollTimer = false;
-			}
-			let index = e;
-			//e=number为点击切换，e=object为swiper滑动切换
-			if (typeof e === 'object') {
-				index = e.detail.current;
-			}
-			if (typeof tabBar !== 'object') {
-				tabBar = await this.getElSize('nav-bar');
-			}
-			//计算宽度相关
-			let tabBarScrollLeft = tabBar.scrollLeft;
-			let width = 0;
-			let nowWidth = 0;
-			//获取可滑动总宽度
-			for (let i = 0; i <= index; i++) {
-				let result = await this.getElSize('tab' + i);
-				width += result.width;
-				if (i === index) {
-					nowWidth = result.width;
-				}
-			}
-			if (typeof e === 'number') {
-				//点击切换时先切换再滚动tabbar，避免同时切换视觉错位
-				this.tabCurrentIndex = index;
-			}
-			//延迟300ms,等待swiper动画结束再修改tabbar
-			scrollTimer = setTimeout(() => {
-				if (width - nowWidth / 2 > windowWidth / 2) {
-					//如果当前项越过中心点，将其放在屏幕中心
-					this.scrollLeft = width - nowWidth / 2 - windowWidth / 2;
-				} else {
-					this.scrollLeft = 0;
-				}
-				if (typeof e === 'object') {
-					this.tabCurrentIndex = index;
-				}
-				this.tabCurrentIndex = index;
-
-				//第一次切换tab，动画结束后需要加载数据
-				let tabItem = this.tabBars[this.tabCurrentIndex];
-				if (this.tabCurrentIndex !== 0 && tabItem.loaded !== true) {
-					this.loadNewsList('add');
-					tabItem.loaded = true;
-				}
-			}, 300);
-		},
+		
 		//获得元素的size
 		getElSize(id) {
 			return new Promise((res, rej) => {

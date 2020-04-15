@@ -19,7 +19,7 @@
 			<view class="tabBar_list" :style="{paddingBottom:is_lhp?'40rpx':''}">
 				<view v-for="(item) in tab_nav_list" :key="item.id" :class="{'tabBar_item':item.id!=2,'tabBar_item2':item.id==2}" @tap="cut_index(item.id)">
 					
-						<view v-if="item.id==3" class="uni-tabbar__reddot uni-tabbar__badge">3</view>
+						<view v-if="item.id==3&&badge>0" class="uni-tabbar__reddot uni-tabbar__badge">{{badge}}</view>
 					
 					<image v-if="show_index == item.id"  :src="`../../static/tabBar/${item.id+1}${item.id+1}.png`"></image>
 					<image v-else :src="`../../static/tabBar/${item.id+1}.png`"></image>
@@ -42,20 +42,34 @@
 			tabDiscovery,//事件中心    1
 			tabInformation,//我要上报   2
 			tabData,//通知/公告   3
-			tabMycenter//个人中心  4
+			tabMycenter,//个人中心  4
+			
 		},
 		data() {
 			return {
 				show_index:0,//控制显示那个组件
 				tab_nav_list :[{'id':0,'name':'实时监控'},{'id':1,'name':'事件中心'},{'id':2,'name':'我要上报'},{'id':3,'name':'通知/公告'},{'id':4,'name':'个人中心'}],//菜单列表
-				is_lhp:false
+				is_lhp:false,
+				badge:0
 			}
 		},
-		onLoad() {
+		onShow:function(){
+		this.cut_index(this.show_index)
+		 },
+		onLoad(options) {
+			
+			if(Object.keys(options).length>0){
+			var show_index = JSON.parse(options.show_index);
+			this.show_index=show_index
+			
+			}
+		  
 			this.is_lhp = this.$is_bang
+			this.getbadge();
 			this.$nextTick(function(){
 				// 一定要等视图更新完再调用方法   -----------++++++++++++++++重要
 				this.$refs.game.ontrueGetList()//初次加载第一个页面的请求数据
+		
 			})
 			
 			console.log("是否为刘海屏",this.is_lhp ) 
@@ -70,8 +84,33 @@
 			}, 1000);
 		},
 		methods: {
+			getbadge(){
+				this.$http
+					.get('/interface/rest/http/xlwb/xlgc-wb-xcx-tzgg-wdsl.htm', {
+						params: {
+							
+						}
+					})
+					.then(res => {
+						console.log(res);
+						if (res.statusCode == 200) {
+							var badge = res.data.list[0].badge;
+							this.badge=badge
+							console.log('badge');
+							console.log(this.badge);
+						} else {
+							uni.showLoading({
+								title: '请求失败'
+							});
+						}
+					})
+					.catch(err => {
+						console.log(err);
+					});
+			},
 			// 切换组件
 			cut_index(type){
+			this.getbadge();
 				console.log('----------------------------------',type)
 				this.show_index = type
 				if(this.show_index == 0){

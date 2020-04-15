@@ -28,11 +28,11 @@
 								</text>
 								<text class="item-title" space="emsp" :decode="trues" @tap.stop="callPhone(item.phone)">
 									电话:
-									<text class="it2"  >{{ item.phone }}</text>
+									<text class="it2">{{ item.phone }}</text>
 								</text>
 								<text class="item-title last-cild" space="emsp">
 									状态:
-									<text class="it2" :class="{'statusd':item.status==3}">{{ statusChange(item.status) }}</text>
+									<text class="it2" :class="{ statusd: item.status == 3 }">{{ statusChange(item.status) }}</text>
 								</text>
 							</view>
 							<view class="items">
@@ -59,7 +59,6 @@
 				</swiper-item>
 			</swiper>
 		</mix-pulldown-refresh>
-	
 	</view>
 </template>
 
@@ -83,7 +82,8 @@ export default {
 			tabCurrentIndex: 0, //当前选项卡索引
 			scrollLeft: 0, //顶部选项卡左滑距离
 			enableScroll: true,
-			tabBars: []
+			tabBars: [],
+			status: 0
 		};
 	},
 
@@ -95,16 +95,16 @@ export default {
 	onReady() {},
 	methods: {
 		ontrueGetList() {
-			console.log('加载了第二个页面，可以把网络请求放这里');
+			console.log('事件中心');
 			// 获取屏幕宽度
 			windowWidth = uni.getSystemInfoSync().windowWidth;
 			this.loadTabbars();
 		},
 		//打电话
-		callPhone(phone){
-			console.log(phone)
+		callPhone(phone) {
+			console.log(phone);
 			uni.makePhoneCall({
-			    phoneNumber: phone //仅为示例
+				phoneNumber: phone //仅为示例
 			});
 		},
 		statusChange(index) {
@@ -115,7 +115,7 @@ export default {
 				case 2:
 					return '处理中';
 					break;
-			
+
 				case 3:
 					return '已处理';
 					break;
@@ -155,7 +155,27 @@ export default {
 				tabItem.refreshing = true;
 			}
 			// #endif
-
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjzx-sjlb.htm', {
+					params: {
+						status: this.tabCurrentIndex
+					}
+				})
+				.then(res => {
+					console.log(res);
+					if (res.statusCode == 200) {
+						var list = res.data.list;
+						console.log('list');
+						console.log(list);
+					} else {
+						uni.showLoading({
+							title: '请求失败'
+						});
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				});
 			//setTimeout模拟异步请求数据
 			setTimeout(() => {
 				let list = json.newsList;
@@ -183,14 +203,14 @@ export default {
 				}
 			}, 600);
 		},
-		//新闻详情
+		//事件详情
 		navToDetails(item) {
+			console.log(item)
 			let data = {
 				id: item.id,
-				title: item.title,
-				author: item.author,
-				time: item.time
+				
 			};
+			console.log( item.id)
 			let url = item.videoSrc ? 'videoDetails' : 'details';
 
 			uni.navigateTo({
@@ -259,10 +279,15 @@ export default {
 
 				//第一次切换tab，动画结束后需要加载数据
 				let tabItem = this.tabBars[this.tabCurrentIndex];
-				if (this.tabCurrentIndex !== 0 && tabItem.loaded !== true) {
-					this.loadNewsList('add');
-					tabItem.loaded = true;
-				}
+				console.log('111111');
+				console.log(this.tabCurrentIndex);
+				console.log(tabItem.loaded);
+				//重新获取新数据
+				this.loadNewsList('add');
+				// if (this.tabCurrentIndex !== 0 && tabItem.loaded !== true) {
+				// 	this.loadNewsList('add');
+				// 	tabItem.loaded = true;
+				// }
 			}, 300);
 		},
 		//获得元素的size
@@ -396,9 +421,9 @@ export default {
 		font-weight: 500;
 		color: #2256d8;
 	}
-.statusd{
-	color: #888888;
-}
+	.statusd {
+		color: #888888;
+	}
 	.last-cild {
 		margin-right: 0;
 	}

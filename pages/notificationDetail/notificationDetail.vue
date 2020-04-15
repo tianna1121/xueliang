@@ -102,6 +102,9 @@ export default {
 			});
 			setTimeout(() => {
 				uni.hideLoading();
+				uni.navigateTo({
+					url: `/pages/index/index`
+				});
 			}, 3000);
 		},
 		//反馈
@@ -130,6 +133,9 @@ export default {
 					.replace(/\.[\d]{3}Z/, '');
 				this.detailData.feedback_time = dates;
 				this.$refs.showtip.close();
+				uni.navigateTo({
+					url: `/pages/index/index`
+				});
 			}, 1500);
 		}
 	}

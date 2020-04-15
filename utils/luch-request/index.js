@@ -109,7 +109,7 @@ reReqest.setConfig(config => {
 const http = new Request()
 const refreshToken = getTokenDebounce()
 http.setConfig((config) => { /* 设置全局配置 */
-  config.baseUrl = 'http://app8848.com/interface/rest/http/xlgc/wb-test.htm' /* 根域名不同 */
+  config.baseUrl = 'http://app8848.com' /* 根域名不同 */
   config.header = {
     ...config.header,
     
