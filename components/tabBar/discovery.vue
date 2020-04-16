@@ -164,9 +164,30 @@ export default {
 				.then(res => {
 					console.log(res);
 					if (res.statusCode == 200) {
-						var list = res.data.list;
-						console.log('list');
-						console.log(list);
+						var list1 = res.data.list;
+						console.log('list1');
+						console.log(list1);
+						let list = list1;
+						
+						if (type === 'refresh') {
+							tabItem.newsList = []; //刷新前清空数组
+						}
+						list.forEach(item => {
+							
+							tabItem.newsList.push(item);
+						});
+						//下拉刷新 关闭刷新动画
+						if (type === 'refresh') {
+							this.$refs.mixPulldownRefresh && this.$refs.mixPulldownRefresh.endPulldownRefresh();
+							// #ifdef APP-PLUS
+							tabItem.refreshing = false;
+							// #endif
+							tabItem.loadMoreStatus = 0;
+						}
+						//上滑加载 处理状态
+						if (type === 'add') {
+							tabItem.loadMoreStatus = tabItem.newsList.length > 40 ? 2 : 0;
+						}
 					} else {
 						uni.showLoading({
 							title: '请求失败'
@@ -176,32 +197,7 @@ export default {
 				.catch(err => {
 					console.log(err);
 				});
-			//setTimeout模拟异步请求数据
-			setTimeout(() => {
-				let list = json.newsList;
-				list.sort((a, b) => {
-					return Math.random() > 0.5 ? -1 : 1; //静态数据打乱顺序
-				});
-				if (type === 'refresh') {
-					tabItem.newsList = []; //刷新前清空数组
-				}
-				list.forEach(item => {
-					item.id = parseInt(Math.random() * 10000);
-					tabItem.newsList.push(item);
-				});
-				//下拉刷新 关闭刷新动画
-				if (type === 'refresh') {
-					this.$refs.mixPulldownRefresh && this.$refs.mixPulldownRefresh.endPulldownRefresh();
-					// #ifdef APP-PLUS
-					tabItem.refreshing = false;
-					// #endif
-					tabItem.loadMoreStatus = 0;
-				}
-				//上滑加载 处理状态
-				if (type === 'add') {
-					tabItem.loadMoreStatus = tabItem.newsList.length > 40 ? 2 : 0;
-				}
-			}, 600);
+			
 		},
 		//事件详情
 		navToDetails(item) {

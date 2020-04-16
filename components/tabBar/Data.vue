@@ -5,8 +5,8 @@
 		<view class="item">
 			<view class="item-title">事件类型</view>
 			<view class="item-next">
-				<picker :range="type1" @change="sizeTypeChange" :value="type1Index" mode="selector">
-					<view class="uni-input">{{upData.type}}</view>
+				<picker :range="type1" @change="sizeTypeChange" :value="upData.type" mode="selector">
+					<view class="uni-input">{{type1[upData.type]}}</view>
 				</picker>
 				<uni-icons type="forward" color="#C7C7CC" size="22" />
 			</view>
@@ -14,8 +14,8 @@
 		<view class="item">
 			<view class="item-title">事件类别</view>
 			<view class="item-next">
-				<picker :range="type2" @change="sizeType2Change" :value="type2Index" mode="selector">
-					<view class="uni-input">{{ upData.category }}</view>
+				<picker :range="type2" @change="sizeType2Change" :value="upData.category" mode="selector">
+					<view class="uni-input">{{ type1[upData.category] }}</view>
 				</picker>
 				<uni-icons type="forward" color="#C7C7CC" size="22" />
 			</view>
@@ -70,14 +70,13 @@ export default {
 	},
 	data() {
 		return {
-			type1: ['点击选择', '类型1', '类型2'],
-			type1Index: 0,
-			type2: ['点击选择', '类别1', '类别2'],
+			type1: [],
+			type2: [],
 			type2Index: 0,
 			dates: '',
 			upData:{
-				type:"点击选择",
-				category:"点击选择",
+				type:"0",
+				category:"0",
 				time:"点击选择",
 				address:{
 					address_content:'选择地点',
@@ -126,14 +125,74 @@ export default {
 			}, 1000);
 		},
 		ontrueGetList() {
+			//获取上报类型
+			this.getType()
+			//获取上报事件
+			//this.getType1()
 			
-			
+		},
+		getType(){
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sblxxz.htm', {params: {}})
+				.then(res => {
+					console.log(res);
+					if (res.data.msgState ==1) {
+						var obj1=[{id:'0',type:"点击选择"}]
+						var data=res.data.list
+						var obj=[...obj1,...data]
+					this.type1=	this.typeChange(obj)
+					this.type2=	this.typeChange(obj)
+						
+						
+					} else {
+						uni.showLoading({
+							title: '请求失败'
+						});
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		},
+		getType1(){
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sbsjclzt.htm', {params: {}})
+				.then(res => {
+					console.log("上报事件");
+					console.log(res);
+					if (res.data.msgState ==1) {
+					// 	var obj1=[{id:'0',type:"点击选择"}]
+					// 	var data=res.data.list
+					// 	var obj=[...obj1,...data]
+					// this.type1=	this.typeChange(obj)
+						
+						
+					} else {
+						uni.showLoading({
+							title: '请求失败'
+						});
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		},
+		//处理函数
+		typeChange(val){
+			var arr=[]
+			for (let item in val) {
+				console.log(val[item].type)
+				arr.push(val[item].type)
+			}
+		
+		return arr;
+		
 		},
 		cleanData(){
 			this.$refs.upload.cleanAll()
 			var upData={
-				type:"点击选择",
-				category:"点击选择",
+				type:"0",
+				category:"0",
 				time:"点击选择",
 				address:{
 					address_content:'选择地点',
@@ -146,12 +205,12 @@ export default {
 			this.upData=upData
 		},
 		sizeTypeChange(e) {
-			this.type1Index = parseInt(e.detail.value);
-			this.upData.type=this.type1[parseInt(e.detail.value)]
+			this.upData.type = parseInt(e.detail.value);
+			
 		},
 		sizeType2Change(e) {
-			this.type2Index = parseInt(e.detail.value);
-			this.upData.category=this.type2[parseInt(e.detail.value)]
+			this.upData.category = parseInt(e.detail.value);
+			
 		},
 		
 		chooseLocation: function() {
