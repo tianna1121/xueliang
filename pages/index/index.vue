@@ -58,11 +58,11 @@
 		 },
 		onLoad(options) {
 			
-			if(Object.keys(options).length>0){
-			var show_index = JSON.parse(options.show_index);
-			this.show_index=show_index
+			// if(Object.keys(options).length>0){
+			// var show_index = JSON.parse(options.show_index);
+			// this.show_index=show_index
 			
-			}
+			// }
 		  
 			this.is_lhp = this.$is_bang
 			this.getbadge();

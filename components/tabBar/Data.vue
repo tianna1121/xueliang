@@ -40,7 +40,7 @@
 		</view>
 		<view class="item2">
 			<view class="item-title1">图片/视频</view>
-			<hUpload @schange="schange" @upload="setAttachData"></hUpload>
+			<hUpload @schange="schange" @upload="setAttachData" ref="upload"></hUpload>
 			<!-- <image class="uplaod-img" src="../../static/img/news/upload.png" @tap="upLoadImg"></image> -->
 			<view class="tip-uplaod">点击上传图片/视频</view>
 		</view>
@@ -90,11 +90,13 @@ export default {
 		};
 	},
 	onReady() {
+		
 		var dateee = new Date().toJSON();
 		this.dates = new Date(+new Date(dateee) + 8 * 3600 * 1000)
 			.toISOString()
 			.replace(/T/g, ' ')
 			.replace(/\.[\d]{3}Z/, '');
+	
 	},
 
 	methods: {
@@ -105,9 +107,11 @@ export default {
 		setAttachData(val){
 			console.log(222)
 			console.log(val)
+			this.upData.imgList=val
 		},
 		updataJump() {
 			console.log('上报提交');
+			
 			console.log(this.upData)
 			uni.showLoading({
 				title: 'loading'
@@ -118,10 +122,28 @@ export default {
 				    title: '上报成功',
 				    duration: 2000
 				});
+				this.cleanData();
 			}, 1000);
 		},
 		ontrueGetList() {
-			console.log('加载了第三个页面，可以把网络请求放这里');
+			
+			
+		},
+		cleanData(){
+			this.$refs.upload.cleanAll()
+			var upData={
+				type:"点击选择",
+				category:"点击选择",
+				time:"点击选择",
+				address:{
+					address_content:'选择地点',
+					longitude:"",
+					latitude:"",	
+				},
+				content:"",
+				imgList:[]
+			}
+			this.upData=upData
 		},
 		sizeTypeChange(e) {
 			this.type1Index = parseInt(e.detail.value);
@@ -156,6 +178,7 @@ export default {
 		//上传图片/视频
 		upLoadImg(){
 			console.log("根据选择调用不同的api")
+			
 		}
 	}
 };

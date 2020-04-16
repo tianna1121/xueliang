@@ -95,10 +95,8 @@ export default {
 		
 		
 		back(){
-			console.log("___________________________________________________")
-			uni.redirectTo({
-			    url: '../index/index?show_index=4',
-				
+			uni.navigateBack({
+				delta: 1
 			});
 		},
 		//打电话

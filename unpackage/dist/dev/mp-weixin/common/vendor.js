@@ -1685,9 +1685,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 15:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/utils/luch-request/index.js ***!
-  \******************************************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/utils/luch-request/index.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1824,13 +1824,14 @@ http.validateStatus = function (statusCode) {
 http.interceptor.request(function (config, cancel) {/* 请求之前拦截器 */
   config.header = _objectSpread({},
   config.header, {
-    token: (0, _tool.getTokenStorage)() });
+    // token: getTokenStorage()
+    token: '311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv' });
 
   /*
-                                            if (!token) { // 如果token不存在，调用cancel 会取消本次请求，但是该函数的catch() 仍会执行
-                                              cancel('token 不存在') // 接收一个参数，会传给catch((err) => {}) err.errMsg === 'token 不存在'
-                                            }
-                                            */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              if (!token) { // 如果token不存在，调用cancel 会取消本次请求，但是该函数的catch() 仍会执行
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                cancel('token 不存在') // 接收一个参数，会传给catch((err) => {}) err.errMsg === 'token 不存在'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */
   return config;
 });
 
@@ -1872,9 +1873,9 @@ function (response) {// 请求错误做点什么
 /***/ }),
 
 /***/ 156:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/components/uni-icons/icons.js ***!
-  \********************************************************************************************/
+/*!**************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/components/uni-icons/icons.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2805,9 +2806,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 19:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/utils/luch-request/request.js ***!
-  \********************************************************************************************/
+/*!**************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/utils/luch-request/request.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9345,9 +9346,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/js_sdk/ccdzhang-dokey/md5.js ***!
-  \*******************************************************************************************/
+/*!*************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/js_sdk/ccdzhang-dokey/md5.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10037,7 +10038,7 @@ internalMixin(Vue);
     }
   }
 })();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/node-libs-browser/mock/process.js */ 21), __webpack_require__(/*! (webpack)/buildin/global.js */ 3)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/node-libs-browser/mock/process.js */ 21), __webpack_require__(/*! ./../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
 
 /***/ }),
 
@@ -10415,9 +10416,9 @@ module.exports = __webpack_amd_options__;
 /***/ }),
 
 /***/ 24:
-/*!****************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/test/index.js ***!
-  \****************************************************************************/
+/*!**********************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/test/index.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10433,9 +10434,9 @@ exports.currentCode = currentCode;
 /***/ }),
 
 /***/ 25:
-/*!***************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/utils/api.js ***!
-  \***************************************************************************/
+/*!*********************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/utils/api.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10450,9 +10451,9 @@ var getNewTokenServe = function getNewTokenServe() {
 /***/ }),
 
 /***/ 26:
-/*!***************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/test/tool.js ***!
-  \***************************************************************************/
+/*!*********************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/test/tool.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10516,9 +10517,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 311:
-/*!*******************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/components/w-picker/areadata/areadata.js ***!
-  \*******************************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/components/w-picker/areadata/areadata.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10528,9 +10529,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 4:
-/*!*************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/pages.json ***!
-  \*************************************************************************/
+/*!*******************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/pages.json ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -11437,9 +11438,9 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ }),
 
 /***/ 7:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/pages.json?{"type":"style"} ***!
-  \******************************************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/pages.json?{"type":"style"} ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11449,9 +11450,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 73:
-/*!**********************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/json.js ***!
-  \**********************************************************************/
+/*!****************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/json.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11675,9 +11676,9 @@ var detail = {
 /***/ }),
 
 /***/ 8:
-/*!*****************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/pages.json?{"type":"stat"} ***!
-  \*****************************************************************************************/
+/*!***********************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/pages.json?{"type":"stat"} ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

@@ -5,12 +5,12 @@
   },
   "setting": {
     "urlCheck": false,
-    "minified": false,
-    "es6": false
+    "minified": true,
+    "es6": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.9.2",
-  "appid": "touristappid",
+  "appid": "wxbc89be44cef30fea",
   "projectname": "雪亮工程",
   "condition": {
     "search": {

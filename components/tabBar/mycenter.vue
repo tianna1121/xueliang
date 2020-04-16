@@ -71,9 +71,9 @@ export default {
 	},
 	methods: {
 		ontrueGetList() {
-			uni.showToast({
-				title: '个人中心'
-			});
+			// uni.showToast({
+			// 	title: '个人中心'
+			// });
 			console.log('加载了个人中心，可以把网络请求放这里');
 		},
 		//修改头像

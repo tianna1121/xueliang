@@ -9,10 +9,13 @@
 <template>
 	<view>
 		<view class="photo">
-			<image v-for="(item,index) in imgArr" @click="preImage(item.url,imgArr)" :key="index" :src="item.url" mode="scaleToFill">
-				<view v-if="imgArr.length>0" class="del" @tap.stop="delImage(index)"></view>
-			</image>
-			<video v-for="(item,index) in videoArr"  @fullscreenchange="screenchange" :key="index" :src="item.url" controls>
+			<view class="boxs" v-for="(item,index) in imgArr" @click="preImage(item,imgArr)" :key="index">
+				<image  :src="item" mode="scaleToFill">
+					<view  class="del" @tap.stop="delImage(index)"></view>
+				</image>
+			</view>
+			
+			<video id="myVideo" v-for="(item,index) in videoArr" @play="fulls"  @fullscreenchange="screenchange" :key="index" :src="item" controls>
 				<cover-view class="del" @tap.stop="delVideo(index)"></cover-view>
 			</video>
 			<image v-if="imgArr.length<imgLimit" @tap="chooseImage" src="https://mmcfile.hiroop.com/miniprogram/takePhoto.png" />
@@ -41,6 +44,7 @@
 		},
 		methods: {
 			chooseImage() {
+				//console.log("图片")
 				let that = this;
 				uni.chooseImage({
 					count: that.imgLimit, //默认9
@@ -55,18 +59,30 @@
 							
 
 							uni.uploadFile({
-								url: 'https://www.example.com/upload', //仅为示例，非真实的接口地址
-								filePath: res.tempFilePaths[i],
+								url: 'http://www.app8848.com/interface/rest/file/upload/util/uploadFile.htm', //仅为示例，非真实的接口地址
+								 header:{token:"311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv"},
+								filePath: res.tempFilePaths[0],
 								name: 'file',
-								formData: {
-									'user': 'test'
-								},
+								
 								success: (uploadFileRes) => {
-									console.log(uploadFileRes.data);
-									//将返回的数据存入img,并通知外界
-									// 默认返回的有路径，字段名 url
-									that.imgArr.push(uploadFileRes.data);
-									that.sendData()
+									// console.log("图片上传+++++++")
+									// console.log(JSON.parse(uploadFileRes.data));
+									
+									var datas=JSON.parse(uploadFileRes.data)
+									if(datas.msgState==1){
+										
+										//将返回的数据存入img,并通知外界
+										// 默认返回的有路径，字段名 url
+										that.imgArr.push(datas.result);
+										that.sendData()
+										
+									}else{
+										uni.showToast({
+										    title: '上传失败，请重新上传',
+										    duration: 2000
+										});
+									}
+									
 								}
 							});
 						}
@@ -77,7 +93,7 @@
 			},
 			preImage(url, urls) {
 				let _urls = urls.map(ele => {
-					return ele.url;
+					return ele;
 				})
 				console.log(url, urls);
 				uni.previewImage({
@@ -106,15 +122,28 @@
 						})
 						// 上传视频
 						uni.uploadFile({
-							url: 'https://www.example.com/upload', //仅为示例，非真实的接口地址
+							url: 'http://www.app8848.com/interface/rest/file/upload/util/uploadFile.htm', //仅为示例，非真实的接口地址
+							 header:{token:"311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv"},				
 							filePath: res.tempFilePath,
 							name: 'file',
 							success: (uploadFileRes) => {
-								console.log(uploadFileRes.data);
+								var datas=JSON.parse(uploadFileRes.data)
+								console.log("datas+++++")
+								console.log(datas)
+								if(datas.msgState==1){
+									
 									//将返回的数据存入img,并通知外界
 									// 默认返回的有路径，字段名 url
-									that.videoArr.push(uploadFileRes.data);
+									that.videoArr.push(datas.result);
 									that.sendData()
+									
+								}else{
+									uni.showToast({
+									    title: '上传失败，请重新上传',
+									    duration: 2000
+									});
+								}
+								
 							uni.hideLoading()
 							}
 						});
@@ -131,6 +160,10 @@
 				this.videoArr.splice(ind, 1)
 				this.sendData()
 			},
+			cleanAll(){
+				this.imgArr=[];
+				this.videoArr=[];
+			},
 			sendData() {
 				let _data = [];
 				// 将数据整合到一个数组中发出去，可以按自己项目要求进行修改
@@ -141,6 +174,14 @@
 			screenchange(e){
 				// 监听视频的全屏和退出全屏
 				this.$emit('schange', e.detail.fullScreen)
+			},
+			fulls(){
+				console.log("播放～！！！")
+				// #ifndef MP-ALIPAY
+				this.videoContext = uni.createVideoContext('myVideo');
+				// #endif
+				this.videoContext.requestFullScreen();
+				
 			}
 		}
 	}
@@ -150,11 +191,13 @@
 	.photo {
 
 		image,
+		.boxs,
 		video {
-			width: 23%;
-			height: 150upx;
+			width: 158rpx;
+			height: 158rpx;
 			margin: 0 2% 20upx 0;
 			position: relative;
+			display: inline-block;
 		}
 
 		.del {
@@ -171,4 +214,5 @@
 			background-size: 26upx 27upx;
 		}
 	}
+	
 </style>

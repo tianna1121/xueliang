@@ -25,11 +25,13 @@
 /* 透明度 */
 /* 文章场景相关 */
 .photo image,
+.photo .boxs,
 .photo video {
-  width: 23%;
-  height: 150rpx;
+  width: 158rpx;
+  height: 158rpx;
   margin: 0 2% 20rpx 0;
   position: relative;
+  display: inline-block;
 }
 .photo .del {
   position: absolute;
