@@ -155,11 +155,14 @@ export default {
 				tabItem.refreshing = true;
 			}
 			// #endif
+			var obj={status: this.tabCurrentIndex}
+			if(this.tabCurrentIndex==0){
+				obj=null 
+			}
 			this.$http
 				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjzx-sjlb.htm', {
-					params: {
-						status: this.tabCurrentIndex
-					}
+					params:obj
+					
 				})
 				.then(res => {
 					console.log(res);
@@ -329,7 +332,7 @@ export default {
 		background-color: #fff;
 		.nav-item {
 			display: inline-block;
-			width: 25%;
+			width: 33.3%;
 			height: 90upx;
 			text-align: center;
 			line-height: 90upx;

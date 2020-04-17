@@ -115,14 +115,32 @@ export default {
 			uni.showLoading({
 				title: 'loading'
 			});
-			setTimeout(() => {
-				uni.hideLoading();
-				uni.showToast({
-				    title: '上报成功',
-				    duration: 2000
+			this.$http
+				.post('/interface/rest/http/xlwb/xlgc-wb-xcx-grzx-wysb.htm', this.upData,{params: {}})
+				.then(res => {
+					console.log("上报结果++++++");
+					console.log(res);
+					if (res.data.msgState ==1) {
+						
+					} else {
+						uni.hideLoading();
+						uni.showToast({
+							title: '请求失败'
+						});
+					}
+				})
+				.catch(err => {
+					console.log(err);
+					uni.hideLoading();
 				});
-				this.cleanData();
-			}, 1000);
+			// setTimeout(() => {
+			// 	uni.hideLoading();
+			// 	uni.showToast({
+			// 	    title: '上报成功',
+			// 	    duration: 2000
+			// 	});
+			// 	this.cleanData();
+			// }, 1000);
 		},
 		ontrueGetList() {
 			//获取上报类型

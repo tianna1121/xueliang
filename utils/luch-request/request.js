@@ -131,7 +131,7 @@ export default class Request {
 		options.timeout = options.timeout || this.config.timeout
 		// #endif
 		options.url = options.url || ''
-		options.needSign = options.needSign || true
+		options.needSign = options.needSign || false
 		let reqPayload = {};
 		//如果需要加密
 		if (options.needSign) {

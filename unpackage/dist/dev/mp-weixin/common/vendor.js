@@ -1685,9 +1685,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 15:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/utils/luch-request/index.js ***!
-  \******************************************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/utils/luch-request/index.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1873,9 +1873,9 @@ function (response) {// 请求错误做点什么
 /***/ }),
 
 /***/ 156:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/components/uni-icons/icons.js ***!
-  \********************************************************************************************/
+/*!**************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/components/uni-icons/icons.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2806,9 +2806,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 19:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/utils/luch-request/request.js ***!
-  \********************************************************************************************/
+/*!**************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/utils/luch-request/request.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2946,7 +2946,7 @@ Request = /*#__PURE__*/function () {function Request() {var _this = this;_classC
 
 
                 options.url = options.url || '';
-                options.needSign = options.needSign || true;
+                options.needSign = options.needSign || false;
                 reqPayload = {};
                 //如果需要加密
                 if (options.needSign) {
@@ -9346,9 +9346,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/js_sdk/ccdzhang-dokey/md5.js ***!
-  \*******************************************************************************************/
+/*!*************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/js_sdk/ccdzhang-dokey/md5.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10038,7 +10038,7 @@ internalMixin(Vue);
     }
   }
 })();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/node-libs-browser/mock/process.js */ 21), __webpack_require__(/*! (webpack)/buildin/global.js */ 3)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/node-libs-browser/mock/process.js */ 21), __webpack_require__(/*! ./../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
 
 /***/ }),
 
@@ -10416,9 +10416,9 @@ module.exports = __webpack_amd_options__;
 /***/ }),
 
 /***/ 24:
-/*!****************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/test/index.js ***!
-  \****************************************************************************/
+/*!**********************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/test/index.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10434,9 +10434,9 @@ exports.currentCode = currentCode;
 /***/ }),
 
 /***/ 25:
-/*!***************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/utils/api.js ***!
-  \***************************************************************************/
+/*!*********************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/utils/api.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10451,9 +10451,9 @@ var getNewTokenServe = function getNewTokenServe() {
 /***/ }),
 
 /***/ 26:
-/*!***************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/test/tool.js ***!
-  \***************************************************************************/
+/*!*********************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/test/tool.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10517,9 +10517,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 311:
-/*!*******************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/components/w-picker/areadata/areadata.js ***!
-  \*******************************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/components/w-picker/areadata/areadata.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10529,9 +10529,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 4:
-/*!*************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/pages.json ***!
-  \*************************************************************************/
+/*!*******************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/pages.json ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -11438,9 +11438,9 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ }),
 
 /***/ 7:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/pages.json?{"type":"style"} ***!
-  \******************************************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/pages.json?{"type":"style"} ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11450,9 +11450,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 73:
-/*!**********************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/json.js ***!
-  \**********************************************************************/
+/*!****************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/json.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11463,13 +11463,16 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 {
   name: '待处理',
   id: '2' },
-{
-  name: '处理中',
-  id: '3' },
+
 {
   name: '已处理',
-  id: '4' }];
+  id: '3' }
 
+// {
+// 	name: '已处理',
+// 	id: '4'
+// },
+];
 var tabList1 = [{
   name: '通知',
   id: '1' },
@@ -11676,9 +11679,9 @@ var detail = {
 /***/ }),
 
 /***/ 8:
-/*!*****************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/pages.json?{"type":"stat"} ***!
-  \*****************************************************************************************/
+/*!***********************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/pages.json?{"type":"stat"} ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

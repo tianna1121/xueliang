@@ -104,6 +104,8 @@
 <style lang='scss'>
 			page{
 				position: relative;
+				width: 100%;
+				height: 100%;
 			}
 		.bg-img{
 			width: 750rpx;

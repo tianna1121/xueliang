@@ -1,5 +1,5 @@
 
-.uni-grid-wrap.data-v-a1827e04 {
+.uni-grid-wrap.data-v-766e271c {
 		
 		display: -webkit-box;
 		display: -webkit-flex;
@@ -14,7 +14,7 @@
 		        flex-direction: column;
 		
 }
-.uni-grid.data-v-a1827e04 {
+.uni-grid.data-v-766e271c {
 		
 		display: -webkit-box;
 		display: -webkit-flex;
@@ -29,7 +29,7 @@
 		-webkit-flex-wrap: wrap;
 		        flex-wrap: wrap;
 }
-.uni-grid--border.data-v-a1827e04 {
+.uni-grid--border.data-v-766e271c {
 		border-left-color: #e5e5e5;
 		border-left-style: solid;
 		border-left-width: 1px;

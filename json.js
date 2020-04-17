@@ -4,13 +4,16 @@ const tabList = [{
 }, {
 	name: '待处理',
 	id: '2'
-}, {
-	name: '处理中',
-	id: '3'
-}, {
+}, 
+{
 	name: '已处理',
-	id: '4'
-}];
+	id: '3'
+}, 
+// {
+// 	name: '已处理',
+// 	id: '4'
+// },
+];
 const tabList1 = [{
 	name: '通知',
 	id: '1',
