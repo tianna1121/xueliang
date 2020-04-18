@@ -11445,7 +11445,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "实时监控", "navigationStyle": "custom", "enablePullDownRefresh": false, "bounce": "none" }, "pages/register/register": { "navigationBarTitleText": "注册" }, "pages/login/login": { "navigationBarTitleText": "登录", "navigationStyle": "custom" }, "pages/regresult/regresult": { "navigationBarTitleText": "注册" }, "pages/regres/regres": { "navigationBarTitleText": "注册" }, "pages/details/details": { "navigationStyle": "custom" }, "pages/notificationDetail/notificationDetail": { "navigationStyle": "custom" }, "pages/change-phone/change-phone": { "navigationStyle": "custom" }, "pages/video-details/video-details": { "navigationStyle": "custom" }, "pages/my-report/my-report": { "navigationStyle": "custom" }, "pages/my-report-detail/my-report-detail": { "navigationStyle": "custom" } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "实时监控", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "实时监控", "navigationStyle": "custom", "enablePullDownRefresh": false, "bounce": "none", "usingComponents": { "tab-game": "/components/tabBar/game", "tab-discovery": "/components/tabBar/discovery", "tab-information": "/components/tabBar/information", "tab-data": "/components/tabBar/Data", "tab-mycenter": "/components/tabBar/mycenter" }, "usingAutoImportComponents": {} }, "pages/register/register": { "navigationBarTitleText": "注册", "usingComponents": { "uni-icons": "/components/uni-icons/uni-icons" }, "usingAutoImportComponents": { "uni-icons": "/components/uni-icons/uni-icons" } }, "pages/login/login": { "navigationBarTitleText": "登录", "navigationStyle": "custom", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/regresult/regresult": { "navigationBarTitleText": "注册", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/regres/regres": { "navigationBarTitleText": "注册", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/details/details": { "navigationStyle": "custom", "usingComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "uni-steps": "/components/uni-steps/uni-steps", "uni-list": "/components/uni-list/uni-list", "uni-list-item": "/components/uni-list-item/uni-list-item", "uni-popup": "/components/uni-popup/uni-popup" }, "usingAutoImportComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "uni-steps": "/components/uni-steps/uni-steps", "uni-list": "/components/uni-list/uni-list", "uni-list-item": "/components/uni-list-item/uni-list-item", "uni-popup": "/components/uni-popup/uni-popup" } }, "pages/notificationDetail/notificationDetail": { "navigationStyle": "custom", "usingComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "uni-popup": "/components/uni-popup/uni-popup" }, "usingAutoImportComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "uni-popup": "/components/uni-popup/uni-popup" } }, "pages/change-phone/change-phone": { "navigationStyle": "custom", "usingComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar" }, "usingAutoImportComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar" } }, "pages/video-details/video-details": { "navigationStyle": "custom", "usingComponents": { "uni-popup": "/components/uni-popup/uni-popup" }, "usingAutoImportComponents": { "uni-popup": "/components/uni-popup/uni-popup" } }, "pages/my-report/my-report": { "navigationStyle": "custom", "usingComponents": { "mix-pulldown-refresh": "/components/mix-pulldown-refresh/mix-pulldown-refresh", "mix-load-more": "/components/mix-load-more/mix-load-more" }, "usingAutoImportComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "mix-pulldown-refresh": "/components/mix-pulldown-refresh/mix-pulldown-refresh", "mix-load-more": "/components/mix-load-more/mix-load-more" } }, "pages/my-report-detail/my-report-detail": { "navigationStyle": "custom", "usingComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "uni-steps": "/components/uni-steps/uni-steps", "uni-list": "/components/uni-list/uni-list", "uni-list-item": "/components/uni-list-item/uni-list-item" }, "usingAutoImportComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "uni-steps": "/components/uni-steps/uni-steps", "uni-list": "/components/uni-list/uni-list", "uni-list-item": "/components/uni-list-item/uni-list-item" } } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "实时监控", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 
@@ -11661,10 +11661,15 @@ var detail = {
     'userinfo': {
       'name': "张三",
       'phone': "135444444",
-      'url': "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg" } } };var _default =
+      'url': "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg" } } };
 
 
 
+var subs1 = [
+{ id: '0', type: "点击选择" },
+{ id: '1', type: "劳动局" },
+{ id: '2', type: "社保局" },
+{ id: '3', type: "林业局" }];var _default =
 
 
 {
@@ -11674,7 +11679,8 @@ var detail = {
   tabList1: tabList1,
   evaList1: evaList1,
   subs: subs,
-  detail: detail };exports.default = _default;
+  detail: detail,
+  subs1: subs1 };exports.default = _default;
 
 /***/ }),
 

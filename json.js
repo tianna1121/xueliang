@@ -206,7 +206,12 @@ const detail = {
 		}
 	}
 }
-
+const subs1= [
+	{id:'0',type:"点击选择"}, 
+	{id:'1',type:"劳动局"}, 
+	{id:'2',type:"社保局"}, 
+	{id:'3',type:"林业局"}, 
+	]
 
 export default {
 	tabList,
@@ -215,5 +220,6 @@ export default {
 	tabList1,
 	evaList1,
 	subs,
-	detail
+	detail,
+	subs1
 }

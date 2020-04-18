@@ -135,7 +135,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-icons/uni-icons.vue */ 151));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -192,6 +192,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 73));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-icons/uni-icons.vue */ 151));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
     uniIcons: uniIcons },
@@ -205,20 +206,24 @@ __webpack_require__.r(__webpack_exports__);
       phone: "",
       array: ['请选择', '男', '女'],
       sexIndex: 0,
-      workList: ['请选择', '政府', '国家电网', '财务', '路政', '纪委'],
+      workList: [],
       workIndex: 0,
       userInfo: {
         avatar: "",
         username: "",
         idcard: "",
-        sex: "",
+        sex: "0",
         phone: "",
-        unit: "" } };
+        unit: "0" } };
 
 
   },
   onShow: function onShow() {
     uni.hideHomeButton();
+  },
+
+  onLoad: function onLoad() {
+    this.workList = this.typeChange(_json.default.subs1);
   },
   methods: {
     jumpRegster: function jumpRegster() {
@@ -227,7 +232,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
     },
+    //处理函数
+    typeChange: function typeChange(val) {
+      var arr = [];
+      for (var item in val) {
+        console.log(val[item].type);
+        arr.push(val[item].type);
+      }
 
+      return arr;
+
+    },
     submitMsg: function submitMsg() {
       console.log(this.userInfo);
 
@@ -240,7 +255,7 @@ __webpack_require__.r(__webpack_exports__);
 
         return;
       }
-      if (this.userInfo.avatar.username < 1) {
+      if (this.userInfo.username.length < 1) {
         uni.showModal({
 
           content: "请输入姓名!",
@@ -249,16 +264,7 @@ __webpack_require__.r(__webpack_exports__);
 
         return;
       }
-      if (this.userInfo.avatar.idcard < 1) {
-        uni.showModal({
-
-          content: "请输入身份证号!",
-          showCancel: false,
-          confirmText: "确定" });
-
-        return;
-      }
-      if (this.userInfo.avatar.sex < 1) {
+      if (this.userInfo.sex == '0') {
         uni.showModal({
 
           content: "请选择性别!",
@@ -267,7 +273,17 @@ __webpack_require__.r(__webpack_exports__);
 
         return;
       }
-      if (this.userInfo.avatar.phone < 1) {
+      if (this.userInfo.idcard.length < 10) {
+        uni.showModal({
+
+          content: "请输入身份证号!",
+          showCancel: false,
+          confirmText: "确定" });
+
+        return;
+      }
+
+      if (this.userInfo.phone.length < 5) {
         uni.showModal({
 
           content: "请输入电话号码!",
@@ -276,7 +292,7 @@ __webpack_require__.r(__webpack_exports__);
 
         return;
       }
-      if (this.userInfo.avatar.unit < 1) {
+      if (this.userInfo.unit == '0') {
         uni.showModal({
 
           content: "请选择所在单位!",
@@ -285,14 +301,26 @@ __webpack_require__.r(__webpack_exports__);
 
         return;
       }
+      //整理数据
+
+      var obj = {
+        avatar: this.userInfo.avatar,
+        username: this.userInfo.username,
+        idcard: this.userInfo.idcard,
+        sex: this.userInfo.sex.toString(),
+        phone: this.userInfo.phone,
+        unit: this.userInfo.unit.toString() };
+
+      console.log(obj);
       uni.showLoading({
         title: 'loading' });
 
       //发起请求
-      this.$http.post('/interface/rest/http/xlgc/wb-test.htm', this.userInfo).then(function (res) {
-        console.log(res.data.list);
+      this.$http.post('/interface/rest/http/xlwb/xlgc-wb-jdh-yhzc.htm', obj).then(function (res) {
+        console.log(res);
+        uni.hideLoading();
         if (res.code == 200) {
-          uni.hideLoading();
+
 
           uni.redirectTo({
             url: '../regres/regres' });
@@ -302,31 +330,63 @@ __webpack_require__.r(__webpack_exports__);
       }).catch(function (err) {
         console.log(err);
       });
-      uni.redirectTo({
-        url: '../regres/regres' });
+      // uni.redirectTo({
+      //     url: '../regres/regres',
 
-
+      // });
     },
+
+
     //上传头像
     chooseImage: function chooseImage() {var _this = this;
       uni.chooseImage({
         count: 1,
         success: function success(res) {
-          console.log(JSON.stringify(res.tempFilePaths));
-          _this.userInfo.avatar = res.tempFilePaths[0];
+          //console.log(JSON.stringify(res.tempFilePaths));
+          uni.showLoading({
+            title: '上传中...',
+            mask: true });
+
+          uni.uploadFile({
+            url: 'http://www.app8848.com/interface/rest/file/upload/util/uploadFile.htm', //仅为示例，非真实的接口地址
+            header: { token: "311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv" },
+            filePath: res.tempFilePaths[0],
+            name: 'file',
+
+            success: function success(uploadFileRes) {
+              // console.log("图片上传+++++++")
+              // console.log(JSON.parse(uploadFileRes.data));
+
+              var datas = JSON.parse(uploadFileRes.data);
+              if (datas.msgState == 1) {
+
+                //将返回的数据存入img,并通知外界
+                // 默认返回的有路径，字段名 url
+                _this.userInfo.avatar = datas.result;
+
+              } else {
+                uni.showToast({
+                  title: '上传失败，请重新上传',
+                  duration: 2000 });
+
+              }
+
+            } });
+
+          uni.hideLoading();
         } });
 
 
     },
     //选择单位
     workListChange: function workListChange(e) {
-      this.workIndex = parseInt(e.detail.value);
-      this.userInfo.unit = this.workList[this.workIndex];
+      this.userInfo.unit = parseInt(e.detail.value);
+
     },
 
     sizeTypeChange: function sizeTypeChange(e) {
-      this.sexIndex = parseInt(e.detail.value);
-      this.userInfo.sex = parseInt(e.detail.value) == 0 ? "M" : "F";
+      this.userInfo.sex = parseInt(e.detail.value);
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

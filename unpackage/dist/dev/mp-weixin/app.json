@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/register/register",
+    "pages/index/index",
     "pages/login/login",
     "pages/regresult/regresult",
     "pages/regres/regres",
@@ -20,6 +20,5 @@
     "backgroundColor": "#F8F8F8"
   },
   "permission": {},
-  "usingComponents": {},
-  "sitemapLocation": "sitemap15.json"
+  "usingComponents": {}
 }
