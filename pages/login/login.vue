@@ -73,12 +73,13 @@
 					title: 'loading'
 				});
 				//发起请求
-				this.$http.post('/interface/rest/http/xlgc/wb-test.htm',that.userInfo).then(res => {
-					console.log(res.data.list);
-					if(res.code==200){
-						uni.hideLoading();
+				this.$http.post('/interface/rest/http/xlwb/xlgc-wb-jdh-yhdl.htm',that.userInfo).then(res => {
+					uni.hideLoading();
+					console.log(res.data);
+					if(res.data.msgState==1){
+						
 						//设置token
-						 setTokenStorage(res.data.data.token) // todo 储存token，可更换为自己的储存token逻辑
+						 setTokenStorage(res.data.list[0].token) // todo 储存token，可更换为自己的储存token逻辑
 						uni.redirectTo({
 						    url: '../index/index?show_index=0',
 							
@@ -86,12 +87,13 @@
 					}
 				}).catch(err => {
 					console.log(err);
+					uni.hideLoading();
 				})
 				//TODO
-				uni.redirectTo({
-				    url: '../index/index',
+				// uni.redirectTo({
+				//     url: '../index/index',
 					
-				});
+				// });
 			}
 		}
 			

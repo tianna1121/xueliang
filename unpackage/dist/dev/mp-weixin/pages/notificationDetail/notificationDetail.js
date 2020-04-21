@@ -271,21 +271,39 @@ __webpack_require__.r(__webpack_exports__);
       uni.showLoading({
         title: 'loading' });
 
+      var obj = { feedback_content: this.feedbackContent };
+      //发起请求
+      this.$refs.showtip1.close();
+      uni.showLoading({
+        title: 'loading' });
 
-      setTimeout(function () {
+      this.$http.
+      post('/interface/rest/http/xlwb/xlgc-wb-xcx-sjsb-feedback.htm', obj).
+      then(function (res) {
         uni.hideLoading();
-        _this3.detailData.feedback_content = _this3.feedbackContent;
-        var dateee = new Date().toJSON();
-        var dates = new Date(+new Date(dateee) + 8 * 3600 * 1000).
-        toISOString().
-        replace(/T/g, ' ').
-        replace(/\.[\d]{3}Z/, '');
-        _this3.detailData.feedback_time = dates;
-        _this3.$refs.showtip.close();
-        uni.navigateTo({
-          url: "/pages/index/index" });
+        console.log(res.data);
+        if (res.data.msgState == 1) {
+          _this3.detailData.feedback_content = _this3.feedbackContent;
+          var dateee = new Date().toJSON();
+          var dates = new Date(+new Date(dateee) + 8 * 3600 * 1000).
+          toISOString().
+          replace(/T/g, ' ').
+          replace(/\.[\d]{3}Z/, '');
+          _this3.detailData.feedback_time = dates;
+          _this3.$refs.showtip.close();
+          uni.navigateTo({
+            url: "/pages/index/index" });
 
-      }, 1500);
+        }
+        uni.showToast({
+          title: res.data.msg,
+          duration: 2000 });
+
+      }).
+      catch(function (err) {
+        console.log(err);
+        uni.hideLoading();
+      });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

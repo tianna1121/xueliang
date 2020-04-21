@@ -150,15 +150,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 {
   components: {
     uniNavBar: uniNavBar },
 
-
   data: function data() {
     return {
-      phone: "",
+      phone: '',
       detailData: {} };
 
   },
@@ -175,16 +173,31 @@ __webpack_require__.r(__webpack_exports__);
     },
     //保存
     submitJunmp: function submitJunmp() {
-      console.log("保存成功");
+      console.log('保存成功');
       uni.showLoading({
         title: 'loading' });
 
-      setTimeout(function () {
+      var obj = { phone: this.phone };
+      //发起请求
+      this.$http.
+      post('/interface/rest/http/xlwb/xlgc-wb-xcx-grzx-xgsjh.htm', obj).
+      then(function (res) {
         uni.hideLoading();
-        uni.navigateBack({
-          delta: 1 });
+        console.log(res.data);
+        if (res.data.msgState == 1) {
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000 });
 
-      }, 1000);
+          uni.navigateBack({
+            delta: 1 });
+
+        }
+      }).
+      catch(function (err) {
+        console.log(err);
+        uni.hideLoading();
+      });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

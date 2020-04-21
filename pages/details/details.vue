@@ -6,7 +6,7 @@
 		<view class="main-title1">事件信息</view>
 		<view class="item">
 			<view class="item-title">上报终端</view>
-			<view class="item-next">{{ detailData.upReport }}</view>
+			<view class="item-next">{{ detailData.up_report }}</view>
 		</view>
 		<view class="item">
 			<view class="item-title">事件类型</view>
@@ -14,7 +14,7 @@
 		</view>
 		<view class="item">
 			<view class="item-title">事件类别</view>
-			<view class="item-next">{{ detailData.category }}1</view>
+			<view class="item-next">{{ detailData.category ||"无"}}</view>
 		</view>
 		<view class="item">
 			<view class="item-title">事发时间</view>
@@ -51,8 +51,8 @@
 		</view>
 		<view class="item1 ">
 			<view class="item-title1">反馈内容</view>
-			<view class="conents1">{{ detailData.feedbackContent }}</view>
-			<view class="times1">{{ detailData.feedbackTime }}</view>
+			<view class="conents1">{{ detailData.feedback_content }}</view>
+			<view class="times1">{{ detailData.feedback_time }}</view>
 		</view>
 		<view class="main-title1">处理队员信息</view>
 		<uni-list><uni-list-item :title="detailData.userinfo.name" :rightText="detailData.userinfo.phone" :show-arrow="false" :thumb="detailData.userinfo.url" /></uni-list>
@@ -139,8 +139,11 @@ export default {
 	methods: {
 		//获取推荐列表
 		async loadNewsList() {
-			this.detailData = json.detail.data;
-			console.log(this.detailData);
+			uni.showLoading({
+				title: '加载中...'
+			});
+			// this.detailData = json.detail.data;
+			// console.log(this.detailData);
 			this.$http
 				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjzx-sjxq.htm', {
 					params: {
@@ -148,19 +151,22 @@ export default {
 					}
 				})
 				.then(res => {
+					uni.hideLoading();
 					console.log(res);
-					if (res.statusCode == 200) {
+					if (res.data.msgState == 1) {
 						var list = res.data.list;
 						console.log('list');
 						console.log(list);
+						this.detailData=list[0]
 					} else {
-						uni.showLoading({
-							title: '请求失败'
-						});
+						uni.showToast({
+							title:"请求失败"
+						})
 					}
 				})
 				.catch(err => {
 					console.log(err);
+					uni.hideLoading();
 				});
 		},
 		statusChange(index) {
@@ -211,9 +217,31 @@ export default {
 		},
 
 		submitFeedbackContent() {
-			this.detailData.feedbackContent = this.feedbackContent;
+			
+			var obj={feedback_content:this.feedbackContent}
 			//发起请求
 			this.$refs.showtip1.close();
+			uni.showLoading({
+				title: 'loading'
+			});
+			this.$http.post('/interface/rest/http/xlwb/xlgc-wb-xcx-sjzx-wyfk.htm',obj).then(res => {
+				uni.hideLoading();
+				console.log(res.data);
+				if(res.data.msgState==1){
+					
+					this.detailData.feedback_content = this.feedbackContent;
+					
+					
+				}
+				uni.showToast({
+				    title: res.data.msg,
+				    duration: 2000
+				});
+			}).catch(err => {
+				console.log(err);
+				uni.hideLoading();
+			})
+			
 		},
 		submitOver(){
 				this.$refs.showtip.close();
@@ -225,7 +253,7 @@ export default {
 				})
 				.then(res => {
 					console.log(res);
-					if (res.statusCode == 200) {
+					if (res.data.msgState == 1) {
 						uni.showToast({
 						    title: res.data.msg,
 						    duration: 2000

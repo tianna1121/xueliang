@@ -201,27 +201,25 @@ __webpack_require__.r(__webpack_exports__);
       type2Index: 0,
       dates: '',
       upData: {
-        type: "0",
-        category: "0",
-        time: "点击选择",
+        type: '0',
+        category: '0',
+        time: '点击选择',
         address: {
           address_content: '选择地点',
-          longitude: "",
-          latitude: "" },
+          longitude: '',
+          latitude: '' },
 
-        content: "",
+        content: '',
         imgList: [] } };
 
 
   },
   onReady: function onReady() {
-
     var dateee = new Date().toJSON();
     this.dates = new Date(+new Date(dateee) + 8 * 3600 * 1000).
     toISOString().
     replace(/T/g, ' ').
     replace(/\.[\d]{3}Z/, '');
-
   },
 
   methods: {
@@ -234,7 +232,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(val);
       this.upData.imgList = val;
     },
-    updataJump: function updataJump() {
+    updataJump: function updataJump() {var _this = this;
       console.log('上报提交');
 
       console.log(this.upData);
@@ -244,16 +242,16 @@ __webpack_require__.r(__webpack_exports__);
       this.$http.
       post('/interface/rest/http/xlwb/xlgc-wb-xcx-grzx-wysb.htm', this.upData, { params: {} }).
       then(function (res) {
-        console.log("上报结果++++++");
+        uni.hideLoading();
+        console.log('上报结果++++++');
         console.log(res);
         if (res.data.msgState == 1) {
-
-        } else {
-          uni.hideLoading();
-          uni.showToast({
-            title: '请求失败' });
-
+          _this.cleanData();
         }
+        uni.showToast({
+          title: res.data.msg,
+          duration: 2000 });
+
       }).
       catch(function (err) {
         console.log(err);
@@ -273,21 +271,18 @@ __webpack_require__.r(__webpack_exports__);
       this.getType();
       //获取上报事件
       //this.getType1()
-
     },
-    getType: function getType() {var _this = this;
+    getType: function getType() {var _this2 = this;
       this.$http.
       get('/interface/rest/http/xlwb/xlgc-wb-xcx-sblxxz.htm', { params: {} }).
       then(function (res) {
         console.log(res);
         if (res.data.msgState == 1) {
-          var obj1 = [{ id: '0', type: "点击选择" }];
+          var obj1 = [{ id: '0', type: '点击选择' }];
           var data = res.data.list;
           var obj = [].concat(obj1, _toConsumableArray(data));
-          _this.type1 = _this.typeChange(obj);
-          _this.type2 = _this.typeChange(obj);
-
-
+          _this2.type1 = _this2.typeChange(obj);
+          _this2.type2 = _this2.typeChange(obj);
         } else {
           uni.showLoading({
             title: '请求失败' });
@@ -302,15 +297,13 @@ __webpack_require__.r(__webpack_exports__);
       this.$http.
       get('/interface/rest/http/xlwb/xlgc-wb-xcx-sbsjclzt.htm', { params: {} }).
       then(function (res) {
-        console.log("上报事件");
+        console.log('上报事件');
         console.log(res);
         if (res.data.msgState == 1) {
           // 	var obj1=[{id:'0',type:"点击选择"}]
           // 	var data=res.data.list
           // 	var obj=[...obj1,...data]
           // this.type1=	this.typeChange(obj)
-
-
         } else {
           uni.showLoading({
             title: '请求失败' });
@@ -330,34 +323,31 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return arr;
-
     },
     cleanData: function cleanData() {
       this.$refs.upload.cleanAll();
       var upData = {
-        type: "0",
-        category: "0",
-        time: "点击选择",
+        type: '0',
+        category: '0',
+        time: '点击选择',
         address: {
           address_content: '选择地点',
-          longitude: "",
-          latitude: "" },
+          longitude: '',
+          latitude: '' },
 
-        content: "",
+        content: '',
         imgList: [] };
 
       this.upData = upData;
     },
     sizeTypeChange: function sizeTypeChange(e) {
       this.upData.type = parseInt(e.detail.value);
-
     },
     sizeType2Change: function sizeType2Change(e) {
       this.upData.category = parseInt(e.detail.value);
-
     },
 
-    chooseLocation: function chooseLocation() {var _this2 = this;
+    chooseLocation: function chooseLocation() {var _this3 = this;
       uni.chooseLocation({
         success: function success(res) {
           console.log(res.name);
@@ -365,9 +355,9 @@ __webpack_require__.r(__webpack_exports__);
           console.log(res.longitude);
           console.log(res.latitude);
           // this.location = formatLocation(res.longitude, res.latitude),
-          _this2.upData.address.address_content = res.name;
-          _this2.upData.address.longitude = res.longitude;
-          _this2.upData.address.latitude = res.latitude;
+          _this3.upData.address.address_content = res.name;
+          _this3.upData.address.longitude = res.longitude;
+          _this3.upData.address.latitude = res.latitude;
         } });
 
     },
@@ -380,8 +370,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     //上传图片/视频
     upLoadImg: function upLoadImg() {
-      console.log("根据选择调用不同的api");
-
+      console.log('根据选择调用不同的api');
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

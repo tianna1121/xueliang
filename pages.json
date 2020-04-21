@@ -1,58 +1,71 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+
+		{
+			"path": "pages/index/index",
+			"style": {
+				// #ifdef MP 
+				"navigationBarTitleText": "实时监控",
+				"navigationStyle": "custom",
+				// #endif 
+				"enablePullDownRefresh": false,
+				"bounce": "none"
 		
-	{
-	    "path" : "pages/register/register",
-	    "style" : {"navigationBarTitleText": "注册"}
-	}
-	,{
-		"path": "pages/index/index",
-		"style": {
-			// #ifdef MP 
-			"navigationBarTitleText": "实时监控",
-			"navigationStyle": "custom",
-			// #endif 
-			"enablePullDownRefresh": false,
-			"bounce": "none"
-			
+			}
+		},{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "pages/regresult/regresult",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		}, {
+			"path": "pages/regres/regres",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		}, {
+			"path": "pages/details/details",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/notificationDetail/notificationDetail",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/change-phone/change-phone",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/video-details/video-details",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/my-report/my-report",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/my-report-detail/my-report-detail",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		}
-	},
-	{
-		"path": "pages/login/login",
-		"style": {
-			"navigationBarTitleText": "登录",
-			"navigationStyle":"custom"
-		}},	{
-		    "path" : "pages/regresult/regresult",
-		    "style" : {"navigationBarTitleText": "注册"}
-		},{
-		    "path" : "pages/regres/regres",
-		    "style" : {"navigationBarTitleText": "注册"}
-		},{
-            "path" : "pages/details/details",
-            "style" : {"navigationStyle": "custom"}
-        }
-        ,{
-            "path" : "pages/notificationDetail/notificationDetail",
-            "style" : {"navigationStyle":"custom"}
-        }
-        ,{
-            "path" : "pages/change-phone/change-phone",
-            "style" : {"navigationStyle":"custom"}
-        }
-        ,{
-            "path" : "pages/video-details/video-details",
-            "style" : {"navigationStyle":"custom"}
-        }
-        ,{
-            "path" : "pages/my-report/my-report",
-            "style" : {"navigationStyle":"custom"}
-        }
-        ,{
-            "path" : "pages/my-report-detail/my-report-detail",
-            "style" : {"navigationStyle":"custom"}
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "实时监控",

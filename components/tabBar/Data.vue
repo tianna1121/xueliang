@@ -6,7 +6,7 @@
 			<view class="item-title">事件类型</view>
 			<view class="item-next">
 				<picker :range="type1" @change="sizeTypeChange" :value="upData.type" mode="selector">
-					<view class="uni-input">{{type1[upData.type]}}</view>
+					<view class="uni-input">{{ type1[upData.type] }}</view>
 				</picker>
 				<uni-icons type="forward" color="#C7C7CC" size="22" />
 			</view>
@@ -62,7 +62,7 @@
 
 <script>
 import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
-import hUpload from "@/components/h-upload/h-upload.vue"
+import hUpload from '@/components/h-upload/h-upload.vue';
 export default {
 	components: {
 		uniNavBar,
@@ -74,60 +74,58 @@ export default {
 			type2: [],
 			type2Index: 0,
 			dates: '',
-			upData:{
-				type:"0",
-				category:"0",
-				time:"点击选择",
-				address:{
-					address_content:'选择地点',
-					longitude:"",
-					latitude:"",	
+			upData: {
+				type: '0',
+				category: '0',
+				time: '点击选择',
+				address: {
+					address_content: '选择地点',
+					longitude: '',
+					latitude: ''
 				},
-				content:"",
-				imgList:[]
+				content: '',
+				imgList: []
 			}
 		};
 	},
 	onReady() {
-		
 		var dateee = new Date().toJSON();
 		this.dates = new Date(+new Date(dateee) + 8 * 3600 * 1000)
 			.toISOString()
 			.replace(/T/g, ' ')
 			.replace(/\.[\d]{3}Z/, '');
-	
 	},
 
 	methods: {
-		schange(val){
-			console.log(111)
-			console.log(val)
+		schange(val) {
+			console.log(111);
+			console.log(val);
 		},
-		setAttachData(val){
-			console.log(222)
-			console.log(val)
-			this.upData.imgList=val
+		setAttachData(val) {
+			console.log(222);
+			console.log(val);
+			this.upData.imgList = val;
 		},
 		updataJump() {
 			console.log('上报提交');
-			
-			console.log(this.upData)
+
+			console.log(this.upData);
 			uni.showLoading({
 				title: 'loading'
 			});
 			this.$http
-				.post('/interface/rest/http/xlwb/xlgc-wb-xcx-grzx-wysb.htm', this.upData,{params: {}})
+				.post('/interface/rest/http/xlwb/xlgc-wb-xcx-grzx-wysb.htm', this.upData, { params: {} })
 				.then(res => {
-					console.log("上报结果++++++");
+					uni.hideLoading();
+					console.log('上报结果++++++');
 					console.log(res);
-					if (res.data.msgState ==1) {
-						
-					} else {
-						uni.hideLoading();
-						uni.showToast({
-							title: '请求失败'
-						});
+					if (res.data.msgState == 1) {
+						this.cleanData();
 					}
+					uni.showToast({
+						title: res.data.msg,
+						duration: 2000
+					});
 				})
 				.catch(err => {
 					console.log(err);
@@ -144,24 +142,21 @@ export default {
 		},
 		ontrueGetList() {
 			//获取上报类型
-			this.getType()
+			this.getType();
 			//获取上报事件
 			//this.getType1()
-			
 		},
-		getType(){
+		getType() {
 			this.$http
-				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sblxxz.htm', {params: {}})
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sblxxz.htm', { params: {} })
 				.then(res => {
 					console.log(res);
-					if (res.data.msgState ==1) {
-						var obj1=[{id:'0',type:"点击选择"}]
-						var data=res.data.list
-						var obj=[...obj1,...data]
-					this.type1=	this.typeChange(obj)
-					this.type2=	this.typeChange(obj)
-						
-						
+					if (res.data.msgState == 1) {
+						var obj1 = [{ id: '0', type: '点击选择' }];
+						var data = res.data.list;
+						var obj = [...obj1, ...data];
+						this.type1 = this.typeChange(obj);
+						this.type2 = this.typeChange(obj);
 					} else {
 						uni.showLoading({
 							title: '请求失败'
@@ -172,19 +167,17 @@ export default {
 					console.log(err);
 				});
 		},
-		getType1(){
+		getType1() {
 			this.$http
-				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sbsjclzt.htm', {params: {}})
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sbsjclzt.htm', { params: {} })
 				.then(res => {
-					console.log("上报事件");
+					console.log('上报事件');
 					console.log(res);
-					if (res.data.msgState ==1) {
-					// 	var obj1=[{id:'0',type:"点击选择"}]
-					// 	var data=res.data.list
-					// 	var obj=[...obj1,...data]
-					// this.type1=	this.typeChange(obj)
-						
-						
+					if (res.data.msgState == 1) {
+						// 	var obj1=[{id:'0',type:"点击选择"}]
+						// 	var data=res.data.list
+						// 	var obj=[...obj1,...data]
+						// this.type1=	this.typeChange(obj)
 					} else {
 						uni.showLoading({
 							title: '请求失败'
@@ -196,41 +189,38 @@ export default {
 				});
 		},
 		//处理函数
-		typeChange(val){
-			var arr=[]
+		typeChange(val) {
+			var arr = [];
 			for (let item in val) {
-				console.log(val[item].type)
-				arr.push(val[item].type)
+				console.log(val[item].type);
+				arr.push(val[item].type);
 			}
-		
-		return arr;
-		
+
+			return arr;
 		},
-		cleanData(){
-			this.$refs.upload.cleanAll()
-			var upData={
-				type:"0",
-				category:"0",
-				time:"点击选择",
-				address:{
-					address_content:'选择地点',
-					longitude:"",
-					latitude:"",	
+		cleanData() {
+			this.$refs.upload.cleanAll();
+			var upData = {
+				type: '0',
+				category: '0',
+				time: '点击选择',
+				address: {
+					address_content: '选择地点',
+					longitude: '',
+					latitude: ''
 				},
-				content:"",
-				imgList:[]
-			}
-			this.upData=upData
+				content: '',
+				imgList: []
+			};
+			this.upData = upData;
 		},
 		sizeTypeChange(e) {
 			this.upData.type = parseInt(e.detail.value);
-			
 		},
 		sizeType2Change(e) {
 			this.upData.category = parseInt(e.detail.value);
-			
 		},
-		
+
 		chooseLocation: function() {
 			uni.chooseLocation({
 				success: res => {
@@ -253,9 +243,8 @@ export default {
 			console.log(res.result);
 		},
 		//上传图片/视频
-		upLoadImg(){
-			console.log("根据选择调用不同的api")
-			
+		upLoadImg() {
+			console.log('根据选择调用不同的api');
 		}
 	}
 };

@@ -202,7 +202,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 73));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 159));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixPulldownRefresh = function mixPulldownRefresh() {__webpack_require__.e(/*! require.ensure | components/mix-pulldown-refresh/mix-pulldown-refresh */ "components/mix-pulldown-refresh/mix-pulldown-refresh").then((function () {return resolve(__webpack_require__(/*! @/components/mix-pulldown-refresh/mix-pulldown-refresh */ 194));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixLoadMore = function mixLoadMore() {__webpack_require__.e(/*! require.ensure | components/mix-load-more/mix-load-more */ "components/mix-load-more/mix-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/mix-load-more/mix-load-more */ 201));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 49));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 159));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixPulldownRefresh = function mixPulldownRefresh() {__webpack_require__.e(/*! require.ensure | components/mix-pulldown-refresh/mix-pulldown-refresh */ "components/mix-pulldown-refresh/mix-pulldown-refresh").then((function () {return resolve(__webpack_require__(/*! @/components/mix-pulldown-refresh/mix-pulldown-refresh */ 194));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixLoadMore = function mixLoadMore() {__webpack_require__.e(/*! require.ensure | components/mix-load-more/mix-load-more */ "components/mix-load-more/mix-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/mix-load-more/mix-load-more */ 201));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 var windowWidth = 0,
@@ -242,7 +242,7 @@ tabBar;var _default =
           break;
 
         case 3:
-          return '工作';
+          return '预案';
           break;
         default:
           return '通知';}
@@ -295,10 +295,32 @@ tabBar;var _default =
 
       then(function (res) {
         console.log(res);
-        if (res.statusCode == 200) {
+        if (res.data.msgState == 1) {
           var list = res.data.list;
           console.log('list');
           console.log(list);
+
+
+          if (type === 'refresh') {
+            tabItem.newsList = []; //刷新前清空数组
+          }
+          list.forEach(function (item) {
+            tabItem.newsList.push(item);
+          });
+          //下拉刷新 关闭刷新动画
+          if (type === 'refresh') {
+            _this2.$refs.mixPulldownRefresh && _this2.$refs.mixPulldownRefresh.endPulldownRefresh();
+
+
+
+            tabItem.loadMoreStatus = 0;
+          }
+          //上滑加载 处理状态
+          if (type === 'add') {
+            tabItem.loadMoreStatus = 2;
+            //tabItem.loadMoreStatus = tabItem.newsList.length > 4 ? 2 : 0;
+          }
+
         } else {
           uni.showLoading({
             title: '请求失败' });
@@ -308,32 +330,7 @@ tabBar;var _default =
       catch(function (err) {
         console.log(err);
       });
-      //setTimeout模拟异步请求数据
-      setTimeout(function () {
-        var list = _json.default.evaList1;
-        list.sort(function (a, b) {
-          return Math.random() > 0.5 ? -1 : 1; //静态数据打乱顺序
-        });
-        if (type === 'refresh') {
-          tabItem.newsList = []; //刷新前清空数组
-        }
-        list.forEach(function (item) {
-          item.id = parseInt(Math.random() * 10000);
-          tabItem.newsList.push(item);
-        });
-        //下拉刷新 关闭刷新动画
-        if (type === 'refresh') {
-          _this2.$refs.mixPulldownRefresh && _this2.$refs.mixPulldownRefresh.endPulldownRefresh();
 
-
-
-          tabItem.loadMoreStatus = 0;
-        }
-        //上滑加载 处理状态
-        if (type === 'add') {
-          tabItem.loadMoreStatus = tabItem.newsList.length > 40 ? 2 : 0;
-        }
-      }, 600);
     },
     //详情
     navToDetails: function navToDetails(item) {

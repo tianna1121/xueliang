@@ -32,7 +32,7 @@
 								</text>
 								<text class="item-title last-cild" space="emsp">
 									状态:
-									<text class="it2" :class="{ statusd: item.status == 3 }">{{ statusChange(item.status) }}</text>
+									<text class="it2" :class="{ statusd: item.status == 3||item.status == 4 }">{{ statusChange(item.status) }}</text>
 								</text>
 							</view>
 							<view class="items">
@@ -109,16 +109,22 @@ export default {
 		},
 		statusChange(index) {
 			switch (index) {
-				case 1:
+				case 0:
 					return '待处理';
 					break;
+				case 1:
+					return '代办';
+					break;
 				case 2:
-					return '处理中';
+					return '代办结';
 					break;
 
 				case 3:
-					return '已处理';
+					return '已办结';
 					break;
+					case 4:
+						return '无效';
+						break;
 				default:
 					return '待处理';
 			}
@@ -155,7 +161,8 @@ export default {
 				tabItem.refreshing = true;
 			}
 			// #endif
-			var obj={status: this.tabCurrentIndex}
+			
+			var obj={status: this.tabCurrentIndex-1}
 			if(this.tabCurrentIndex==0){
 				obj=null 
 			}
@@ -166,11 +173,11 @@ export default {
 				})
 				.then(res => {
 					console.log(res);
-					if (res.statusCode == 200) {
-						var list1 = res.data.list;
-						console.log('list1');
-						console.log(list1);
-						let list = list1;
+					if (res.data.msgState == 1) {
+						var list = res.data.list;
+						console.log('list');
+						console.log(list);
+						
 						
 						if (type === 'refresh') {
 							tabItem.newsList = []; //刷新前清空数组
@@ -189,7 +196,8 @@ export default {
 						}
 						//上滑加载 处理状态
 						if (type === 'add') {
-							tabItem.loadMoreStatus = tabItem.newsList.length > 40 ? 2 : 0;
+							tabItem.loadMoreStatus =2
+							//tabItem.loadMoreStatus = tabItem.newsList.length > 4 ? 2 : 0;
 						}
 					} else {
 						uni.showLoading({

@@ -179,17 +179,8 @@ __webpack_require__.r(__webpack_exports__);
   components: { action: action },
   data: function data() {
     return {
-      userInfo: {
-        img: 'http://fc-feed.cdn.bcebos.com/0/pic/9107b498a0cbea000842763091e833b6.jpg',
-        name: '吴彦祖',
-        unit: '小金县八角乡',
-        jue: '统治管理队员',
-        account: '13540021548',
-        sex: 'M',
-        idCard: '511255488963251145',
-        phone: '13540025689',
-        creatTime: '2019-12-10' } };
-
+      userInfo: {},
+      isTrue: false };
 
   },
   methods: {
@@ -198,6 +189,34 @@ __webpack_require__.r(__webpack_exports__);
       // 	title: '个人中心'
       // });
       console.log('加载了个人中心，可以把网络请求放这里');
+
+      this.getMsg();
+    },
+    //获取个人中心基本信息
+    getMsg: function getMsg() {var _this2 = this;
+      if (this.isTrue) {
+        return;
+      }
+      console.log("个人数据");
+      this.$http.
+      get('/interface/rest/http/xlwb/xlgc-wb-xcx-grzxsj.htm').
+      then(function (res) {
+
+        console.log(res);
+        if (res.data.msgState == 1) {
+          var userInfo = res.data.list[0];
+          _this2.userInfo = userInfo;
+          if (_this2.userInfo.avatar.length < 10) {
+            _this2.userInfo.avatar = "http://fc-feed.cdn.bcebos.com/0/pic/9107b498a0cbea000842763091e833b6.jpg";
+          }
+
+        }
+
+      }).
+      catch(function (err) {
+        console.log(err);
+
+      });
     },
     //修改头像
     changeAvatar: function changeAvatar(e) {
@@ -210,6 +229,7 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     itemClick: function itemClick(index, type) {
+      this.isTrue = true;
       //这里根据不同的类型点击的索引值,做对应的逻辑处理
       console.log("\u4F60\u70B9\u51FB\u7684action-sheet\u7684\u7C7B\u578B\u662F".concat(type, ",list\u5BF9\u5E94\u7684\u7D22\u5F15\u503C\u662F").concat(index));
       var _this = this;
@@ -229,8 +249,8 @@ __webpack_require__.r(__webpack_exports__);
             sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
             sourceType: ['camera'], //拍照
             success: function success(res) {
-              _this.userInfo.img = res.tempFilePaths[0];
-              console.log(JSON.stringify(res.tempFilePaths[0]));
+              _this.chooseImage1(res.tempFilePaths[0]);
+              // console.log(JSON.stringify(res.tempFilePaths[0]));
             } });
 
           break;
@@ -240,14 +260,74 @@ __webpack_require__.r(__webpack_exports__);
             sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
             sourceType: ['album'], //从相册选择
             success: function success(res) {
-              _this.userInfo.img = res.tempFilePaths[0];
-              console.log(JSON.stringify(res.tempFilePaths[0]));
+              _this.chooseImage1(res.tempFilePaths[0]);
+              //_this.userInfo.img = res.tempFilePaths[0];
+              //console.log(JSON.stringify(res.tempFilePaths[0]));
             } });
 
           break;
         default:
           break;}
 
+    },
+    //上传头像
+    chooseImage1: function chooseImage1(val) {var _this3 = this;
+      uni.showLoading({
+        title: '上传中...',
+        mask: true });
+
+      uni.uploadFile({
+        url: 'https://app8848.com/interface/rest/file/upload/util/uploadFile.htm', //仅为示例，非真实的接口地址
+        header: { token: "311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv" },
+        filePath: val,
+        name: 'file',
+
+        success: function success(uploadFileRes) {
+          // console.log("图片上传+++++++")
+          // console.log(JSON.parse(uploadFileRes.data));
+
+          var datas = JSON.parse(uploadFileRes.data);
+          if (datas.msgState == 1) {
+            _this3.isTrue = true;
+            //将返回的数据存入img,并通知外界
+            // 默认返回的有路径，字段名 url
+            _this3.updata(datas.result);
+            return datas.result;
+
+
+          } else {
+            _this3.isTrue = false;
+            uni.showToast({
+              title: '上传失败，请重新上传',
+              duration: 2000 });
+
+
+          }
+
+        } });
+
+
+    },
+    updata: function updata(val) {var _this4 = this;
+      var obj = { avatar: val };
+      var that = this;
+      this.$http.
+      post('/interface/rest/http/xlwb/xlgc-wb-xcx-grzx-xgtx.htm', obj).
+      then(function (res) {
+        console.log('图像上传');
+        console.log(res);
+        if (res.data.msgState == 1) {
+          _this4.userInfo.avatar = val;
+        }
+        uni.showToast({
+          title: res.data.msg,
+          duration: 2000 });
+
+      }).
+      catch(function (err) {
+        console.log(err);
+
+      });
     },
     titleClick: function titleClick(type) {
       //这里根据不同的类型做对应的逻辑处理

@@ -213,7 +213,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 73));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 159));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixPulldownRefresh = function mixPulldownRefresh() {__webpack_require__.e(/*! require.ensure | components/mix-pulldown-refresh/mix-pulldown-refresh */ "components/mix-pulldown-refresh/mix-pulldown-refresh").then((function () {return resolve(__webpack_require__(/*! @/components/mix-pulldown-refresh/mix-pulldown-refresh */ 194));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixLoadMore = function mixLoadMore() {__webpack_require__.e(/*! require.ensure | components/mix-load-more/mix-load-more */ "components/mix-load-more/mix-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/mix-load-more/mix-load-more */ 201));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 49));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 159));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixPulldownRefresh = function mixPulldownRefresh() {__webpack_require__.e(/*! require.ensure | components/mix-pulldown-refresh/mix-pulldown-refresh */ "components/mix-pulldown-refresh/mix-pulldown-refresh").then((function () {return resolve(__webpack_require__(/*! @/components/mix-pulldown-refresh/mix-pulldown-refresh */ 194));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixLoadMore = function mixLoadMore() {__webpack_require__.e(/*! require.ensure | components/mix-load-more/mix-load-more */ "components/mix-load-more/mix-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/mix-load-more/mix-load-more */ 201));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 var windowWidth = 0,
@@ -258,15 +258,21 @@ tabBar;var _default =
     },
     statusChange: function statusChange(index) {
       switch (index) {
-        case 1:
+        case 0:
           return '待处理';
           break;
+        case 1:
+          return '代办';
+          break;
         case 2:
-          return '处理中';
+          return '代办结';
           break;
 
         case 3:
-          return '已处理';
+          return '已办结';
+          break;
+        case 4:
+          return '无效';
           break;
         default:
           return '待处理';}
@@ -304,7 +310,8 @@ tabBar;var _default =
 
 
 
-      var obj = { status: this.tabCurrentIndex };
+
+      var obj = { status: this.tabCurrentIndex - 1 };
       if (this.tabCurrentIndex == 0) {
         obj = null;
       }
@@ -315,11 +322,11 @@ tabBar;var _default =
 
       then(function (res) {
         console.log(res);
-        if (res.statusCode == 200) {
-          var list1 = res.data.list;
-          console.log('list1');
-          console.log(list1);
-          var list = list1;
+        if (res.data.msgState == 1) {
+          var list = res.data.list;
+          console.log('list');
+          console.log(list);
+
 
           if (type === 'refresh') {
             tabItem.newsList = []; //刷新前清空数组
@@ -338,7 +345,8 @@ tabBar;var _default =
           }
           //上滑加载 处理状态
           if (type === 'add') {
-            tabItem.loadMoreStatus = tabItem.newsList.length > 40 ? 2 : 0;
+            tabItem.loadMoreStatus = 2;
+            //tabItem.loadMoreStatus = tabItem.newsList.length > 4 ? 2 : 0;
           }
         } else {
           uni.showLoading({

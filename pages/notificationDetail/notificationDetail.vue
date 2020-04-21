@@ -122,21 +122,39 @@ export default {
 			uni.showLoading({
 				title: 'loading'
 			});
-
-			setTimeout(() => {
-				uni.hideLoading();
-				this.detailData.feedback_content = this.feedbackContent;
-				var dateee = new Date().toJSON();
-				var dates = new Date(+new Date(dateee) + 8 * 3600 * 1000)
-					.toISOString()
-					.replace(/T/g, ' ')
-					.replace(/\.[\d]{3}Z/, '');
-				this.detailData.feedback_time = dates;
-				this.$refs.showtip.close();
-				uni.navigateTo({
-					url: `/pages/index/index`
+			var obj = { feedback_content: this.feedbackContent };
+			//发起请求
+			this.$refs.showtip1.close();
+			uni.showLoading({
+				title: 'loading'
+			});
+			this.$http
+				.post('/interface/rest/http/xlwb/xlgc-wb-xcx-sjsb-feedback.htm', obj)
+				.then(res => {
+					uni.hideLoading();
+					console.log(res.data);
+					if (res.data.msgState == 1) {
+						this.detailData.feedback_content = this.feedbackContent;
+						var dateee = new Date().toJSON();
+						var dates = new Date(+new Date(dateee) + 8 * 3600 * 1000)
+							.toISOString()
+							.replace(/T/g, ' ')
+							.replace(/\.[\d]{3}Z/, '');
+						this.detailData.feedback_time = dates;
+						this.$refs.showtip.close();
+						uni.navigateTo({
+							url: `/pages/index/index`
+						});
+					}
+					uni.showToast({
+						title: res.data.msg,
+						duration: 2000
+					});
+				})
+				.catch(err => {
+					console.log(err);
+					uni.hideLoading();
 				});
-			}, 1500);
 		}
 	}
 };

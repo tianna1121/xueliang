@@ -1796,14 +1796,14 @@ test.interceptor.response(function (response) {/* 请求之后拦截器 */
 // XXX 重新创建一个示例，可根据自身逻辑决定是否需要重新创建一个示例
 var reReqest = new _request.default();
 reReqest.setConfig(function (config) {
-  config.baseUrl = 'http://app8848.com/interface/rest/http/xlgc/wb-test.htm'; /* 根域名不同 */
+  config.baseUrl = 'https://app8848.com'; /* 根域名不同 */
   return config;
 });
 
 var http = new _request.default();exports.http = http;
 var refreshToken = getTokenDebounce();
 http.setConfig(function (config) {/* 设置全局配置 */
-  config.baseUrl = 'http://app8848.com'; /* 根域名不同 */
+  config.baseUrl = 'https://app8848.com'; /* 根域名不同 */
   config.header = _objectSpread({},
   config.header);
 
@@ -1824,7 +1824,7 @@ http.validateStatus = function (statusCode) {
 http.interceptor.request(function (config, cancel) {/* 请求之前拦截器 */
   config.header = _objectSpread({},
   config.header, {
-    // token: getTokenStorage()
+    //token: getTokenStorage()
     token: '311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv' });
 
   /*
@@ -10539,6 +10539,241 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
+/***/ 49:
+/*!****************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/json.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tabList = [{
+  name: '全部',
+  id: '1' },
+{
+  name: '待处理',
+  id: '2' },
+
+{
+  name: '已处理',
+  id: '3' }
+
+// {
+// 	name: '已处理',
+// 	id: '4'
+// },
+];
+var tabList1 = [{
+  name: '通知',
+  id: '1' },
+{
+  name: '公告',
+  id: '2' }];
+
+/*
+               *status:1 待处理 2，待办，3 处理中，4 代办结 5已办结
+               *
+               */
+var newsList = [{
+  id: 1,
+  reporter: '降央卓玛',
+  phone: '13540020380',
+  status: 2,
+  address: "美兴县新街村",
+  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调有两人发生争吵和斗殴，需要其他人员前来辅助协调有两人发生争吵和斗殴，需要其他人员前来辅助协调有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
+  time: '2019-12-25 13:25:30' },
+
+
+{
+  id: 2,
+  reporter: '降央卓玛',
+  phone: '13540020380',
+  status: 1,
+  address: "美兴县新街村",
+  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
+  time: '2019-12-25 13:25:30' },
+
+{
+  id: 3,
+  reporter: '降央卓玛',
+  phone: '13540020380',
+  status: 3,
+  address: "美兴县新街村",
+  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
+  time: '2019-12-25 13:25:30' },
+
+{
+  id: 4,
+  reporter: '降央卓玛',
+  phone: '13540020380',
+  status: 4,
+  address: "美兴县新街村",
+  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
+  time: '2019-12-25 13:25:30' },
+
+{
+  id: 5,
+  reporter: '降央卓玛',
+  phone: '13540020380',
+  status: 5,
+  address: "美兴县新街村",
+  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
+  time: '2019-12-25 13:25:30' },
+
+{
+  id: 6,
+  reporter: '降央卓玛',
+  phone: '13540020380',
+  status: 2,
+  address: "美兴县新街村",
+  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
+  time: '2019-12-25 13:25:30' },
+
+{
+  id: 7,
+  reporter: '降央卓玛',
+  phone: '13540020380',
+  status: 1,
+  address: "美兴县新街村",
+  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
+  time: '2019-12-25 13:25:30' }];
+
+
+
+var evaList = [{
+  id: 1,
+  src: 'http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg',
+  nickname: 'Ranth Allngal',
+  time: '2019-12-25 13:25:30',
+  status: 1,
+  content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' },
+
+{
+  id: 2,
+  src: 'http://img0.imgtn.bdimg.com/it/u=2396068252,4277062836&fm=26&gp=0.jpg',
+  nickname: 'Ranth Allngal',
+  time: '09-20 12:54',
+  zan: '54',
+  content: '楼上说的好有道理。' }];
+
+
+/*
+                           *category:1、通知，2、公告，3、工作
+                           *status ：1、已读，2、未读
+                           */
+var evaList1 = [{
+  id: 1,
+  category: 1,
+  time: '2019-12-25 13:25:30',
+  status: 1,
+
+  content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' },
+
+{
+  id: 2,
+  category: 2,
+  time: '2019-11-25 11:24:30',
+  status: 2,
+  content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' },
+
+{
+  id: 3,
+  category: 3,
+  time: '2019-11-25 11:24:30',
+  status: 2,
+  feedback_content: "我是反馈内容啊啊啊啊啊啊啊啊啊啊啊啊",
+  'feedback_time': "2020-04-43 12:23:10",
+  content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' },
+
+{
+  id: 5,
+  category: 3,
+  time: '2019-11-25 11:24:30',
+  status: 2,
+  feedback_content: "",
+  'feedback_time': "",
+  content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' }];
+
+
+var subs = [{
+  name: "监控点1",
+  url: "rtsp://www.baidu.com",
+  logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+  id: "1",
+  address: "金川县阿阿镇",
+  date: "2020-04-09 00:00:00" },
+{
+  name: "监控点1",
+  url: "rtsp://www.baidu.com",
+  logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+  id: "2",
+  address: "金川县阿阿镇",
+  date: "2020-04-09 00:00:00" }];
+
+
+var detail = {
+  'data': {
+    'upReport': "小程序",
+    'type': "类型一",
+    "category": "类别1",
+    'time': "2019-12-21",
+    'content': "请更换附近队员进行处理,在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
+    'imgList': [
+    'http://fc-feed.cdn.bcebos.com/0/pic/9107b498a0cbea000842763091e833b6.jpg',
+    'http://fc-feed.cdn.bcebos.com/0/pic/dc4b0610241d7016279f4f4652ea0886.jpg',
+    'http://fc-feed.cdn.bcebos.com/0/pic/0f6effa42536fb5c2ca945bd46c59335.jpg',
+    'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2133231534,4242817610&fm=173&app=49&f=JPEG?w=218&h=146&s=4FB42BC55E2A26076B2D1301030060C6',
+    'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1276936674,3021787485&fm=173&app=49&f=JPEG?w=218&h=146&s=4FB02FC40B00064332AD45170300D0C7',
+    'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1909353310,863816541&fm=173&app=49&f=JPEG?w=218&h=146&s=25F67E844C002445437DE8810300E0D3'],
+
+    'adress': {
+      'addressContent': "地点",
+      'longitude': 334.44,
+      'latitude': 323.22 },
+
+    'status': 1,
+    'processingProcess': [
+    {
+      'title': '待处理',
+      'desc': '2018-11-11' },
+
+    {
+      title: '处理中',
+      desc: '2018-11-13' },
+
+    {
+      title: '已处理',
+      desc: '2018-11-13' }],
+
+
+    'feedbackContent': "请更换附近队员进行处理,在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
+    'feedbackTime': "2019-23-12",
+    'userinfo': {
+      'name': "张三",
+      'phone': "135444444",
+      'url': "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg" } } };
+
+
+
+var subs1 = [
+{ id: '0', type: "点击选择" },
+{ id: '1', type: "劳动局" },
+{ id: '2', type: "社保局" },
+{ id: '3', type: "林业局" }];var _default =
+
+
+{
+  tabList: tabList,
+  newsList: newsList,
+  evaList: evaList,
+  tabList1: tabList1,
+  evaList1: evaList1,
+  subs: subs,
+  detail: detail,
+  subs1: subs1 };exports.default = _default;
+
+/***/ }),
+
 /***/ 5:
 /*!*******************************************************!*\
   !*** ./node_modules/@dcloudio/uni-stat/dist/index.js ***!
@@ -11445,242 +11680,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "实时监控", "navigationStyle": "custom", "enablePullDownRefresh": false, "bounce": "none", "usingComponents": { "tab-game": "/components/tabBar/game", "tab-discovery": "/components/tabBar/discovery", "tab-information": "/components/tabBar/information", "tab-data": "/components/tabBar/Data", "tab-mycenter": "/components/tabBar/mycenter" }, "usingAutoImportComponents": {} }, "pages/register/register": { "navigationBarTitleText": "注册", "usingComponents": { "uni-icons": "/components/uni-icons/uni-icons" }, "usingAutoImportComponents": { "uni-icons": "/components/uni-icons/uni-icons" } }, "pages/login/login": { "navigationBarTitleText": "登录", "navigationStyle": "custom", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/regresult/regresult": { "navigationBarTitleText": "注册", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/regres/regres": { "navigationBarTitleText": "注册", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/details/details": { "navigationStyle": "custom", "usingComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "uni-steps": "/components/uni-steps/uni-steps", "uni-list": "/components/uni-list/uni-list", "uni-list-item": "/components/uni-list-item/uni-list-item", "uni-popup": "/components/uni-popup/uni-popup" }, "usingAutoImportComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "uni-steps": "/components/uni-steps/uni-steps", "uni-list": "/components/uni-list/uni-list", "uni-list-item": "/components/uni-list-item/uni-list-item", "uni-popup": "/components/uni-popup/uni-popup" } }, "pages/notificationDetail/notificationDetail": { "navigationStyle": "custom", "usingComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "uni-popup": "/components/uni-popup/uni-popup" }, "usingAutoImportComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "uni-popup": "/components/uni-popup/uni-popup" } }, "pages/change-phone/change-phone": { "navigationStyle": "custom", "usingComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar" }, "usingAutoImportComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar" } }, "pages/video-details/video-details": { "navigationStyle": "custom", "usingComponents": { "uni-popup": "/components/uni-popup/uni-popup" }, "usingAutoImportComponents": { "uni-popup": "/components/uni-popup/uni-popup" } }, "pages/my-report/my-report": { "navigationStyle": "custom", "usingComponents": { "mix-pulldown-refresh": "/components/mix-pulldown-refresh/mix-pulldown-refresh", "mix-load-more": "/components/mix-load-more/mix-load-more" }, "usingAutoImportComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "mix-pulldown-refresh": "/components/mix-pulldown-refresh/mix-pulldown-refresh", "mix-load-more": "/components/mix-load-more/mix-load-more" } }, "pages/my-report-detail/my-report-detail": { "navigationStyle": "custom", "usingComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "uni-steps": "/components/uni-steps/uni-steps", "uni-list": "/components/uni-list/uni-list", "uni-list-item": "/components/uni-list-item/uni-list-item" }, "usingAutoImportComponents": { "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar", "uni-steps": "/components/uni-steps/uni-steps", "uni-list": "/components/uni-list/uni-list", "uni-list-item": "/components/uni-list-item/uni-list-item" } } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "实时监控", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
-
-/***/ }),
-
-/***/ 73:
-/*!****************************************************!*\
-  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/json.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tabList = [{
-  name: '全部',
-  id: '1' },
-{
-  name: '待处理',
-  id: '2' },
-
-{
-  name: '已处理',
-  id: '3' }
-
-// {
-// 	name: '已处理',
-// 	id: '4'
-// },
-];
-var tabList1 = [{
-  name: '通知',
-  id: '1' },
-{
-  name: '公告',
-  id: '2' }];
-
-/*
-               *status:1 待处理 2，待办，3 处理中，4 代办结 5已办结
-               *
-               */
-var newsList = [{
-  id: 1,
-  reporter: '降央卓玛',
-  phone: '13540020380',
-  status: 2,
-  address: "美兴县新街村",
-  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调有两人发生争吵和斗殴，需要其他人员前来辅助协调有两人发生争吵和斗殴，需要其他人员前来辅助协调有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
-  time: '2019-12-25 13:25:30' },
-
-
-{
-  id: 2,
-  reporter: '降央卓玛',
-  phone: '13540020380',
-  status: 1,
-  address: "美兴县新街村",
-  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
-  time: '2019-12-25 13:25:30' },
-
-{
-  id: 3,
-  reporter: '降央卓玛',
-  phone: '13540020380',
-  status: 3,
-  address: "美兴县新街村",
-  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
-  time: '2019-12-25 13:25:30' },
-
-{
-  id: 4,
-  reporter: '降央卓玛',
-  phone: '13540020380',
-  status: 4,
-  address: "美兴县新街村",
-  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
-  time: '2019-12-25 13:25:30' },
-
-{
-  id: 5,
-  reporter: '降央卓玛',
-  phone: '13540020380',
-  status: 5,
-  address: "美兴县新街村",
-  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
-  time: '2019-12-25 13:25:30' },
-
-{
-  id: 6,
-  reporter: '降央卓玛',
-  phone: '13540020380',
-  status: 2,
-  address: "美兴县新街村",
-  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
-  time: '2019-12-25 13:25:30' },
-
-{
-  id: 7,
-  reporter: '降央卓玛',
-  phone: '13540020380',
-  status: 1,
-  address: "美兴县新街村",
-  content: "在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
-  time: '2019-12-25 13:25:30' }];
-
-
-
-var evaList = [{
-  id: 1,
-  src: 'http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg',
-  nickname: 'Ranth Allngal',
-  time: '2019-12-25 13:25:30',
-  status: 1,
-  content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' },
-
-{
-  id: 2,
-  src: 'http://img0.imgtn.bdimg.com/it/u=2396068252,4277062836&fm=26&gp=0.jpg',
-  nickname: 'Ranth Allngal',
-  time: '09-20 12:54',
-  zan: '54',
-  content: '楼上说的好有道理。' }];
-
-
-/*
-                           *category:1、通知，2、公告，3、工作
-                           *status ：1、已读，2、未读
-                           */
-var evaList1 = [{
-  id: 1,
-  category: 1,
-  time: '2019-12-25 13:25:30',
-  status: 1,
-
-  content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' },
-
-{
-  id: 2,
-  category: 2,
-  time: '2019-11-25 11:24:30',
-  status: 2,
-  content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' },
-
-{
-  id: 3,
-  category: 3,
-  time: '2019-11-25 11:24:30',
-  status: 2,
-  feedback_content: "我是反馈内容啊啊啊啊啊啊啊啊啊啊啊啊",
-  'feedback_time': "2020-04-43 12:23:10",
-  content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' },
-
-{
-  id: 5,
-  category: 3,
-  time: '2019-11-25 11:24:30',
-  status: 2,
-  feedback_content: "",
-  'feedback_time': "",
-  content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。' }];
-
-
-var subs = [{
-  name: "监控点1",
-  url: "rtsp://www.baidu.com",
-  logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
-  id: "1",
-  address: "金川县阿阿镇",
-  date: "2020-04-09 00:00:00" },
-{
-  name: "监控点1",
-  url: "rtsp://www.baidu.com",
-  logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
-  id: "2",
-  address: "金川县阿阿镇",
-  date: "2020-04-09 00:00:00" }];
-
-
-var detail = {
-  'data': {
-    'upReport': "小程序",
-    'type': "类型一",
-    "category": "类别1",
-    'time': "2019-12-21",
-    'content': "请更换附近队员进行处理,在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
-    'imgList': [
-    'http://fc-feed.cdn.bcebos.com/0/pic/9107b498a0cbea000842763091e833b6.jpg',
-    'http://fc-feed.cdn.bcebos.com/0/pic/dc4b0610241d7016279f4f4652ea0886.jpg',
-    'http://fc-feed.cdn.bcebos.com/0/pic/0f6effa42536fb5c2ca945bd46c59335.jpg',
-    'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2133231534,4242817610&fm=173&app=49&f=JPEG?w=218&h=146&s=4FB42BC55E2A26076B2D1301030060C6',
-    'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1276936674,3021787485&fm=173&app=49&f=JPEG?w=218&h=146&s=4FB02FC40B00064332AD45170300D0C7',
-    'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1909353310,863816541&fm=173&app=49&f=JPEG?w=218&h=146&s=25F67E844C002445437DE8810300E0D3'],
-
-    'adress': {
-      'addressContent': "地点",
-      'longitude': 334.44,
-      'latitude': 323.22 },
-
-    'status': 1,
-    'processingProcess': [
-    {
-      'title': '待处理',
-      'desc': '2018-11-11' },
-
-    {
-      title: '处理中',
-      desc: '2018-11-13' },
-
-    {
-      title: '已处理',
-      desc: '2018-11-13' }],
-
-
-    'feedbackContent': "请更换附近队员进行处理,在美兴县新街村，有两人发生争吵和斗殴，需要其他人员前来辅助协调。",
-    'feedbackTime': "2019-23-12",
-    'userinfo': {
-      'name': "张三",
-      'phone': "135444444",
-      'url': "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg" } } };
-
-
-
-var subs1 = [
-{ id: '0', type: "点击选择" },
-{ id: '1', type: "劳动局" },
-{ id: '2', type: "社保局" },
-{ id: '3', type: "林业局" }];var _default =
-
-
-{
-  tabList: tabList,
-  newsList: newsList,
-  evaList: evaList,
-  tabList1: tabList1,
-  evaList1: evaList1,
-  subs: subs,
-  detail: detail,
-  subs1: subs1 };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "实时监控", "navigationStyle": "custom", "enablePullDownRefresh": false, "bounce": "none" }, "pages/login/login": { "navigationBarTitleText": "登录", "navigationStyle": "custom" }, "pages/register/register": { "navigationBarTitleText": "注册" }, "pages/regresult/regresult": { "navigationBarTitleText": "注册" }, "pages/regres/regres": { "navigationBarTitleText": "注册" }, "pages/details/details": { "navigationStyle": "custom" }, "pages/notificationDetail/notificationDetail": { "navigationStyle": "custom" }, "pages/change-phone/change-phone": { "navigationStyle": "custom" }, "pages/video-details/video-details": { "navigationStyle": "custom" }, "pages/my-report/my-report": { "navigationStyle": "custom" }, "pages/my-report-detail/my-report-detail": { "navigationStyle": "custom" } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "实时监控", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 
