@@ -7,8 +7,9 @@
 				<view class="pick-box">
 					<picker :range="array" @change="sizeTypeChange" :value="sexIndex" mode="selector">
 						<view class="uni-input">{{ array[sexIndex] }}</view>
-					</picker>
 					<uni-icons type="arrowdown" color="#000000" size="18" />
+					</picker>
+					
 				</view>
 				<view class="pick-box">
 					<picker :range="array" @change="sizeTypeChange" :value="sexIndex" mode="selector">
@@ -61,10 +62,34 @@ export default {
 	},
 	methods: {
 		ontrueGetList() {
-			console.log('加载了第一个页面，可以把网络请求放这里');
+			console.log('实时监控');
+			this.getType();
 			console.log(json.subs);
 			this.list = json.subs;
 		},
+		getType() {
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sssj-xzcsjsj.htm', { params: {} })
+				.then(res => {
+					console.log('级联数据');
+					console.log(res);
+					if (res.data.msgState == 1) {
+						// var obj1 = [{ id: '0', type: '点击选择' }];
+						// var data = res.data.list;
+						// var obj = [...obj1, ...data];
+						// this.type1 = this.typeChange(obj);
+						// this.type2 = this.typeChange(obj);
+					} else {
+						uni.showLoading({
+							title: '请求失败'
+						});
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		},
+		
 		lower() {
 			uni.showToast({
 				title: 'scroll-view的加载更多'

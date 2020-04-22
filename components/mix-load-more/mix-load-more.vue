@@ -41,6 +41,7 @@
 		align-items: center;
 		height: 90upx;
 		padding-top: 10upx;
+		padding-bottom: 150rpx;
 	}
 	.mix-load-icon{
 		display: block;

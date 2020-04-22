@@ -15,6 +15,7 @@
 	        align-items: center;
 	height: 90rpx;
 	padding-top: 10rpx;
+	padding-bottom: 150rpx;
 }
 .mix-load-icon{
 	display: block;

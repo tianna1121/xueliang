@@ -129,8 +129,8 @@
   display: flex;
 }
 .sos-box .sos-img {
-    width: 120rpx;
-    height: 120rpx;
+  width: 120rpx;
+  height: 120rpx;
 }
 .adress-box {
   background-color: rgba(0, 0, 0, 0.1);
@@ -156,13 +156,13 @@
           align-items: center;
 }
 .adress-box .adress-img {
-    width: 32rpx;
-    height: 32rpx;
+  width: 32rpx;
+  height: 32rpx;
 }
 .adress-box .adresss {
-    font-size: 32rpx;
-    color: #ffffff;
-    margin-left: 5rpx;
+  font-size: 32rpx;
+  color: #ffffff;
+  margin-left: 5rpx;
 }
 .multi-list {
   position: absolute;
@@ -174,7 +174,8 @@
   -webkit-transition: width 0.3s ease;
   transition: width 0.3s ease;
   z-index: 999;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   padding: 21rpx;
   overflow: hidden;
 }
@@ -182,14 +183,15 @@
   padding: 25rpx 0;
 }
 .multi-list.active {
-  width: 373rpx;
+  width: 260rpx;
 }
 .blaks {
   height: 66rpx;
   width: 100%;
 }
 .list-box {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   height: 100%;
   padding: 1rpx;
   overflow-y: scroll;
@@ -237,13 +239,13 @@
   border-bottom: 2rpx solid #ffffff;
 }
 .top-close .close-img {
-    width: 44rpx;
-    height: 44rpx;
+  width: 44rpx;
+  height: 44rpx;
 }
 .top-close .closeds {
-    font-size: 32rpx;
-    color: #ffffff;
-    margin-left: 5rpx;
+  font-size: 32rpx;
+  color: #ffffff;
+  margin-left: 5rpx;
 }
 /* 提示窗口 */
 .uni-tip1 {

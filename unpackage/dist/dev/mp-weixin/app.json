@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/video-details/video-details",
     "pages/login/login",
     "pages/register/register",
     "pages/regresult/regresult",
@@ -8,7 +9,6 @@
     "pages/details/details",
     "pages/notificationDetail/notificationDetail",
     "pages/change-phone/change-phone",
-    "pages/video-details/video-details",
     "pages/my-report/my-report",
     "pages/my-report-detail/my-report-detail"
   ],
@@ -20,6 +20,5 @@
     "backgroundColor": "#F8F8F8"
   },
   "permission": {},
-  "usingComponents": {},
-  "sitemapLocation": "sitemap82.json"
+  "usingComponents": {}
 }

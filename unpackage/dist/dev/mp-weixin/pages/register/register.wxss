@@ -47,49 +47,49 @@ page {
   border-bottom: 1rpx #DDDDDD solid;
 }
 .item .item-title {
-    font-size: 34rpx;
+  font-size: 34rpx;
 }
 .item .avatar {
-    width: 60rpx;
-    height: 60rpx;
-    margin-top: 16rpx;
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 16rpx;
 }
 .item .item-next {
-    color: #888888;
-    font-size: 32rpx;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-            justify-content: center;
+  color: #888888;
+  font-size: 32rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
 }
 .item .item-next1 {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-            justify-content: center;
-    color: #888888;
-    font-size: 32rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  color: #888888;
+  font-size: 32rpx;
 }
 .item .right-title {
-    margin-right: 10rpx;
+  margin-right: 10rpx;
 }
 .item .ipt {
-    text-align: right;
-    width: 400rpx;
-    height: 32rpx;
-    margin-right: 50rpx;
+  text-align: right;
+  width: 400rpx;
+  height: 32rpx;
+  margin-right: 50rpx;
 }
 .btn-login {
   margin: 72rpx auto;

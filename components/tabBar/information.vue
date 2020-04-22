@@ -71,7 +71,8 @@ export default {
 			tabCurrentIndex: 0, //当前选项卡索引
 			scrollLeft: 0, //顶部选项卡左滑距离
 			enableScroll: true,
-			tabBars: []
+			tabBars: [],
+			pageNo:1
 		};
 	},
 
@@ -136,14 +137,13 @@ export default {
 			// #ifdef APP-PLUS
 			else if (type === 'refresh') {
 				tabItem.refreshing = true;
+				this.pageNo=1
 			}
 			// #endif
+			var obj={type: this.tabCurrentIndex+1,pageNo:this.pageNo}
+			
            this.$http
-           	.get('/interface/rest/http/xlwb/xlgc-wb-xcx-tzgg-lb.htm', {
-           		params: {
-           			type: this.tabCurrentIndex+1
-           		}
-           	})
+           	.get('/interface/rest/http/xlwb/xlgc-wb-xcx-tzgg-lb.htm', {params: obj})
            	.then(res => {
            		console.log(res);
            		if (res.data.msgState == 1) {
@@ -164,12 +164,16 @@ export default {
 							// #ifdef APP-PLUS
 							tabItem.refreshing = false;
 							// #endif
-							tabItem.loadMoreStatus = 0;
+							if(res.data.totalPages===0||res.data.curPage===res.data.totalPages){
+							tabItem.loadMoreStatus =2	
+							}else tabItem.loadMoreStatus = 0;
+							
 						}
 						//上滑加载 处理状态
 						if (type === 'add') {
-							tabItem.loadMoreStatus =2
-							//tabItem.loadMoreStatus = tabItem.newsList.length > 4 ? 2 : 0;
+							if(res.data.totalPages===0||res.data.curPage===res.data.totalPages){
+							tabItem.loadMoreStatus =2	
+							}
 						}
 					
            		} else {
@@ -211,6 +215,7 @@ export default {
 
 		//tab切换
 		async changeTab(e) {
+			this.pageNo=1
 			if (scrollTimer) {
 				//多次切换只执行最后一次
 				clearTimeout(scrollTimer);
@@ -296,20 +301,20 @@ export default {
 
 	/* 顶部tabbar */
 	.nav-bar {
-		position: relative;
+		position: fixed;
 		z-index: 10;
 		width: 750rpx;
-		height: 90upx;
+		height: 90rpx;
 		white-space: nowrap;
 		box-shadow: 0 2upx 8upx rgba(0, 0, 0, 0.06);
 		background-color: #fff;
 		.nav-item {
 			display: inline-block;
 			width: 50%;
-			height: 90upx;
+			height: 90rpx;
 			text-align: center;
-			line-height: 90upx;
-			font-size: 30upx;
+			line-height: 90rpx;
+			font-size: 30rpx;
 			color: #303133;
 			position: relative;
 			&:after {
@@ -334,6 +339,7 @@ export default {
 
 	.swiper-box {
 		height: 100%;
+		margin-top: 90rpx;
 	}
 
 	.panel-scroll-box {

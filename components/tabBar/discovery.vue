@@ -2,7 +2,9 @@
 	<view class="bigBox">
 		<!-- 自定义标题 -->
 		<uni-nav-bar fixed="true" color="#007AFF" background-color="#F8F8F8" :status-bar="true" title="事件中心" />
+	   
 		<!-- 顶部选项卡 -->
+		
 		<scroll-view id="nav-bar" class="nav-bar" scroll-x scroll-with-animation :scroll-left="scrollLeft">
 			<view v-for="(item, index) in tabBars" :key="item.id" class="nav-item" :class="{ current: index === tabCurrentIndex }" :id="'tab' + index" @click="changeTab(index)">
 				{{ item.name }}
@@ -83,7 +85,8 @@ export default {
 			scrollLeft: 0, //顶部选项卡左滑距离
 			enableScroll: true,
 			tabBars: [],
-			status: 0
+			status: 0,
+			pageNo:1
 		};
 	},
 
@@ -113,7 +116,7 @@ export default {
 					return '待处理';
 					break;
 				case 1:
-					return '代办';
+					return '待办结';
 					break;
 				case 2:
 					return '代办结';
@@ -159,12 +162,13 @@ export default {
 			// #ifdef APP-PLUS
 			else if (type === 'refresh') {
 				tabItem.refreshing = true;
+				this.pageNo=1
 			}
 			// #endif
 			
-			var obj={status: this.tabCurrentIndex-1}
+			var obj={status: this.tabCurrentIndex-1,pageNo:this.pageNo}
 			if(this.tabCurrentIndex==0){
-				obj=null 
+				delete obj.status 
 			}
 			this.$http
 				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjzx-sjlb.htm', {
@@ -177,6 +181,8 @@ export default {
 						var list = res.data.list;
 						console.log('list');
 						console.log(list);
+						console.log("type");
+						console.log(type);
 						
 						
 						if (type === 'refresh') {
@@ -192,13 +198,18 @@ export default {
 							// #ifdef APP-PLUS
 							tabItem.refreshing = false;
 							// #endif
-							tabItem.loadMoreStatus = 0;
+							if(res.data.totalPages===0||res.data.curPage===res.data.totalPages){
+							tabItem.loadMoreStatus =2	
+							}else tabItem.loadMoreStatus = 0;
+							
 						}
 						//上滑加载 处理状态
 						if (type === 'add') {
-							tabItem.loadMoreStatus =2
-							//tabItem.loadMoreStatus = tabItem.newsList.length > 4 ? 2 : 0;
-						}
+							if(res.data.totalPages===0||res.data.curPage===res.data.totalPages){
+							tabItem.loadMoreStatus =2	
+							}
+							}
+						
 					} else {
 						uni.showLoading({
 							title: '请求失败'
@@ -242,6 +253,7 @@ export default {
 
 		//tab切换
 		async changeTab(e) {
+			this.pageNo=1
 			if (scrollTimer) {
 				//多次切换只执行最后一次
 				clearTimeout(scrollTimer);
@@ -321,7 +333,9 @@ export default {
 </script>
 
 <style lang="scss">
+
 .bigBox {
+	
 	page,
 	.content {
 		background-color: #f8f8f8;
@@ -331,19 +345,20 @@ export default {
 
 	/* 顶部tabbar */
 	.nav-bar {
-		position: relative;
+		position: fixed;
 		z-index: 10;
 		width: 750rpx;
-		height: 90upx;
+		height: 90rpx;
+		
 		white-space: nowrap;
 		box-shadow: 0 2upx 8upx rgba(0, 0, 0, 0.06);
 		background-color: #fff;
 		.nav-item {
 			display: inline-block;
 			width: 33.3%;
-			height: 90upx;
+			height: 90rpx;
 			text-align: center;
-			line-height: 90upx;
+			line-height: 90rpx;
 			font-size: 30upx;
 			color: #303133;
 			position: relative;
@@ -369,6 +384,7 @@ export default {
 
 	.swiper-box {
 		height: 100%;
+		margin-top: 90rpx;
 	}
 
 	.panel-scroll-box {

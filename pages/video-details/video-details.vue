@@ -31,7 +31,7 @@
 				<cover-view class="adresss">{{ adress }}</cover-view>
 			</cover-view>
 			<!-- 右侧导航栏 -->
-			<cover-view class="multi-list rate" :class="{ active: rateShow }" @tap.native.stop>
+			<cover-view class="multi-list rate" :class="{ active: !isMenu1 }" @tap.native.stop>
 				<cover-view class="top-close" @tap="closeedMenu">
 					<cover-image class="close-img" src="../../static/img/news/close@2x.png"></cover-image>
 					<cover-view class="closeds">关闭</cover-view>
@@ -141,26 +141,27 @@ export default {
 			this.$nextTick(() => {
 				this.$refs.showtip1.open();
 				this.isshow = true;
+				this.isMenu1 = true;
 			});
 		},
 		cancel(type) {
 			this.$refs.showtip1.close();
-			//this.videoContext.requestFullScreen();
+			this.videoContext.requestFullScreen();
 			this.isshow = false;
 		},
 		choosed() {
-			this.rateShow = true;
+			
 			this.isMenu1 = false;
 		},
 		closeedMenu() {
-			this.rateShow = false;
+	
 			this.isMenu1 = true;
 		},
 		//选择视频播放
 		switchRate(id) {
 			let that = this;
 			that.currentRate = id;
-			that.rateShow = false;
+			
 			this.isMenu1 = true;
 			console.log(id);
 		}
@@ -307,7 +308,7 @@ export default {
 	padding: 25rpx 0;
 }
 .multi-list.active {
-	width: 373rpx;
+	width: 260rpx;
 }
 .blaks {
 	height: 66rpx;

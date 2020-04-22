@@ -104,7 +104,7 @@
 								'left': 0,
 								'right': 0,
 								'top':0 ,
-								'margin-top':'130rpx',
+								'margin-top':'230rpx',
 								'justifyContent': 'center',
 								'alignItems': 'center'
 							}

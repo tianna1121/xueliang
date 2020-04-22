@@ -31,7 +31,8 @@
   width: 100vw;
   height: 100vh;
   padding-bottom: 120rpx;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .main_centent {
   width: 100%;
@@ -127,25 +128,25 @@ image {
   line-height: 90rpx;
 }
 .item .item-title {
-    font-size: 34rpx;
-    color: #000000;
+  font-size: 34rpx;
+  color: #000000;
 }
 .item .item-next {
-    color: #888888;
-    font-size: 32rpx;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-            justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-            align-items: center;
+  color: #888888;
+  font-size: 32rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
 }
 .myrport {
   width: 750rpx;

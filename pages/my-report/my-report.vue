@@ -78,7 +78,7 @@ export default {
 			scrollLeft: 0, //顶部选项卡左滑距离
 			enableScroll: true,
 			tabBars: [],
-			
+			pageNo:1
 		};
 	},
 
@@ -112,7 +112,7 @@ export default {
 					return '待处理';
 					break;
 				case 1:
-					return '代办';
+					return '代办结';
 					break;
 				case 2:
 					return '代办结';
@@ -158,15 +158,14 @@ export default {
 			// #ifdef APP-PLUS
 			else if (type === 'refresh') {
 				tabItem.refreshing = true;
+					this.pageNo=1
 			}
 			// #endif
 			
-			var obj={status: this.tabCurrentIndex-1}
-			if(this.tabCurrentIndex==0){
-				obj=null 
-			}
+			var obj={pageNo:this.pageNo}
+			
 			this.$http
-				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-grzx-wdsb.htm')
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-grzx-wdsb.htm', {params:obj})
 				.then(res => {
 					console.log(res);
 					if (res.data.msgState == 1) {
@@ -182,19 +181,23 @@ export default {
 							
 							tabItem.newsList.push(item);
 						});
-						//下拉刷新 关闭刷新动画
-						if (type === 'refresh') {
-							this.$refs.mixPulldownRefresh && this.$refs.mixPulldownRefresh.endPulldownRefresh();
-							// #ifdef APP-PLUS
-							tabItem.refreshing = false;
-							// #endif
-							tabItem.loadMoreStatus = 0;
-						}
+					//下拉刷新 关闭刷新动画
+					if (type === 'refresh') {
+						this.$refs.mixPulldownRefresh && this.$refs.mixPulldownRefresh.endPulldownRefresh();
+						// #ifdef APP-PLUS
+						tabItem.refreshing = false;
+						// #endif
+						if(res.data.totalPages===0||res.data.curPage===res.data.totalPages){
+						tabItem.loadMoreStatus =2	
+						}else tabItem.loadMoreStatus = 0;
+						
+					}
 						//上滑加载 处理状态
 						if (type === 'add') {
-							tabItem.loadMoreStatus =2
-							//tabItem.loadMoreStatus = tabItem.newsList.length > 4 ? 2 : 0;
-						}
+							if(res.data.totalPages===0||res.data.curPage===res.data.totalPages){
+							tabItem.loadMoreStatus =2	
+							}
+							}
 					} else {
 						uni.showLoading({
 							title: '请求失败'
@@ -258,7 +261,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+  .bigBox{
+	  margin-bottom: 10rpx;
+  }
 	page,
 	.content {
 		background-color: #f8f8f8;
@@ -268,10 +273,10 @@ export default {
 
 	/* 顶部tabbar */
 	.nav-bar {
-		position: relative;
+		position: fixed;
 		z-index: 10;
 		width: 750rpx;
-		height: 90upx;
+		height: 90rpx;
 		white-space: nowrap;
 		box-shadow: 0 2upx 8upx rgba(0, 0, 0, 0.06);
 		background-color: #fff;
@@ -280,8 +285,8 @@ export default {
 			width: 25%;
 			height: 90upx;
 			text-align: center;
-			line-height: 90upx;
-			font-size: 30upx;
+			line-height: 90rpx;
+			font-size: 30rpx;
 			color: #303133;
 			position: relative;
 			&:after {
