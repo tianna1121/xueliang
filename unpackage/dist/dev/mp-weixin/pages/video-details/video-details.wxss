@@ -183,6 +183,9 @@
   padding: 25rpx 0;
 }
 .multi-list.active {
+  width: 373rpx;
+}
+.multi-list.active1 {
   width: 260rpx;
 }
 .blaks {

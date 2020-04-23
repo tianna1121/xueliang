@@ -31,7 +31,7 @@
 				<cover-view class="adresss">{{ adress }}</cover-view>
 			</cover-view>
 			<!-- 右侧导航栏 -->
-			<cover-view class="multi-list rate" :class="{ active: !isMenu1 }" @tap.native.stop>
+			<cover-view class="multi-list rate" :class="{ active: !isMenu1, active1: !isIos&&!isMenu1 }" @tap.native.stop>
 				<cover-view class="top-close" @tap="closeedMenu">
 					<cover-image class="close-img" src="../../static/img/news/close@2x.png"></cover-image>
 					<cover-view class="closeds">关闭</cover-view>
@@ -80,10 +80,7 @@ export default {
 				{ id: 12, adress: '美星镇-新街村' },
 				{ id: 13, adress: '美星镇-新街村' },
 				{ id: 41, adress: '美星镇-新街村' },
-				{ id: 15, adress: '美星镇-新街村' },
-				{ id: 16, adress: '美星镇-新街村' },
-				{ id: 17, adress: '美星镇-新街村' },
-				{ id: 18, adress: '美星镇-新街村' }
+				
 			],
 			currentRate: 1, //当前播放id
 			rateShow: false, //右侧弹出选项
@@ -93,6 +90,7 @@ export default {
 			isMenu: false,
 			isshow: false,
 			isMenu1: true,
+			isIos: true,
 			feedbackContent: ''
 		};
 	},
@@ -146,23 +144,29 @@ export default {
 		},
 		cancel(type) {
 			this.$refs.showtip1.close();
-			this.videoContext.requestFullScreen();
+			this.videoContext.requestFullScreen({direction:90});
 			this.isshow = false;
 		},
+		//侧边导航栏
 		choosed() {
-			
 			this.isMenu1 = false;
+			if (uni.getSystemInfoSync().platform == 'android') {
+				this.isIos = false;
+				this.videoContext.exitFullScreen();
+			}
 		},
 		closeedMenu() {
-	
 			this.isMenu1 = true;
 		},
 		//选择视频播放
 		switchRate(id) {
 			let that = this;
 			that.currentRate = id;
-			
+
 			this.isMenu1 = true;
+			if (uni.getSystemInfoSync().platform == 'android') {
+				this.videoContext.requestFullScreen({direction:90});
+			}
 			console.log(id);
 		}
 	}
@@ -307,7 +311,11 @@ export default {
 .multi-list.rate {
 	padding: 25rpx 0;
 }
+
 .multi-list.active {
+	width: 373rpx;
+}
+.multi-list.active1 {
 	width: 260rpx;
 }
 .blaks {
