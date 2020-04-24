@@ -12,6 +12,11 @@
 </template>
 
 <script>
+	import {
+	  setTokenStorage,
+	  getTokenStorage,
+	  configHandle
+	} from '@/test/tool.js'
 	export default {
 		data() {
 			return {
@@ -24,6 +29,7 @@
 			
 		methods:{
 			jumpRegster(){
+				
 				uni.redirectTo({
 				    url: '../login/login',
 					

@@ -130,32 +130,38 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {};
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-  },
-  onShow: function onShow() {
-    uni.hideHomeButton();
-  },
+
+
+
+
+
+
+
+
+
+
+
+var _tool = __webpack_require__(/*! @/test/tool.js */ 26); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return {};}, onShow: function onShow() {uni.hideHomeButton();},
 
   methods: {
     jumpRegster: function jumpRegster() {
+
       uni.redirectTo({
         url: '../login/login' });
 

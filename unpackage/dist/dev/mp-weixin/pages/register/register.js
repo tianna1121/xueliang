@@ -190,64 +190,69 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-icons/uni-icons.vue */ 158));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
-{
-  components: {
-    uniIcons: uniIcons },
+var _tool = __webpack_require__(/*! @/test/tool.js */ 26);
 
 
-  data: function data() {
-    return {
-      imageList: [],
-      name: "",
-      idCard: "",
-      phone: "",
-      array: ['请选择', '男', '女'],
-      sexIndex: 0,
-      workList: [],
-      workIndex: 0,
-      userInfo: {
-        avatar: "",
-        username: "",
-        idcard: "",
-        sex: "0",
-        phone: "",
-        unit: "0" } };
 
 
-  },
-  onShow: function onShow() {
-    uni.hideHomeButton();
-  },
 
-  onLoad: function onLoad() {
-    this.workList = this.typeChange(_json.default.subs1);
-  },
-  methods: {
-    jumpRegster: function jumpRegster() {
-      uni.redirectTo({
-        url: '../login/login' });
-
-
-    },
-    //处理函数
-    typeChange: function typeChange(val) {
-      var arr = [];
-      for (var item in val) {
-        console.log(val[item].type);
-        arr.push(val[item].type);
-      }
-
-      return arr;
-
-    },
-    submitMsg: function submitMsg() {
-      console.log(this.userInfo);
-
-      if (this.userInfo.avatar.length < 1) {
-        uni.showModal({
-
+var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-icons/uni-icons.vue */ 158));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { uniIcons: uniIcons }, data: function data() {return { imageList: [], name: "", idCard: "", phone: "", array: ['请选择', '男', '女'], sexIndex: 0, workList: [], workIndex: 0, userInfo: { avatar: "", username: "", idcard: "", sex: "0", phone: "", unit: "0" } };}, onShow: function onShow() {uni.hideHomeButton();}, onLoad: function onLoad() {this.workList = this.typeChange(_json.default.subs1);}, methods: { jumpRegster: function jumpRegster() {uni.redirectTo({ url: '../login/login' });}, //处理函数
+    typeChange: function typeChange(val) {var arr = [];for (var item in val) {console.log(val[item].type);arr.push(val[item].type);}return arr;}, submitMsg: function submitMsg() {console.log(this.userInfo);if (this.userInfo.avatar.length < 1) {uni.showModal({
           content: "请上传头像!",
           showCancel: false,
           confirmText: "确定" });
@@ -315,13 +320,12 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));functi
       uni.showLoading({
         title: 'loading' });
 
+      (0, _tool.setTokenStorage)('register');
       //发起请求
       this.$http.post('/interface/rest/http/xlwb/xlgc-wb-jdh-yhzc.htm', obj).then(function (res) {
         console.log(res);
         uni.hideLoading();
         if (res.data.msgState == 1) {
-
-
           uni.redirectTo({
             url: '../regres/regres' });
 

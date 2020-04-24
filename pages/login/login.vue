@@ -84,6 +84,7 @@
 						    url: '../index/index?show_index=0',
 							
 						});
+						
 					}
 				}).catch(err => {
 					console.log(err);

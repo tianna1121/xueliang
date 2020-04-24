@@ -149,8 +149,8 @@
 			image{ width:44rpx;height: 44rpx;margin-bottom:2rpx}
 			.tabBar_item{ width:128rpx;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size: 20rpx;color: #969BA3;}
 			.tabBar_item2{
-				width:128rpx;height:100%;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size: 20rpx;color: #969BA3;margin-top:-50rpx;position: relative;z-index: 101;
-				image{ width:90rpx;height: 90rpx;}
+				width:140rpx;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size: 20rpx;color: #969BA3;margin-top:-37rpx;position: relative;z-index: 101;
+				image{ width:95rpx;height: 95rpx;}
 			}
 		 } 
 	}

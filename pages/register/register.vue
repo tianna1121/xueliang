@@ -54,6 +54,11 @@
 </template>
 
 <script>
+	import {
+	  setTokenStorage,
+	  getTokenStorage,
+	  configHandle
+	} from '@/test/tool.js'
 	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	import json from '@/json';
 	export default {
@@ -179,13 +184,12 @@
 				uni.showLoading({
 					title: 'loading'
 				});
+				setTokenStorage('register')
 				//发起请求
 				this.$http.post('/interface/rest/http/xlwb/xlgc-wb-jdh-yhzc.htm',obj).then(res => {
 					console.log(res);
 					uni.hideLoading();
 					if(res.data.msgState==1){
-						
-						
 						uni.redirectTo({
 						    url: '../regres/regres',
 							
