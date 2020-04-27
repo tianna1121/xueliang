@@ -421,7 +421,7 @@ export default {
 
 	/* 新闻列表  emmm 仅供参考 */
 	.news-item {
-		width: 750rpx;
+		width: 710rpx;
 		padding: 20rpx 20rpx 1rpx 20rpx;
 		background-color: #fff;
 		margin-bottom: 20rpx;
@@ -429,7 +429,7 @@ export default {
 	.item-title {
 		font-size: 28rpx;
 		color: #000;
-		margin-right: 45rpx;
+		// margin-right: 45rpx;
 	}
 	.item-title1 {
 		margin-right: 0rpx;
@@ -465,12 +465,14 @@ export default {
 	}
 	.items {
 		margin-bottom: 20rpx;
-		padding-right: 20rpx;
-	}
-	.it4 {
-		width: 100%;
 		display: flex;
 		flex-direction: row;
+		justify-content: space-between; 
+		
+	}
+	.it4 {
+		
+		justify-content: left;
 	}
 
 	.video-tip {

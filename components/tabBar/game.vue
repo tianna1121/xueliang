@@ -2,28 +2,21 @@
 	<view class="main">
 		<!-- 自定义标题 -->
 		<uni-nav-bar fixed="true" color="#007AFF" background-color="#F8F8F8" :status-bar="true" title="实时监控" />
-		<scroll-view class="main_box" scroll-y="true" @scrolltolower="lower">
-			<view class="jian-kong-box">
-				<view class="pick-box">
-					<picker :range="array" @change="sizeTypeChange" :value="sexIndex" mode="selector">
-						<view class="uni-input">{{ array[sexIndex] }}</view>
-					<uni-icons type="arrowdown" color="#000000" size="18" />
-					</picker>
-					
-				</view>
-				<view class="pick-box">
-					<picker :range="array" @change="sizeTypeChange" :value="sexIndex" mode="selector">
-						<view class="uni-input">{{ array[sexIndex] }}</view>
-					</picker>
-					<uni-icons type="arrowdown" color="#000000" size="18" />
-				</view>
-				<view class="pick-box">
-					<picker :range="array" @change="sizeTypeChange" :value="sexIndex" mode="selector">
-						<view class="uni-input">{{ array[sexIndex] }}</view>
-					</picker>
-					<uni-icons type="arrowdown" color="#000000" size="18" />
-				</view>
+		<view class="jian-kong-box" @tap="showPicker">
+			<view class="pick-box">
+				<view>{{value[0]}}</view>
+				<uni-icons type="arrowdown" color="#000000" size="18" />
 			</view>
+			<view class="pick-box">
+				<view>{{value[1]}}</view>
+				<uni-icons type="arrowdown" color="#000000" size="18" />
+			</view>
+			<view class="pick-box">
+				<view>{{value[2]}}</view>
+				<uni-icons type="arrowdown" color="#000000" size="18" />
+			</view>
+		</view>
+		<scroll-view class="main_box" scroll-y="true" @scrolltolower="lower">
 			<!-- 正文 -->
 			<view class=" big-mm" v-for="(item, index) in list" :index="index" :key="index">
 				<view class="grid-item-box" @tap="videoDetail(item.id)">
@@ -32,6 +25,17 @@
 				</view>
 			</view>
 		</scroll-view>
+		<w-picker
+			mode="linkage"
+			        :value="value"
+			        :options="options"
+			        :level="3"
+			        default-type="id"
+			        :default-props="defaultProps1"
+			        @confirm="onConfirm($event,'linkage')"
+			        @cancel="onCancel"
+			        ref="linkage" 
+		></w-picker>
 	</view>
 </template>
 
@@ -49,15 +53,17 @@ export default {
 	data() {
 		return {
 			imageList: [],
+			value:['请选择', '请选择', '请选择'],
 			name: '',
 			idCard: '',
 			phone: '',
-			array: ['小金县', '金川县', '丹巴县'],
+			
 			sexIndex: 0,
-
+            options:[],
 			workIndex: 0,
 			dynamicList: [],
-			list: []
+			list: [],
+			defaultProps1:{"label":"name","value":"name","children":"child"}
 		};
 	},
 	methods: {
@@ -69,20 +75,25 @@ export default {
 		},
 		getType() {
 			this.$http
-				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sssj-xzcsjsj.htm', { params: {} })
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sssj-xzcjl.htm', { params: {} })
 				.then(res => {
 					console.log('级联数据');
 					console.log(res);
 					if (res.data.msgState == 1) {
+						 this.options=res.data.result
+						 console.log(this.options)
 						// var obj1 = [{ id: '0', type: '点击选择' }];
 						// var data = res.data.list;
 						// var obj = [...obj1, ...data];
 						// this.type1 = this.typeChange(obj);
 						// this.type2 = this.typeChange(obj);
 					} else {
-						uni.showLoading({
-							title: '请求失败'
+						uni.showToast({
+							icon:"none",
+							title: '联动数据获取失败！',
+							duration:2000
 						});
+						
 					}
 				})
 				.catch(err => {
@@ -117,6 +128,19 @@ export default {
 			uni.navigateTo({
 				url: `/pages/video-details/${url}?data=${JSON.stringify(data)}`
 			});
+		},
+		showPicker() {
+			this.$refs.linkage.show();
+		},
+		onConfirm($event,val){
+			console.log($event);
+			this.value=$event.value;
+			console.log(val)
+			//TODO在这里发起请求
+			
+		},
+		onCancel(){
+			console.log('你取消了')
 		}
 	}
 };
@@ -129,9 +153,10 @@ export default {
 // padding-bottom:120rpx;box-sizing: border-box;重要*************************保证页面底部内容不被隐藏也不会出现多余的滚动条
 .main_box {
 	width: 100vw;
-	height: 100vh;
+	// height: 100vh;
 	padding-bottom: 120rpx;
 	box-sizing: border-box;
+	margin-top: 84rpx;
 }
 .main_centent {
 	width: 100%;
@@ -144,13 +169,17 @@ export default {
 }
 
 .jian-kong-box {
+	background-color: #FFFFFF;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	width: 750rpx;
 	height: 84rpx;
+	position: fixed;
+	z-index: 9999;
 }
 .pick-box {
+	font-size: 30rpx;
 	width: 33.3%;
 	height: 84rpx;
 	text-align: center;
@@ -160,9 +189,7 @@ export default {
 	justify-content: center;
 }
 
-.uni-input {
-	font-size: 30rpx;
-}
+
 
 .big-mm {
 	display: inline-block;

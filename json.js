@@ -146,7 +146,8 @@ const evaList1 = [{
 		content: '评论不要太苛刻，不管什么产品都会有瑕疵，客服也说了可以退货并且商家承担运费，我觉得至少态度就可以给五星。'
 	}
 ]
-const subs = [{
+const subs = [
+	{
 	name: "监控点1",
 	url: "rtsp://www.baidu.com",
 	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
@@ -160,7 +161,218 @@ const subs = [{
 	id: "2",
 	address: "金川县阿阿镇", 
 	date: "2020-04-09 00:00:00"
-}, ]
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "1",
+	address: "金川县阿阿镇",
+	date: "2020-04-09 00:00:00"
+}, {
+	name: "监控点1",
+	url: "rtsp://www.baidu.com",
+	logoUrl: "http://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/77c6a7efce1b9d1663174705fbdeb48f8d546486.jpg",
+	id: "2",
+	address: "金川县阿阿镇", 
+	date: "2020-04-09 00:00:00"
+}, 
+]
 
 const detail = {
 	'data': {

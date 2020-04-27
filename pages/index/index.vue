@@ -174,7 +174,7 @@
 	 .uni-tabbar__reddot {
 	    position: absolute;
 	    top: 22rpx;
-	    right:185rpx;
+	    right:200rpx;
 	    
 	    background-color: #f43530;
 	    color: #fff;

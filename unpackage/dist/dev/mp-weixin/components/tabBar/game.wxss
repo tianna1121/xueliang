@@ -29,10 +29,10 @@
 }
 .main_box {
   width: 100vw;
-  height: 100vh;
   padding-bottom: 120rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  margin-top: 84rpx;
 }
 .main_centent {
   width: 100%;
@@ -50,6 +50,7 @@
           justify-content: center;
 }
 .jian-kong-box {
+  background-color: #FFFFFF;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -62,8 +63,11 @@
           justify-content: space-between;
   width: 750rpx;
   height: 84rpx;
+  position: fixed;
+  z-index: 9999;
 }
 .pick-box {
+  font-size: 30rpx;
   width: 33.3%;
   height: 84rpx;
   text-align: center;
@@ -78,9 +82,6 @@
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
-}
-.uni-input {
-  font-size: 30rpx;
 }
 .big-mm {
   display: inline-block;

@@ -82,6 +82,9 @@ var components = {
   },
   "uni-icons": function() {
     return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 158))
+  },
+  "w-picker": function() {
+    return __webpack_require__.e(/*! import() | components/w-picker/w-picker */ "components/w-picker/w-picker").then(__webpack_require__.bind(null, /*! @/components/w-picker/w-picker.vue */ 222))
   }
 }
 var render = function() {
@@ -162,6 +165,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniGrid = function uniGrid() {__webpack_require__.e(/*! require.ensure | components/uni-grid/uni-grid */ "components/uni-grid/uni-grid").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid/uni-grid.vue */ 208));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniGridItem = function uniGridItem() {__webpack_require__.e(/*! require.ensure | components/uni-grid-item/uni-grid-item */ "components/uni-grid-item/uni-grid-item").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid-item/uni-grid-item.vue */ 215));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
@@ -172,15 +179,17 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));functi
   data: function data() {
     return {
       imageList: [],
+      value: ['请选择', '请选择', '请选择'],
       name: '',
       idCard: '',
       phone: '',
-      array: ['小金县', '金川县', '丹巴县'],
-      sexIndex: 0,
 
+      sexIndex: 0,
+      options: [],
       workIndex: 0,
       dynamicList: [],
-      list: [] };
+      list: [],
+      defaultProps1: { "label": "name", "value": "name", "children": "child" } };
 
   },
   methods: {
@@ -190,21 +199,26 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));functi
       console.log(_json.default.subs);
       this.list = _json.default.subs;
     },
-    getType: function getType() {
+    getType: function getType() {var _this = this;
       this.$http.
-      get('/interface/rest/http/xlwb/xlgc-wb-xcx-sssj-xzcsjsj.htm', { params: {} }).
+      get('/interface/rest/http/xlwb/xlgc-wb-xcx-sssj-xzcjl.htm', { params: {} }).
       then(function (res) {
         console.log('级联数据');
         console.log(res);
         if (res.data.msgState == 1) {
+          _this.options = res.data.result;
+          console.log(_this.options);
           // var obj1 = [{ id: '0', type: '点击选择' }];
           // var data = res.data.list;
           // var obj = [...obj1, ...data];
           // this.type1 = this.typeChange(obj);
           // this.type2 = this.typeChange(obj);
         } else {
-          uni.showLoading({
-            title: '请求失败' });
+          uni.showToast({
+            icon: "none",
+            title: '联动数据获取失败！',
+            duration: 2000 });
+
 
         }
       }).
@@ -240,6 +254,19 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));functi
       uni.navigateTo({
         url: "/pages/video-details/".concat(url, "?data=").concat(JSON.stringify(data)) });
 
+    },
+    showPicker: function showPicker() {
+      this.$refs.linkage.show();
+    },
+    onConfirm: function onConfirm($event, val) {
+      console.log($event);
+      this.value = $event.value;
+      console.log(val);
+      //TODO在这里发起请求
+
+    },
+    onCancel: function onCancel() {
+      console.log('你取消了');
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
