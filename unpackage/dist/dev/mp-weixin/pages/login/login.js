@@ -175,7 +175,7 @@ var _tool = __webpack_require__(/*! @/test/tool.js */ 26); //
 //
 //
 //
-var _default = { data: function data() {return { userInfo: { username: "", password: "" } };}, components: {}, mounted: function mounted() {}, methods: { jumpRegster: function jumpRegster() {uni.redirectTo({
+var _default = { data: function data() {return { userInfo: { username: "", password: "" } };}, components: {}, mounted: function mounted() {(0, _tool.setTokenStorage)('');}, methods: { jumpRegster: function jumpRegster() {uni.redirectTo({
         url: '../register/register' });
 
 

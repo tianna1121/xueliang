@@ -39,7 +39,7 @@
 			
 		},
 		mounted() {
-			
+			setTokenStorage('')
 		},
 		methods:{
 			jumpRegster(){

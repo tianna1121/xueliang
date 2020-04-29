@@ -1828,12 +1828,17 @@ http.validateStatus = function (statusCode) {
 http.interceptor.request(function (config, cancel) {/* 请求之前拦截器 */
   // console.log("token=")
   // console.log(getTokenStorage())
+  console.log("!!!!!!!!!");
 
-  if ((0, _tool.getTokenStorage)().length == 0 || (0, _tool.getTokenStorage)().length == undefined) {
-    uni.redirectTo({
-      url: "/pages/login/login" });
+  if (config.url != '/interface/rest/http/xlwb/xlgc-wb-jdh-yhdl.htm') {
+    console.log("你不是登陆");
+    if ((0, _tool.getTokenStorage)().length == 0 || (0, _tool.getTokenStorage)().length == undefined) {
+      uni.redirectTo({
+        url: "/pages/login/login" });
 
+    }
   }
+
   config.header = _objectSpread({},
   config.header, {
     token: (0, _tool.getTokenStorage)()

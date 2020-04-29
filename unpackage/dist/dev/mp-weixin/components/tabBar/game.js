@@ -84,7 +84,7 @@ var components = {
     return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 158))
   },
   "w-picker": function() {
-    return __webpack_require__.e(/*! import() | components/w-picker/w-picker */ "components/w-picker/w-picker").then(__webpack_require__.bind(null, /*! @/components/w-picker/w-picker.vue */ 222))
+    return __webpack_require__.e(/*! import() | components/w-picker/w-picker */ "components/w-picker/w-picker").then(__webpack_require__.bind(null, /*! @/components/w-picker/w-picker.vue */ 208))
   }
 }
 var render = function() {
@@ -169,7 +169,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniGrid = function uniGrid() {__webpack_require__.e(/*! require.ensure | components/uni-grid/uni-grid */ "components/uni-grid/uni-grid").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid/uni-grid.vue */ 208));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniGridItem = function uniGridItem() {__webpack_require__.e(/*! require.ensure | components/uni-grid-item/uni-grid-item */ "components/uni-grid-item/uni-grid-item").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid-item/uni-grid-item.vue */ 215));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniGrid = function uniGrid() {__webpack_require__.e(/*! require.ensure | components/uni-grid/uni-grid */ "components/uni-grid/uni-grid").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid/uni-grid.vue */ 215));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniGridItem = function uniGridItem() {__webpack_require__.e(/*! require.ensure | components/uni-grid-item/uni-grid-item */ "components/uni-grid-item/uni-grid-item").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid-item/uni-grid-item.vue */ 222));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
     uniNavBar: uniNavBar,

@@ -84,7 +84,7 @@ var components = {
     return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 158))
   },
   "w-picker": function() {
-    return __webpack_require__.e(/*! import() | components/w-picker/w-picker */ "components/w-picker/w-picker").then(__webpack_require__.bind(null, /*! @/components/w-picker/w-picker.vue */ 222))
+    return __webpack_require__.e(/*! import() | components/w-picker/w-picker */ "components/w-picker/w-picker").then(__webpack_require__.bind(null, /*! @/components/w-picker/w-picker.vue */ 208))
   }
 }
 var render = function() {
