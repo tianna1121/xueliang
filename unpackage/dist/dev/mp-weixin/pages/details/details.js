@@ -440,7 +440,7 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
         case 3:
           return '已办结';
           break;
-        case 3:
+        case 4:
           return '无效';
           break;
         default:
@@ -473,6 +473,9 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
 
     },
     submitMsg: function submitMsg() {var _this4 = this;
+      if (this.detailData.status == 3 || this.detailData.status == 4) {
+        return;
+      }
       console.log('確認完成');
       this.$nextTick(function () {
         _this4.$refs.showtip.open();

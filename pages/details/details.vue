@@ -56,7 +56,7 @@
 		</view>
 		<view class="main-title1">处理队员信息</view>
 		<uni-list><uni-list-item  @tap.stop="callPhone(detailData.phone)" :title="detailData.name" :rightText="detailData.phone" :show-arrow="false" :thumb="detailData.url" /></uni-list>
-		<button type="primary" class="btn-login" @tap="submitMsg">处理完成</button>
+		<button type="primary" class="btn-login" @tap="submitMsg"  :class="{ readed: detailData.status == 3||detailData.status == 4 }" >处理完成</button>
 
 		<image src="../../static/img/news/aa.png" class="fabs" @tap="alertMsg"></image>
 
@@ -283,7 +283,7 @@ category:[],
 				case 3:
 					return '已办结';
 					break;
-					case 3:
+					case 4:
 						return '无效';
 						break;
 				default:
@@ -316,6 +316,9 @@ category:[],
 			});
 		},
 		submitMsg() {
+			if(this.detailData.status==3||this.detailData.status==4){
+				return
+			}
 			console.log('確認完成');
 			this.$nextTick(() => {
 				this.$refs.showtip.open();
@@ -536,13 +539,16 @@ text-align: right;
 }
 
 .btn-login {
-	margin: 52rpx auto;
+	margin: 52rpx auto 150px;
 	color: #ffffff;
 	font-size: 36rpx;
 	width: 690rpx;
 	height: 94rpx;
 	background: #2256d8 !important;
 	border-radius: 10rpx;
+}
+.readed{
+	background: #ccc !important;
 }
 
 /*

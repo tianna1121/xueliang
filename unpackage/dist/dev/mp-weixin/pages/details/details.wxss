@@ -182,13 +182,16 @@ page {
   font-size: 32rpx;
 }
 .btn-login {
-  margin: 52rpx auto;
+  margin: 52rpx auto 150px;
   color: #ffffff;
   font-size: 36rpx;
   width: 690rpx;
   height: 94rpx;
   background: #2256d8 !important;
   border-radius: 10rpx;
+}
+.readed {
+  background: #ccc !important;
 }
 /*
 		*悬浮按钮图片
