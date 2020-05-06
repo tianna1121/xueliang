@@ -94,7 +94,7 @@ export default {
 					break;
 		
 				case 3:
-					return '预案';
+					return '工作安排';
 					break;
 				default:
 					return '通知';
@@ -158,6 +158,7 @@ export default {
 						list.forEach(item => {
 							tabItem.newsList.push(item);
 						});
+						this.pageNo+=1
 						//下拉刷新 关闭刷新动画
 						if (type === 'refresh') {
 							this.$refs.mixPulldownRefresh && this.$refs.mixPulldownRefresh.endPulldownRefresh();
@@ -173,6 +174,7 @@ export default {
 						if (type === 'add') {
 							if(res.data.totalPages===0||res.data.curPage===res.data.totalPages){
 							tabItem.loadMoreStatus =2	
+							this.pageNo=1
 							}
 						}
 					
@@ -200,6 +202,7 @@ export default {
 
 		//下拉刷新
 		onPulldownReresh() {
+			this.pageNo=1;
 			this.loadNewsList('refresh');
 		},
 		//上滑加载
@@ -310,7 +313,7 @@ export default {
 		background-color: #fff;
 		.nav-item {
 			display: inline-block;
-			width: 50%;
+			width: 33.3%;
 			height: 90rpx;
 			text-align: center;
 			line-height: 90rpx;

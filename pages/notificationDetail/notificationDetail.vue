@@ -12,8 +12,9 @@
 		</view>
 		<view class="fan-content" v-if="detailData.feedback_content.length > 0">{{ detailData.feedback_content }}</view>
 		<!-- 通知公告确认按钮 -->
-		<button v-if="detailData.category == 3" type="primary" class="btn-login" :class="{ isFlxed: isFxid }" @tap="fanKui">反馈</button>
-		<button v-else type="primary" class="btn-login" :class="{ isFlxed: isFxid }" @tap="confirmMsg">确认收到</button>
+		<button v-if="detailData.category == 3" type="primary" class="btn-login1 " :class="{ isFlxed: isFxid ,'readed': detailData.status==1}" @tap="confirmMsg">确认收到</button>
+		<button v-if="detailData.category == 3" type="primary" class="btn-login1 rightbtn" :class="{ isFlxed: isFxid,'readed': detailData.feedback_content.length > 0}" @tap="fanKui">反馈</button>
+		<button v-else type="primary" class="btn-login" :class="{ isFlxed: isFxid,'readed': detailData.status==1 }" @tap="confirmMsg">确认收到</button>
 
 		<uni-popup ref="showtip" type="center" :mask-click="false">
 			<view class="uni-tip">
@@ -83,7 +84,7 @@ export default {
 					break;
 
 				case 3:
-					return '工作';
+					return '工作安排';
 					break;
 				default:
 					return '通知';
@@ -96,6 +97,9 @@ export default {
 		},
 		//通知公告确认
 		confirmMsg() {
+			if(this.detailData.status==1){
+				return
+			}
 			uni.showLoading({
 				title: 'loading'
 			});
@@ -123,6 +127,9 @@ export default {
 		},
 		//反馈
 		fanKui() {
+			if(this.detailData.feedback_content.length > 0){
+				return
+			}
 			console.log('反馈');
 			this.$nextTick(() => {
 				this.$refs.showtip.open();
@@ -138,7 +145,7 @@ export default {
 			});
 			var obj = { feedback_content: this.feedbackContent,id:this.detailData.id};
 			//发起请求
-			this.$refs.showtip1.close();
+			this.$refs.showtip.close();
 			uni.showLoading({
 				title: 'loading'
 			});
@@ -149,13 +156,8 @@ export default {
 					console.log(res.data);
 					if (res.data.msgState == 1) {
 						this.detailData.feedback_content = this.feedbackContent;
-						var dateee = new Date().toJSON();
-						var dates = new Date(+new Date(dateee) + 8 * 3600 * 1000)
-							.toISOString()
-							.replace(/T/g, ' ')
-							.replace(/\.[\d]{3}Z/, '');
-						this.detailData.feedback_time = dates;
-						this.$refs.showtip.close();
+						this.detailData.feedback_time = this.getNowFormatDate();
+						
 						this.back()
 					}
 					uni.showToast({
@@ -167,7 +169,25 @@ export default {
 					console.log(err);
 					uni.hideLoading();
 				});
-		}
+		},
+		// 获取当前系统时间戳
+		 getNowFormatDate() {
+		     var date = new Date();
+		     var seperator1 = "-";
+		     var seperator2 = ":";
+		     var month = date.getMonth() + 1;
+		     var strDate = date.getDate();
+		     if (month >= 1 && month <= 9) {
+		         month = "0" + month;
+		     }
+		     if (strDate >= 0 && strDate <= 9) {
+		         strDate = "0" + strDate;
+		     }
+		     var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+		             + " " + date.getHours() + seperator2 + date.getMinutes()
+		             + seperator2 + date.getSeconds();
+		     return currentdate;
+		 },
 	}
 };
 </script>
@@ -209,6 +229,24 @@ page {
 	height: 94rpx;
 	background: #2256d8 !important;
 	border-radius: 10rpx;
+}
+	.btn-login1 {
+		margin: 140rpx auto 44rpx;
+		color: #ffffff;
+		font-size: 36rpx;
+		width: 340rpx;
+		height: 94rpx;
+		background: #2256d8 !important;
+		border-radius: 10rpx;
+	}
+			
+		.rightbtn{
+			bottom: 4rpx;
+			left: 0rpx;
+			left: 380rpx;
+		}
+.readed{
+	background: #ccc !important;
 }
 
 .fan-box {

@@ -52,7 +52,7 @@
 }
 .bigBox .nav-bar .nav-item {
   display: inline-block;
-  width: 50%;
+  width: 33.3%;
   height: 90rpx;
   text-align: center;
   line-height: 90rpx;

@@ -158,7 +158,7 @@ export default {
 			uni.showLoading({
 				title: 'loading'
 			});
-			this.$http.post('//interface/rest/http/xlwb/xlgc-wb-jdh-yjqz.htm',obj).then(res => {
+			this.$http.post('/interface/rest/http/xlwb/xlgc-wb-xcx-yjqz-x.htm',obj).then(res => {
 				uni.hideLoading();
 				console.log(res.data);
 				if(res.data.msgState==1){
@@ -168,7 +168,10 @@ export default {
 				    title: res.data.msg,
 				    duration: 2000
 				});
-				this.cancel()
+				setTimeout(() => {
+					this.cancel()
+				}, 1500);
+				
 			}).catch(err => {
 				console.log(err);
 				uni.hideLoading();

@@ -55,7 +55,7 @@
 			<view class="times1">{{ detailData.feedback_time }}</view>
 		</view>
 		<view class="main-title1">处理队员信息</view>
-		<uni-list><uni-list-item :title="detailData.name" :rightText="detailData.phone" :show-arrow="false" :thumb="detailData.url" /></uni-list>
+		<uni-list><uni-list-item  @tap.stop="callPhone(detailData.phone)" :title="detailData.name" :rightText="detailData.phone" :show-arrow="false" :thumb="detailData.url" /></uni-list>
 		<button type="primary" class="btn-login" @tap="submitMsg">处理完成</button>
 
 		<image src="../../static/img/news/aa.png" class="fabs" @tap="alertMsg"></image>
@@ -295,6 +295,13 @@ category:[],
 				delta: 1
 			});
 		},
+		//打电话
+		callPhone(phone) {
+			console.log(phone);
+			uni.makePhoneCall({
+				phoneNumber: phone //仅为示例
+			});
+		},
 		scroll(e) {
 			console.log(e.detail.scrollTop);
 		},
@@ -401,16 +408,16 @@ page {
 
 .item {
 	width: 690rpx;
-	height: 90rpx;
+	min-height: 54rpx;
 	display: flex;
 	flex-direction: row;
 	flex: 1;
 	justify-content: space-between;
-	padding: 0 30rpx;
+	padding: 18rpx 30rpx;
 	background-color: #ffffff;
 	//border-top: 1rpx #DDDDDD solid;
 	border-bottom: 1rpx #dddddd solid;
-	line-height: 90rpx;
+	line-height: 54rpx;
 
 	.item-title {
 		font-size: 34rpx;
@@ -429,7 +436,7 @@ page {
 
 .item1 {
 	width: 690rpx;
-
+   
 	display: flex;
 	flex-direction: column;
 	flex: 1;
@@ -491,6 +498,15 @@ page {
 }
 
 .adresss {
+text-align: right;
+	width: 500rpx;
+	line-height: 40rpx;
+	overflow: hidden;
+	word-break: break-all; /* break-all(允许在单词内换行。) */
+	text-overflow: ellipsis; /* 超出部分省略号 */
+	display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+	-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+	-webkit-line-clamp: 2; /** 显示的行数 **/
 }
 
 .address-icon {

@@ -100,11 +100,11 @@
 								'display': 'flex',
 								'flexDirection': 'column',
 								/* #endif */
-								'bottom': 1,
+								'bottom': 0,
 								'left': 0,
 								'right': 0,
 								'top':0 ,
-								'margin-top':'230rpx',
+								// 'margin-top':'230rpx',
 								'justifyContent': 'center',
 								'alignItems': 'center'
 							}

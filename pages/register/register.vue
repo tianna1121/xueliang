@@ -207,7 +207,7 @@
 				uni.showLoading({
 					title: 'loading'
 				});
-				setTokenStorage('register')
+				// setTokenStorage('register')
 				//发起请求
 				this.$http.post('/interface/rest/http/xlwb/xlgc-wb-jdh-yhzc.htm',obj).then(res => {
 					console.log(res);
@@ -216,6 +216,12 @@
 						uni.redirectTo({
 						    url: '../regres/regres',
 							
+						});
+					}else{
+						uni.showToast({
+							title: res.data.msg,
+							duration: 2000,
+							icon:'none'
 						});
 					}
 				}).catch(err => {

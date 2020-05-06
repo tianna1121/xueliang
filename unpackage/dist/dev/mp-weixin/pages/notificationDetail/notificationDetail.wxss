@@ -57,6 +57,23 @@ page {
   background: #2256d8 !important;
   border-radius: 10rpx;
 }
+.btn-login1 {
+  margin: 140rpx auto 44rpx;
+  color: #ffffff;
+  font-size: 36rpx;
+  width: 340rpx;
+  height: 94rpx;
+  background: #2256d8 !important;
+  border-radius: 10rpx;
+}
+.rightbtn {
+  bottom: 4rpx;
+  left: 0rpx;
+  left: 380rpx;
+}
+.readed {
+  background: #ccc !important;
+}
 .fan-box {
   display: -webkit-box;
   display: -webkit-flex;
