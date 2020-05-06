@@ -3,7 +3,7 @@
 		<image  mode="scaleToFill"  class="bg-img" src="../../static/img/news/login_bg.png"></image>
 	    <!-- logo图 -->
 		<view class="main">
-			<image class="logo-img" src="../../static/img/news/bg.png"></image>
+			<image class="logo-img" src="../../static/img/news/xuelogo.png"></image>
 			<view class="title">雪亮工程</view>
 			<view class="acount-box">
 				<text class="account-title">账号：</text>
@@ -11,7 +11,7 @@
 			</view>
 			<view class="acount-box passwd">
 				<text class="account-title">密码：</text>
-				<input v-model="userInfo.password" class="ipt-tel " placeholder="初始密码为身份证后六位"  type="text" placeholder-class="placeholder"/>	
+				<input v-model="userInfo.password" class="ipt-tel " placeholder="初始密码为身份证后六位"  type="idcard" placeholder-class="placeholder"/>	
 			</view>
 			<button type="primary" class="btn-login" @tap="loginJump">登录</button>
 			<view class="jump-reg" @tap="jumpRegster">注册账号</view>
@@ -26,6 +26,7 @@
 	  getTokenStorage,
 	  configHandle
 	} from '@/test/tool.js'
+	//import '@/components/shoyu-xxtea/shoyu-xxtea';
 	export default {
 		data() {
 			return {
@@ -43,6 +44,7 @@
 		},
 		methods:{
 			jumpRegster(){
+				setTokenStorage('test')
 				uni.redirectTo({
 				    url: '../register/register',
 					
@@ -69,26 +71,54 @@
 					})
 					return
 				};
+					
+				var obj= Object.assign({}, this.userInfo);
+				//obj.password=Base64.encode(obj.password)
+				console.log(obj.password)
 				uni.showLoading({
 					title: 'loading'
 				});
 				//发起请求
-				this.$http.post('/interface/rest/http/xlwb/xlgc-wb-jdh-yhdl.htm',that.userInfo).then(res => {
+				this.$http.post('/interface/rest/http/xlwb/xlgc-wb-jdh-yhdl.htm',obj).then(res => {
 					uni.hideLoading();
 					console.log(res.data);
 					if(res.data.msgState==1){
-						
-						//设置token
-						 setTokenStorage(res.data.list[0].token) // todo 储存token，可更换为自己的储存token逻辑
+						if(res.data.list.length>0){
+							uni.showToast({
+								 title: '登陆成功！',
+								 duration: 2000,
+								 
+							})
+							//设置token
+							 setTokenStorage(res.data.list[0].token) // todo 储存token，可更换为自己的储存token逻辑
+							uni.redirectTo({
+							    url: '../index/index?show_index=0',
+								
+							});
+							
+						}else{
+							uni.showToast({
+								 title: 'token不存在！',
+								 duration: 2000,
+								 icon:'none'
+							})
+							var token=`311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv`
+						setTokenStorage(token)
 						uni.redirectTo({
 						    url: '../index/index?show_index=0',
 							
 						});
+						}
 						
 					}
 				}).catch(err => {
 					console.log(err);
 					uni.hideLoading();
+					uni.showToast({
+						 title: '登陆失败！',
+						 duration: 2000,
+						 icon:'none'
+					})
 				})
 				//TODO
 				// uni.redirectTo({

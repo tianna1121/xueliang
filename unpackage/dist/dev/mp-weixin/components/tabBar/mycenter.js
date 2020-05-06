@@ -237,7 +237,7 @@ __webpack_require__.r(__webpack_exports__);
       switch (index) {
         case 0:
           var imglist = [];
-          imglist.push(this.userInfo.img);
+          imglist.push(this.userInfo.avatar);
           uni.previewImage({
             urls: imglist });
 

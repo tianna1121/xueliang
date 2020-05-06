@@ -60,7 +60,7 @@
 	  configHandle
 	} from '@/test/tool.js'
 	import uniIcons from '@/components/uni-icons/uni-icons.vue'
-	import json from '@/json';
+
 	export default {
 		components: {
 			uniIcons
@@ -91,7 +91,9 @@
 		},
 	
 	onLoad() {
-			this.workList=	this.typeChange(json.subs1)
+			
+			//获取上报类型
+			this.getType();
 		},
 		methods:{
 			jumpRegster(){
@@ -100,12 +102,33 @@
 					
 				});
 			},
+			getType() {
+				this.$http
+					.get('/interface/rest/http/xlwb/xlgc-wb-xcx-dwxz.htm', { params: {type:1} })
+					.then(res => {
+					 //	console.log(res);
+						if (res.data.msgState == 1) {
+							var obj1 = [{ id: '0', unit: '点击选择' }];
+							var data = res.data.list;
+							var obj = [...obj1, ...data];
+							this.workList = this.typeChange(obj);
+							
+						} else {
+							uni.showLoading({
+								title: '请求失败'
+							});
+						}
+					})
+					.catch(err => {
+						console.log(err);
+					});
+			},
 				//处理函数
 				typeChange(val){
 					var arr=[]
 					for (let item in val) {
-						console.log(val[item].type)
-						arr.push(val[item].type)
+						// console.log(val[item].unit)
+						arr.push(val[item].unit)
 					}
 				
 				return arr;

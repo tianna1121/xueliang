@@ -204,25 +204,42 @@ __webpack_require__.r(__webpack_exports__);
         type: '0',
         category: '0',
         time: '点击选择',
-        address: {
-          address_content: '选择地点',
-          longitude: '',
-          latitude: '' },
+
+        address: '选择地点',
+        longitude: '',
+        latitude: '',
 
         content: '',
-        imgList: [] } };
+        imgList: '' },
 
+      imgList: [] };
 
   },
   onReady: function onReady() {
-    var dateee = new Date().toJSON();
-    this.dates = new Date(+new Date(dateee) + 8 * 3600 * 1000).
-    toISOString().
-    replace(/T/g, ' ').
-    replace(/\.[\d]{3}Z/, '');
+
+    this.dates = this.getNowFormatDate();
   },
 
   methods: {
+    // 获取当前系统时间戳
+    getNowFormatDate: function getNowFormatDate() {
+      var date = new Date();
+      var seperator1 = "-";
+      var seperator2 = ":";
+      var month = date.getMonth() + 1;
+      var strDate = date.getDate();
+      if (month >= 1 && month <= 9) {
+        month = "0" + month;
+      }
+      if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+      }
+      var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
+      " " + date.getHours() + seperator2 + date.getMinutes() +
+      seperator2 + date.getSeconds();
+      return currentdate;
+    },
+
     schange: function schange(val) {
       console.log(111);
       console.log(val);
@@ -230,12 +247,13 @@ __webpack_require__.r(__webpack_exports__);
     setAttachData: function setAttachData(val) {
       console.log(222);
       console.log(val);
-      this.upData.imgList = val;
+      this.imgList = val;
     },
     updataJump: function updataJump() {var _this = this;
       console.log('上报提交');
 
       console.log(this.upData);
+      this.upData.imgList = this.imgList.join(',');
       uni.showLoading({
         title: 'loading' });
 
@@ -267,22 +285,24 @@ __webpack_require__.r(__webpack_exports__);
       // }, 1000);
     },
     ontrueGetList: function ontrueGetList() {
-      //获取上报类型
-      this.getType();
+
       //获取上报事件
-      //this.getType1()
+      this.getType();
+      //获取上报类型
+      this.getType1();
     },
     getType: function getType() {var _this2 = this;
       this.$http.
-      get('/interface/rest/http/xlwb/xlgc-wb-xcx-sblxxz.htm', { params: {} }).
+      get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjlxxz.htm', { params: {} }).
       then(function (res) {
+        console.log('事件类型');
         console.log(res);
         if (res.data.msgState == 1) {
-          var obj1 = [{ id: '0', type: '点击选择' }];
+          var obj1 = [{ id: '0', name: '点击选择' }];
           var data = res.data.list;
           var obj = [].concat(obj1, _toConsumableArray(data));
           _this2.type1 = _this2.typeChange(obj);
-          _this2.type2 = _this2.typeChange(obj);
+
         } else {
           uni.showLoading({
             title: '请求失败' });
@@ -293,17 +313,17 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
-    getType1: function getType1() {
+    getType1: function getType1() {var _this3 = this;
       this.$http.
-      get('/interface/rest/http/xlwb/xlgc-wb-xcx-sbsjclzt.htm', { params: {} }).
+      get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjlbxz.htm', { params: {} }).
       then(function (res) {
-        console.log('上报事件');
+        console.log('事件类别');
         console.log(res);
         if (res.data.msgState == 1) {
-          // 	var obj1=[{id:'0',type:"点击选择"}]
-          // 	var data=res.data.list
-          // 	var obj=[...obj1,...data]
-          // this.type1=	this.typeChange(obj)
+          var obj1 = [{ id: '0', name: "点击选择" }];
+          var data = res.data.list;
+          var obj = [].concat(obj1, _toConsumableArray(data));
+          _this3.type2 = _this3.typeChange(obj);
         } else {
           uni.showLoading({
             title: '请求失败' });
@@ -318,8 +338,8 @@ __webpack_require__.r(__webpack_exports__);
     typeChange: function typeChange(val) {
       var arr = [];
       for (var item in val) {
-        console.log(val[item].type);
-        arr.push(val[item].type);
+        console.log(val[item].name);
+        arr.push(val[item].name);
       }
 
       return arr;
@@ -330,14 +350,15 @@ __webpack_require__.r(__webpack_exports__);
         type: '0',
         category: '0',
         time: '点击选择',
-        address: {
-          address_content: '选择地点',
-          longitude: '',
-          latitude: '' },
+
+        address: '选择地点',
+        longitude: '',
+        latitude: '',
 
         content: '',
-        imgList: [] };
+        imgList: "" };
 
+      this.imgList = [];
       this.upData = upData;
     },
     sizeTypeChange: function sizeTypeChange(e) {
@@ -346,8 +367,43 @@ __webpack_require__.r(__webpack_exports__);
     sizeType2Change: function sizeType2Change(e) {
       this.upData.category = parseInt(e.detail.value);
     },
+    get_location: function get_location() {
+      var that = this;
+      uni.showLoading({
+        title: '加载中',
+        mask: true });
 
-    chooseLocation: function chooseLocation() {var _this3 = this;
+
+
+      uni.getSetting({
+        success: function success(res) {
+          uni.hideLoading();
+          if (!res.authSetting['scope.userLocation']) {
+            uni.authorize({
+              scope: 'scope.userLocation',
+              success: function success() {
+                that.chooseLocation();
+                return;
+              },
+
+              fail: function fail() {
+                uni.showToast({
+                  title: '无法获取地图权限',
+                  duration: 2000 });
+
+              } });
+
+          } else {
+            that.chooseLocation();
+            return;
+          }
+        } });
+
+
+      //that.chooseLocation()
+      //uni.hideLoading()
+    },
+    chooseLocation: function chooseLocation() {var _this4 = this;
       uni.chooseLocation({
         success: function success(res) {
           console.log(res.name);
@@ -355,9 +411,9 @@ __webpack_require__.r(__webpack_exports__);
           console.log(res.longitude);
           console.log(res.latitude);
           // this.location = formatLocation(res.longitude, res.latitude),
-          _this3.upData.address.address_content = res.name;
-          _this3.upData.address.longitude = res.longitude;
-          _this3.upData.address.latitude = res.latitude;
+          _this4.upData.address = res.name;
+          _this4.upData.longitude = res.longitude;
+          _this4.upData.latitude = res.latitude;
         } });
 
     },

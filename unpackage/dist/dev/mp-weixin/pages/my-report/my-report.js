@@ -224,7 +224,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var mixPulldownRefresh = function mixPulldownRefresh() {__webpack_require__.e(/*! require.ensure | components/mix-pulldown-refresh/mix-pulldown-refresh */ "components/mix-pulldown-refresh/mix-pulldown-refresh").then((function () {return resolve(__webpack_require__(/*! @/components/mix-pulldown-refresh/mix-pulldown-refresh */ 194));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixLoadMore = function mixLoadMore() {__webpack_require__.e(/*! require.ensure | components/mix-load-more/mix-load-more */ "components/mix-load-more/mix-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/mix-load-more/mix-load-more */ 201));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var mixPulldownRefresh = function mixPulldownRefresh() {__webpack_require__.e(/*! require.ensure | components/mix-pulldown-refresh/mix-pulldown-refresh */ "components/mix-pulldown-refresh/mix-pulldown-refresh").then((function () {return resolve(__webpack_require__(/*! @/components/mix-pulldown-refresh/mix-pulldown-refresh */ 194));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mixLoadMore = function mixLoadMore() {__webpack_require__.e(/*! require.ensure | components/mix-load-more/mix-load-more */ "components/mix-load-more/mix-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/mix-load-more/mix-load-more */ 201));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 var windowWidth = 0,
@@ -346,6 +346,7 @@ tabBar;var _default =
 
             tabItem.newsList.push(item);
           });
+          _this.pageNo += 1;
           //下拉刷新 关闭刷新动画
           if (type === 'refresh') {
             _this.$refs.mixPulldownRefresh && _this.$refs.mixPulldownRefresh.endPulldownRefresh();
@@ -356,11 +357,13 @@ tabBar;var _default =
               tabItem.loadMoreStatus = 2;
             } else tabItem.loadMoreStatus = 0;
 
+
           }
           //上滑加载 处理状态
           if (type === 'add') {
             if (res.data.totalPages === 0 || res.data.curPage === res.data.totalPages) {
               tabItem.loadMoreStatus = 2;
+              _this.pageNo = 1;
             }
           }
         } else {
@@ -388,6 +391,7 @@ tabBar;var _default =
 
     //下拉刷新
     onPulldownReresh: function onPulldownReresh() {
+      this.pageNo = 1;
       this.loadNewsList('refresh');
     },
     //上滑加载

@@ -152,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 16));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniSteps = function uniSteps() {__webpack_require__.e(/*! require.ensure | components/uni-steps/uni-steps */ "components/uni-steps/uni-steps").then((function () {return resolve(__webpack_require__(/*! @/components/uni-steps/uni-steps.vue */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniList = function uniList() {__webpack_require__.e(/*! require.ensure | components/uni-list/uni-list */ "components/uni-list/uni-list").then((function () {return resolve(__webpack_require__(/*! @/components/uni-list/uni-list.vue */ 180));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniListItem = function uniListItem() {__webpack_require__.e(/*! require.ensure | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then((function () {return resolve(__webpack_require__(/*! @/components/uni-list-item/uni-list-item.vue */ 187));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -218,7 +218,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniSteps = function uniSteps() {__webpack_require__.e(/*! require.ensure | components/uni-steps/uni-steps */ "components/uni-steps/uni-steps").then((function () {return resolve(__webpack_require__(/*! @/components/uni-steps/uni-steps.vue */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniList = function uniList() {__webpack_require__.e(/*! require.ensure | components/uni-list/uni-list */ "components/uni-list/uni-list").then((function () {return resolve(__webpack_require__(/*! @/components/uni-list/uni-list.vue */ 180));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniListItem = function uniListItem() {__webpack_require__.e(/*! require.ensure | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then((function () {return resolve(__webpack_require__(/*! @/components/uni-list-item/uni-list-item.vue */ 187));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
 
 {
   components: {
@@ -227,13 +229,18 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));functi
     uniList: uniList,
     uniListItem: uniListItem },
 
+
   data: function data() {
     return {
-      id: '',
+      id: "",
       showtip1: 'center',
       detailData: {},
       imgList: [],
       active: 1,
+      type1: [],
+      category: [],
+      userFeedbackHidden: true, // 默认隐藏
+      feedbackContent: '', // 用户反馈内容
       latitude: 30.663429,
       longitude: 104.072422,
       covers: [
@@ -248,28 +255,159 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));functi
 
   },
   onLoad: function onLoad(options) {
-    var datas = JSON.parse(options.data);
-    this.id = datas.id;
-    console.log(this.id);
-    this.loadNewsList();
+    var detailData = JSON.parse(options.data);
+    this.id = detailData.id;
+    //console.log(this.id)
+    // this.detailData = json.detail.data;
+
+    this.getType();
+    this.getType1();
   },
+  onReady: function onReady() {this.loadNewsList();},
   methods: {
+    getType: function getType() {var _this = this;
+      this.$http.
+      get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjlxxz.htm', { params: {} }).
+      then(function (res) {
+        //console.log('事件类型');
+        //console.log(res);
+        if (res.data.msgState == 1) {
+          _this.type1 = res.data.list;
+
+        } else {
+          uni.showLoading({
+            title: '获取事件类型失败' });
+
+        }
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
+    },
+    getType1: function getType1() {var _this2 = this;
+      this.$http.
+      get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjlbxz.htm', { params: {} }).
+      then(function (res) {
+        //console.log('事件类别');
+        //console.log(res);
+        if (res.data.msgState == 1) {
+          _this2.category = res.data.list;
+        } else {
+          uni.showLoading({
+            title: '获取事件类别失败' });
+
+        }
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
+    },
+    //处理函数
+    typeChange: function typeChange() {
+
+      console.log(this.type1);
+      for (var i = 0; i < this.type1.length; i++) {
+        if (this.type1[i].id == this.detailData.type) {
+          this.detailData.type = this.type1[i].name;
+        }
+      }
+      return '无';
+    },
+    //处理函数
+    typeChange1: function typeChange1(val) {
+      console.log(val);
+      console.log(this.category);
+      for (var i = 0; i < this.category.length; i++) {
+        if (this.category[i].id == this.detailData.category) {
+          this.detailData.category = this.category[i].name;
+        }
+      }
+      return '无';
+    },
+
     //获取推荐列表
-    loadNewsList: function loadNewsList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                _this.detailData = _json.default.detail.data;
-                console.log(_this.detailData);case 2:case "end":return _context.stop();}}}, _callee);}))();
+    loadNewsList: function loadNewsList() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                uni.showLoading({
+                  title: '加载中...' });
+
+                // this.detailData = json.detail.data;
+                // console.log(this.detailData);
+                _this3.$http.
+                get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjzx-sjxq.htm', {
+                  params: {
+                    id: _this3.id } }).
+
+
+                then(function (res) {
+                  uni.hideLoading();
+                  console.log(res);
+                  if (res.data.msgState == 1) {
+                    var list = res.data.list;
+                    console.log('list');
+                    console.log(list);
+                    _this3.detailData = list[0];
+                    _this3.covers[0].latitude = list[0].latitude;
+                    _this3.covers[0].longitude = list[0].longitude;
+                    //处理进度
+                    _this3.processingProcess();
+                    //处理图片
+                    _this3.imgsrc();
+                    //处理类型
+                    _this3.typeChange1();
+                    _this3.typeChange();
+                  } else {
+                    uni.showToast({
+                      title: "请求失败" });
+
+                  }
+                }).
+                catch(function (err) {
+                  console.log(err);
+                  uni.hideLoading();
+                });case 2:case "end":return _context.stop();}}}, _callee);}))();
+    },
+    imgsrc: function imgsrc() {
+      if (this.detailData.imgsrc.length > 0) {
+        var str = this.detailData.imgsrc.split(',');
+        console.log(str);
+        this.detailData.imgList = _toConsumableArray(str);
+
+      }
+
+    },
+    processingProcess: function processingProcess() {
+      var str = this.detailData.jd.split(',');
+      console.log(str);
+      var processingProcess = [];
+      for (var i = 0; i < str.length; i++) {
+        var os = str[i].split('  ');
+        console.log(os);
+        var obj = {};
+        obj.title = os[0];
+        obj.desc = os[1];
+        processingProcess.push(obj);
+      }
+      console.log(processingProcess);
+      this.detailData.processingProcess = processingProcess;
+
     },
     statusChange: function statusChange(index) {
       switch (index) {
-        case 1:
+        case 0:
           return '待处理';
           break;
+        case 1:
+          return '待办';
+          break;
         case 2:
-          return '处理中';
+          return '待办结';
           break;
 
         case 3:
-          return '已处理';
+          return '已办结';
+          break;
+        case 3:
+          return '无效';
           break;
         default:
           return '待处理';}

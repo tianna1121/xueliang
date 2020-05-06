@@ -96,16 +96,30 @@ export default {
 		},
 		//通知公告确认
 		confirmMsg() {
-			console.log('确认弹出框');
 			uni.showLoading({
 				title: 'loading'
 			});
-			setTimeout(() => {
-				uni.hideLoading();
-				uni.navigateTo({
-					url: `/pages/index/index`
-				});
-			}, 3000);
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-tzgg-receive.htm', {
+					params: {
+						id: this.detailData.id
+					}
+				})
+				.then(res => {
+					uni.hideLoading();
+					console.log(res.data);
+					if (res.data.msgState == 1) {
+						this.back()
+					}
+					uni.showToast({
+						title: res.data.msg,
+						duration: 2000
+					});
+				})
+				.catch(err => {
+					console.log(err);
+					uni.hideLoading();
+				});		
 		},
 		//反馈
 		fanKui() {
@@ -122,7 +136,7 @@ export default {
 			uni.showLoading({
 				title: 'loading'
 			});
-			var obj = { feedback_content: this.feedbackContent };
+			var obj = { feedback_content: this.feedbackContent,id:this.detailData.id};
 			//发起请求
 			this.$refs.showtip1.close();
 			uni.showLoading({
@@ -142,9 +156,7 @@ export default {
 							.replace(/\.[\d]{3}Z/, '');
 						this.detailData.feedback_time = dates;
 						this.$refs.showtip.close();
-						uni.navigateTo({
-							url: `/pages/index/index`
-						});
+						this.back()
 					}
 					uni.showToast({
 						title: res.data.msg,

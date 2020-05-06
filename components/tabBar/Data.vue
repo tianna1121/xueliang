@@ -15,7 +15,7 @@
 			<view class="item-title">事件类别</view>
 			<view class="item-next">
 				<picker :range="type2" @change="sizeType2Change" :value="upData.category" mode="selector">
-					<view class="uni-input">{{ type1[upData.category] }}</view>
+					<view class="uni-input">{{ type2[upData.category] }}</view>
 				</picker>
 				<uni-icons type="forward" color="#C7C7CC" size="22" />
 			</view>
@@ -30,7 +30,7 @@
 		<view class="item">
 			<view class="item-title">事发地点</view>
 			<view class="item-next">
-				<view class="adresss" @tap="chooseLocation">{{ upData.address.address_content }}</view>
+				<view class="adresss" @tap="get_location">{{ upData.address }}</view>
 				<image class="address-icon" src="../../static/img/news/location1.png"></image>
 			</view>
 		</view>
@@ -78,25 +78,42 @@ export default {
 				type: '0',
 				category: '0',
 				time: '点击选择',
-				address: {
-					address_content: '选择地点',
-					longitude: '',
-					latitude: ''
-				},
+
+				address: '选择地点',
+				longitude: '',
+				latitude: '',
+
 				content: '',
-				imgList: []
-			}
+				imgList: ''
+			},
+			imgList: []
 		};
 	},
 	onReady() {
-		var dateee = new Date().toJSON();
-		this.dates = new Date(+new Date(dateee) + 8 * 3600 * 1000)
-			.toISOString()
-			.replace(/T/g, ' ')
-			.replace(/\.[\d]{3}Z/, '');
+		
+		this.dates = this.getNowFormatDate()
 	},
 
 	methods: {
+		 // 获取当前系统时间戳
+		  getNowFormatDate() {
+		      var date = new Date();
+		      var seperator1 = "-";
+		      var seperator2 = ":";
+		      var month = date.getMonth() + 1;
+		      var strDate = date.getDate();
+		      if (month >= 1 && month <= 9) {
+		          month = "0" + month;
+		      }
+		      if (strDate >= 0 && strDate <= 9) {
+		          strDate = "0" + strDate;
+		      }
+		      var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+		              + " " + date.getHours() + seperator2 + date.getMinutes()
+		              + seperator2 + date.getSeconds();
+		      return currentdate;
+		  },
+		
 		schange(val) {
 			console.log(111);
 			console.log(val);
@@ -104,12 +121,13 @@ export default {
 		setAttachData(val) {
 			console.log(222);
 			console.log(val);
-			this.upData.imgList = val;
+			this.imgList = val;
 		},
 		updataJump() {
 			console.log('上报提交');
 
 			console.log(this.upData);
+			this.upData.imgList=this.imgList.join(',')
 			uni.showLoading({
 				title: 'loading'
 			});
@@ -141,22 +159,24 @@ export default {
 			// }, 1000);
 		},
 		ontrueGetList() {
-			//获取上报类型
-			this.getType();
+			
 			//获取上报事件
-			//this.getType1()
+			this.getType();
+			//获取上报类型
+			this.getType1()
 		},
 		getType() {
 			this.$http
-				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sblxxz.htm', { params: {} })
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjlxxz.htm', { params: {} })
 				.then(res => {
+					console.log('事件类型');
 					console.log(res);
 					if (res.data.msgState == 1) {
-						var obj1 = [{ id: '0', type: '点击选择' }];
+						var obj1 = [{ id: '0', name: '点击选择' }];
 						var data = res.data.list;
 						var obj = [...obj1, ...data];
 						this.type1 = this.typeChange(obj);
-						this.type2 = this.typeChange(obj);
+						
 					} else {
 						uni.showLoading({
 							title: '请求失败'
@@ -169,15 +189,15 @@ export default {
 		},
 		getType1() {
 			this.$http
-				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sbsjclzt.htm', { params: {} })
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjlbxz.htm', { params: {} })
 				.then(res => {
-					console.log('上报事件');
+					console.log('事件类别');
 					console.log(res);
 					if (res.data.msgState == 1) {
-						// 	var obj1=[{id:'0',type:"点击选择"}]
-						// 	var data=res.data.list
-						// 	var obj=[...obj1,...data]
-						// this.type1=	this.typeChange(obj)
+							var obj1=[{id:'0',name:"点击选择"}]
+							var data=res.data.list
+							var obj=[...obj1,...data]
+						this.type2=	this.typeChange(obj)
 					} else {
 						uni.showLoading({
 							title: '请求失败'
@@ -192,8 +212,8 @@ export default {
 		typeChange(val) {
 			var arr = [];
 			for (let item in val) {
-				console.log(val[item].type);
-				arr.push(val[item].type);
+				console.log(val[item].name);
+				arr.push(val[item].name);
 			}
 
 			return arr;
@@ -204,14 +224,15 @@ export default {
 				type: '0',
 				category: '0',
 				time: '点击选择',
-				address: {
-					address_content: '选择地点',
-					longitude: '',
-					latitude: ''
-				},
+
+				address: '选择地点',
+				longitude: '',
+				latitude: '',
+
 				content: '',
-				imgList: []
+				imgList: ""
 			};
+			this.imgList=[]
 			this.upData = upData;
 		},
 		sizeTypeChange(e) {
@@ -220,7 +241,42 @@ export default {
 		sizeType2Change(e) {
 			this.upData.category = parseInt(e.detail.value);
 		},
+		get_location() {
+			const that = this;
+			uni.showLoading({
+				title: '加载中',
+				mask: true
+			});
 
+			//#ifdef MP-WEIXIN
+			uni.getSetting({
+				success(res) {
+					uni.hideLoading();
+					if (!res.authSetting['scope.userLocation']) {
+						uni.authorize({
+							scope: 'scope.userLocation',
+							success() {
+								that.chooseLocation();
+								return;
+							},
+
+							fail() {
+								uni.showToast({
+									title: '无法获取地图权限',
+									duration: 2000
+								});
+							}
+						});
+					} else {
+						that.chooseLocation();
+						return;
+					}
+				}
+			});
+			//#endif
+			//that.chooseLocation()
+			//uni.hideLoading()
+		},
 		chooseLocation: function() {
 			uni.chooseLocation({
 				success: res => {
@@ -229,9 +285,9 @@ export default {
 					console.log(res.longitude);
 					console.log(res.latitude);
 					// this.location = formatLocation(res.longitude, res.latitude),
-					this.upData.address.address_content = res.name;
-					this.upData.address.longitude = res.longitude;
-					this.upData.address.latitude = res.latitude;
+					this.upData.address= res.name;
+					this.upData.longitude = res.longitude;
+					this.upData.latitude = res.latitude;
 				}
 			});
 		},
@@ -256,17 +312,18 @@ page {
 }
 
 .item {
+	
 	width: 690rpx;
-	height: 90rpx;
+	min-height: 54rpx;
 	display: flex;
 	flex-direction: row;
 	flex: 1;
 	justify-content: space-between;
-	padding: 0 30rpx;
+	padding: 18rpx 30rpx;
 	background-color: #ffffff;
 	//border-top: 1rpx #DDDDDD solid;
 	border-bottom: 1rpx #dddddd solid;
-	line-height: 90rpx;
+	line-height: 54rpx;
 
 	.item-title {
 		font-size: 34rpx;
@@ -301,6 +358,16 @@ page {
 }
 
 .adresss {
+	text-align: right;
+	width: 500rpx;
+	line-height: 40rpx;
+	overflow: hidden;
+	word-break: break-all; /* break-all(允许在单词内换行。) */
+	text-overflow: ellipsis; /* 超出部分省略号 */
+	display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+	-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+	-webkit-line-clamp: 2; /** 显示的行数 **/
+	
 }
 .address-icon {
 	width: 36rpx;
@@ -353,7 +420,7 @@ page {
 	margin-top: 10rpx;
 }
 .btn-login {
-	margin: 72rpx auto 80rpx;
+	margin: 72rpx auto 150rpx;
 	color: #ffffff;
 	font-size: 36rpx;
 	width: 690rpx;

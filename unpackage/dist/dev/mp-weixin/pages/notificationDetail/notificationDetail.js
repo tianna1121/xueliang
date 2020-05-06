@@ -243,34 +243,48 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.detailData);
     },
     //通知公告确认
-    confirmMsg: function confirmMsg() {
-      console.log('确认弹出框');
+    confirmMsg: function confirmMsg() {var _this2 = this;
       uni.showLoading({
         title: 'loading' });
 
-      setTimeout(function () {
-        uni.hideLoading();
-        uni.navigateTo({
-          url: "/pages/index/index" });
+      this.$http.
+      get('/interface/rest/http/xlwb/xlgc-wb-xcx-tzgg-receive.htm', {
+        params: {
+          id: this.detailData.id } }).
 
-      }, 3000);
+
+      then(function (res) {
+        uni.hideLoading();
+        console.log(res.data);
+        if (res.data.msgState == 1) {
+          _this2.back();
+        }
+        uni.showToast({
+          title: res.data.msg,
+          duration: 2000 });
+
+      }).
+      catch(function (err) {
+        console.log(err);
+        uni.hideLoading();
+      });
     },
     //反馈
-    fanKui: function fanKui() {var _this2 = this;
+    fanKui: function fanKui() {var _this3 = this;
       console.log('反馈');
       this.$nextTick(function () {
-        _this2.$refs.showtip.open();
+        _this3.$refs.showtip.open();
       });
     },
 
     cancel: function cancel(type) {
       this.$refs.showtip.close();
     },
-    submitMgs: function submitMgs() {var _this3 = this;
+    submitMgs: function submitMgs() {var _this4 = this;
       uni.showLoading({
         title: 'loading' });
 
-      var obj = { feedback_content: this.feedbackContent };
+      var obj = { feedback_content: this.feedbackContent, id: this.detailData.id };
       //发起请求
       this.$refs.showtip1.close();
       uni.showLoading({
@@ -282,17 +296,15 @@ __webpack_require__.r(__webpack_exports__);
         uni.hideLoading();
         console.log(res.data);
         if (res.data.msgState == 1) {
-          _this3.detailData.feedback_content = _this3.feedbackContent;
+          _this4.detailData.feedback_content = _this4.feedbackContent;
           var dateee = new Date().toJSON();
           var dates = new Date(+new Date(dateee) + 8 * 3600 * 1000).
           toISOString().
           replace(/T/g, ' ').
           replace(/\.[\d]{3}Z/, '');
-          _this3.detailData.feedback_time = dates;
-          _this3.$refs.showtip.close();
-          uni.navigateTo({
-            url: "/pages/index/index" });
-
+          _this4.detailData.feedback_time = dates;
+          _this4.$refs.showtip.close();
+          _this4.back();
         }
         uni.showToast({
           title: res.data.msg,

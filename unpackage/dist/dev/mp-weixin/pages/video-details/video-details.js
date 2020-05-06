@@ -232,6 +232,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   onLoad: function onLoad(options) {
     this.detailData = JSON.parse(options.data);
+    console.log('this.detailData.id');
+    console.log(this.detailData.id);
     this.loadNewsList();
   },
   onReady: function onReady(res) {
@@ -283,6 +285,32 @@ __webpack_require__.r(__webpack_exports__);
       this.videoContext.requestFullScreen({ direction: 90 });
       this.isshow = false;
     },
+    //一键求助
+    submitHelp: function submitHelp() {var _this2 = this;
+
+      var obj = { note: this.feedbackContent, id: this.detailData.id };
+      //发起请求
+      console.log('一键求助');
+      uni.showLoading({
+        title: 'loading' });
+
+      this.$http.post('//interface/rest/http/xlwb/xlgc-wb-jdh-yjqz.htm', obj).then(function (res) {
+        uni.hideLoading();
+        console.log(res.data);
+        if (res.data.msgState == 1) {
+
+        }
+        uni.showToast({
+          title: res.data.msg,
+          duration: 2000 });
+
+        _this2.cancel();
+      }).catch(function (err) {
+        console.log(err);
+        uni.hideLoading();
+      });
+
+    },
     //侧边导航栏
     choosed: function choosed() {
       this.isMenu1 = false;
@@ -297,7 +325,7 @@ __webpack_require__.r(__webpack_exports__);
     //选择视频播放
     switchRate: function switchRate(id) {
       var that = this;
-      that.currentRate = id;
+      that.detailData.id = id;
 
       this.isMenu1 = true;
       if (uni.getSystemInfoSync().platform == 'android') {

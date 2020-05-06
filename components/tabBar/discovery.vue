@@ -116,10 +116,10 @@ export default {
 					return '待处理';
 					break;
 				case 1:
-					return '待办结';
+					return '待办';
 					break;
 				case 2:
-					return '代办结';
+					return '待办结';
 					break;
 
 				case 3:
@@ -154,6 +154,7 @@ export default {
 
 			//type add 加载更多 refresh下拉刷新
 			if (type === 'add') {
+				
 				if (tabItem.loadMoreStatus === 2) {
 					return;
 				}
@@ -192,6 +193,7 @@ export default {
 							
 							tabItem.newsList.push(item);
 						});
+						this.pageNo+=1
 						//下拉刷新 关闭刷新动画
 						if (type === 'refresh') {
 							this.$refs.mixPulldownRefresh && this.$refs.mixPulldownRefresh.endPulldownRefresh();
@@ -206,7 +208,8 @@ export default {
 						//上滑加载 处理状态
 						if (type === 'add') {
 							if(res.data.totalPages===0||res.data.curPage===res.data.totalPages){
-							tabItem.loadMoreStatus =2	
+							tabItem.loadMoreStatus =2;
+								this.pageNo=1
 							}
 							}
 						
@@ -238,7 +241,9 @@ export default {
 
 		//下拉刷新
 		onPulldownReresh() {
+			this.pageNo=1;
 			this.loadNewsList('refresh');
+			
 		},
 		//上滑加载
 		loadMore() {

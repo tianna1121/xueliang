@@ -172,7 +172,7 @@
 				this.checkObj=obj;
 				hour=dVal[0]?dVal[0]:hours[0];
 				minute=dVal[1]?dVal[1]:minutes[0];
-				second=dVal[2]?dVal[0]:seconds[0];
+				if(this.second)second=dVal[2]?dVal[0]:seconds[0];
 				result=this.second?`${hour+':'+minute+':'+second}`:`${hour+':'+minute}`;
 				full=this.second?`${hour+':'+minute+':'+second}`:`${hour+':'+minute+':00'}`;
 				this.$nextTick(()=>{
@@ -190,7 +190,7 @@
 				let hour="",minute="",second="",result="",full="",obj={};
 				hour=(arr[0]||arr[0]==0)?data.hours[arr[0]]||data.hours[data.hours.length-1]:"";
 				minute=(arr[1]||arr[1]==0)?data.minutes[arr[1]]||data.minutes[data.minutes.length-1]:"";
-				second=(arr[2]||arr[2]==0)?data.seconds[arr[2]]||data.seconds[data.seconds.length-1]:"";
+				if(this.second)second=(arr[2]||arr[2]==0)?data.seconds[arr[2]]||data.seconds[data.seconds.length-1]:"";
 				obj=this.second?{
 					hour,
 					minute,

@@ -149,7 +149,7 @@
 				let curDay=curDate.getDate();
 				let curHour=curDate.getHours();
 				let curSection="上午";
-				if(curHour>12){
+				if(curHour>=12){
 					curSection="下午";
 				}
 				return{
@@ -209,7 +209,7 @@
 				let day=this.formatNum(aDate.getDate());
 				let hour=aDate.getHours();
 				let section="上午";
-				if(hour)section="下午";
+				if(hour>=12)section="下午";
 				if(value){
 					let flag=this.checkValue(value);
 					if(!flag){
@@ -268,7 +268,7 @@
 					years.indexOf(curYear+''),
 					months.indexOf(this.formatNum(curMonth)),
 					days.indexOf(this.formatNum(curDay)),
-					sections.indexOf(this.formatNum(curSection)),
+					sections.indexOf(curSection),
 				]:[
 					dVal[0]&&years.indexOf(dVal[0])!=-1?years.indexOf(dVal[0]):0,
 					dVal[1]&&months.indexOf(dVal[1])!=-1?months.indexOf(dVal[1]):0,

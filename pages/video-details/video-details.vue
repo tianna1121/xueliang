@@ -38,7 +38,7 @@
 				</cover-view>
 				<cover-view class="blaks"></cover-view>
 				<cover-view class="list-box" scroll-top="50">
-					<cover-view v-for="(item, index) in list" :key="index" class="multi-item rate" @tap="switchRate(item.id)" :class="{ active: item.id == currentRate }">
+					<cover-view v-for="(item, index) in list" :key="index" class="multi-item rate" @tap="switchRate(item.id)" :class="{ active: item.id == this.detailData.id }">
 						{{ item.adress }}
 					</cover-view>
 				</cover-view>
@@ -51,7 +51,7 @@
 				<textarea class="popup_textarea uni-input" :show-confirm-bar="flase" cursor-spacing="0" placeholder="输入内容..." v-model="feedbackContent"></textarea>
 				<view class="uni-tip-group-button1">
 					<text class="uni-tip-buttons uni-tip-button11 " @click="cancel('tip')">关闭</text>
-					<text class="uni-tip-buttons" @click="cancel('tip')">提交</text>
+					<text class="uni-tip-buttons" @click="submitHelp">提交</text>
 				</view>
 			</view>
 		</uni-popup>
@@ -96,6 +96,8 @@ export default {
 	},
 	onLoad(options) {
 		this.detailData = JSON.parse(options.data);
+		console.log('this.detailData.id')
+		console.log(this.detailData.id)
 		this.loadNewsList();
 	},
 	onReady: function(res) {
@@ -147,6 +149,32 @@ export default {
 			this.videoContext.requestFullScreen({direction:90});
 			this.isshow = false;
 		},
+		//一键求助
+		submitHelp() {
+			
+			var obj={note:this.feedbackContent,id:this.detailData.id}
+			//发起请求
+			console.log('一键求助');
+			uni.showLoading({
+				title: 'loading'
+			});
+			this.$http.post('//interface/rest/http/xlwb/xlgc-wb-jdh-yjqz.htm',obj).then(res => {
+				uni.hideLoading();
+				console.log(res.data);
+				if(res.data.msgState==1){
+					
+				}
+				uni.showToast({
+				    title: res.data.msg,
+				    duration: 2000
+				});
+				this.cancel()
+			}).catch(err => {
+				console.log(err);
+				uni.hideLoading();
+			})
+			
+		},
 		//侧边导航栏
 		choosed() {
 			this.isMenu1 = false;
@@ -161,7 +189,7 @@ export default {
 		//选择视频播放
 		switchRate(id) {
 			let that = this;
-			that.currentRate = id;
+			that.detailData.id = id;
 
 			this.isMenu1 = true;
 			if (uni.getSystemInfoSync().platform == 'android') {

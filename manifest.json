@@ -48,6 +48,10 @@
             "minified" : true,
             "es6" : true
         },
-        "permission" : {}
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "小程序需要获取您的位置"
+            }
+        }
     }
 }

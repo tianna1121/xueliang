@@ -169,7 +169,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniGrid = function uniGrid() {__webpack_require__.e(/*! require.ensure | components/uni-grid/uni-grid */ "components/uni-grid/uni-grid").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid/uni-grid.vue */ 215));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniGridItem = function uniGridItem() {__webpack_require__.e(/*! require.ensure | components/uni-grid-item/uni-grid-item */ "components/uni-grid-item/uni-grid-item").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid-item/uni-grid-item.vue */ 222));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniGrid = function uniGrid() {__webpack_require__.e(/*! require.ensure | components/uni-grid/uni-grid */ "components/uni-grid/uni-grid").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid/uni-grid.vue */ 215));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniGridItem = function uniGridItem() {__webpack_require__.e(/*! require.ensure | components/uni-grid-item/uni-grid-item */ "components/uni-grid-item/uni-grid-item").then((function () {return resolve(__webpack_require__(/*! @/components/uni-grid-item/uni-grid-item.vue */ 222));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
     uniNavBar: uniNavBar,
@@ -189,7 +189,9 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));functi
       workIndex: 0,
       dynamicList: [],
       list: [],
-      defaultProps1: { "label": "name", "value": "name", "children": "child" } };
+      defaultProps1: { "label": "name", "value": "name", "children": "child" },
+      pageNo: 1,
+      srcId: '' };
 
   },
   methods: {
@@ -198,6 +200,7 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));functi
       this.getType();
       console.log(_json.default.subs);
       this.list = _json.default.subs;
+      this.getList();
     },
     getType: function getType() {var _this = this;
       this.$http.
@@ -226,7 +229,38 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 57));functi
         console.log(err);
       });
     },
+    getList: function getList() {
+      var obj = { srcId: this.srcId, pageNo: this.pageNo };
+      if (this.srcId.length == 0) {
+        delete obj.srcId;
+      }
+      this.$http.
+      get('/interface/rest/http/xlwb/xlgc-wb-xcx-yjqz-ssjksp-x.htm', { params: obj }).
+      then(function (res) {
+        console.log('监控列表数据');
+        console.log(res);
+        if (res.data.msgState == 1) {
+          // this.options=res.data.result
+          // console.log(this.options)
 
+        } else {
+          uni.showToast({
+            icon: "none",
+            title: '监控列表获取失败！',
+            duration: 2000 });
+
+
+        }
+      }).
+      catch(function (err) {
+        console.log(err);
+        uni.showToast({
+          icon: "none",
+          title: '监控列表获取失败！',
+          duration: 2000 });
+
+      });
+    },
     lower: function lower() {
       uni.showToast({
         title: 'scroll-view的加载更多' });

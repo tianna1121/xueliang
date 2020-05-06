@@ -14,7 +14,7 @@
 		</view>
 		<view class="item">
 			<view class="item-title">事件类别</view>
-			<view class="item-next">{{ detailData.category ||"无"}}</view>
+			<view class="item-next">{{ detailData.category}}</view>
 		</view>
 		<view class="item">
 			<view class="item-title">事发时间</view>
@@ -34,12 +34,12 @@
 		<view class="item">
 			<view class="item-title">事发地点</view>
 			<view class="item-next">
-				<view class="adresss">{{ detailData.adress.addressContent }}</view>
+				<view class="adresss">{{ detailData.address }}</view>
 				<image class="address-icon" src="../../static/img/news/location1.png"></image>
 			</view>
 		</view>
 		<!-- 地图占位 -->
-		<view class="map-box"><map style="width: 750rpx; height:386rpx;" :latitude="latitude" :longitude="longitude" :markers="covers"></map></view>
+		<view class="map-box"><map style="width: 750rpx; height:386rpx;" :latitude="detailData.latitude" :longitude="detailData.longitude" :markers="covers"></map></view>
 		<view class="main-title2">当前状态</view>
 		<view class="item">
 			<view class="item-title">当前状态</view>
@@ -51,11 +51,11 @@
 		</view>
 		<view class="item1 ">
 			<view class="item-title1">反馈内容</view>
-			<view class="conents1">{{ detailData.feedback_content }}</view>
+			<view class="conents1">{{ detailData.feedback_content||'暂无反馈' }}</view>
 			<view class="times1">{{ detailData.feedback_time }}</view>
 		</view>
 		<view class="main-title1">处理队员信息</view>
-		<uni-list><uni-list-item :title="detailData.userinfo.name" :rightText="detailData.userinfo.phone" :show-arrow="false" :thumb="detailData.userinfo.url" /></uni-list>
+		<uni-list><uni-list-item :title="detailData.name" :rightText="detailData.phone" :show-arrow="false" :thumb="detailData.url" /></uni-list>
 		<button type="primary" class="btn-login" @tap="submitMsg">处理完成</button>
 
 		<image src="../../static/img/news/aa.png" class="fabs" @tap="alertMsg"></image>
@@ -113,7 +113,8 @@ export default {
 			detailData: {},
 			imgList: [],
 			active: 1,
-
+type1:[],
+category:[],
 			userFeedbackHidden: true, // 默认隐藏
 			feedbackContent: '', // 用户反馈内容
 			latitude: 30.663429,
@@ -134,9 +135,73 @@ export default {
 		this.id=detailData.id;
 		console.log(this.id)
 		// this.detailData = json.detail.data;
-		this.loadNewsList();
+		//this.loadNewsList();
+		//获取上报事件
+		this.getType();
+		//获取上报类型
+		this.getType1()
 	},
+	onReady(){this.loadNewsList()},
 	methods: {
+		getType() {
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjlxxz.htm', { params: {} })
+				.then(res => {
+					console.log('事件类型');
+					console.log(res);
+					if (res.data.msgState == 1) {
+						this.type1= res.data.list;
+						
+					} else {
+						uni.showLoading({
+							title: '获取事件类型失败'
+						});
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		},
+		getType1() {
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjlbxz.htm', { params: {} })
+				.then(res => {
+					console.log('事件类别');
+					console.log(res);
+					if (res.data.msgState == 1) {
+							this.category=res.data.list
+					} else {
+						uni.showLoading({
+							title: '获取事件类别失败'
+						});
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		},
+		//处理函数
+		typeChange() {
+			
+			console.log( this.type1)
+			for (let i = 0; i < this.type1.length; i++) {
+				if(this.type1[i].id==this.detailData.type){
+					this.detailData.type=this.type1[i].name
+				}
+			}
+			return '无';
+		},
+		//处理函数
+		typeChange1(val) {
+			console.log(val)
+			console.log( this.category)
+			for (let i = 0; i < this.category.length; i++) {
+				if(this.category[i].id==this.detailData.category){
+					this.detailData.category=this.category[i].name
+				}
+			}
+			return '无';
+		},
 		//获取推荐列表
 		async loadNewsList() {
 			uni.showLoading({
@@ -157,7 +222,16 @@ export default {
 						var list = res.data.list;
 						console.log('list');
 						console.log(list);
-						this.detailData=list[0]
+						this.detailData=list[0];
+						this.covers[0].latitude= list[0].latitude;
+						this.covers[0].longitude= list[0].longitude;
+						//处理进度
+						this.processingProcess()
+						//处理图片
+						this.imgsrc()
+						//处理类型
+					   this.typeChange1()
+					   this.typeChange()
 					} else {
 						uni.showToast({
 							title:"请求失败"
@@ -169,18 +243,49 @@ export default {
 					uni.hideLoading();
 				});
 		},
+		imgsrc(){
+			if(this.detailData.imgsrc.length>0){
+				var str=this.detailData.imgsrc.split(',');
+				console.log(str)
+				this.detailData.imgList=[...str]
+				
+			}
+			
+		},
+		processingProcess(){
+			var str=this.detailData.jd.split(',');
+			console.log(str)
+			var processingProcess=[]
+			for (var i = 0; i < str.length; i++) {
+				var os=str[i].split('  ');
+				console.log(os)
+				var obj={}
+				obj.title=os[0];
+				obj.desc=os[1];
+				processingProcess.push(obj)
+			}
+			console.log(processingProcess)
+			this.detailData.processingProcess=processingProcess
+			
+		},
 		statusChange(index) {
 			switch (index) {
-				case 1:
+				case 0:
 					return '待处理';
 					break;
+				case 1:
+					return '待办';
+					break;
 				case 2:
-					return '处理中';
+					return '待办结';
 					break;
 
 				case 3:
-					return '已处理';
+					return '已办结';
 					break;
+					case 3:
+						return '无效';
+						break;
 				default:
 					return '待处理';
 			}
@@ -218,7 +323,7 @@ export default {
 
 		submitFeedbackContent() {
 			
-			var obj={feedback_content:this.feedbackContent}
+			var obj={feedback_content:this.feedbackContent,id:this.id}
 			//发起请求
 			this.$refs.showtip1.close();
 			uni.showLoading({
@@ -248,7 +353,7 @@ export default {
 			this.$http
 				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjzx-clwc.htm', {
 					params: {
-						
+							id: this.id
 					}
 				})
 				.then(res => {

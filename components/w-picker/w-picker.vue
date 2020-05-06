@@ -275,9 +275,7 @@
 	  font-size: 30upx;
 	}
 	.w-picker{
-		position: relative;
 		z-index: 888;
-		overflow: hidden;
 		.mask {
 		  position: fixed;
 		  z-index: 1000;

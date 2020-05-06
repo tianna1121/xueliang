@@ -114,7 +114,7 @@ export default {
 			switch (index) {
 				case 0:
 					var imglist = [];
-					imglist.push(this.userInfo.img);
+					imglist.push(this.userInfo.avatar);
 					uni.previewImage({
 						urls:imglist
 					});

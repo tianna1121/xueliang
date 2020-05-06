@@ -181,6 +181,7 @@ export default {
 							
 							tabItem.newsList.push(item);
 						});
+						this.pageNo+=1
 					//下拉刷新 关闭刷新动画
 					if (type === 'refresh') {
 						this.$refs.mixPulldownRefresh && this.$refs.mixPulldownRefresh.endPulldownRefresh();
@@ -191,11 +192,13 @@ export default {
 						tabItem.loadMoreStatus =2	
 						}else tabItem.loadMoreStatus = 0;
 						
+						
 					}
 						//上滑加载 处理状态
 						if (type === 'add') {
 							if(res.data.totalPages===0||res.data.curPage===res.data.totalPages){
 							tabItem.loadMoreStatus =2	
+							this.pageNo=1
 							}
 							}
 					} else {
@@ -223,6 +226,7 @@ export default {
 
 		//下拉刷新
 		onPulldownReresh() {
+			this.pageNo=1;
 			this.loadNewsList('refresh');
 		},
 		//上滑加载

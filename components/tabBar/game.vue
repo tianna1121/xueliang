@@ -63,7 +63,9 @@ export default {
 			workIndex: 0,
 			dynamicList: [],
 			list: [],
-			defaultProps1:{"label":"name","value":"name","children":"child"}
+			defaultProps1:{"label":"name","value":"name","children":"child"},
+			pageNo:1,
+			srcId:''
 		};
 	},
 	methods: {
@@ -72,6 +74,7 @@ export default {
 			this.getType();
 			console.log(json.subs);
 			this.list = json.subs;
+			this.getList()
 		},
 		getType() {
 			this.$http
@@ -100,7 +103,38 @@ export default {
 					console.log(err);
 				});
 		},
-		
+		getList(){
+			var obj={srcId: this.srcId,pageNo:this.pageNo}
+			if(this.srcId.length==0){
+				delete obj.srcId 
+			}
+		this.$http
+			.get('/interface/rest/http/xlwb/xlgc-wb-xcx-yjqz-ssjksp-x.htm', { params: obj })
+			.then(res => {
+				console.log('监控列表数据');
+				console.log(res);
+				if (res.data.msgState == 1) {
+					// this.options=res.data.result
+					// console.log(this.options)
+					
+				} else {
+					uni.showToast({
+						icon:"none",
+						title: '监控列表获取失败！',
+						duration:2000
+					});
+					
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				uni.showToast({
+					icon:"none",
+					title: '监控列表获取失败！',
+					duration:2000
+				});
+			});	
+		},
 		lower() {
 			uni.showToast({
 				title: 'scroll-view的加载更多'

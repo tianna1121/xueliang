@@ -175,7 +175,9 @@ var _tool = __webpack_require__(/*! @/test/tool.js */ 26); //
 //
 //
 //
-var _default = { data: function data() {return { userInfo: { username: "", password: "" } };}, components: {}, mounted: function mounted() {(0, _tool.setTokenStorage)('');}, methods: { jumpRegster: function jumpRegster() {uni.redirectTo({
+//import '@/components/shoyu-xxtea/shoyu-xxtea';
+var _default = { data: function data() {return { userInfo: { username: "", password: "" } };}, components: {}, mounted: function mounted() {(0, _tool.setTokenStorage)('');}, methods: { jumpRegster: function jumpRegster() {(0, _tool.setTokenStorage)('test');
+      uni.redirectTo({
         url: '../register/register' });
 
 
@@ -201,26 +203,54 @@ var _default = { data: function data() {return { userInfo: { username: "", passw
 
         return;
       };
+
+      var obj = Object.assign({}, this.userInfo);
+      //obj.password=Base64.encode(obj.password)
+      console.log(obj.password);
       uni.showLoading({
         title: 'loading' });
 
       //发起请求
-      this.$http.post('/interface/rest/http/xlwb/xlgc-wb-jdh-yhdl.htm', that.userInfo).then(function (res) {
+      this.$http.post('/interface/rest/http/xlwb/xlgc-wb-jdh-yhdl.htm', obj).then(function (res) {
         uni.hideLoading();
         console.log(res.data);
         if (res.data.msgState == 1) {
+          if (res.data.list.length > 0) {
+            uni.showToast({
+              title: '登陆成功！',
+              duration: 2000 });
 
-          //设置token
-          (0, _tool.setTokenStorage)(res.data.list[0].token); // todo 储存token，可更换为自己的储存token逻辑
-          uni.redirectTo({
-            url: '../index/index?show_index=0' });
+
+            //设置token
+            (0, _tool.setTokenStorage)(res.data.list[0].token); // todo 储存token，可更换为自己的储存token逻辑
+            uni.redirectTo({
+              url: '../index/index?show_index=0' });
 
 
+
+          } else {
+            uni.showToast({
+              title: 'token不存在！',
+              duration: 2000,
+              icon: 'none' });
+
+            var token = "311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv";
+            (0, _tool.setTokenStorage)(token);
+            uni.redirectTo({
+              url: '../index/index?show_index=0' });
+
+
+          }
 
         }
       }).catch(function (err) {
         console.log(err);
         uni.hideLoading();
+        uni.showToast({
+          title: '登陆失败！',
+          duration: 2000,
+          icon: 'none' });
+
       });
       //TODO
       // uni.redirectTo({

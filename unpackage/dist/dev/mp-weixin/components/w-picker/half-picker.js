@@ -265,7 +265,7 @@ var _default =
       var curDay = curDate.getDate();
       var curHour = curDate.getHours();
       var curSection = "上午";
-      if (curHour > 12) {
+      if (curHour >= 12) {
         curSection = "下午";
       }
       return {
@@ -325,7 +325,7 @@ var _default =
       var day = this.formatNum(aDate.getDate());
       var hour = aDate.getHours();
       var section = "上午";
-      if (hour) section = "下午";
+      if (hour >= 12) section = "下午";
       if (value) {
         var flag = this.checkValue(value);
         if (!flag) {
@@ -384,7 +384,7 @@ var _default =
       years.indexOf(curYear + ''),
       months.indexOf(this.formatNum(curMonth)),
       days.indexOf(this.formatNum(curDay)),
-      sections.indexOf(this.formatNum(curSection))] :
+      sections.indexOf(curSection)] :
       [
       dVal[0] && years.indexOf(dVal[0]) != -1 ? years.indexOf(dVal[0]) : 0,
       dVal[1] && months.indexOf(dVal[1]) != -1 ? months.indexOf(dVal[1]) : 0,

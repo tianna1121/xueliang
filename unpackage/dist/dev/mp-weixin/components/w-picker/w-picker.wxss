@@ -34,9 +34,7 @@
   font-size: 30rpx;
 }
 .w-picker {
-  position: relative;
   z-index: 888;
-  overflow: hidden;
 }
 .w-picker .mask {
   position: fixed;
