@@ -331,7 +331,7 @@ export default {
 	top: 0;
 	right: 0;
 	transition: width 0.3s ease;
-	z-index: 999;
+	z-index: 9999999;
 	box-sizing: border-box;
 	padding: 21rpx;
 	overflow: hidden;
