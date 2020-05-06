@@ -222,6 +222,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 {
   components: {
     uniNavBar: uniNavBar,
@@ -379,6 +380,14 @@ __webpack_require__.r(__webpack_exports__);
         console.log(str);
         this.detailData.imgList = _toConsumableArray(str);
 
+      }
+      if (this.detailData.videosrc.length > 0) {
+        var str = this.detailData.videoSrc.split(',');
+        console.log(str);
+        this.detailData.videoSrc = _toConsumableArray(str);
+
+      } else {
+        this.detailData.videoSrc = [].concat();
       }
 
     },

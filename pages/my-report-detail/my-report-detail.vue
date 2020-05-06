@@ -29,6 +29,7 @@
 			<view class="item-title1">图片/视频</view>
 			<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll" scroll-left="120">
 				<image v-for="(image, index) in detailData.imgList" :key="index" class="uplaod-img" @tap="previewImage" :data-src="image" :src="image"></image>
+			    <video v-for="(video, index) in detailData.videoSrc" :key="index"  id="myVideo" @play="fulls"  @fullscreenchange="screenchange" controls class="uplaod-img"   :src="video"></video>
 			</scroll-view>
 		</view>
 		<view class="item">
@@ -225,6 +226,14 @@ category:[],
 				console.log(str)
 				this.detailData.imgList=[...str]
 				
+			}
+			if(this.detailData.videosrc.length>0){
+				var str=this.detailData.videoSrc.split(',');
+				console.log(str)
+				this.detailData.videoSrc=[...str]
+				
+			}else{
+				this.detailData.videoSrc=[...[]]
 			}
 			
 		},

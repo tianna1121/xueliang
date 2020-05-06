@@ -281,11 +281,17 @@ var _default =
       this.videoArr = [];
     },
     sendData: function sendData() {
+      //图片
       var _data = [];
+      //视频
+      var _videos = [];
+      var allData = { img: '', video: '' };
       // 将数据整合到一个数组中发出去，可以按自己项目要求进行修改
       _data.push.apply(_data, _toConsumableArray(this.imgArr));
-      _data.push.apply(_data, _toConsumableArray(this.videoArr));
-      this.$emit('upload', _data);
+      _videos.push.apply(_videos, _toConsumableArray(this.videoArr));
+      allData.img = _data;
+      allData.video = _videos;
+      this.$emit('upload', allData);
     },
     screenchange: function screenchange(e) {
       // 监听视频的全屏和退出全屏

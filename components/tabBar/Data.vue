@@ -84,9 +84,11 @@ export default {
 				latitude: '',
 
 				content: '',
-				imgList: ''
+				imgList: '',
+				videoSrc:""
 			},
-			imgList: []
+			imgList: [],
+			videoList:[]
 		};
 	},
 	onReady() {
@@ -121,13 +123,18 @@ export default {
 		setAttachData(val) {
 			console.log(222);
 			console.log(val);
-			this.imgList = val;
+			
+			this.imgList = val.img;
+			this.videoList=val.video
+			console.log(this.imgList);
 		},
 		updataJump() {
 			console.log('上报提交');
-
+			console.log(this.upData);
+			
 			console.log(this.upData);
 			this.upData.imgList=this.imgList.join(',')
+			this.upData.videoSrc=this.videoList.join(',')
 			uni.showLoading({
 				title: 'loading'
 			});
