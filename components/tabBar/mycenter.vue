@@ -8,7 +8,7 @@
 				<image class="icon-avatar" src="../../static/img/news/avatar.png" mode=""></image>
 			</view>
 			<view class="name">{{ userInfo.username }}</view>
-			<view class="unit">单位：{{ userInfo.unit||'未设置' }} | 角色：{{ userInfo.jue ||"未设置"}}</view>
+			<view class="unit">单位：{{ userInfo.unit||'未设置' }}| 角色：{{ userInfo.jue ||"未设置"}}</view>
 		</view>
 		<view class="item">
 			<view class="item-title">账号</view>

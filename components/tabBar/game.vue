@@ -106,9 +106,9 @@ export default {
 				});
 		},
 		getList(){
-			var obj={srcId: this.srcId,pageNo:this.pageNo}
+			var obj={id: this.srcId,pageNo:this.pageNo}
 			if(this.srcId.length==0){
-				delete obj.srcId 
+				delete obj.id 
 			}
 		this.$http
 			.get('/interface/rest/http/xlwb/xlgc-wb-xcx-yjqz-ssjksp-x.htm', { params: obj })
@@ -170,14 +170,17 @@ export default {
 		},
 		onConfirm($event,val){
 			console.log($event);
-			this.value[0]=$event.obj.col1.name;
-			this.value[1]=$event.obj.col2.name;
-			this.value[2]=$event.obj.col3.name;
+				console.log(val)
+			var arr=[];
+			arr.push($event.obj.col1.name)
+			arr.push($event.obj.col2.name)
+			arr.push($event.obj.col3.name)
+			this.value=arr;
 			console.log(this.value);
+		this.srcId=$event.value[2]
 		
-			console.log(val)
 			//TODO在这里发起请求
-			
+			this.getList()
 		},
 		onCancel(){
 			console.log('你取消了')

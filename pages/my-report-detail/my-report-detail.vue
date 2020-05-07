@@ -28,8 +28,8 @@
 		<view class="item2">
 			<view class="item-title1">图片/视频</view>
 			<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll" scroll-left="120">
-				<image v-for="(image, index) in detailData.imgList" :key="index" class="uplaod-img" @tap="previewImage" :data-src="image" :src="image"></image>
-			    <video v-for="(video, index) in detailData.videoSrc" :key="index"  id="myVideo" @play="fulls"  @fullscreenchange="screenchange" controls class="uplaod-img"   :src="video"></video>
+				<image v-for="(image, index) in detailData.imgsrc" :key="index" class="uplaod-img" @tap="previewImage" :data-src="image" :src="image"></image>
+			    <video v-for="(video, index1) in detailData.videoSrc" :key="index1"   id="'vi'+index1" @tap='clk(index1)' class="uplaod-img" :src="video" controls></video>
 			</scroll-view>
 		</view>
 		<view class="item">
@@ -98,7 +98,8 @@ category:[],
 					width: 50,
 					height: 50
 				}
-			]
+			],
+			isfull:false
 		};
 	},
 	onLoad(options) {
@@ -112,6 +113,16 @@ category:[],
 	},
 	onReady(){this.loadNewsList();},
 	methods: {
+		clk(index1){
+			if(!this.isfull){
+				console.log(index1)
+				this.videoContext = uni.createVideoContext("'vi'+index1");
+				this.videoContext.requestFullScreen();
+				this.videoContext.play();
+				this.isfull=!this.isfull
+			}
+			
+		},
 		//打电话
 		callPhone(phone) {
 			console.log(phone);
@@ -168,8 +179,8 @@ category:[],
 			return '无';
 		},
 		//处理函数
-		typeChange1(val) {
-			console.log(val)
+		typeChange1() {
+			
 			console.log( this.category)
 			for (let i = 0; i < this.category.length; i++) {
 				if(this.category[i].id==this.detailData.category){
@@ -205,7 +216,7 @@ category:[],
 						//处理进度
 						this.processingProcess()
 						//处理图片
-						this.imgsrc()
+						//this.imgsrc()
 						//处理类型
 						this.typeChange1()
 						this.typeChange()
@@ -249,6 +260,14 @@ category:[],
 				obj.desc=os[1];
 				processingProcess.push(obj)
 			}
+			//处理待办结/内容反馈
+			if(processingProcess[2].desc.length>=processingProcess[3].desc.length){
+				processingProcess.splice(3,1)
+			}
+			//处理已办结/无效
+			if(processingProcess[3].desc.length>=processingProcess[4].desc.length){
+				processingProcess.splice(4,1)
+			}
 			console.log(processingProcess)
 			this.detailData.processingProcess=processingProcess
 			
@@ -268,8 +287,8 @@ category:[],
 				case 3:
 					return '已办结';
 					break;
-					case 3:
-						return '无效';
+					case 4:
+						return '已办结';
 						break;
 				default:
 					return '待处理';
@@ -280,6 +299,7 @@ category:[],
 				delta: 1
 			});
 		},
+		
 		scroll(e) {
 			console.log(e.detail.scrollTop);
 		},
@@ -290,7 +310,7 @@ category:[],
 			console.log(current);
 			uni.previewImage({
 				current: current,
-				urls: this.detailData.imgList
+				urls: this.detailData.imgsrc
 			});
 		},
 	

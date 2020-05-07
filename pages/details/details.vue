@@ -194,9 +194,8 @@ category:[],
 				});
 		},
 		//处理函数
-		typeChange() {
-			
-			console.log( this.type1)
+		typeChange() {	
+			//console.log( this.type1)
 			for (let i = 0; i < this.type1.length; i++) {
 				if(this.type1[i].id==this.detailData.type){
 					this.detailData.type=this.type1[i].name
@@ -205,9 +204,8 @@ category:[],
 			return '无';
 		},
 		//处理函数
-		typeChange1(val) {
-			console.log(val)
-			console.log( this.category)
+		typeChange1() {
+			//console.log( this.category)
 			for (let i = 0; i < this.category.length; i++) {
 				if(this.category[i].id==this.detailData.category){
 					this.detailData.category=this.category[i].name
@@ -275,7 +273,17 @@ category:[],
 				var obj={}
 				obj.title=os[0];
 				obj.desc=os[1];
+				
 				processingProcess.push(obj)
+			}
+			console.log(processingProcess)
+			//处理待办结/内容反馈
+			if(processingProcess[2].desc.length>=processingProcess[3].desc.length){
+				processingProcess.splice(3,1)
+			}
+			//处理已办结/无效
+			if(processingProcess[3].desc.length>=processingProcess[4].desc.length){
+				processingProcess.splice(4,1)
 			}
 			console.log(processingProcess)
 			this.detailData.processingProcess=processingProcess
@@ -297,7 +305,7 @@ category:[],
 					return '已办结';
 					break;
 					case 4:
-						return '无效';
+						return '已办结';
 						break;
 				default:
 					return '待处理';
