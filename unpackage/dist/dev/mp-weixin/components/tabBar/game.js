@@ -191,7 +191,7 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
       workIndex: 0,
       dynamicList: [],
       list: [],
-      defaultProps1: { "label": "name", "value": "name", "children": "child" },
+      defaultProps1: { "label": "name", "value": "id", "children": "child" },
       pageNo: 1,
       srcId: '' };
 
@@ -296,7 +296,11 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
     },
     onConfirm: function onConfirm($event, val) {
       console.log($event);
-      this.value = $event.value;
+      this.value[0] = $event.obj.col1.name;
+      this.value[1] = $event.obj.col2.name;
+      this.value[2] = $event.obj.col3.name;
+      console.log(this.value);
+
       console.log(val);
       //TODO在这里发起请求
 
