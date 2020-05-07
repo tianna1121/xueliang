@@ -41,15 +41,24 @@
 			</view>
 			<view class="item">
 				<view class="item-title">所在单位</view>
-				<view class="item-next" >
-					<picker :range="workList" @change="workListChange" :value="userInfo.unit" mode="selector">
-						<view class="uni-input">{{workList[userInfo.unit]}}</view>
-					</picker>
+				<view class="item-next"  @tap="showPicker">
+						<view class="uni-input">{{userInfo.unit}}</view>
 					<uni-icons type="forward" color="#C7C7CC" size="22" />
 				</view>
 				</view>
 		<button type="primary" class="btn-login" @tap="submitMsg" >提交</button>
 		<view class="jump-reg" @tap="jumpRegster">登录账号</view>
+		<w-picker
+			mode="linkage"
+			        :value="userInfo.unit"
+			        :options="options"
+			        :level="3"
+			        default-type="id"
+			        :default-props="defaultProps1"
+			        @confirm="onConfirm($event,'linkage')"
+			        @cancel="onCancel"
+			        ref="linkage" 
+		></w-picker>
 	</view>
 </template>
 
@@ -69,6 +78,9 @@
 		data() {
 			return {
 				imageList:[],
+				value:['请选择', '请选择', '请选择'],
+				defaultProps1:{"label":"name","value":"id","children":"child"},
+				 options:[],
 				name:"",
 				idCard:"",
 				phone:"",
@@ -82,7 +94,10 @@
 				idcard:"",
 				sex:"0",
 				phone:"",
-				unit:"0"
+				unit:"请选择",
+				x:'',
+				z:"",
+				c:""
 			}
 			};
 		},
@@ -91,11 +106,28 @@
 		},
 	
 	onLoad() {
-			
+	
 			//获取上报类型
 			this.getType();
 		},
 		methods:{
+			onConfirm($event,val){
+				console.log($event);
+				this.userInfo.unit=$event.result;
+				console.log(val)
+				this.userInfo.x=$event.value[0]
+				this.userInfo.z=$event.value[1]
+				this.userInfo.c=$event.value[2]
+				console.log(this.userInfo)
+				
+			},
+			onCancel(){
+				console.log('你取消了')
+			},
+				
+			showPicker() {
+				this.$refs.linkage.show();
+			},
 			jumpRegster(){
 				uni.redirectTo({
 				    url: '../login/login',
@@ -104,14 +136,12 @@
 			},
 			getType() {
 				this.$http
-					.get('/interface/rest/http/xlwb/xlgc-wb-xcx-dwxz.htm', { params: {type:1} })
+					.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sssj-xzcjl.htm', { params: {} })
 					.then(res => {
-					 //	console.log(res);
+					 	console.log('单位');
+						console.log(res);
 						if (res.data.msgState == 1) {
-							var obj1 = [{ id: '0', unit: '点击选择' }];
-							var data = res.data.list;
-							var obj = [...obj1, ...data];
-							this.workList = this.typeChange(obj);
+							this.options=res.data.result
 							
 						} else {
 							uni.showLoading({
@@ -200,7 +230,10 @@
 					idcard:this.userInfo.idcard,
 					sex:this.userInfo.sex.toString(),
 					phone:this.userInfo.phone,
-					unit:this.userInfo.unit.toString()
+					unit:this.userInfo.unit,
+					x:this.userInfo.x.toString(),
+					z:this.userInfo.z.toString(),
+					c:this.userInfo.c.toString(),
 				}
 				
 				console.log(obj)
@@ -247,6 +280,7 @@
 						uni.uploadFile({
 							url: 'https://app8848.com/interface/rest/file/upload/util/uploadFile.htm', //仅为示例，非真实的接口地址
 							 header:{token:"311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv"},
+							 //header:{token:"test"},
 							filePath: res.tempFilePaths[0],
 							name: 'file',
 							
@@ -275,12 +309,7 @@
 					
 				})
 			},
-			//选择单位
-			workListChange(e){
-				this.userInfo.unit = parseInt(e.detail.value)
-				
-			},
-				
+		
 			sizeTypeChange(e){
 				this.userInfo.sex = parseInt(e.detail.value)
 				

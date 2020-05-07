@@ -5,17 +5,17 @@
 		<view class="item">
 			<view class="item-title">事件类型</view>
 			<view class="item-next">
-				<picker :range="type1" @change="sizeTypeChange" :value="upData.type" mode="selector">
-					<view class="uni-input">{{ type1[upData.type] }}</view>
+				<picker :range="type1" @change="sizeTypeChange" :value="typeNum1" mode="selector">
+					<view class="uni-input">{{ type1[typeNum1] }}</view>
 				</picker>
 				<uni-icons type="forward" color="#C7C7CC" size="22" />
 			</view>
 		</view>
 		<view class="item">
 			<view class="item-title">事件类别</view>
-			<view class="item-next">
-				<picker :range="type2" @change="sizeType2Change" :value="upData.category" mode="selector">
-					<view class="uni-input">{{ type2[upData.category] }}</view>
+			<view class="item-next" @click="tosts">
+				<picker :disabled="disabled" :range="type2" @change="sizeType2Change" :value="typeNum2" mode="selector">
+					<view class="uni-input">{{ type2[typeNum2] }}</view>
 				</picker>
 				<uni-icons type="forward" color="#C7C7CC" size="22" />
 			</view>
@@ -71,7 +71,9 @@ export default {
 	data() {
 		return {
 			type1: [],
+			typeNum1:0,
 			type2: [],
+			typeNum2:0,
 			type2Index: 0,
 			dates: '',
 			upData: {
@@ -88,15 +90,29 @@ export default {
 				videoSrc:""
 			},
 			imgList: [],
-			videoList:[]
+			videoList:[],
+			typeList:[],
+			childList:[],
+			disabled:true
 		};
 	},
 	onReady() {
-		
+		//获取上报事件
+		this.getType();
 		this.dates = this.getNowFormatDate()
 	},
 
 	methods: {
+		tosts(){
+			if(this.type2.length<=1){
+				uni.showToast({
+				    title: '请先选择类型',
+				    duration: 2000,
+					icon:"none"
+				});	
+				return
+			}
+		},
 		 // 获取当前系统时间戳
 		  getNowFormatDate() {
 		      var date = new Date();
@@ -130,11 +146,12 @@ export default {
 		},
 		updataJump() {
 			console.log('上报提交');
-			console.log(this.upData);
+			//console.log(this.upData);
 			
 			console.log(this.upData);
-			this.upData.imgList=this.imgList.join(',')
-			this.upData.videoSrc=this.videoList.join(',')
+			this.upData.imgList=this.imgList
+			this.upData.videoSrc=this.videoList
+			console.log(this.upData);
 			uni.showLoading({
 				title: 'loading'
 			});
@@ -167,23 +184,24 @@ export default {
 		},
 		ontrueGetList() {
 			
-			//获取上报事件
-			this.getType();
+			
+			this.dates = this.getNowFormatDate()
 			//获取上报类型
-			this.getType1()
+			//this.getType1()
 		},
 		getType() {
 			this.$http
-				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjlxxz.htm', { params: {} })
+				.get('/interface/rest/http/condition/xltz-sjlxlb.htm', { params: {} })
 				.then(res => {
-					console.log('事件类型');
-					console.log(res);
+			//console.log('事件类型');
+				//	console.log(res);
 					if (res.data.msgState == 1) {
 						var obj1 = [{ id: '0', name: '点击选择' }];
-						var data = res.data.list;
-						var obj = [...obj1, ...data];
-						this.type1 = this.typeChange(obj);
-						
+						var data = res.data.result;
+						this.typeList= [...obj1, ...data];
+						this.type1 = this.typeChange(this.typeList);
+					
+						this.type2=	this.typeChange(obj1)
 					} else {
 						uni.showLoading({
 							title: '请求失败'
@@ -219,7 +237,7 @@ export default {
 		typeChange(val) {
 			var arr = [];
 			for (let item in val) {
-				console.log(val[item].name);
+				//console.log(val[item].name);
 				arr.push(val[item].name);
 			}
 
@@ -239,14 +257,31 @@ export default {
 				content: '',
 				imgList: ""
 			};
+			this.typeNum1=0
+			this.typeNum2=0
 			this.imgList=[]
 			this.upData = upData;
 		},
 		sizeTypeChange(e) {
-			this.upData.type = parseInt(e.detail.value);
+			
+			var num=parseInt(e.detail.value)
+			this.typeNum1=num
+			this.upData.type =this.typeList[num].id ;
+			var dataa=this.typeList[num].child
+			
+			var obj1=[{id:'0',name:"点击选择"}]
+			this.childList=[...obj1,...dataa]
+			this.type2=	this.typeChange(this.childList)
+			this.disabled=false
+			//console.log(this.type2)
+			
 		},
 		sizeType2Change(e) {
-			this.upData.category = parseInt(e.detail.value);
+			var num1=parseInt(e.detail.value)
+			this.typeNum2=num1
+			this.upData.category = this.childList[num1].id;
+			//console.log(this.upData.type)
+			//console.log(this.upData.category)
 		},
 		get_location() {
 			const that = this;

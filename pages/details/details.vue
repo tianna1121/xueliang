@@ -28,7 +28,8 @@
 		<view class="item2">
 			<view class="item-title1">图片/视频</view>
 			<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll" scroll-left="120">
-				<image v-for="(image, index) in detailData.imgList" :key="index" class="uplaod-img" @tap="previewImage" :data-src="image" :src="image"></image>
+				<image v-for="(image, index) in detailData.imgsrc" :key="index" class="uplaod-img" @tap="previewImage" :data-src="image" :src="image"></image>
+			    <video v-for="(video, index1) in detailData.videoSrc"  :key="index1" id="'vi'+index1" @tap='clk(index1)' class="uplaod-img" :src="video" controls></video>
 			</scroll-view>
 		</view>
 		<view class="item">
@@ -127,7 +128,8 @@ category:[],
 					width: 50,
 					height: 50
 				}
-			]
+			],
+			isfull:false
 		};
 	},
 	onLoad(options) {
@@ -143,6 +145,17 @@ category:[],
 	},
 	onReady(){this.loadNewsList()},
 	methods: {
+			
+		clk(index1){
+			if(!this.isfull){
+				console.log(index1)
+				this.videoContext = uni.createVideoContext("'vi'+index1");
+				this.videoContext.requestFullScreen();
+				this.videoContext.play();
+				this.isfull=!this.isfull
+			}
+			
+		},
 		getType() {
 			this.$http
 				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjlxxz.htm', { params: {} })
@@ -228,7 +241,7 @@ category:[],
 						//处理进度
 						this.processingProcess()
 						//处理图片
-						this.imgsrc()
+					//	this.imgsrc()
 						//处理类型
 					   this.typeChange1()
 					   this.typeChange()
@@ -312,7 +325,7 @@ category:[],
 			console.log(current);
 			uni.previewImage({
 				current: current,
-				urls: this.detailData.imgList
+				urls: this.detailData.imgsrc
 			});
 		},
 		submitMsg() {

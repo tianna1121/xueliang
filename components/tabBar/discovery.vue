@@ -167,9 +167,9 @@ export default {
 			}
 			// #endif
 			
-			var obj={status: this.tabCurrentIndex-1,pageNo:this.pageNo}
+			var obj={type: this.tabCurrentIndex-1,pageNo:this.pageNo}
 			if(this.tabCurrentIndex==0){
-				delete obj.status 
+				delete obj.type 
 			}
 			this.$http
 				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sjzx-sjlb.htm', {

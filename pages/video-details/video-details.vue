@@ -1,20 +1,19 @@
 <template>
 	<view class="bigboxxs">
-		<video
+		<live-player
 			id="myVideo"
-			:src="src"
-			:show-center-play-btn="false"
+			:src="detailData.url"
+			autoplay
 			@fullscreenchange="fullscreenchange"
-			:controls="false"
-			:loop="true"
+			@statechange="statechange"
 			@error="videoErrorCallback"
 			@click="clk"
-			enable-danmu="flase"
+			
 		>
 			<!--顶部栏 竖屏-->
 			<cover-view class="video-control">
 				<cover-view class="video-control-back" @tap.native.stop="backup"><cover-image src="../../static/img/news/back.png"></cover-image></cover-view>
-				<cover-view class="video-control-text" @tap.native.stop="backup">{{ title }}</cover-view>
+				<cover-view class="video-control-text" @tap.native.stop="backup">{{ detailData.date }}</cover-view>
 				<cover-view class="video-control-more" @tap="choosed">
 					<cover-view v-if="isMenu1">
 						<cover-image src="../../static/img/news/menu@2x.png"></cover-image>
@@ -28,7 +27,7 @@
 			<!-- 位置 -->
 			<cover-view class="adress-box">
 				<cover-image class="adress-img" src="../../static/img/news/location.png"></cover-image>
-				<cover-view class="adresss">{{ adress }}</cover-view>
+				<cover-view class="adresss">{{ detailData.location }}</cover-view>
 			</cover-view>
 			<!-- 右侧导航栏 -->
 			<cover-view class="multi-list rate" :class="{ active: !isMenu1, active1: !isIos&&!isMenu1 }" @tap.native.stop>
@@ -43,7 +42,7 @@
 					</cover-view>
 				</cover-view>
 			</cover-view>
-		</video>
+		</live-player>
 
 		<uni-popup ref="showtip1" type="center" :mask-click="false">
 			<view class="uni-tip1">
@@ -66,7 +65,7 @@ export default {
 	},
 	data() {
 		return {
-			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-01.mp4',
+			src: 'rtsp://10.2.145.66:655/openUrl/CLJ52BW',
 			list: [
 				{ id: 1, adress: '美星镇-新街村' },
 				{ id: 2, adress: '美星镇-新街村' },
@@ -95,14 +94,14 @@ export default {
 		};
 	},
 	onLoad(options) {
-		this.detailData = JSON.parse(options.data);
-		console.log('this.detailData.id')
-		console.log(this.detailData.id)
+		this.detailData = JSON.parse(options.data).item;
+		console.log('this.detailData')
+		console.log(this.detailData)
 		this.loadNewsList();
 	},
 	onReady: function(res) {
 		// #ifndef MP-ALIPAY
-		this.videoContext = uni.createVideoContext('myVideo');
+		this.videoContext = uni.createLivePlayerContext('myVideo',this);
 		// #endif
 		this.videoContext.requestFullScreen();
 		this.videoContext.play();
@@ -115,6 +114,9 @@ export default {
 			// 		this.backup()
 			// 	}
 		},
+		statechange(e){
+		            console.log('live-player code:', e.detail.code)
+		        },
 		backup() {
 			uni.navigateBack({
 				delta: 1
@@ -129,7 +131,7 @@ export default {
 		},
 		videoErrorCallback: function(e) {
 			uni.showModal({
-				content: e.target.errMsg,
+				content: e.detail.errMsg,
 				showCancel: false
 			});
 		},

@@ -17,11 +17,13 @@
 			</view>
 		</view>
 		<scroll-view class="main_box" scroll-y="true" @scrolltolower="lower">
+			
+			
 			<!-- 正文 -->
 			<view class=" big-mm" v-for="(item, index) in list" :index="index" :key="index">
-				<view class="grid-item-box" @tap="videoDetail(item.id)">
-					<image class="image" :src="item.logoUrl" mode=""></image>
-					<text class="text">{{ item.address }}</text>
+				<view class="grid-item-box" @tap="videoDetail(item)">
+					<image class="image" src="http://img0.imgtn.bdimg.com/it/u=2396068252,4277062836&fm=26&gp=0.jpg" mode=""></image>
+					<text class="text">{{ item.location }}</text>
 				</view>
 			</view>
 		</scroll-view>
@@ -72,16 +74,16 @@ export default {
 		ontrueGetList() {
 			console.log('实时监控');
 			this.getType();
-			console.log(json.subs);
-			this.list = json.subs;
+			//console.log(json.subs);
+			//this.list = json.subs;
 			this.getList()
 		},
 		getType() {
 			this.$http
 				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sssj-xzcjl.htm', { params: {} })
 				.then(res => {
-					console.log('级联数据');
-					console.log(res);
+					//console.log('级联数据');
+					//console.log(res);
 					if (res.data.msgState == 1) {
 						 this.options=res.data.result
 						 console.log(this.options)
@@ -111,11 +113,11 @@ export default {
 		this.$http
 			.get('/interface/rest/http/xlwb/xlgc-wb-xcx-yjqz-ssjksp-x.htm', { params: obj })
 			.then(res => {
-				console.log('监控列表数据');
-				console.log(res);
+				//console.log('监控列表数据');
+				//console.log(res);
 				if (res.data.msgState == 1) {
-					// this.options=res.data.result
-					// console.log(this.options)
+					 this.list=res.data.list
+					console.log(this.list)
 					
 				} else {
 					uni.showToast({
@@ -153,9 +155,9 @@ export default {
 				icon: 'none'
 			});
 		},
-		videoDetail(id) {
+		videoDetail(item ) {
 			let data = {
-				id: id
+				item:item
 			};
 			let url = 'video-details';
 
