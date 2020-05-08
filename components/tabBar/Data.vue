@@ -2,6 +2,7 @@
 	<view class="main">
 		<!-- 自定义标题 -->
 		<uni-nav-bar fixed="true" color="#007AFF" background-color="#F8F8F8" :status-bar="true" title="我要上报" />
+		<view class="main_box">
 		<view class="item">
 			<view class="item-title">事件类型</view>
 			<view class="item-next">
@@ -45,6 +46,9 @@
 			<view class="tip-uplaod">点击上传图片/视频</view>
 		</view>
 		<button type="primary" class="btn-login" @tap="updataJump">上报</button>
+		<view class="end">
+			
+		</view>
 		<w-picker
 			mode="date"
 			startYear="2020"
@@ -57,6 +61,7 @@
 			:disabled-after="false"
 			ref="date1"
 		></w-picker>
+		</view>
 	</view>
 </template>
 
@@ -352,7 +357,18 @@ export default {
 page {
 	background-color: #f8f8f8;
 }
-
+.main{
+	
+}
+// .main_box{
+// 	// height: 100vh;
+// 	padding-bottom: 150rpx;
+// 	box-sizing: border-box;
+// }
+.end{
+	height: 125rpx;
+	//background-color: red;
+}
 .item {
 	
 	width: 690rpx;
@@ -462,7 +478,7 @@ page {
 	margin-top: 10rpx;
 }
 .btn-login {
-	margin: 72rpx auto 150rpx;
+	margin: 72rpx auto 50rpx;
 	color: #ffffff;
 	font-size: 36rpx;
 	width: 690rpx;

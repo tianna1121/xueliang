@@ -27,6 +27,9 @@
 page {
   background-color: #f8f8f8;
 }
+.end {
+  height: 125rpx;
+}
 .item {
   width: 690rpx;
   min-height: 54rpx;
@@ -166,7 +169,7 @@ page {
   margin-top: 10rpx;
 }
 .btn-login {
-  margin: 72rpx auto 150rpx;
+  margin: 72rpx auto 50rpx;
   color: #ffffff;
   font-size: 36rpx;
   width: 690rpx;

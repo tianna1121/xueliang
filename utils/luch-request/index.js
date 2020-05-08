@@ -102,14 +102,14 @@ test.interceptor.response((response) => { /* 请求之后拦截器 */
 // XXX 重新创建一个示例，可根据自身逻辑决定是否需要重新创建一个示例
 const reReqest = new Request()
 reReqest.setConfig(config => {
-	config.baseUrl = 'https://app8848.com' /* 根域名不同 */
+	config.baseUrl = 'https://www.app8848.com' /* 根域名不同 */
 	return config
 })
 
 const http = new Request()
 const refreshToken = getTokenDebounce()
 http.setConfig((config) => { /* 设置全局配置 */
-	config.baseUrl = 'https://app8848.com' /* 根域名不同 */
+	config.baseUrl = 'https://www.app8848.com' /* 根域名不同 */
 	config.header = {
 		...config.header,
 

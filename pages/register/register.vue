@@ -164,6 +164,53 @@
 				return arr;
 				
 				},
+				// 函数参数必须是字符串，因为二代身份证号码是十八位，而在javascript中，十八位的数值会超出计算范围，造成不精确的结果，导致最后两位和计算的值不一致，从而该函数出现错误。
+				// 详情查看javascript的数值范围
+				//身份证校验
+				checkIDCard(idcode){
+				    // 加权因子
+				    var weight_factor = [7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2];
+				    // 校验码
+				    var check_code = ['1', '0', 'X' , '9', '8', '7', '6', '5', '4', '3', '2'];
+				
+				    var code = idcode + "";
+				    var last = idcode[17];//最后一位
+				
+				    var seventeen = code.substring(0,17);
+				
+				    // ISO 7064:1983.MOD 11-2
+				    // 判断最后一位校验码是否正确
+				    var arr = seventeen.split("");
+				    var len = arr.length;
+				    var num = 0;
+				    for(var i = 0; i < len; i++){
+				        num = num + arr[i] * weight_factor[i];
+				    }
+				    
+				    // 获取余数
+				    var resisue = num%11;
+				    var last_no = check_code[resisue];
+				
+				    // 格式的正则
+				    // 正则思路
+				    /*
+				    第一位不可能是0
+				    第二位到第六位可以是0-9
+				    第七位到第十位是年份，所以七八位为19或者20
+				    十一位和十二位是月份，这两位是01-12之间的数值
+				    十三位和十四位是日期，是从01-31之间的数值
+				    十五，十六，十七都是数字0-9
+				    十八位可能是数字0-9，也可能是X
+				    */
+				    var idcard_patter = /^[1-9][0-9]{5}([1][9][0-9]{2}|[2][0][0|1][0-9])([0][1-9]|[1][0|1|2])([0][1-9]|[1|2][0-9]|[3][0|1])[0-9]{3}([0-9]|[X])$/;
+				
+				    // 判断格式是否正确
+				    var format = idcard_patter.test(idcode);
+				
+				    // 返回验证结果，校验码和格式同时正确才算是合法的身份证号码
+				    return last === last_no && format ? true : false;
+				},
+
 			submitMsg(){
 				console.log(this.userInfo)
 				
@@ -194,26 +241,26 @@
 					})
 					return
 				}
-				if(this.userInfo.idcard.length<10){
+				if(!this.checkIDCard(this.userInfo.idcard)){
+					
 					uni.showModal({
 						
-						content: "请输入身份证号!",
+						content: "请输入正确的身份证号!",
 						showCancel: false,
 						confirmText: "确定"
 					})
 					return
 				}
 				
-				if(this.userInfo.phone.length<5){
+				if(!(/^1[3456789]\d{9}$/.test(this.userInfo.phone))){
 					uni.showModal({
-						
-						content: "请输入电话号码!",
+						content: "请输入正确的手机号!",
 						showCancel: false,
 						confirmText: "确定"
 					})
 					return
 				}
-				if(this.userInfo.unit=='0'){
+				if(this.userInfo.x==''){
 					uni.showModal({
 				
 						content: "请选择所在单位!",
@@ -231,9 +278,9 @@
 					sex:this.userInfo.sex.toString(),
 					phone:this.userInfo.phone,
 					unit:this.userInfo.unit,
-					x:this.userInfo.x.toString(),
-					z:this.userInfo.z.toString(),
-					c:this.userInfo.c.toString(),
+					countyId:this.userInfo.x.toString(),
+					townId:this.userInfo.z.toString(),
+					villageId:this.userInfo.c.toString(),
 				}
 				
 				console.log(obj)
@@ -242,12 +289,17 @@
 				});
 				// setTokenStorage('register')
 				//发起请求
-				this.$http.post('/interface/rest/http/xlwb/xlgc-wb-jdh-yhzc.htm',obj).then(res => {
+				this.$http.post('/interface/rest/http/xlwb/xlgc-wb-xcx-yhzc.htm',obj).then(res => {
 					console.log(res);
 					uni.hideLoading();
 					if(res.data.msgState==1){
 						uni.redirectTo({
 						    url: '../regres/regres',
+							
+						});
+						uni.showToast({
+							title: res.data.msg,
+							duration: 2000,
 							
 						});
 					}else{
@@ -259,6 +311,12 @@
 					}
 				}).catch(err => {
 					console.log(err);
+					uni.hideLoading();
+					uni.showToast({
+						 title: '登陆失败！',
+						 duration: 2000,
+						 icon:'none'
+					})
 				})
 				// uni.redirectTo({
 				//     url: '../regres/regres',
@@ -278,8 +336,8 @@
 							mask: true
 						})
 						uni.uploadFile({
-							url: 'https://app8848.com/interface/rest/file/upload/util/uploadFile.htm', //仅为示例，非真实的接口地址
-							 header:{token:"311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv"},
+							url: 'https://www.app8848.com/interface/rest/file/upload/util/uploadFile.htm', //仅为示例，非真实的接口地址
+							 header:{token:"281179305_eN2cdo2snJhvbJO2ZC3FzMUNLC2kloZWjJavbkak3cXOLC2abp6WbC3F3i3T3mZNbJ0ixc_T3maRZm92ZC3FzCwiloy8bJ5mlo2S3cXOLC2TbJdWbauWbpUixcEKx8f5z8_Kzs_JzM3T3mKhlm9NlpQixi3w3iwibpqRdUak3cX0zs_0zskOzMET3m5WnJSxnpKa3cXidGqMd8zKzcQO3iwijGhvbmUixi3iLC2wlpQixi3iLC2NZp6Tsm6SZt3F3YuajIQMys30zt3T3Y2vbGUixcQT3YyclG9vbE5hbpUixiLWmFrkRV7aSFoYV3TiLC2MZpyKjma0eqBhjIyIbI2k3cXizsQNzcQNx8_Oya9rt4ZHemyFsoWcyN3T3YyXbI20sm6SZt3F3YhTZJziLC20daqMZo22ZC3FzCwidp5WdC3F3m5KbGwiLC2KjJqNtpQixczKzcQT3YqMZo2xnpKa3cXidGqMd8zKzcQO3iwidIhKjJqNlpQixi20Zoy0zMUNy8EigQ"},
 							 //header:{token:"test"},
 							filePath: res.tempFilePaths[0],
 							name: 'file',

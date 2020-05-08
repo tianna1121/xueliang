@@ -57,7 +57,7 @@
 		</view>
 		<view class="main-title1">处理队员信息</view>
 		<uni-list><uni-list-item  @tap.stop="callPhone(detailData.phone)" :title="detailData.name" :rightText="detailData.phone" :show-arrow="false" :thumb="detailData.url" /></uni-list>
-		<button type="primary" class="btn-login" @tap="submitMsg"  :class="{ readed: detailData.status == 3||detailData.status == 4 }" >处理完成</button>
+		<button type="primary" class="btn-login" @tap="submitMsg"  :class="{ readed: detailData.status == 2||detailData.status == 3||detailData.status == 4 }" >处理完成</button>
 
 		<image src="../../static/img/news/aa.png" class="fabs" @tap="alertMsg"></image>
 
@@ -280,10 +280,14 @@ category:[],
 			//处理待办结/内容反馈
 			if(processingProcess[2].desc.length>=processingProcess[3].desc.length){
 				processingProcess.splice(3,1)
+			}else{
+				processingProcess.splice(2,1)
 			}
 			//处理已办结/无效
 			if(processingProcess[3].desc.length>=processingProcess[4].desc.length){
 				processingProcess.splice(4,1)
+			}else{
+				processingProcess.splice(3,1)
 			}
 			console.log(processingProcess)
 			this.detailData.processingProcess=processingProcess
@@ -305,7 +309,7 @@ category:[],
 					return '已办结';
 					break;
 					case 4:
-						return '已办结';
+						return '无效';
 						break;
 				default:
 					return '待处理';
@@ -337,7 +341,7 @@ category:[],
 			});
 		},
 		submitMsg() {
-			if(this.detailData.status==3||this.detailData.status==4){
+			if(this.detailData.status==2||this.detailData.status==3||this.detailData.status==4){
 				return
 			}
 			console.log('確認完成');

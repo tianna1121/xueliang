@@ -11,7 +11,7 @@
 			</view>
 			<view class="acount-box passwd">
 				<text class="account-title">密码：</text>
-				<input v-model="userInfo.password" class="ipt-tel " placeholder="初始密码为身份证后六位"  type="idcard" placeholder-class="placeholder"/>	
+				<input v-model="userInfo.password" password class="ipt-tel " placeholder="初始密码为身份证后六位"  type="idcard" placeholder-class="placeholder"/>	
 			</view>
 			<button type="primary" class="btn-login" @tap="loginJump">登录</button>
 			<view class="jump-reg" @tap="jumpRegster">注册账号</view>
@@ -27,6 +27,7 @@
 	  configHandle
 	} from '@/test/tool.js'
 	//import '@/components/shoyu-xxtea/shoyu-xxtea';
+	//import md5 from '@/js_sdk/ccdzhang-dokey/md5.js'
 	export default {
 		data() {
 			return {
@@ -44,7 +45,7 @@
 		},
 		methods:{
 			jumpRegster(){
-				var token=`311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv`
+				var token=`281179305_eN2cdo2snJhvbJO2ZC3FzMUNLC2kloZWjJavbkak3cXOLC2abp6WbC3F3i3T3mZNbJ0ixc_T3maRZm92ZC3FzCwiloy8bJ5mlo2S3cXOLC2TbJdWbauWbpUixcEKx8f5z8_Kzs_JzM3T3mKhlm9NlpQixi3w3iwibpqRdUak3cX0zs_0zskOzMET3m5WnJSxnpKa3cXidGqMd8zKzcQO3iwijGhvbmUixi3iLC2wlpQixi3iLC2NZp6Tsm6SZt3F3YuajIQMys30zt3T3Y2vbGUixcQT3YyclG9vbE5hbpUixiLWmFrkRV7aSFoYV3TiLC2MZpyKjma0eqBhjIyIbI2k3cXizsQNzcQNx8_Oya9rt4ZHemyFsoWcyN3T3YyXbI20sm6SZt3F3YhTZJziLC20daqMZo22ZC3FzCwidp5WdC3F3m5KbGwiLC2KjJqNtpQixczKzcQT3YqMZo2xnpKa3cXidGqMd8zKzcQO3iwidIhKjJqNlpQixi20Zoy0zMUNy8EigQ`
 				setTokenStorage(token)
 				uni.redirectTo({
 				    url: '../register/register',
@@ -74,7 +75,7 @@
 				};
 					
 				var obj= Object.assign({}, this.userInfo);
-				//obj.password=Base64.encode(obj.password)
+				//obj.password=md5(obj.password)
 				console.log(obj.password)
 				uni.showLoading({
 					title: 'loading'
@@ -84,45 +85,25 @@
 					uni.hideLoading();
 					console.log(res.data);
 					if(res.data.msgState==1){
-						if(res.data.list.length>0){
+						
 							uni.showToast({
 								 title: '登陆成功！',
 								 duration: 2000,
 								 
 							})
 							//设置token
-							 setTokenStorage(res.data.list[0].token) // todo 储存token，可更换为自己的储存token逻辑
+							 setTokenStorage(res.data.token) // todo 储存token，可更换为自己的储存token逻辑
 							uni.redirectTo({
 							    url: '../index/index?show_index=0',
 								
 							});
-							
-						}else{
-							uni.showToast({
-								 title: 'token不存在！',
-								 duration: 2000,
-								 icon:'none'
-							})
-							var token=`311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv`
-						setTokenStorage(token)
-						uni.redirectTo({
-						    url: '../index/index?show_index=0',
-							
-						});
-						}
-						
-					}else{
+							}else{
 						uni.showToast({
-							 title: '请求异常！',
+							 title: res.data.msg,
 							 duration: 2000,
 							 icon:'none'
 						})
-						var token=`311288512_eN2cdo2snJhQbJO2mC36zszJLC2kaomWjJlQbklk3cXOLC2lbpFWbC363i3T3ZmNbJ0ixcAT3ZlRmZ92mC36zCPiaoy8bJGZao2S3cXOLC2TbJdWbluWbpUixcE1x8vGzckPzc3Hy8vT3Z1haZ9Napvixi3iLC2SmpG1tpvixcE1yMUT3ZGWnJSxnp1l3cXiGnin6362GXCd3iPij5hQbZUixi3iLC2Papvixi3OzsEOzsEOzsEOzsEOzsEiLC2NmpFTsZFSmt363Rp3ZxixieaAYt3T3Y2Qb5UixcvT3Yyca59QbEGhbpUixiLlhb8Wg2slWKflraniLC2Mmpy1jZl0eVBhjIyIbI2k3cXix8nMysvPx8dfnkdHek1UtoWyeklH3iPijJhQjYuxnp1l3cXisFunpt3T3YuJVoyljklk3cXPLC21bZl03cXibYVTbC3T3YVMmo22mC36zszJx8kHLC21jJVNsZFSmt363ZOWdpOWjJkiLC2Ie4VMmo2WmC363ZOWdpOWjJkifv`
-						setTokenStorage(token)
-						uni.redirectTo({
-						    url: '../index/index?show_index=0',
-							
-						});
+						
 					}
 				}).catch(err => {
 					console.log(err);

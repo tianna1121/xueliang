@@ -288,7 +288,7 @@ category:[],
 					return '已办结';
 					break;
 					case 4:
-						return '已办结';
+						return '无效';
 						break;
 				default:
 					return '待处理';

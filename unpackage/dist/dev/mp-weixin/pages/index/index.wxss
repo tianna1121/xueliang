@@ -24,6 +24,10 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.butooms {
+  width: 100%;
+  height: 140rpx;
+}
 .tabBar {
   width: 100%;
   height: 98rpx;

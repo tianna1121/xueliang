@@ -1,15 +1,6 @@
 <template>
 	<view class="bigboxxs">
-		<live-player
-			id="myVideo"
-			:src="detailData.url"
-			autoplay
-			@fullscreenchange="fullscreenchange"
-			@statechange="statechange"
-			@error="videoErrorCallback"
-			@click="clk"
-			
-		>
+		<live-player id="myVideo" :src="src" autoplay mode="RTC" @fullscreenchange="fullscreenchange" @statechange="statechange" @error="videoErrorCallback" @click="clk">
 			<!--顶部栏 竖屏-->
 			<cover-view class="video-control">
 				<cover-view class="video-control-back" @tap.native.stop="backup"><cover-image src="../../static/img/news/back.png"></cover-image></cover-view>
@@ -30,15 +21,15 @@
 				<cover-view class="adresss">{{ detailData.location }}</cover-view>
 			</cover-view>
 			<!-- 右侧导航栏 -->
-			<cover-view class="multi-list rate" :class="{ active: !isMenu1, active1: !isIos&&!isMenu1 }" @tap.native.stop>
+			<cover-view class="multi-list rate" :class="{ active: !isMenu1, active1: !isIos && !isMenu1 }" @tap.native.stop>
 				<cover-view class="top-close" @tap="closeedMenu">
 					<cover-image class="close-img" src="../../static/img/news/close@2x.png"></cover-image>
 					<cover-view class="closeds">关闭</cover-view>
 				</cover-view>
 				<cover-view class="blaks"></cover-view>
 				<cover-view class="list-box" scroll-top="50">
-					<cover-view v-for="(item, index) in list" :key="index" class="multi-item rate" @tap="switchRate(item.id)" :class="{ active: item.id == this.detailData.id }">
-						{{ item.adress }}
+					<cover-view v-for="(item, index) in list" :key="index" class="multi-item rate" @tap="switchRate(item)" :class="{ active: item.id == this.detailData.id }">
+						{{ item.location }}
 					</cover-view>
 				</cover-view>
 			</cover-view>
@@ -65,22 +56,8 @@ export default {
 	},
 	data() {
 		return {
-			src: 'rtsp://10.2.145.66:655/openUrl/CLJ52BW',
-			list: [
-				{ id: 1, adress: '美星镇-新街村' },
-				{ id: 2, adress: '美星镇-新街村' },
-				{ id: 3, adress: '美星镇-新街村' },
-				{ id: 4, adress: '美星镇-新街村' },
-				{ id: 5, adress: '美星镇-新街村' },
-				{ id: 6, adress: '美星镇-新街村' },
-				{ id: 7, adress: '美星镇-新街村' },
-				{ id: 8, adress: '美星镇-新街村' },
-				{ id: 111, adress: '美星镇-新街村' },
-				{ id: 12, adress: '美星镇-新街村' },
-				{ id: 13, adress: '美星镇-新街村' },
-				{ id: 41, adress: '美星镇-新街村' },
-				
-			],
+			src: 'rtmp://58.200.131.2:1935/livetv/hunantv',
+			list: [],
 			currentRate: 1, //当前播放id
 			rateShow: false, //右侧弹出选项
 			detailData: {},
@@ -95,15 +72,19 @@ export default {
 	},
 	onLoad(options) {
 		this.detailData = JSON.parse(options.data).item;
-		console.log('this.detailData')
-		console.log(this.detailData)
+		console.log('this.detailData');
+		console.log(this.detailData);
+		//获取视频列表
 		this.loadNewsList();
+		
 	},
-	onReady: function(res) {
-		// #ifndef MP-ALIPAY
-		this.videoContext = uni.createLivePlayerContext('myVideo',this);
-		// #endif
-		this.videoContext.requestFullScreen();
+	mounted(){
+		uni.showLoading({
+			title: 'loading'
+		});
+	},
+	onReady: function() {
+		this.videoContext = uni.createLivePlayerContext('myVideo', this);
 		this.videoContext.play();
 	},
 	methods: {
@@ -114,9 +95,24 @@ export default {
 			// 		this.backup()
 			// 	}
 		},
-		statechange(e){
-		            console.log('live-player code:', e.detail.code)
-		        },
+		statechange(e) {
+			
+			console.log('live-player code:', e.detail.code);
+			if (e.detail.code == 2002) {
+				uni.hideLoading();
+			}
+			if (e.detail.code == 2003) {
+				this.videoContext.requestFullScreen({ direction: 90 });
+			}
+			if (e.detail.code == -2301) {
+				uni.showToast({
+					icon: 'none',
+					title: '网络断连，请重新退出连接！',
+					duration: 2000
+				});
+			}
+			uni.hideLoading();
+		},
 		backup() {
 			uni.navigateBack({
 				delta: 1
@@ -128,6 +124,32 @@ export default {
 		},
 		loadNewsList() {
 			console.log(this.detailData);
+			var obj = { pageNo: 1, pageCount: 1000 };
+
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-yjqz-ssjksp-x.htm', { params: obj })
+				.then(res => {
+					//console.log('监控列表数据');
+					//console.log(res);
+					if (res.data.msgState == 1) {
+						this.list = res.data.list;
+						console.log(this.list);
+					} else {
+						uni.showToast({
+							icon: 'none',
+							title: '监控列表获取失败！',
+							duration: 2000
+						});
+					}
+				})
+				.catch(err => {
+					console.log(err);
+					uni.showToast({
+						icon: 'none',
+						title: '监控列表获取失败！',
+						duration: 2000
+					});
+				});
 		},
 		videoErrorCallback: function(e) {
 			uni.showModal({
@@ -148,37 +170,36 @@ export default {
 		},
 		cancel(type) {
 			this.$refs.showtip1.close();
-			this.videoContext.requestFullScreen({direction:90});
+			this.videoContext.requestFullScreen({ direction: 90 });
 			this.isshow = false;
 		},
 		//一键求助
 		submitHelp() {
-			
-			var obj={note:this.feedbackContent,id:this.detailData.id}
+			var obj = { note: this.feedbackContent, id: this.detailData.id };
 			//发起请求
 			console.log('一键求助');
 			uni.showLoading({
 				title: 'loading'
 			});
-			this.$http.post('/interface/rest/http/xlwb/xlgc-wb-xcx-yjqz-x.htm',obj).then(res => {
-				uni.hideLoading();
-				console.log(res.data);
-				if(res.data.msgState==1){
-					
-				}
-				uni.showToast({
-				    title: res.data.msg,
-				    duration: 2000
+			this.$http
+				.post('/interface/rest/http/xlwb/xlgc-wb-xcx-yjqz-x.htm', obj)
+				.then(res => {
+					uni.hideLoading();
+					console.log(res.data);
+					if (res.data.msgState == 1) {
+					}
+					uni.showToast({
+						title: res.data.msg,
+						duration: 2000
+					});
+					setTimeout(() => {
+						this.cancel();
+					}, 1000);
+				})
+				.catch(err => {
+					console.log(err);
+					uni.hideLoading();
 				});
-				setTimeout(() => {
-					this.cancel()
-				}, 1500);
-				
-			}).catch(err => {
-				console.log(err);
-				uni.hideLoading();
-			})
-			
 		},
 		//侧边导航栏
 		choosed() {
@@ -192,15 +213,20 @@ export default {
 			this.isMenu1 = true;
 		},
 		//选择视频播放
-		switchRate(id) {
+		switchRate(val) {
 			let that = this;
-			that.detailData.id = id;
-
+			that.detailData = val;
+		this.$nextTick(() => {
+			this.src = 'rtmp://58.200.131.2:1935/livetv/hunantv';
+		});
+			
+			// uni.showLoading({
+			// 	title: 'loading'
+			// });
 			this.isMenu1 = true;
-			if (uni.getSystemInfoSync().platform == 'android') {
-				this.videoContext.requestFullScreen({direction:90});
-			}
-			console.log(id);
+			// if (uni.getSystemInfoSync().platform == 'android') {
+			// 	this.videoContext.requestFullScreen({direction:90});
+			// }
 		}
 	}
 };

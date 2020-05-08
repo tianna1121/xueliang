@@ -16,17 +16,30 @@
 				<uni-icons type="arrowdown" color="#000000" size="18" />
 			</view>
 		</view>
-		<scroll-view class="main_box" scroll-y="true" @scrolltolower="lower">
+		<view class="tips">
 			
+		</view>
+		<!-- 下拉刷新组件 -->
+		<mix-pulldown-refresh ref="mixPulldownRefresh" class="panel-content" :top="90" @refresh="onPulldownReresh" @setEnableScroll="setEnableScroll">
+			<!-- 内容部分 -->
+			<swiper id="swiper" class="swiper-box" :duration="300" >
+				<swiper-item v-for="tabItem in tabBars" :key="tabItem.id">
+					<scroll-view class="panel-scroll-box" :scroll-y="enableScroll" @scrolltolower="loadMore">
 			
 			<!-- 正文 -->
-			<view class=" big-mm" v-for="(item, index) in list" :index="index" :key="index">
+			<view class=" big-mm" v-for="(item, index) in tabItem.newsList" :index="index" :key="index">
 				<view class="grid-item-box" @tap="videoDetail(item)">
 					<image class="image" src="http://img0.imgtn.bdimg.com/it/u=2396068252,4277062836&fm=26&gp=0.jpg" mode=""></image>
 					<text class="text">{{ item.location }}</text>
 				</view>
 			</view>
-		</scroll-view>
+			
+		<!-- 上滑加载更多组件 -->
+						<mix-load-more :status="tabItem.loadMoreStatus"></mix-load-more>
+					</scroll-view>
+				</swiper-item>
+			</swiper>
+		</mix-pulldown-refresh>
 		<w-picker
 			mode="linkage"
 			        :value="value"
@@ -45,12 +58,16 @@
 import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 import uniGrid from '@/components/uni-grid/uni-grid.vue';
 import uniGridItem from '@/components/uni-grid-item/uni-grid-item.vue';
+import mixPulldownRefresh from '@/components/mix-pulldown-refresh/mix-pulldown-refresh';
+import mixLoadMore from '@/components/mix-load-more/mix-load-more';
 import json from '@/json';
 export default {
 	components: {
 		uniNavBar,
 		uniGrid,
-		uniGridItem
+		uniGridItem,
+		mixPulldownRefresh,
+		mixLoadMore,
 	},
 	data() {
 		return {
@@ -66,17 +83,128 @@ export default {
 			dynamicList: [],
 			list: [],
 			defaultProps1:{"label":"name","value":"id","children":"child"},
-			pageNo:1,
-			srcId:''
+			srcId:'',
+			trues: true,
+			tabCurrentIndex: 0, //当前选项卡索引
+			scrollLeft: 0, //顶部选项卡左滑距离
+			enableScroll: true,
+			tabBars: [],
+			pageNo:1
 		};
 	},
+	async onLoad() {
+		// 获取屏幕宽度
+		windowWidth = uni.getSystemInfoSync().windowWidth;
+		
+	},
 	methods: {
+		/**
+		 * 数据处理方法在vue和nvue中通用，可以直接用mixin混合
+		 * 这里直接写的
+		 * mixin使用方法看index.nuve
+		 */
+		//获取分类
+		loadTabbars() {
+			let tabList = json.tabList;
+			tabList.forEach(item => {
+				item.newsList = [];
+				item.loadMoreStatus = 0; //加载更多 0加载前，1加载中，2没有更多了
+				item.refreshing = 0;
+			});
+			this.tabBars = tabList;
+			this.loadNewsList('add');
+		},
+		loadNewsList(type) {
+			console.log("实时监控数据")
+			let tabItem = this.tabBars[this.tabCurrentIndex];
+			
+			//type add 加载更多 refresh下拉刷新
+			if (type === 'add') {
+				if (tabItem.loadMoreStatus === 2) {
+					return;
+				}
+				tabItem.loadMoreStatus = 1;
+			}
+			// #ifdef APP-PLUS
+			else if (type === 'refresh') {
+				tabItem.refreshing = true;
+					this.pageNo=1
+			}
+			// #endif
+			var obj={id: this.srcId,pageNo:this.pageNo}
+			if(this.srcId.length==0){
+				delete obj.id 
+			}
+			
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-yjqz-ssjksp-x.htm', {params:obj})
+				.then(res => {
+					console.log(res);
+					if (res.data.msgState == 1) {
+						var list = res.data.list;
+						console.log('list');
+						console.log(list);
+						
+						
+						if (type === 'refresh') {
+							tabItem.newsList = []; //刷新前清空数组
+						}
+						list.forEach(item => {
+							
+							tabItem.newsList.push(item);
+						});
+						this.pageNo+=1
+					//下拉刷新 关闭刷新动画
+					if (type === 'refresh') {
+						this.$refs.mixPulldownRefresh && this.$refs.mixPulldownRefresh.endPulldownRefresh();
+						// #ifdef APP-PLUS
+						tabItem.refreshing = false;
+						// #endif
+						if(res.data.totalPages===0||res.data.curPage===res.data.totalPages){
+						tabItem.loadMoreStatus =2	
+						}else tabItem.loadMoreStatus = 0;
+						
+						
+					}
+						//上滑加载 处理状态
+						if (type === 'add') {
+							if(res.data.totalPages===0||res.data.curPage===res.data.totalPages){
+							tabItem.loadMoreStatus =2	
+							this.pageNo=1
+							}
+							}
+					} else {
+						uni.showLoading({
+							title: '请求失败'
+						});
+					}
+				})
+				.catch(err => {
+					console.log(err);
+					console.log(err);
+					uni.showToast({
+						icon:"none",
+						title: '监控列表获取失败！',
+						duration:2000
+					});
+				});
+		},
+		
 		ontrueGetList() {
 			console.log('实时监控');
+			this.init()
 			this.getType();
+			this.loadTabbars();
+			
+			
 			//console.log(json.subs);
 			//this.list = json.subs;
-			this.getList()
+			//this.getList()
+		},
+		init(){
+			this.value=['请选择', '请选择', '请选择']
+			this.srcId=''
+			this.pageNo=1
 		},
 		getType() {
 			this.$http
@@ -180,11 +308,28 @@ export default {
 		this.srcId=$event.value[2]
 		
 			//TODO在这里发起请求
-			this.getList()
+			this.onPulldownReresh()
 		},
 		onCancel(){
 			console.log('你取消了')
-		}
+		},
+		//下拉刷新
+		onPulldownReresh() {
+			this.pageNo=1;
+			this.loadNewsList('refresh');
+		},
+		//上滑加载
+		loadMore() {
+			this.loadNewsList('add');
+		},
+		//设置scroll-view是否允许滚动，在小程序里下拉刷新时避免列表可以滑动
+		setEnableScroll(enable) {
+			if (this.enableScroll !== enable) {
+				this.enableScroll = enable;
+			}
+		},
+		
+		
 	}
 };
 </script>
@@ -192,15 +337,20 @@ export default {
 <style lang="scss">
 .main {
 	background-color: #ffffff;
+	//padding-bottom:120rpx;box-sizing: border-box;
 }
-// padding-bottom:120rpx;box-sizing: border-box;重要*************************保证页面底部内容不被隐藏也不会出现多余的滚动条
+//padding-bottom:120rpx;box-sizing: border-box;重要*************************保证页面底部内容不被隐藏也不会出现多余的滚动条
 .main_box {
 	width: 100vw;
-	// height: 100vh;
-	padding-bottom: 120rpx;
+	 height: 100vh;
+	padding-bottom: 130rpx;
 	box-sizing: border-box;
 	margin-top: 84rpx;
 }
+.swiper-box {
+		height: 100%;
+		margin-top: 90rpx;
+	}
 .main_centent {
 	width: 100%;
 	height: 100vh;
@@ -258,4 +408,15 @@ export default {
 	font-weight: 500;
 	margin-top: 10rpx;
 }
+
+
+.panel-scroll-box {
+		height: 100%;
+
+		.panel-item {
+			background: #fff;
+			padding: 30px 0;
+			border-bottom: 2px solid #000;
+		}
+	}
 </style>

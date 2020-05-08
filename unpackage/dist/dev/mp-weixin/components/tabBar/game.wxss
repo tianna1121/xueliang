@@ -29,10 +29,15 @@
 }
 .main_box {
   width: 100vw;
-  padding-bottom: 120rpx;
+  height: 100vh;
+  padding-bottom: 130rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   margin-top: 84rpx;
+}
+.swiper-box {
+  height: 100%;
+  margin-top: 90rpx;
 }
 .main_centent {
   width: 100%;
@@ -110,5 +115,13 @@
   font-size: 28rpx;
   font-weight: 500;
   margin-top: 10rpx;
+}
+.panel-scroll-box {
+  height: 100%;
+}
+.panel-scroll-box .panel-item {
+  background: #fff;
+  padding: 30px 0;
+  border-bottom: 2px solid #000;
 }
 

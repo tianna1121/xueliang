@@ -757,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -919,12 +919,11 @@ function wrapper$1(event) {
 
   event.target = event.target || {};
 
-  if (!hasOwn(event, 'detail')) {
+  if (!hasOwn(event, 'detail') || !event.detail) {
     event.detail = {};
   }
 
-  if (hasOwn(event, 'markerId')) {
-    event.detail = typeof event.detail === 'object' ? event.detail : {};
+  if (!('markerId' in event.detail) && 'markerId' in event) {
     event.detail.markerId = event.markerId;
   }
 
@@ -1690,9 +1689,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 15:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/utils/luch-request/index.js ***!
-  \******************************************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/utils/luch-request/index.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1801,14 +1800,14 @@ test.interceptor.response(function (response) {/* 请求之后拦截器 */
 // XXX 重新创建一个示例，可根据自身逻辑决定是否需要重新创建一个示例
 var reReqest = new _request.default();
 reReqest.setConfig(function (config) {
-  config.baseUrl = 'https://app8848.com'; /* 根域名不同 */
+  config.baseUrl = 'https://www.app8848.com'; /* 根域名不同 */
   return config;
 });
 
 var http = new _request.default();exports.http = http;
 var refreshToken = getTokenDebounce();
 http.setConfig(function (config) {/* 设置全局配置 */
-  config.baseUrl = 'https://app8848.com'; /* 根域名不同 */
+  config.baseUrl = 'https://www.app8848.com'; /* 根域名不同 */
   config.header = _objectSpread({},
   config.header);
 
@@ -1903,9 +1902,9 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 17);
 /***/ }),
 
 /***/ 163:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/components/uni-icons/icons.js ***!
-  \********************************************************************************************/
+/*!**************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/components/uni-icons/icons.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2825,9 +2824,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 19:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/utils/luch-request/request.js ***!
-  \********************************************************************************************/
+/*!**************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/utils/luch-request/request.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8866,7 +8865,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8887,14 +8886,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8970,7 +8969,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9365,9 +9364,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/js_sdk/ccdzhang-dokey/md5.js ***!
-  \*******************************************************************************************/
+/*!*************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/js_sdk/ccdzhang-dokey/md5.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10057,7 +10056,7 @@ internalMixin(Vue);
     }
   }
 })();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/node-libs-browser/mock/process.js */ 21), __webpack_require__(/*! (webpack)/buildin/global.js */ 3)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/node-libs-browser/mock/process.js */ 21), __webpack_require__(/*! ./../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
 
 /***/ }),
 
@@ -10435,9 +10434,9 @@ module.exports = __webpack_amd_options__;
 /***/ }),
 
 /***/ 24:
-/*!****************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/test/index.js ***!
-  \****************************************************************************/
+/*!**********************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/test/index.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10453,9 +10452,9 @@ exports.currentCode = currentCode;
 /***/ }),
 
 /***/ 25:
-/*!***************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/utils/api.js ***!
-  \***************************************************************************/
+/*!*********************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/utils/api.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10470,9 +10469,9 @@ var getNewTokenServe = function getNewTokenServe() {
 /***/ }),
 
 /***/ 26:
-/*!***************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/test/tool.js ***!
-  \***************************************************************************/
+/*!*********************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/test/tool.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10505,9 +10504,9 @@ exports.getTokenStorage = getTokenStorage;var configHandle = function configHand
 /***/ }),
 
 /***/ 297:
-/*!*******************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/components/w-picker/areadata/areadata.js ***!
-  \*******************************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/components/w-picker/areadata/areadata.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10548,9 +10547,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!*************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/pages.json ***!
-  \*************************************************************************/
+/*!*******************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/pages.json ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -11452,14 +11451,14 @@ main();
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-26920200424005","_inBundle":false,"_integrity":"sha512-FT8Z/C5xSmIxooqhV1v69jTkxATPz+FsRQIFOrbdlWekjGkrE73jfrdNMWm7gL5u41ALPJTVArxN1Re9by1bjQ==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-26920200424005.tgz","_shasum":"47f4375095eda3089cf4678b4b96fc656a7ab623","_spec":"@dcloudio/uni-stat@next","_where":"/Users/guoshengqiang/Documents/dcloud-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"94494d54ed23e2dcf9ab8e3245b48b770b4e98a9","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-26920200424005"};
+module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-26920200421003","_inBundle":false,"_integrity":"sha512-Aa6R66ZF2pIK9XB+Y7QbSW2GficyNTcdT7fnxFw5gY1eeY+u8oT7rTpZrL1W2qKbqf2FbsNPDjZrg1nRj6RxkQ==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-26920200421003.tgz","_shasum":"c08ebc00afa71edd9ed388fc4bf411e42d458ac5","_spec":"@dcloudio/uni-stat@next","_where":"/Users/guoshengqiang/Documents/dcloud-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"a7035ab7f2a83dbc2c75090de34f68e5a01224a7","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-26920200421003"};
 
 /***/ }),
 
 /***/ 7:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/pages.json?{"type":"style"} ***!
-  \******************************************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/pages.json?{"type":"style"} ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11469,9 +11468,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 8:
-/*!*****************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/pages.json?{"type":"stat"} ***!
-  \*****************************************************************************************/
+/*!***********************************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/pages.json?{"type":"stat"} ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11481,9 +11480,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 81:
-/*!**********************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/abc/PlentyEngineeringWX/json.js ***!
-  \**********************************************************************/
+/*!****************************************************!*\
+  !*** /Users/heimofang/Desktop/uniapp/雪亮工程/json.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

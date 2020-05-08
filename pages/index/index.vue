@@ -10,6 +10,8 @@
 		<tab-information :style="{'display':show_index == 3 ?'block':'none'}" ref="information"></tab-information>
 		<!-- 个人中心 -->
 		<tab-mycenter :style="{'display':show_index == 4 ? 'flex':'none'}" ref="mycenter"></tab-mycenter>
+		<!-- //底部留白 -->
+		<!-- <view class="butooms"></view> -->
 		<!-- is_lhp判断是否为刘海屏在main.js里，好像uniapp有一个css变量获取刘海屏的安全区域 -->
 		<view class="tabBar" :style="{height:is_lhp?'140rpx':'98rpx'}">
 			<!-- 导航的中间圆圈 --> 
@@ -144,6 +146,11 @@
 </script>
 
 <style lang="scss" >
+	.butooms{
+		width: 100%;
+		height: 140rpx;
+		
+	}
 	.tabBar{ width:100%;height: 98rpx;background: #fff;border-top:1px solid #E5E5E5;position: fixed;bottom:0px;left:0px;right:0px;display: flex;align-items: center;justify-content: center;
 		.tabBar_list{ width:95%;display: flex;justify-content: space-between;
 			image{ width:44rpx;height: 44rpx;margin-bottom:2rpx}

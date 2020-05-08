@@ -150,7 +150,7 @@ export default {
 				title: 'loading'
 			});
 			this.$http
-				.post('/interface/rest/http/xlwb/xlgc-wb-xcx-sjsb-feedback.htm', obj)
+				.post('/interface/rest/http/xlwb/xlgc-wb-xcx-tzgg-feedback.htm', obj)
 				.then(res => {
 					uni.hideLoading();
 					console.log(res.data);

@@ -112,10 +112,10 @@ export default {
 					return '待处理';
 					break;
 				case 1:
-					return '代办结';
+					return '待办';
 					break;
 				case 2:
-					return '代办结';
+					return '待办结';
 					break;
 			
 				case 3:
