@@ -175,6 +175,14 @@ export default {
 		},
 		//一键求助
 		submitHelp() {
+			if(this.feedbackContent==''){
+				uni.showToast({
+				    title: '请输入求助内容',
+				    duration: 2000,
+					icon:"none"
+				});
+				return
+			}
 			var obj = { note: this.feedbackContent, id: this.detailData.id };
 			//发起请求
 			console.log('一键求助');

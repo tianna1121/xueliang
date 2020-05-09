@@ -366,7 +366,14 @@ category:[],
 		},
 
 		submitFeedbackContent() {
-			
+			if(this.feedbackContent==''){
+				uni.showToast({
+				    title: '请输入反馈信息',
+				    duration: 2000,
+					icon:"none"
+				});
+				return
+			}
 			var obj={feedback_content:this.feedbackContent,id:this.id}
 			//发起请求
 			this.$refs.showtip1.close();

@@ -523,7 +523,14 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
     },
 
     submitFeedbackContent: function submitFeedbackContent() {var _this6 = this;
+      if (this.feedbackContent == '') {
+        uni.showToast({
+          title: '请输入反馈信息',
+          duration: 2000,
+          icon: "none" });
 
+        return;
+      }
       var obj = { feedback_content: this.feedbackContent, id: this.id };
       //发起请求
       this.$refs.showtip1.close();

@@ -311,6 +311,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     //一键求助
     submitHelp: function submitHelp() {var _this3 = this;
+      if (this.feedbackContent == '') {
+        uni.showToast({
+          title: '请输入求助内容',
+          duration: 2000,
+          icon: "none" });
+
+        return;
+      }
       var obj = { note: this.feedbackContent, id: this.detailData.id };
       //发起请求
       console.log('一键求助');

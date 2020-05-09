@@ -85,11 +85,9 @@ export default {
 				type: '0',
 				category: '0',
 				time: '点击选择',
-
 				address: '选择地点',
 				longitude: '',
 				latitude: '',
-
 				content: '',
 				imgList: '',
 				videoSrc:""
@@ -157,6 +155,55 @@ export default {
 			this.upData.imgList=this.imgList
 			this.upData.videoSrc=this.videoList
 			console.log(this.upData);
+			if(this.upData.type=='0'){
+				uni.showModal({
+					content: "请选择类型",
+					showCancel: false,
+					confirmText: "确定"
+				})
+				return
+			}
+			if(this.upData.category=='0'){
+				uni.showModal({
+					content: "请选择类别",
+					showCancel: false,
+					confirmText: "确定"
+				})
+				return
+			}
+			if(this.upData.time=='点击选择'){
+				uni.showModal({
+					content: "请选择上报时间",
+					showCancel: false,
+					confirmText: "确定"
+				})
+				return
+			}
+			if(this.upData.address=='选择地点'){
+				uni.showModal({
+					content: "请选择事发地点",
+					showCancel: false,
+					confirmText: "确定"
+				})
+				return
+			}
+			if(this.upData.content==''){
+				uni.showModal({
+					content: "请输入事件描述",
+					showCancel: false,
+					confirmText: "确定"
+				})
+				return
+			}
+			if(this.upData.imgList.length==0&&this.upData.videoSrc.length==0){
+				uni.showModal({
+					content: "请上传图片/视频",
+					showCancel: false,
+					confirmText: "确定"
+				})
+				return
+			}
+			
 			uni.showLoading({
 				title: 'loading'
 			});
