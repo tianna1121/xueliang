@@ -187,11 +187,19 @@ export default {
 					uni.hideLoading();
 					console.log(res.data);
 					if (res.data.msgState == 1) {
+						uni.showToast({
+							 title: res.data.msg,
+							 duration: 2000,
+							
+						})
+					}else{
+						uni.showToast({
+							 title: res.data.msg,
+							 duration: 2000,
+							 icon:'none'
+						})
 					}
-					uni.showToast({
-						title: res.data.msg,
-						duration: 2000
-					});
+				
 					setTimeout(() => {
 						this.cancel();
 					}, 1000);

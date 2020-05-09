@@ -363,8 +363,10 @@ tabBar;var _default =
           }
 
         } else {
-          uni.showLoading({
-            title: '请求失败' });
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000,
+            icon: "none" });
 
         }
       }).

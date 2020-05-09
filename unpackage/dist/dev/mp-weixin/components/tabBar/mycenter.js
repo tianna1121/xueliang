@@ -210,11 +210,21 @@ __webpack_require__.r(__webpack_exports__);
             _this2.userInfo.avatar = "http://fc-feed.cdn.bcebos.com/0/pic/9107b498a0cbea000842763091e833b6.jpg";
           }
 
+        } else {
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000,
+            icon: "none" });
+
         }
 
       }).
       catch(function (err) {
         console.log(err);
+        uni.showToast({
+          title: "请求失败",
+          duration: 2000,
+          icon: "none" });
 
       });
     },
@@ -318,14 +328,27 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res);
         if (res.data.msgState == 1) {
           _this4.userInfo.avatar = val;
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000 });
+
+        } else {
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000,
+            icon: "none" });
+
         }
-        uni.showToast({
-          title: res.data.msg,
-          duration: 2000 });
+
 
       }).
       catch(function (err) {
         console.log(err);
+        uni.showToast({
+          title: "请求失败",
+          duration: 2000,
+          icon: "none" });
+
 
       });
     },

@@ -265,7 +265,8 @@ __webpack_require__.r(__webpack_exports__);
         }
         uni.showToast({
           title: res.data.msg,
-          duration: 2000 });
+          duration: 2000,
+          icon: 'none' });
 
       }).
       catch(function (err) {
@@ -310,7 +311,8 @@ __webpack_require__.r(__webpack_exports__);
         }
         uni.showToast({
           title: res.data.msg,
-          duration: 2000 });
+          duration: 2000,
+          icon: 'none' });
 
       }).
       catch(function (err) {

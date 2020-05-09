@@ -144,9 +144,11 @@
 							this.options=res.data.result
 							
 						} else {
-							uni.showLoading({
-								title: '请求失败'
-							});
+							uni.showToast({
+								 title: res.data.msg,
+								 duration: 2000,
+								 icon:'none'
+							})
 						}
 					})
 					.catch(err => {
@@ -295,12 +297,10 @@
 					if(res.data.msgState==1){
 						uni.redirectTo({
 						    url: '../regres/regres',
-							
 						});
 						uni.showToast({
 							title: res.data.msg,
 							duration: 2000,
-							
 						});
 					}else{
 						uni.showToast({
@@ -313,7 +313,7 @@
 					console.log(err);
 					uni.hideLoading();
 					uni.showToast({
-						 title: '登陆失败！',
+						 title: '请求失败！',
 						 duration: 2000,
 						 icon:'none'
 					})
@@ -356,7 +356,8 @@
 								}else{
 									uni.showToast({
 									    title: '上传失败，请重新上传',
-									    duration: 2000
+									    duration: 2000,
+										icon:"none"
 									});
 								}
 								

@@ -191,11 +191,23 @@ __webpack_require__.r(__webpack_exports__);
           uni.navigateBack({
             delta: 1 });
 
+        } else {
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000,
+            icon: 'none' });
+
         }
+
       }).
       catch(function (err) {
         console.log(err);
         uni.hideLoading();
+        uni.showToast({
+          title: "请求失败",
+          duration: 2000,
+          icon: 'none' });
+
       });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

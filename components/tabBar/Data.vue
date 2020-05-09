@@ -168,11 +168,19 @@ export default {
 					console.log(res);
 					if (res.data.msgState == 1) {
 						this.cleanData();
+						uni.showToast({
+							title: res.data.msg,
+							duration: 2000
+						});
+						
+					}else{
+						uni.showToast({
+							title: res.data.msg,
+							duration: 2000,
+							icon:"none"
+						});
 					}
-					uni.showToast({
-						title: res.data.msg,
-						duration: 2000
-					});
+					
 				})
 				.catch(err => {
 					console.log(err);
@@ -208,8 +216,10 @@ export default {
 					
 						this.type2=	this.typeChange(obj1)
 					} else {
-						uni.showLoading({
-							title: '请求失败'
+						uni.showToast({
+							title: res.data.msg,
+							duration: 2000,
+							icon:"none"
 						});
 					}
 				})
@@ -229,8 +239,10 @@ export default {
 							var obj=[...obj1,...data]
 						this.type2=	this.typeChange(obj)
 					} else {
-						uni.showLoading({
-							title: '请求失败'
+						uni.showToast({
+							title: res.data.msg,
+							duration: 2000,
+							icon:"none"
 						});
 					}
 				})
@@ -310,7 +322,8 @@ export default {
 							fail() {
 								uni.showToast({
 									title: '无法获取地图权限',
-									duration: 2000
+									duration: 2000,
+									icon:"none"
 								});
 							}
 						});

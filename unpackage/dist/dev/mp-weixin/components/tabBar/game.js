@@ -306,8 +306,10 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
             }
           }
         } else {
-          uni.showLoading({
-            title: '请求失败' });
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000,
+            icon: "none" });
 
         }
       }).
@@ -381,9 +383,9 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
 
         } else {
           uni.showToast({
-            icon: "none",
-            title: '监控列表获取失败！',
-            duration: 2000 });
+            title: res.data.msg,
+            duration: 2000,
+            icon: "none" });
 
 
         }
@@ -406,15 +408,7 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
     sizeTypeChange: function sizeTypeChange(e) {
       this.sexIndex = parseInt(e.detail.value);
     },
-    change: function change(e) {var
-      index = e.detail.index;
-      this.list[index].badge && this.list[index].badge++;
 
-      uni.showToast({
-        title: "\u70B9\u51FB\u7B2C".concat(index + 1, "\u4E2A\u5BAB\u683C"),
-        icon: 'none' });
-
-    },
     videoDetail: function videoDetail(item) {
       var data = {
         item: item };

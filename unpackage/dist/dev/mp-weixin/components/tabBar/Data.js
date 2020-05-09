@@ -294,10 +294,18 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res);
         if (res.data.msgState == 1) {
           _this.cleanData();
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000 });
+
+
+        } else {
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000,
+            icon: "none" });
+
         }
-        uni.showToast({
-          title: res.data.msg,
-          duration: 2000 });
 
       }).
       catch(function (err) {
@@ -334,8 +342,10 @@ __webpack_require__.r(__webpack_exports__);
 
           _this2.type2 = _this2.typeChange(obj1);
         } else {
-          uni.showLoading({
-            title: '请求失败' });
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000,
+            icon: "none" });
 
         }
       }).
@@ -355,8 +365,10 @@ __webpack_require__.r(__webpack_exports__);
           var obj = [].concat(obj1, _toConsumableArray(data));
           _this3.type2 = _this3.typeChange(obj);
         } else {
-          uni.showLoading({
-            title: '请求失败' });
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000,
+            icon: "none" });
 
         }
       }).
@@ -436,7 +448,8 @@ __webpack_require__.r(__webpack_exports__);
               fail: function fail() {
                 uni.showToast({
                   title: '无法获取地图权限',
-                  duration: 2000 });
+                  duration: 2000,
+                  icon: "none" });
 
               } });
 

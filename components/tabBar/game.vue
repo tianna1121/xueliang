@@ -174,8 +174,10 @@ export default {
 							}
 							}
 					} else {
-						uni.showLoading({
-							title: '请求失败'
+						uni.showToast({
+							title: res.data.msg,
+							duration: 2000,
+							icon:"none"
 						});
 					}
 				})
@@ -249,9 +251,9 @@ export default {
 					
 				} else {
 					uni.showToast({
-						icon:"none",
-						title: '监控列表获取失败！',
-						duration:2000
+						title: res.data.msg,
+						duration: 2000,
+						icon:"none"
 					});
 					
 				}
@@ -274,15 +276,7 @@ export default {
 		sizeTypeChange(e) {
 			this.sexIndex = parseInt(e.detail.value);
 		},
-		change(e) {
-			let { index } = e.detail;
-			this.list[index].badge && this.list[index].badge++;
-
-			uni.showToast({
-				title: `点击第${index + 1}个宫格`,
-				icon: 'none'
-			});
-		},
+	
 		videoDetail(item ) {
 			let data = {
 				item:item

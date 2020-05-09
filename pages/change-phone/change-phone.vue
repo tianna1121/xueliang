@@ -55,11 +55,23 @@ export default {
 						uni.navigateBack({
 							delta: 1
 						});
+					}else{
+						uni.showToast({
+							 title: res.data.msg,
+							 duration: 2000,
+							 icon:'none'
+						})
 					}
+					
 				})
 				.catch(err => {
 					console.log(err);
 					uni.hideLoading();
+					uni.showToast({
+						 title: "请求失败",
+						 duration: 2000,
+						 icon:'none'
+					})
 				});
 		}
 	}

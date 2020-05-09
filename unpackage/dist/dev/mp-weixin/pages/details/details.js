@@ -323,8 +323,10 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
           _this.type1 = res.data.list;
 
         } else {
-          uni.showLoading({
-            title: '获取事件类型失败' });
+          uni.showToast({
+            title: "请求失败",
+            duration: 2000,
+            icon: 'none' });
 
         }
       }).
@@ -402,13 +404,20 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
                     _this3.typeChange();
                   } else {
                     uni.showToast({
-                      title: "请求失败" });
+                      title: res.data.msg,
+                      duration: 2000,
+                      icon: 'none' });
 
                   }
                 }).
                 catch(function (err) {
                   console.log(err);
                   uni.hideLoading();
+                  uni.showToast({
+                    title: "请求失败",
+                    duration: 2000,
+                    icon: 'none' });
+
                 });case 2:case "end":return _context.stop();}}}, _callee);}))();
     },
     imgsrc: function imgsrc() {
@@ -441,7 +450,7 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
         processingProcess.splice(2, 1);
       }
       //处理已办结/无效
-      if (processingProcess[3].desc.length >= processingProcess[4].desc.length) {
+      if (processingProcess[3].desc.length >= processingProcess[4].desc.length && this.detailData.status == 3) {
         processingProcess.splice(4, 1);
       } else {
         processingProcess.splice(3, 1);
@@ -537,6 +546,11 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
       }).catch(function (err) {
         console.log(err);
         uni.hideLoading();
+        uni.showToast({
+          title: "请求失败",
+          duration: 2000,
+          icon: 'none' });
+
       });
 
     },
@@ -560,8 +574,10 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
           }, 1000);
 
         } else {
-          uni.showLoading({
-            title: '请求失败' });
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000,
+            icon: 'none' });
 
         }
       }).

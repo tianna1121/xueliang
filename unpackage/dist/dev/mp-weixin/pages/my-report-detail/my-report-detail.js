@@ -417,10 +417,14 @@ __webpack_require__.r(__webpack_exports__);
       //处理待办结/内容反馈
       if (processingProcess[2].desc.length >= processingProcess[3].desc.length) {
         processingProcess.splice(3, 1);
+      } else {
+        processingProcess.splice(2, 1);
       }
       //处理已办结/无效
-      if (processingProcess[3].desc.length >= processingProcess[4].desc.length) {
+      if (processingProcess[3].desc.length >= processingProcess[4].desc.length && this.detailData.status == 3) {
         processingProcess.splice(4, 1);
+      } else {
+        processingProcess.splice(3, 1);
       }
       console.log(processingProcess);
       this.detailData.processingProcess = processingProcess;

@@ -116,9 +116,10 @@ export default {
 						this.back()
 					}
 					uni.showToast({
-						title: res.data.msg,
-						duration: 2000
-					});
+						 title: res.data.msg,
+						 duration: 2000,
+						 icon:'none'
+					})
 				})
 				.catch(err => {
 					console.log(err);
@@ -161,9 +162,10 @@ export default {
 						this.back()
 					}
 					uni.showToast({
-						title: res.data.msg,
-						duration: 2000
-					});
+						 title: res.data.msg,
+						 duration: 2000,
+						 icon:'none'
+					})
 				})
 				.catch(err => {
 					console.log(err);
