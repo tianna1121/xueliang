@@ -1,6 +1,6 @@
 <template>
 	<view class="bigboxxs">
-		<live-player id="myVideo" :src="src" autoplay mode="RTC" @fullscreenchange="fullscreenchange" @statechange="statechange" @error="videoErrorCallback" @click="clk">
+		<live-player id="myVideo" :src="detailData.url" autoplay mode="RTC" @fullscreenchange="fullscreenchange" @statechange="statechange" @error="videoErrorCallback" @click="clk">
 			<!--顶部栏 竖屏-->
 			<cover-view class="video-control">
 				<cover-view class="video-control-back" @tap.native.stop="backup"><cover-image src="../../static/img/news/back.png"></cover-image></cover-view>
@@ -98,11 +98,14 @@ export default {
 		statechange(e) {
 			
 			console.log('live-player code:', e.detail.code);
-			if (e.detail.code == 2002) {
-				uni.hideLoading();
-			}
+			
 			if (e.detail.code == 2003) {
+				uni.hideLoading();
 				this.videoContext.requestFullScreen({ direction: 90 });
+			}
+			if (e.detail.code == 2105) {
+				uni.hideLoading();
+				//this.videoContext.requestFullScreen({ direction: 90 });
 			}
 			if (e.detail.code == -2301) {
 				uni.showToast({
@@ -231,18 +234,18 @@ export default {
 		//选择视频播放
 		switchRate(val) {
 			let that = this;
-			that.detailData = val;
+			
 		this.$nextTick(() => {
-			this.src = 'rtmp://58.200.131.2:1935/livetv/hunantv';
+			that.detailData = val;
 		});
 			
-			// uni.showLoading({
-			// 	title: 'loading'
-			// });
+			uni.showLoading({
+				title: 'loading'
+			});
 			this.isMenu1 = true;
-			// if (uni.getSystemInfoSync().platform == 'android') {
-			// 	this.videoContext.requestFullScreen({direction:90});
-			// }
+			if (uni.getSystemInfoSync().platform == 'android') {
+				this.videoContext.requestFullScreen({direction:90});
+			}
 		}
 	}
 };

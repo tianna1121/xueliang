@@ -234,11 +234,14 @@ __webpack_require__.r(__webpack_exports__);
     statechange: function statechange(e) {
 
       console.log('live-player code:', e.detail.code);
-      if (e.detail.code == 2002) {
-        uni.hideLoading();
-      }
+
       if (e.detail.code == 2003) {
+        uni.hideLoading();
         this.videoContext.requestFullScreen({ direction: 90 });
+      }
+      if (e.detail.code == 2105) {
+        uni.hideLoading();
+        //this.videoContext.requestFullScreen({ direction: 90 });
       }
       if (e.detail.code == -2301) {
         uni.showToast({
@@ -365,20 +368,20 @@ __webpack_require__.r(__webpack_exports__);
       this.isMenu1 = true;
     },
     //选择视频播放
-    switchRate: function switchRate(val) {var _this4 = this;
+    switchRate: function switchRate(val) {
       var that = this;
-      that.detailData = val;
+
       this.$nextTick(function () {
-        _this4.src = 'rtmp://58.200.131.2:1935/livetv/hunantv';
+        that.detailData = val;
       });
 
-      // uni.showLoading({
-      // 	title: 'loading'
-      // });
+      uni.showLoading({
+        title: 'loading' });
+
       this.isMenu1 = true;
-      // if (uni.getSystemInfoSync().platform == 'android') {
-      // 	this.videoContext.requestFullScreen({direction:90});
-      // }
+      if (uni.getSystemInfoSync().platform == 'android') {
+        this.videoContext.requestFullScreen({ direction: 90 });
+      }
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
