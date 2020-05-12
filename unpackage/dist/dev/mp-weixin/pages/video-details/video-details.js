@@ -186,6 +186,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 {
   components: {
     uniPopup: uniPopup },
@@ -203,7 +204,8 @@ __webpack_require__.r(__webpack_exports__);
       isshow: false,
       isMenu1: true,
       isIos: true,
-      feedbackContent: '' };
+      feedbackContent: '',
+      isPoster: true };
 
   },
   onLoad: function onLoad(options) {
@@ -234,12 +236,18 @@ __webpack_require__.r(__webpack_exports__);
     statechange: function statechange(e) {
 
       console.log('live-player code:', e.detail.code);
+      if (e.detail.code == 2001) {
+        uni.showLoading({
+          title: 'loading' });
 
+      }
       if (e.detail.code == 2003) {
+        this.isPoster = false;
         uni.hideLoading();
         this.videoContext.requestFullScreen({ direction: 90 });
       }
       if (e.detail.code == 2105) {
+        this.isPoster = false;
         uni.hideLoading();
         //this.videoContext.requestFullScreen({ direction: 90 });
       }
@@ -250,7 +258,7 @@ __webpack_require__.r(__webpack_exports__);
           duration: 2000 });
 
       }
-      uni.hideLoading();
+      //uni.hideLoading();
     },
     backup: function backup() {
       uni.navigateBack({
@@ -368,11 +376,12 @@ __webpack_require__.r(__webpack_exports__);
       this.isMenu1 = true;
     },
     //选择视频播放
-    switchRate: function switchRate(val) {
+    switchRate: function switchRate(val) {var _this4 = this;
       var that = this;
 
       this.$nextTick(function () {
         that.detailData = val;
+        _this4.this.isPoster = true;
       });
 
       uni.showLoading({

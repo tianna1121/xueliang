@@ -1,6 +1,7 @@
 <template>
 	<view class="bigboxxs">
 		<live-player id="myVideo" :src="detailData.url" autoplay mode="RTC" @fullscreenchange="fullscreenchange" @statechange="statechange" @error="videoErrorCallback" @click="clk">
+			<cover-image class="isPosterImg" v-show="isPoster" :src="detailData.logoUrl" ></cover-image>
 			<!--顶部栏 竖屏-->
 			<cover-view class="video-control">
 				<cover-view class="video-control-back" @tap.native.stop="backup"><cover-image src="../../static/img/news/back.png"></cover-image></cover-view>
@@ -67,7 +68,8 @@ export default {
 			isshow: false,
 			isMenu1: true,
 			isIos: true,
-			feedbackContent: ''
+			feedbackContent: '',
+			isPoster:true
 		};
 	},
 	onLoad(options) {
@@ -98,12 +100,18 @@ export default {
 		statechange(e) {
 			
 			console.log('live-player code:', e.detail.code);
-			
+			if (e.detail.code == 2001) {
+				uni.showLoading({
+					title: 'loading'
+				});
+			}
 			if (e.detail.code == 2003) {
+				this.isPoster=false;
 				uni.hideLoading();
 				this.videoContext.requestFullScreen({ direction: 90 });
 			}
 			if (e.detail.code == 2105) {
+				this.isPoster=false;
 				uni.hideLoading();
 				//this.videoContext.requestFullScreen({ direction: 90 });
 			}
@@ -114,7 +122,7 @@ export default {
 					duration: 2000
 				});
 			}
-			uni.hideLoading();
+			//uni.hideLoading();
 		},
 		backup() {
 			uni.navigateBack({
@@ -237,6 +245,7 @@ export default {
 			
 		this.$nextTick(() => {
 			that.detailData = val;
+			this.this.isPoster=true;
 		});
 			
 			uni.showLoading({
@@ -309,6 +318,12 @@ export default {
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 1;
 	font-size: 32rpx;
+}
+	
+.isPosterImg{
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
 }
 .video-control-more {
 	position: relative;

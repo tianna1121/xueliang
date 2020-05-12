@@ -29,7 +29,7 @@
 			<!-- 正文 -->
 			<view class=" big-mm" v-for="(item, index) in tabItem.newsList" :index="index" :key="index">
 				<view class="grid-item-box" @tap="videoDetail(item)">
-					<image class="image" src="http://img0.imgtn.bdimg.com/it/u=2396068252,4277062836&fm=26&gp=0.jpg" mode=""></image>
+					<image class="image" :src="item.logoUrl" mode=""></image>
 					<text class="text">{{ item.location }}</text>
 				</view>
 			</view>
