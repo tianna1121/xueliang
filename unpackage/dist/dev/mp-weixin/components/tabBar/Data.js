@@ -370,7 +370,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     ontrueGetList: function ontrueGetList() {
 
-
+      this.cleanData();
       this.dates = this.getNowFormatDate();
       //获取上报类型
       //this.getType1()

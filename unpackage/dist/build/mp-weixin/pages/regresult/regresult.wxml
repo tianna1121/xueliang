@@ -1,1 +1,0 @@
-<view class="big-box"><image class="img-res" src="../../static/img/news/reg_pass.png"></image><view class="msg">您的账号审核通过</view><view class="msg1">温馨提示</view><view class="msg1">登陆账号为注册手机号</view><view class="msg1">密码为身份证后6位</view><view data-event-opts="{{[['tap',[['jumpRegster',['$event']]]]]}}" class="jump-reg" bindtap="__e">点击进入登陆页</view></view>

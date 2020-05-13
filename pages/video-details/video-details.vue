@@ -1,6 +1,6 @@
 <template>
 	<view class="bigboxxs">
-		<live-player id="myVideo" :src="detailData.url" autoplay mode="RTC" @fullscreenchange="fullscreenchange" @statechange="statechange" @error="videoErrorCallback" @click="clk">
+		<live-player id="myVideo" :src="videoUrl" autoplay mode="RTC" @fullscreenchange="fullscreenchange" @statechange="statechange" @error="videoErrorCallback" @click="clk">
 			<cover-image class="isPosterImg" v-show="isPoster" :src="detailData.logoUrl" ></cover-image>
 			<!--顶部栏 竖屏-->
 			<cover-view class="video-control">
@@ -19,7 +19,7 @@
 			<!-- 位置 -->
 			<cover-view class="adress-box">
 				<cover-image class="adress-img" src="../../static/img/news/location.png"></cover-image>
-				<cover-view class="adresss">{{ detailData.location }}</cover-view>
+				<cover-view class="adresss">{{ detailData.address }}</cover-view>
 			</cover-view>
 			<!-- 右侧导航栏 -->
 			<cover-view class="multi-list rate" :class="{ active: !isMenu1, active1: !isIos && !isMenu1 }" @tap.native.stop>
@@ -30,7 +30,7 @@
 				<cover-view class="blaks"></cover-view>
 				<cover-view class="list-box" scroll-top="50">
 					<cover-view v-for="(item, index) in list" :key="index" class="multi-item rate" @tap="switchRate(item)" :class="{ active: item.id == this.detailData.id }">
-						{{ item.location }}
+						{{ item.address }}
 					</cover-view>
 				</cover-view>
 			</cover-view>
@@ -69,13 +69,16 @@ export default {
 			isMenu1: true,
 			isIos: true,
 			feedbackContent: '',
-			isPoster:true
+			isPoster:true,
+			videoUrl:''
 		};
 	},
 	onLoad(options) {
 		this.detailData = JSON.parse(options.data).item;
 		console.log('this.detailData');
 		console.log(this.detailData);
+		//获取视频接口
+		this.geturl()
 		//获取视频列表
 		this.loadNewsList();
 		
@@ -90,6 +93,35 @@ export default {
 		this.videoContext.play();
 	},
 	methods: {
+		geturl(){
+			var obj = { id: this.detailData.id,playrealUrl:""};
+			
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-yjqz-ssjksp-x-hqsp.htm', { params: obj })
+				.then(res => {
+					console.log('视频url');
+					console.log(res);
+					if (res.data.msgState == 1) {
+						
+						this.videoUrl = res.data.rtmpSrc;
+						// console.log(this.list);
+					} else {
+						uni.showToast({
+							icon: 'none',
+							title: '获取视频失败！',
+							duration: 2000
+						});
+					}
+				})
+				.catch(err => {
+					console.log(err);
+					uni.showToast({
+						icon: 'none',
+						title: '获取视频失败！',
+						duration: 2000
+					});
+				});
+		},
 		fullscreenchange(event) {
 			console.log(event.detail.fullScreen);
 
@@ -246,6 +278,7 @@ export default {
 		this.$nextTick(() => {
 			that.detailData = val;
 			this.this.isPoster=true;
+			this.geturl()
 		});
 			
 			uni.showLoading({

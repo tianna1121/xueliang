@@ -205,13 +205,16 @@ __webpack_require__.r(__webpack_exports__);
       isMenu1: true,
       isIos: true,
       feedbackContent: '',
-      isPoster: true };
+      isPoster: true,
+      videoUrl: '' };
 
   },
   onLoad: function onLoad(options) {
     this.detailData = JSON.parse(options.data).item;
     console.log('this.detailData');
     console.log(this.detailData);
+    //获取视频接口
+    this.geturl();
     //获取视频列表
     this.loadNewsList();
 
@@ -226,6 +229,35 @@ __webpack_require__.r(__webpack_exports__);
     this.videoContext.play();
   },
   methods: {
+    geturl: function geturl() {var _this = this;
+      var obj = { id: this.detailData.id, playrealUrl: "" };
+
+      this.$http.
+      get('/interface/rest/http/xlwb/xlgc-wb-xcx-yjqz-ssjksp-x-hqsp.htm', { params: obj }).
+      then(function (res) {
+        console.log('视频url');
+        console.log(res);
+        if (res.data.msgState == 1) {
+
+          _this.videoUrl = res.data.rtmpSrc;
+          // console.log(this.list);
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: '获取视频失败！',
+            duration: 2000 });
+
+        }
+      }).
+      catch(function (err) {
+        console.log(err);
+        uni.showToast({
+          icon: 'none',
+          title: '获取视频失败！',
+          duration: 2000 });
+
+      });
+    },
     fullscreenchange: function fullscreenchange(event) {
       console.log(event.detail.fullScreen);
 
@@ -269,7 +301,7 @@ __webpack_require__.r(__webpack_exports__);
       var that = this;
       that.isMenu = !that.isMenu;
     },
-    loadNewsList: function loadNewsList() {var _this = this;
+    loadNewsList: function loadNewsList() {var _this2 = this;
       console.log(this.detailData);
       var obj = { pageNo: 1, pageCount: 1000 };
 
@@ -279,8 +311,8 @@ __webpack_require__.r(__webpack_exports__);
         //console.log('监控列表数据');
         //console.log(res);
         if (res.data.msgState == 1) {
-          _this.list = res.data.list;
-          console.log(_this.list);
+          _this2.list = res.data.list;
+          console.log(_this2.list);
         } else {
           uni.showToast({
             icon: 'none',
@@ -306,13 +338,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     //一键求助弹出框
 
-    sosPopup: function sosPopup() {var _this2 = this;
+    sosPopup: function sosPopup() {var _this3 = this;
       console.log('我要反馈');
       this.videoContext.exitFullScreen();
       this.$nextTick(function () {
-        _this2.$refs.showtip1.open();
-        _this2.isshow = true;
-        _this2.isMenu1 = true;
+        _this3.$refs.showtip1.open();
+        _this3.isshow = true;
+        _this3.isMenu1 = true;
       });
     },
     cancel: function cancel(type) {
@@ -321,7 +353,7 @@ __webpack_require__.r(__webpack_exports__);
       this.isshow = false;
     },
     //一键求助
-    submitHelp: function submitHelp() {var _this3 = this;
+    submitHelp: function submitHelp() {var _this4 = this;
       if (this.feedbackContent == '') {
         uni.showToast({
           title: '请输入求助内容',
@@ -356,7 +388,7 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         setTimeout(function () {
-          _this3.cancel();
+          _this4.cancel();
         }, 1000);
       }).
       catch(function (err) {
@@ -376,12 +408,13 @@ __webpack_require__.r(__webpack_exports__);
       this.isMenu1 = true;
     },
     //选择视频播放
-    switchRate: function switchRate(val) {var _this4 = this;
+    switchRate: function switchRate(val) {var _this5 = this;
       var that = this;
 
       this.$nextTick(function () {
         that.detailData = val;
-        _this4.this.isPoster = true;
+        _this5.this.isPoster = true;
+        _this5.geturl();
       });
 
       uni.showLoading({

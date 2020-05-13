@@ -413,6 +413,14 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
       var data = {
         item: item };
 
+      if (item.id.length == 0) {
+        uni.showToast({
+          icon: 'none',
+          title: '该点位暂无视频！',
+          duration: 2000 });
+
+        return;
+      }
       var url = 'video-details';
 
       uni.navigateTo({

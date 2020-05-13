@@ -58,7 +58,7 @@
 			fields="second"
 			@confirm="onConfirm($event, 'date1')"
 			@cancel="onCancel"
-			:disabled-after="false"
+			:disabled-after="true"
 			ref="date1"
 		></w-picker>
 		</view>
@@ -244,7 +244,7 @@ export default {
 		},
 		ontrueGetList() {
 			
-			
+			this.cleanData()
 			this.dates = this.getNowFormatDate()
 			//获取上报类型
 			//this.getType1()

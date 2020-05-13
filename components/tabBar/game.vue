@@ -281,6 +281,14 @@ export default {
 			let data = {
 				item:item
 			};
+			if(item.id.length==0){
+				uni.showToast({
+					icon: 'none',
+					title: '该点位暂无视频！',
+					duration: 2000
+				});
+				return
+			}
 			let url = 'video-details';
 
 			uni.navigateTo({
