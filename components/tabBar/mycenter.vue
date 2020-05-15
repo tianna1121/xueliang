@@ -52,6 +52,7 @@
 <script>
 
 import action from '@/components/shufei-action/action.vue';
+import { setTokenStorage} from '@/test/tool.js'
 export default {
 	components: { action },
 	data() {
@@ -252,6 +253,7 @@ export default {
 		},
 		//退出登陆
 		loginOut() {
+			setTokenStorage('')
 			uni.redirectTo({
 				url: `/pages/login/login`
 			});

@@ -131,8 +131,7 @@ http.interceptor.request((config, cancel) => { /* 请求之前拦截器 */
 	// console.log("token=")
 	// console.log(getTokenStorage())
 
-
-	if (config.url != '/interface/rest/http/xlwb/xlgc-wb-jdh-yhdl.htm') {
+   if (config.url != '/interface/rest/http/xlwb/xlgc-wb-jdh-yhdl.htm') {
 
 		if (getTokenStorage().length == 0 || getTokenStorage().length == undefined) {
 			uni.redirectTo({
@@ -140,6 +139,7 @@ http.interceptor.request((config, cancel) => { /* 请求之前拦截器 */
 			});
 		}
 	}
+	
 
 	config.header = {
 		...config.header,

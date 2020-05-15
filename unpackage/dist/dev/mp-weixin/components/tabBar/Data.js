@@ -230,7 +230,6 @@ __webpack_require__.r(__webpack_exports__);
     this.getType();
     this.dates = this.getNowFormatDate();
   },
-
   methods: {
     tosts: function tosts() {
       if (this.type2.length <= 1) {
@@ -242,7 +241,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
     },
-    // 获取当前系统时间戳
+    // 获取当前系统时间戳anshi
     getNowFormatDate: function getNowFormatDate() {
       var date = new Date();
       var seperator1 = "-";
@@ -370,7 +369,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     ontrueGetList: function ontrueGetList() {
 
-      this.cleanData();
+      // this.cleanData()
       this.dates = this.getNowFormatDate();
       //获取上报类型
       //this.getType1()

@@ -104,7 +104,6 @@ export default {
 		this.getType();
 		this.dates = this.getNowFormatDate()
 	},
-
 	methods: {
 		tosts(){
 			if(this.type2.length<=1){
@@ -116,7 +115,7 @@ export default {
 				return
 			}
 		},
-		 // 获取当前系统时间戳
+		 // 获取当前系统时间戳anshi
 		  getNowFormatDate() {
 		      var date = new Date();
 		      var seperator1 = "-";
@@ -244,7 +243,7 @@ export default {
 		},
 		ontrueGetList() {
 			
-			this.cleanData()
+			// this.cleanData()
 			this.dates = this.getNowFormatDate()
 			//获取上报类型
 			//this.getType1()

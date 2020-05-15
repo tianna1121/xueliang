@@ -121,7 +121,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var action = function action() {__webpack_require__.e(/*! require.ensure | components/shufei-action/action */ "components/shufei-action/action").then((function () {return resolve(__webpack_require__(/*! @/components/shufei-action/action.vue */ 236));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -175,6 +175,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var _tool = __webpack_require__(/*! @/test/tool.js */ 26);var action = function action() {__webpack_require__.e(/*! require.ensure | components/shufei-action/action */ "components/shufei-action/action").then((function () {return resolve(__webpack_require__(/*! @/components/shufei-action/action.vue */ 236));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: { action: action },
   data: function data() {
@@ -375,6 +376,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     //退出登陆
     loginOut: function loginOut() {
+      (0, _tool.setTokenStorage)('');
       uni.redirectTo({
         url: "/pages/login/login" });
 

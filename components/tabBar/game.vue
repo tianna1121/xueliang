@@ -30,7 +30,7 @@
 			<view class=" big-mm" v-for="(item, index) in tabItem.newsList" :index="index" :key="index">
 				<view class="grid-item-box" @tap="videoDetail(item)">
 					<image class="image" :src="item.logoUrl" mode=""></image>
-					<text class="text">{{ item.location }}</text>
+					<text class="text">{{ item.address }}</text>
 				</view>
 			</view>
 			
@@ -71,7 +71,7 @@ export default {
 	},
 	data() {
 		return {
-			imageList: [],
+			
 			value:['请选择', '请选择', '请选择'],
 			name: '',
 			idCard: '',
@@ -89,12 +89,15 @@ export default {
 			scrollLeft: 0, //顶部选项卡左滑距离
 			enableScroll: true,
 			tabBars: [],
-			pageNo:1
+			pageNo:1,
+			isFirst:true,
+			isFirst1:true
 		};
 	},
 	async onLoad() {
 		// 获取屏幕宽度
 		windowWidth = uni.getSystemInfoSync().windowWidth;
+		this.init()
 		
 	},
 	methods: {
@@ -194,6 +197,11 @@ export default {
 		
 		ontrueGetList() {
 			console.log('实时监控');
+			console.log(this.isFirst)
+			if(this.isFirst&&this.isFirst1){
+				this.isFirst=false
+					return
+			}
 			this.init()
 			this.getType();
 			this.loadTabbars();

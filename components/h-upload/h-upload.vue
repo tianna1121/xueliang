@@ -44,10 +44,13 @@
 		},
 		methods: {
 			chooseImage() {
+				
+				var num=this.imgArr.length||0
+				var num1=this.imgLimit-num
 				//console.log("图片")
 				let that = this;
 				uni.chooseImage({
-					count: that.imgLimit, //默认9
+					count: num1, //默认9
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 					success: function(res) {
 						console.log(JSON.stringify(res.tempFilePaths));
@@ -61,7 +64,7 @@
 							uni.uploadFile({
 								url: 'https://www.app8848.com/interface/rest/file/upload/util/uploadFile.htm', //仅为示例，非真实的接口地址
 								 header:{token:"281179305_eN2cdo2snJhvbJO2ZC3FzMUNLC2kloZWjJavbkak3cXOLC2abp6WbC3F3i3T3mZNbJ0ixc_T3maRZm92ZC3FzCwiloy8bJ5mlo2S3cXOLC2TbJdWbauWbpUixcEKx8f5z8_Kzs_JzM3T3mKhlm9NlpQixi3w3iwibpqRdUak3cX0zs_0zskOzMET3m5WnJSxnpKa3cXidGqMd8zKzcQO3iwijGhvbmUixi3iLC2wlpQixi3iLC2NZp6Tsm6SZt3F3YuajIQMys30zt3T3Y2vbGUixcQT3YyclG9vbE5hbpUixiLWmFrkRV7aSFoYV3TiLC2MZpyKjma0eqBhjIyIbI2k3cXizsQNzcQNx8_Oya9rt4ZHemyFsoWcyN3T3YyXbI20sm6SZt3F3YhTZJziLC20daqMZo22ZC3FzCwidp5WdC3F3m5KbGwiLC2KjJqNtpQixczKzcQT3YqMZo2xnpKa3cXidGqMd8zKzcQO3iwidIhKjJqNlpQixi20Zoy0zMUNy8EigQ"},
-								filePath: res.tempFilePaths[0],
+								filePath: res.tempFilePaths[i],
 								name: 'file',
 								
 								success: (uploadFileRes) => {
@@ -204,6 +207,7 @@
 			margin: 0 2% 20upx 0;
 			position: relative;
 			display: inline-block;
+		
 		}
 
 		.del {
@@ -212,7 +216,7 @@
 			right: 0;
 			width: 42upx;
 			height: 42upx;
-			z-index: 99999;
+			// z-index: ;
 			background-color: rgba(0, 0, 0, 0.7);
 			background-image: url(https://mmcfile.hiroop.com/miniprogram/delete.png);
 			background-repeat: no-repeat;

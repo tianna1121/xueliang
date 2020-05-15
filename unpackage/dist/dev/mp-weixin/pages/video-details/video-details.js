@@ -187,6 +187,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 {
   components: {
     uniPopup: uniPopup },
@@ -198,8 +199,6 @@ __webpack_require__.r(__webpack_exports__);
       currentRate: 1, //当前播放id
       rateShow: false, //右侧弹出选项
       detailData: {},
-      title: '2019-12-12 13:24:30 星期三',
-      adress: '美星镇-新街村',
       isMenu: false,
       isshow: false,
       isMenu1: true,
@@ -406,15 +405,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     closeedMenu: function closeedMenu() {
       this.isMenu1 = true;
+      if (uni.getSystemInfoSync().platform == 'android') {
+        this.videoContext.requestFullScreen({ direction: 90 });
+      }
     },
     //选择视频播放
-    switchRate: function switchRate(val) {var _this5 = this;
+    switchRate: function switchRate(val) {
       var that = this;
 
       this.$nextTick(function () {
         that.detailData = val;
-        _this5.this.isPoster = true;
-        _this5.geturl();
+        that.isPoster = true;
+        that.geturl();
       });
 
       uni.showLoading({

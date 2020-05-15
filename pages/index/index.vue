@@ -98,8 +98,8 @@
 						if (res.statusCode == 200) {
 							var badge = res.data.list[0].badge;
 							this.badge=badge
-							console.log('badge');
-							console.log(this.badge);
+							//console.log('badge');
+							//console.log(this.badge);
 						} else {
 							uni.showLoading({
 								title: '请求失败'

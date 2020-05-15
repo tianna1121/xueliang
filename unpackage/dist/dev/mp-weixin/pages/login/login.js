@@ -153,6 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _tool = __webpack_require__(/*! @/test/tool.js */ 26); //
 //
 //
@@ -177,7 +178,43 @@ var _tool = __webpack_require__(/*! @/test/tool.js */ 26); //
 //
 //import '@/components/shoyu-xxtea/shoyu-xxtea';
 //import md5 from '@/js_sdk/ccdzhang-dokey/md5.js'
-var _default = { data: function data() {return { userInfo: { username: "", password: "" } };}, components: {}, mounted: function mounted() {(0, _tool.setTokenStorage)('');}, methods: { jumpRegster: function jumpRegster() {var token = "281179305_eN2cdo2snJhvbJO2ZC3FzMUNLC2kloZWjJavbkak3cXOLC2abp6WbC3F3i3T3mZNbJ0ixc_T3maRZm92ZC3FzCwiloy8bJ5mlo2S3cXOLC2TbJdWbauWbpUixcEKx8f5z8_Kzs_JzM3T3mKhlm9NlpQixi3w3iwibpqRdUak3cX0zs_0zskOzMET3m5WnJSxnpKa3cXidGqMd8zKzcQO3iwijGhvbmUixi3iLC2wlpQixi3iLC2NZp6Tsm6SZt3F3YuajIQMys30zt3T3Y2vbGUixcQT3YyclG9vbE5hbpUixiLWmFrkRV7aSFoYV3TiLC2MZpyKjma0eqBhjIyIbI2k3cXizsQNzcQNx8_Oya9rt4ZHemyFsoWcyN3T3YyXbI20sm6SZt3F3YhTZJziLC20daqMZo22ZC3FzCwidp5WdC3F3m5KbGwiLC2KjJqNtpQixczKzcQT3YqMZo2xnpKa3cXidGqMd8zKzcQO3iwidIhKjJqNlpQixi20Zoy0zMUNy8EigQ";
+var _default = { data: function data() {return { logoObj: {}, userInfo: { username: "", password: "" } };}, components: {}, mounted: function mounted() {}, onReady: function onReady() {
+    this.getLogo();
+  },
+  methods: {
+    //获取logo
+    getLogo: function getLogo() {var _this = this;
+      console.log('++++++++');
+      //发起请求
+      var token = "281179305_eN2cdo2snJhvbJO2ZC3FzMUNLC2kloZWjJavbkak3cXOLC2abp6WbC3F3i3T3mZNbJ0ixc_T3maRZm92ZC3FzCwiloy8bJ5mlo2S3cXOLC2TbJdWbauWbpUixcEKx8f5z8_Kzs_JzM3T3mKhlm9NlpQixi3w3iwibpqRdUak3cX0zs_0zskOzMET3m5WnJSxnpKa3cXidGqMd8zKzcQO3iwijGhvbmUixi3iLC2wlpQixi3iLC2NZp6Tsm6SZt3F3YuajIQMys30zt3T3Y2vbGUixcQT3YyclG9vbE5hbpUixiLWmFrkRV7aSFoYV3TiLC2MZpyKjma0eqBhjIyIbI2k3cXizsQNzcQNx8_Oya9rt4ZHemyFsoWcyN3T3YyXbI20sm6SZt3F3YhTZJziLC20daqMZo22ZC3FzCwidp5WdC3F3m5KbGwiLC2KjJqNtpQixczKzcQT3YqMZo2xnpKa3cXidGqMd8zKzcQO3iwidIhKjJqNlpQixi20Zoy0zMUNy8EigQ";
+      (0, _tool.setTokenStorage)(token);
+      this.$http.get('/interface/rest/http/xlwb/xlgc-wb-logo.htm').then(function (res) {
+
+        console.log("logo获取");
+        console.log(res.data);
+        if (res.data.msgState == 1) {
+          _this.logoObj = res.data.list[0];
+          (0, _tool.setTokenStorage)('');
+        } else {
+          uni.showToast({
+            title: res.data.msg,
+            duration: 2000,
+            icon: 'none' });
+
+
+        }
+      }).catch(function (err) {
+        console.log(err);
+
+        uni.showToast({
+          title: '获取logo失败！',
+          duration: 2000,
+          icon: 'none' });
+
+      });
+    },
+    jumpRegster: function jumpRegster() {
+      var token = "281179305_eN2cdo2snJhvbJO2ZC3FzMUNLC2kloZWjJavbkak3cXOLC2abp6WbC3F3i3T3mZNbJ0ixc_T3maRZm92ZC3FzCwiloy8bJ5mlo2S3cXOLC2TbJdWbauWbpUixcEKx8f5z8_Kzs_JzM3T3mKhlm9NlpQixi3w3iwibpqRdUak3cX0zs_0zskOzMET3m5WnJSxnpKa3cXidGqMd8zKzcQO3iwijGhvbmUixi3iLC2wlpQixi3iLC2NZp6Tsm6SZt3F3YuajIQMys30zt3T3Y2vbGUixcQT3YyclG9vbE5hbpUixiLWmFrkRV7aSFoYV3TiLC2MZpyKjma0eqBhjIyIbI2k3cXizsQNzcQNx8_Oya9rt4ZHemyFsoWcyN3T3YyXbI20sm6SZt3F3YhTZJziLC20daqMZo22ZC3FzCwidp5WdC3F3m5KbGwiLC2KjJqNtpQixczKzcQT3YqMZo2xnpKa3cXidGqMd8zKzcQO3iwidIhKjJqNlpQixi20Zoy0zMUNy8EigQ";
       (0, _tool.setTokenStorage)(token);
       uni.redirectTo({
         url: '../register/register' });
@@ -185,6 +222,7 @@ var _default = { data: function data() {return { userInfo: { username: "", passw
 
     },
     loginJump: function loginJump() {
+      (0, _tool.setTokenStorage)('');
       var that = this;
       console.log(this.userInfo);
       if (this.userInfo.username.length < 1) {

@@ -3,15 +3,15 @@
 		<image  mode="scaleToFill"  class="bg-img" src="../../static/img/news/login_bg.png"></image>
 	    <!-- logo图 -->
 		<view class="main">
-			<image class="logo-img" src="../../static/img/news/xuelogo.png"></image>
-			<view class="title">雪亮工程</view>
+			<image class="logo-img" :src="logoObj.logo"></image>
+			<view class="title">{{logoObj.name}}</view>
 			<view class="acount-box">
 				<text class="account-title">账号：</text>
 				<input v-model="userInfo.username" class="ipt-tel" placeholder="请输入注册手机号"  type="number" placeholder-class="placeholder"/>	
 			</view>
 			<view class="acount-box passwd">
 				<text class="account-title">密码：</text>
-				<input v-model="userInfo.password" password class="ipt-tel " placeholder="初始密码为身份证后六位"  type="idcard" placeholder-class="placeholder"/>	
+				<input v-model="userInfo.password" password class="ipt-tel " placeholder="初始密码为身份证后六位"  type="text" placeholder-class="placeholder"/>	
 			</view>
 			<button type="primary" class="btn-login" @tap="loginJump">登录</button>
 			<view class="jump-reg" @tap="jumpRegster">注册账号</view>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+	
 	import {
 	  setTokenStorage,
 	  getTokenStorage,
@@ -31,6 +32,7 @@
 	export default {
 		data() {
 			return {
+				logoObj:{},
 				userInfo:{
 					username:"",
 					password:""
@@ -41,9 +43,44 @@
 			
 		},
 		mounted() {
-			setTokenStorage('')
+			
+			
+		},
+		onReady(){
+			this.getLogo()
 		},
 		methods:{
+			//获取logo
+			getLogo(){
+				console.log('++++++++')
+				//发起请求
+				var token=`281179305_eN2cdo2snJhvbJO2ZC3FzMUNLC2kloZWjJavbkak3cXOLC2abp6WbC3F3i3T3mZNbJ0ixc_T3maRZm92ZC3FzCwiloy8bJ5mlo2S3cXOLC2TbJdWbauWbpUixcEKx8f5z8_Kzs_JzM3T3mKhlm9NlpQixi3w3iwibpqRdUak3cX0zs_0zskOzMET3m5WnJSxnpKa3cXidGqMd8zKzcQO3iwijGhvbmUixi3iLC2wlpQixi3iLC2NZp6Tsm6SZt3F3YuajIQMys30zt3T3Y2vbGUixcQT3YyclG9vbE5hbpUixiLWmFrkRV7aSFoYV3TiLC2MZpyKjma0eqBhjIyIbI2k3cXizsQNzcQNx8_Oya9rt4ZHemyFsoWcyN3T3YyXbI20sm6SZt3F3YhTZJziLC20daqMZo22ZC3FzCwidp5WdC3F3m5KbGwiLC2KjJqNtpQixczKzcQT3YqMZo2xnpKa3cXidGqMd8zKzcQO3iwidIhKjJqNlpQixi20Zoy0zMUNy8EigQ`
+				setTokenStorage(token)
+				this.$http.get('/interface/rest/http/xlwb/xlgc-wb-logo.htm').then(res => {
+					
+					console.log("logo获取");
+					console.log(res.data);
+					if(res.data.msgState==1){
+						this.logoObj=res.data.list[0]
+							setTokenStorage('')
+							}else{
+						uni.showToast({
+							 title: res.data.msg,
+							 duration: 2000,
+							 icon:'none'
+						})
+						
+					}
+				}).catch(err => {
+					console.log(err);
+					
+					uni.showToast({
+						 title: '获取logo失败！',
+						 duration: 2000,
+						 icon:'none'
+					})
+				})
+			},
 			jumpRegster(){
 				var token=`281179305_eN2cdo2snJhvbJO2ZC3FzMUNLC2kloZWjJavbkak3cXOLC2abp6WbC3F3i3T3mZNbJ0ixc_T3maRZm92ZC3FzCwiloy8bJ5mlo2S3cXOLC2TbJdWbauWbpUixcEKx8f5z8_Kzs_JzM3T3mKhlm9NlpQixi3w3iwibpqRdUak3cX0zs_0zskOzMET3m5WnJSxnpKa3cXidGqMd8zKzcQO3iwijGhvbmUixi3iLC2wlpQixi3iLC2NZp6Tsm6SZt3F3YuajIQMys30zt3T3Y2vbGUixcQT3YyclG9vbE5hbpUixiLWmFrkRV7aSFoYV3TiLC2MZpyKjma0eqBhjIyIbI2k3cXizsQNzcQNx8_Oya9rt4ZHemyFsoWcyN3T3YyXbI20sm6SZt3F3YhTZJziLC20daqMZo22ZC3FzCwidp5WdC3F3m5KbGwiLC2KjJqNtpQixczKzcQT3YqMZo2xnpKa3cXidGqMd8zKzcQO3iwidIhKjJqNlpQixi20Zoy0zMUNy8EigQ`
 				setTokenStorage(token)
@@ -53,6 +90,7 @@
 				});
 			},
 			loginJump(){
+				setTokenStorage('')
 				var that=this;
 				console.log(this.userInfo);
 				if(this.userInfo.username.length<1){

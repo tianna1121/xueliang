@@ -203,7 +203,7 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
 
   data: function data() {
     return {
-      imageList: [],
+
       value: ['请选择', '请选择', '请选择'],
       name: '',
       idCard: '',
@@ -221,12 +221,15 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
       scrollLeft: 0, //顶部选项卡左滑距离
       enableScroll: true,
       tabBars: [],
-      pageNo: 1 };
+      pageNo: 1,
+      isFirst: true,
+      isFirst1: true };
 
   },
-  onLoad: function onLoad() {return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
               // 获取屏幕宽度
-              windowWidth = uni.getSystemInfoSync().windowWidth;case 1:case "end":return _context.stop();}}}, _callee);}))();
+              windowWidth = uni.getSystemInfoSync().windowWidth;
+              _this.init();case 2:case "end":return _context.stop();}}}, _callee);}))();
 
   },
   methods: {
@@ -246,7 +249,7 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
       this.tabBars = tabList;
       this.loadNewsList('add');
     },
-    loadNewsList: function loadNewsList(type) {var _this = this;
+    loadNewsList: function loadNewsList(type) {var _this2 = this;
       console.log("实时监控数据");
       var tabItem = this.tabBars[this.tabCurrentIndex];
 
@@ -285,10 +288,10 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
 
             tabItem.newsList.push(item);
           });
-          _this.pageNo += 1;
+          _this2.pageNo += 1;
           //下拉刷新 关闭刷新动画
           if (type === 'refresh') {
-            _this.$refs.mixPulldownRefresh && _this.$refs.mixPulldownRefresh.endPulldownRefresh();
+            _this2.$refs.mixPulldownRefresh && _this2.$refs.mixPulldownRefresh.endPulldownRefresh();
 
 
 
@@ -302,7 +305,7 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
           if (type === 'add') {
             if (res.data.totalPages === 0 || res.data.curPage === res.data.totalPages) {
               tabItem.loadMoreStatus = 2;
-              _this.pageNo = 1;
+              _this2.pageNo = 1;
             }
           }
         } else {
@@ -326,6 +329,11 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
 
     ontrueGetList: function ontrueGetList() {
       console.log('实时监控');
+      console.log(this.isFirst);
+      if (this.isFirst && this.isFirst1) {
+        this.isFirst = false;
+        return;
+      }
       this.init();
       this.getType();
       this.loadTabbars();
@@ -340,15 +348,15 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
       this.srcId = '';
       this.pageNo = 1;
     },
-    getType: function getType() {var _this2 = this;
+    getType: function getType() {var _this3 = this;
       this.$http.
       get('/interface/rest/http/xlwb/xlgc-wb-xcx-sssj-xzcjl.htm', { params: {} }).
       then(function (res) {
         //console.log('级联数据');
         //console.log(res);
         if (res.data.msgState == 1) {
-          _this2.options = res.data.result;
-          console.log(_this2.options);
+          _this3.options = res.data.result;
+          console.log(_this3.options);
           // var obj1 = [{ id: '0', type: '点击选择' }];
           // var data = res.data.list;
           // var obj = [...obj1, ...data];
@@ -367,7 +375,7 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
         console.log(err);
       });
     },
-    getList: function getList() {var _this3 = this;
+    getList: function getList() {var _this4 = this;
       var obj = { id: this.srcId, pageNo: this.pageNo };
       if (this.srcId.length == 0) {
         delete obj.id;
@@ -378,8 +386,8 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
         //console.log('监控列表数据');
         //console.log(res);
         if (res.data.msgState == 1) {
-          _this3.list = res.data.list;
-          console.log(_this3.list);
+          _this4.list = res.data.list;
+          console.log(_this4.list);
 
         } else {
           uni.showToast({

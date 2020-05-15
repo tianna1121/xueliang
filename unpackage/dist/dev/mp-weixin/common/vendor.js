@@ -1829,7 +1829,6 @@ http.interceptor.request(function (config, cancel) {/* 请求之前拦截器 */
   // console.log("token=")
   // console.log(getTokenStorage())
 
-
   if (config.url != '/interface/rest/http/xlwb/xlgc-wb-jdh-yhdl.htm') {
 
     if ((0, _tool.getTokenStorage)().length == 0 || (0, _tool.getTokenStorage)().length == undefined) {
@@ -1838,6 +1837,7 @@ http.interceptor.request(function (config, cancel) {/* 请求之前拦截器 */
 
     }
   }
+
 
   config.header = _objectSpread({},
   config.header, {

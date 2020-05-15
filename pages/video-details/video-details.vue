@@ -11,16 +11,17 @@
 						<cover-image src="../../static/img/news/menu@2x.png"></cover-image>
 						<cover-view class="video-control-text1">视频选择</cover-view>
 					</cover-view>
+					 
 					<cover-view v-else></cover-view>
 				</cover-view>
 			</cover-view>
 			<!-- 一键求助 -->
 			<cover-view class="sos-box" @tap="sosPopup"><cover-image class="sos-img" src="../../static/img/news/sos.png"></cover-image></cover-view>
 			<!-- 位置 -->
-			<cover-view class="adress-box">
+			<!-- <cover-view class="adress-box">
 				<cover-image class="adress-img" src="../../static/img/news/location.png"></cover-image>
 				<cover-view class="adresss">{{ detailData.address }}</cover-view>
-			</cover-view>
+			</cover-view> -->
 			<!-- 右侧导航栏 -->
 			<cover-view class="multi-list rate" :class="{ active: !isMenu1, active1: !isIos && !isMenu1 }" @tap.native.stop>
 				<cover-view class="top-close" @tap="closeedMenu">
@@ -62,8 +63,6 @@ export default {
 			currentRate: 1, //当前播放id
 			rateShow: false, //右侧弹出选项
 			detailData: {},
-			title: '2019-12-12 13:24:30 星期三',
-			adress: '美星镇-新街村',
 			isMenu: false,
 			isshow: false,
 			isMenu1: true,
@@ -270,6 +269,9 @@ export default {
 		},
 		closeedMenu() {
 			this.isMenu1 = true;
+			if (uni.getSystemInfoSync().platform == 'android') {
+				this.videoContext.requestFullScreen({direction:90});
+			}
 		},
 		//选择视频播放
 		switchRate(val) {
@@ -277,8 +279,8 @@ export default {
 			
 		this.$nextTick(() => {
 			that.detailData = val;
-			this.this.isPoster=true;
-			this.geturl()
+			that.isPoster=true;
+			that.geturl()
 		});
 			
 			uni.showLoading({
