@@ -136,7 +136,7 @@
 			},
 			getType() {
 				this.$http
-					.get('/interface/rest/http/xlwb/xlgc-wb-xcx-sssj-xzcjl.htm', { params: {} })
+					.get('/interface/rest/http/xlwb/xlgc-wb-jdh-zcdwxz.htm', { params: {} })
 					.then(res => {
 					 	console.log('单位');
 						console.log(res);

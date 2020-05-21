@@ -275,7 +275,7 @@ var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/
     },
     getType: function getType() {var _this = this;
       this.$http.
-      get('/interface/rest/http/xlwb/xlgc-wb-xcx-sssj-xzcjl.htm', { params: {} }).
+      get('/interface/rest/http/xlwb/xlgc-wb-jdh-zcdwxz.htm', { params: {} }).
       then(function (res) {
         console.log('单位');
         console.log(res);

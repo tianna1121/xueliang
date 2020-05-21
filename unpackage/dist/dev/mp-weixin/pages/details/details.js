@@ -516,10 +516,22 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
       });
     },
     alertMsg: function alertMsg() {var _this5 = this;
-      console.log('我要反馈');
-      this.$nextTick(function () {
-        _this5.$refs.showtip1.open();
-      });
+      if (this.detailData.feedback_content) {
+
+        uni.showToast({
+          title: '您已反馈过',
+          duration: 2000,
+          icon: "none" });
+
+        return;
+
+      } else {
+        console.log('我要反馈');
+        this.$nextTick(function () {
+          _this5.$refs.showtip1.open();
+        });
+      }
+
     },
 
     submitFeedbackContent: function submitFeedbackContent() {var _this6 = this;
@@ -541,10 +553,8 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 81));functi
         uni.hideLoading();
         console.log(res.data);
         if (res.data.msgState == 1) {
-
-          _this6.detailData.feedback_content = _this6.feedbackContent;
-
-
+          _this6.loadNewsList();
+          //this.detailData.feedback_content = this.feedbackContent;
         }
         uni.showToast({
           title: res.data.msg,

@@ -359,10 +359,22 @@ category:[],
 			});
 		},
 		alertMsg() {
-			console.log('我要反馈');
-			this.$nextTick(() => {
-				this.$refs.showtip1.open();
-			});
+			if(this.detailData.feedback_content){
+				
+				uni.showToast({
+				    title: '您已反馈过',
+				    duration: 2000,
+					icon:"none"
+				});
+				return
+				
+			}else{
+				console.log('我要反馈');
+				this.$nextTick(() => {
+					this.$refs.showtip1.open();
+				});
+			}
+			
 		},
 
 		submitFeedbackContent() {
@@ -384,10 +396,8 @@ category:[],
 				uni.hideLoading();
 				console.log(res.data);
 				if(res.data.msgState==1){
-					
-					this.detailData.feedback_content = this.feedbackContent;
-					
-					
+					this.loadNewsList()
+					//this.detailData.feedback_content = this.feedbackContent;
 				}
 				uni.showToast({
 				    title: res.data.msg,
