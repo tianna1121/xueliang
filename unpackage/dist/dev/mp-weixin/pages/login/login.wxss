@@ -65,7 +65,8 @@ page {
   width: 330rpx;
   height: 330rpx;
   margin: 128rpx auto 0;
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 .title {
   z-index: 100;
@@ -80,7 +81,8 @@ page {
   height: 50rpx;
   margin: 88rpx auto 12rpx;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 5rpx;
+  -webkit-border-radius: 5rpx;
+          border-radius: 5rpx;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -137,7 +139,8 @@ page {
   width: 690rpx;
   height: 94rpx;
   background: #2256D8 !important;
-  border-radius: 10rpx;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
 }
 .jump-reg {
   z-index: 100;

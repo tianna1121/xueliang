@@ -24,15 +24,15 @@
 						-->
 						<view v-for="(item, index) in tabItem.newsList" :key="index" class="news-item" @click="navToDetails(item)">
 							<view class="items">
-								<text class="item-title">
-									上报人:
-									<text class="it1" space="emsp" decode="true">{{ item.reporter }}</text>
+								<text class="item-title111 item-title20">
+								<text class="item-title item-title1" space="emsp">上报人:</text>	
+									<text class="it1 it33" space="emsp" decode="true">{{ item.reporter }}1111111111</text>
 								</text>
-								<text class="item-title" space="emsp" :decode="trues" @tap.stop="callPhone(item.phone)">
+								<text class="item-title111" space="emsp" :decode="trues" @tap.stop="callPhone(item.phone)">
 									电话:
 									<text class="it2">{{ item.phone }}</text>
 								</text>
-								<text class="item-title last-cild" space="emsp">
+								<text class="item-title111 last-cild" space="emsp">
 									状态:
 									<text class="it2" :class="{ statusd: item.status == 3||item.status == 4 }">{{ statusChange(item.status) }}</text>
 								</text>
@@ -433,10 +433,20 @@ export default {
 		background-color: #fff;
 		margin-bottom: 20rpx;
 	}
-	.item-title {
+	.item-title{
 		font-size: 28rpx;
 		color: #000;
+	}
+	.item-title111 {
+		font-size: 28rpx;
+		color: #000;
+		width: 33%;	
+		border-left: 1px solid red;
 		// margin-right: 45rpx;
+	}
+	
+	.item-title20{
+		width: 38%;
 	}
 	.item-title1 {
 		margin-right: 0rpx;
@@ -456,6 +466,8 @@ export default {
 	}
 	.last-cild {
 		margin-right: 0;
+		text-align: right;
+		width: 28%;
 	}
 	.it3 {
 		padding-left: 10rpx;
@@ -463,6 +475,17 @@ export default {
 		color: #000;
 		width: 540rpx;
 		font-weight: 500;
+		overflow: hidden;
+		word-break: break-all; /* break-all(允许在单词内换行。) */
+		text-overflow: ellipsis; /* 超出部分省略号 */
+		display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+		-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+		-webkit-line-clamp: 2; /** 显示的行数 **/
+	}
+	.it33{
+		
+		width: 150rpx;
+		background-color: red;
 		overflow: hidden;
 		word-break: break-all; /* break-all(允许在单词内换行。) */
 		text-overflow: ellipsis; /* 超出部分省略号 */

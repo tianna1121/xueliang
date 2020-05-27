@@ -175,6 +175,7 @@ page {
   width: 690rpx;
   height: 94rpx;
   background: #2256d8 !important;
-  border-radius: 10rpx;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
 }
 

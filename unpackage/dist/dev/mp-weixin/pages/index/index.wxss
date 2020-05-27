@@ -126,7 +126,8 @@
   width: 100rpx;
   height: 70rpx;
   border-top: 4rpx solid #E5E5E5;
-  border-radius: 70rpx 70rpx 0 0;
+  -webkit-border-radius: 70rpx 70rpx 0 0;
+          border-radius: 70rpx 70rpx 0 0;
   /* 左上、右上、右下、左下 */
   background: #fff;
 }
@@ -137,7 +138,8 @@
   width: auto;
   height: 16px;
   line-height: 16px;
-  border-radius: 16px;
+  -webkit-border-radius: 16px;
+          border-radius: 16px;
   min-width: 16px;
   padding: 0 2px;
   font-size: 12px;

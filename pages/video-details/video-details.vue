@@ -105,11 +105,16 @@ export default {
 						this.videoUrl = res.data.rtmpSrc;
 						// console.log(this.list);
 					} else {
+						this.videoContext.stop();
 						uni.showToast({
 							icon: 'none',
-							title: '获取视频失败！',
+							title: '视频已下线！',
 							duration: 2000
 						});
+						setTimeout(()=>{
+							this.backup()
+						},2000)
+						
 					}
 				})
 				.catch(err => {
