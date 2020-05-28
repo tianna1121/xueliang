@@ -25,8 +25,8 @@
 						<view v-for="(item, index) in tabItem.newsList" :key="index" class="news-item" @click="navToDetails(item)">
 							<view class="items">
 								<text class="item-title111 item-title20">
-								<text class="item-title item-title1" space="emsp">上报人:</text>	
-									<text class="it1 it33" space="emsp" decode="true">{{ item.reporter }}1111111111</text>
+								<text class="item-title item-titless" >上报人:</text>	
+								<text class="it1 it33" space="emsp" decode="true">{{ item.reporter}}</text>
 								</text>
 								<text class="item-title111" space="emsp" :decode="trues" @tap.stop="callPhone(item.phone)">
 									电话:
@@ -437,16 +437,23 @@ export default {
 		font-size: 28rpx;
 		color: #000;
 	}
+	.item-titless{
+		position: absolute;
+		top: 0px;
+	}
 	.item-title111 {
-		font-size: 28rpx;
+		font-size: 26rpx;
 		color: #000;
-		width: 33%;	
-		border-left: 1px solid red;
+		 width: 35%;	
+	
 		// margin-right: 45rpx;
 	}
 	
 	.item-title20{
-		width: 38%;
+		// width: 38%;
+		// flex: 1 ;
+		position: relative;
+		
 	}
 	.item-title1 {
 		margin-right: 0rpx;
@@ -467,7 +474,7 @@ export default {
 	.last-cild {
 		margin-right: 0;
 		text-align: right;
-		width: 28%;
+		width: 27%;
 	}
 	.it3 {
 		padding-left: 10rpx;
@@ -483,21 +490,18 @@ export default {
 		-webkit-line-clamp: 2; /** 显示的行数 **/
 	}
 	.it33{
-		
+		margin-left: 100rpx;
 		width: 150rpx;
-		background-color: red;
-		overflow: hidden;
-		word-break: break-all; /* break-all(允许在单词内换行。) */
-		text-overflow: ellipsis; /* 超出部分省略号 */
-		display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
-		-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
-		-webkit-line-clamp: 2; /** 显示的行数 **/
+		
+		display: inline-block;
+		
 	}
 	.items {
 		margin-bottom: 20rpx;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between; 
+		
 		
 	}
 	.it4 {

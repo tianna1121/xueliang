@@ -25,7 +25,7 @@
 	import {
 	  setTokenStorage,
 	  getTokenStorage,
-	  configHandle
+	  setPhoneStorage
 	} from '@/test/tool.js'
 	//import '@/components/shoyu-xxtea/shoyu-xxtea';
 	//import md5 from '@/js_sdk/ccdzhang-dokey/md5.js'
@@ -131,6 +131,7 @@
 							})
 							//设置token
 							 setTokenStorage(res.data.token) // todo 储存token，可更换为自己的储存token逻辑
+						   setPhoneStorage(that.userInfo.username)
 							uni.redirectTo({
 							    url: '../index/index?show_index=0',
 								

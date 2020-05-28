@@ -21,9 +21,41 @@ const configHandle = (config) => {
   }
   return config
 }
+// 设置储存isNew
+const setIsNewStorage = (isNew) => {
+  uni.setStorageSync('isNew', isNew)
+}
 
+// 获取isNew
+const getIsNewStorage = () => {
+  let isNew = ''
+  try {
+    isNew = uni.getStorageSync('isNew')
+  } catch (e) {
+  }
+  return isNew
+}
+
+// 设置储存电话
+const setPhoneStorage = (phone) => {
+  uni.setStorageSync('phone', phone)
+}
+
+// 获取phone
+const getPhoneIsNewStorage = () => {
+  let phone = ''
+  try {
+    phone = uni.getStorageSync('phone')
+  } catch (e) {
+  }
+  return phone
+}
 export {
   setTokenStorage,
   getTokenStorage,
-  configHandle
+  configHandle,
+  setIsNewStorage,
+  getIsNewStorage,
+  setPhoneStorage,
+  getPhoneIsNewStorage
 }

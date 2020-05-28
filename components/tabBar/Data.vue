@@ -68,6 +68,7 @@
 <script>
 import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 import hUpload from '@/components/h-upload/h-upload.vue';
+import { setIsNewStorage,getIsNewStorage} from '@/test/tool.js'
 export default {
 	components: {
 		uniNavBar,
@@ -96,17 +97,21 @@ export default {
 			videoList:[],
 			typeList:[],
 			childList:[],
-			disabled:true
+			disabled:true,
+			
 		};
 	},
 	onReady() {
 		//获取上报事件
 		this.getType();
-		this.dates = this.getNowFormatDate()
+		this.dates = this.getNowFormatDate();
+		
 	},
+	
+	
 	methods: {
 		tosts(){
-			if(this.type2.length<=1){
+			if(this.type2.length<=1&&this.upData.type=='0'){
 				uni.showToast({
 				    title: '请先选择类型',
 				    duration: 2000,
@@ -243,8 +248,12 @@ export default {
 		},
 		ontrueGetList() {
 			
-			// this.cleanData()
+			console.log(getIsNewStorage())
 			this.dates = this.getNowFormatDate()
+			if(getIsNewStorage()=="true"){
+				this.cleanData()
+			}
+			
 			//获取上报类型
 			//this.getType1()
 		},
@@ -308,21 +317,22 @@ export default {
 		},
 		cleanData() {
 			this.$refs.upload.cleanAll();
+			var obj1 = [{ id: '0', name: '点击选择' }];
 			var upData = {
 				type: '0',
 				category: '0',
 				time: '点击选择',
-
 				address: '选择地点',
 				longitude: '',
 				latitude: '',
-
 				content: '',
 				imgList: ""
 			};
 			this.typeNum1=0
 			this.typeNum2=0
 			this.imgList=[]
+			this.type2=this.typeChange(obj1)
+			this.disabled=true
 			this.upData = upData;
 		},
 		sizeTypeChange(e) {
@@ -347,6 +357,7 @@ export default {
 			//console.log(this.upData.category)
 		},
 		get_location() {
+			setIsNewStorage("false")
 			const that = this;
 			uni.showLoading({
 				title: '加载中',
@@ -394,6 +405,7 @@ export default {
 					this.upData.address= res.name;
 					this.upData.longitude = res.longitude;
 					this.upData.latitude = res.latitude;
+					
 				}
 			});
 		},

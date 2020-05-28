@@ -113,8 +113,7 @@
 		width: 540rpx;
 		height: 270rpx;
 		background-color: #fff;
-		-webkit-border-radius: 14rpx;
-		        border-radius: 14rpx;
+		border-radius: 14rpx;
 }
 .uni-tip-title {
 		margin-top: 27rpx;

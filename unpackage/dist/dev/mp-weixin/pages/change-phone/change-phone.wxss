@@ -41,7 +41,6 @@ page {
 	width: 690rpx;
 	height: 94rpx;
 	background: #2256d8 !important;
-	-webkit-border-radius: 10rpx;
-	        border-radius: 10rpx;
+	border-radius: 10rpx;
 }
 

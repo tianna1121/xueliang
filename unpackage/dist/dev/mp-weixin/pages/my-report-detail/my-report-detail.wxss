@@ -188,8 +188,7 @@ page {
   width: 690rpx;
   height: 94rpx;
   background: #2256d8 !important;
-  -webkit-border-radius: 10rpx;
-          border-radius: 10rpx;
+  border-radius: 10rpx;
 }
 /*
 		*悬浮按钮图片
@@ -224,8 +223,7 @@ page {
   width: 540rpx;
   height: 270rpx;
   background-color: #fff;
-  -webkit-border-radius: 14rpx;
-          border-radius: 14rpx;
+  border-radius: 14rpx;
 }
 .uni-tip-title {
   margin-top: 27rpx;
@@ -281,8 +279,7 @@ page {
   width: 540rpx;
   height: 424rpx;
   background-color: #fff;
-  -webkit-border-radius: 14rpx;
-          border-radius: 14rpx;
+  border-radius: 14rpx;
 }
 .uni-tip-title1 {
   margin-top: 27rpx;

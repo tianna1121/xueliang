@@ -92,8 +92,7 @@ image {
 .avatar {
   width: 190rpx;
   height: 190rpx;
-  -webkit-border-radius: 190rpx;
-          border-radius: 190rpx;
+  border-radius: 190rpx;
 }
 .name {
   font-size: 36rpx;

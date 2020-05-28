@@ -55,8 +55,7 @@ page {
   width: 690rpx;
   height: 94rpx;
   background: #2256d8 !important;
-  -webkit-border-radius: 10rpx;
-          border-radius: 10rpx;
+  border-radius: 10rpx;
 }
 .btn-login1 {
   margin: 140rpx auto 44rpx;
@@ -65,8 +64,7 @@ page {
   width: 340rpx;
   height: 94rpx;
   background: #2256d8 !important;
-  -webkit-border-radius: 10rpx;
-          border-radius: 10rpx;
+  border-radius: 10rpx;
 }
 .rightbtn {
   bottom: 4rpx;
@@ -109,8 +107,7 @@ page {
   width: 540rpx;
   height: 424rpx;
   background-color: #fff;
-  -webkit-border-radius: 14rpx;
-          border-radius: 14rpx;
+  border-radius: 14rpx;
 }
 .uni-tip-title {
   margin-top: 27rpx;

@@ -25,6 +25,7 @@
 </template>
 
 <script>
+	import { setIsNewStorage} from '@/test/tool.js'
 	export default {
 		props: {
 			imgLimit: {
@@ -44,7 +45,7 @@
 		},
 		methods: {
 			chooseImage() {
-				
+				setIsNewStorage("false")
 				var num=this.imgArr.length||0
 				var num1=this.imgLimit-num
 				//console.log("图片")
@@ -114,6 +115,7 @@
 				});
 			},
 			chooseVedio() {
+				setIsNewStorage("false")
 				let that = this;
 				uni.chooseVideo({
 					count: this.VideoLimit, //默认9

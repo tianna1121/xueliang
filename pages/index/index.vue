@@ -38,6 +38,7 @@
 	import tabInformation from '@/components/tabBar/information.vue'
 	import tabData from '@/components/tabBar/Data.vue'
 	import tabMycenter from '@/components/tabBar/mycenter.vue'
+	import {setTokenStorage,getTokenStorage, setIsNewStorage,getPhoneIsNewStorage} from '@/test/tool.js'
 	export default {
 		components: {
 			tabGame,//实时监控    0
@@ -57,6 +58,12 @@
 		},
 		onShow:function(){
 		this.cut_index(this.show_index)
+		 },
+		 created(){
+			 if(getTokenStorage()){
+				  this.getToken()
+			 }
+			
 		 },
 		onLoad(options) {
 			
@@ -86,6 +93,36 @@
 			}, 1000);
 		},
 		methods: {
+			getToken(){
+				var obj={username:getPhoneIsNewStorage()}
+				this.$http
+					.get('/interface/rest/http/xlwb/xlgc-wb-xcx-tokenyz.htm', {
+						params:obj
+					})
+					.then(res => {
+						console.log("获取token");
+						console.log(res);
+						if (res.data.msgState==1) {
+							var isToken=res.data.list[0].token;
+							if(isToken==2){
+								setTokenStorage('')
+								uni.redirectTo({
+									url: `/pages/login/login`
+								});
+							}
+						} else {
+							uni.showLoading({
+								title: res.data.msg
+							});
+						}
+					})
+					.catch(err => {
+						console.log(err);
+						uni.showLoading({
+							title: res.data.msg
+						});
+					});
+			},
 			getbadge(){
 				this.$http
 					.get('/interface/rest/http/xlwb/xlgc-wb-xcx-tzgg-wdsl.htm', {
@@ -116,18 +153,24 @@
 				console.log('----------------------------------',type)
 				this.show_index = type
 				if(this.show_index == 0){
+					setIsNewStorage("true")
 					this.$refs.game.ontrueGetList()
 				}
 				else if(this.show_index == 1){
+					setIsNewStorage("true")
 					this.$refs.discovery.ontrueGetList()
 				}
 				else if(this.show_index == 2){
+					
 					this.$refs.data.ontrueGetList()
 				}
 				else if(this.show_index == 3){
+					
+					setIsNewStorage("true")
 					this.$refs.information.ontrueGetList()
 				}
 				else if(this.show_index == 4){
+					setIsNewStorage("true")
 					this.$refs.mycenter.ontrueGetList()
 				}
 			},
