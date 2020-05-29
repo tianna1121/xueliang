@@ -4,29 +4,16 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
-		"es6": false,
-		"postcss": true,
-		"preloadBackgroundData": false,
+		"urlCheck": true,
 		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		}
+		"es6": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.9.2",
 	"appid": "wxcb5f25e0591d4174",
 	"projectname": "雪亮工程",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

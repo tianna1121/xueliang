@@ -326,11 +326,13 @@ export default {
 				longitude: '',
 				latitude: '',
 				content: '',
-				imgList: ""
+				imgList: "",
+				videoSrc:""
 			};
 			this.typeNum1=0
 			this.typeNum2=0
 			this.imgList=[]
+			this.videoList=[]
 			this.type2=this.typeChange(obj1)
 			this.disabled=true
 			this.upData = upData;

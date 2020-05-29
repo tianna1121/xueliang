@@ -16,15 +16,15 @@
 						-->
 						<view v-for="(item, index) in tabItem.newsList" :key="index" class="news-item" @click="navToDetails(item)">
 							<view class="items">
-								<text class="item-title">
-									上报人:
-									<text class="it1" space="emsp" decode="true">{{ item.reporter }}</text>
+								<text class="item-title111 item-title20">
+								<text class="item-title item-titless" >上报人:</text>	
+								<text class="it1 it33" space="emsp" decode="true">{{ item.reporter}}</text>
 								</text>
-								<text class="item-title" space="emsp" :decode="trues" @tap.stop="callPhone(item.phone)">
+								<text class="item-title111" space="emsp" :decode="trues" @tap.stop="callPhone(item.phone)">
 									电话:
 									<text class="it2"  >{{ item.phone }}</text>
 								</text>
-								<text class="item-title last-cild" space="emsp">
+								<text class="item-title111 last-cild" space="emsp">
 									状态:
 									<text class="it2" :class="{'statusd': item.status == 3||item.status == 4}">{{ statusChange(item.status) }}</text>
 								</text>
@@ -359,7 +359,7 @@ export default {
 	.item-title {
 		font-size: 28rpx;
 		color: #000;
-		margin-right: 45rpx;
+		
 	}
 	.item-title1 {
 		margin-right: 0rpx;
@@ -378,9 +378,7 @@ export default {
 .statusd{
 	color: #888888;
 }
-	.last-cild {
-		margin-right: 0;
-	}
+	
 	.it3 {
 		padding-left: 10rpx;
 		font-size: 28rpx;
@@ -393,6 +391,13 @@ export default {
 		display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
 		-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
 		-webkit-line-clamp: 2; /** 显示的行数 **/
+	}
+	.it33{
+		margin-left: 100rpx;
+		width: 150rpx;
+		
+		display: inline-block;
+		
 	}
 	.items {
 		margin-bottom: 20rpx;
@@ -419,6 +424,28 @@ export default {
 	.video-tip-icon {
 		width: 60upx;
 		height: 60upx;
+	}
+	.item-titless{
+		position: absolute;
+		top: 0px;
+	}
+	.item-title111 {
+		font-size: 28rpx;
+		color: #000;
+		 width: 35%;	
+	
+		// margin-right: 45rpx;
+	}
+	.item-title20{
+		// width: 38%;
+		// flex: 1 ;
+		position: relative;
+		
+	}
+	.last-cild {
+		margin-right: 0;
+		text-align: right;
+		width: 27%;
 	}
 
 </style>

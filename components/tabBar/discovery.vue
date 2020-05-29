@@ -442,7 +442,7 @@ export default {
 		top: 0px;
 	}
 	.item-title111 {
-		font-size: 26rpx;
+		font-size: 28rpx;
 		color: #000;
 		 width: 35%;	
 	
