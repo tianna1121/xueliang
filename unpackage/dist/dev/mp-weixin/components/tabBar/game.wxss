@@ -115,6 +115,9 @@
   font-weight: 500;
   margin-top: 10rpx;
 }
+.xiaX {
+  color: red;
+}
 .panel-scroll-box {
   height: 100%;
 }

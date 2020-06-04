@@ -72,7 +72,7 @@ export default {
 	data() {
 		return {
 			
-			value:['请选择', '请选择', '请选择'],
+			value:['请选择县', '请选择镇', '请选择村'],
 			name: '',
 			idCard: '',
 			phone: '',
@@ -212,7 +212,7 @@ export default {
 			//this.getList()
 		},
 		init(){
-			this.value=['请选择', '请选择', '请选择']
+			this.value=['请选择县', '请选择镇', '请选择村']
 			this.srcId=''
 			this.pageNo=1
 		},
@@ -292,7 +292,7 @@ export default {
 			if(item.id.length==0){
 				uni.showToast({
 					icon: 'none',
-					title: '该点位暂无视频！',
+					title: '该点位已下线！',
 					duration: 2000
 				});
 				return
@@ -417,6 +417,9 @@ export default {
 	font-size: 28rpx;
 	font-weight: 500;
 	margin-top: 10rpx;
+}
+.xiaX{
+	color:red;
 }
 
 

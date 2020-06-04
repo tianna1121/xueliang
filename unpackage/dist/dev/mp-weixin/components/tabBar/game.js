@@ -204,7 +204,7 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 77));functi
   data: function data() {
     return {
 
-      value: ['请选择', '请选择', '请选择'],
+      value: ['请选择县', '请选择镇', '请选择村'],
       name: '',
       idCard: '',
       phone: '',
@@ -344,7 +344,7 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 77));functi
       //this.getList()
     },
     init: function init() {
-      this.value = ['请选择', '请选择', '请选择'];
+      this.value = ['请选择县', '请选择镇', '请选择村'];
       this.srcId = '';
       this.pageNo = 1;
     },
@@ -424,7 +424,7 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 77));functi
       if (item.id.length == 0) {
         uni.showToast({
           icon: 'none',
-          title: '该点位暂无视频！',
+          title: '该点位已下线！',
           duration: 2000 });
 
         return;
