@@ -209,7 +209,10 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   onLoad: function onLoad(options) {
-    this.detailData = JSON.parse(options.data).item;
+    console.log(JSON.parse(decodeURIComponent(options.data)));
+    var data = JSON.parse(decodeURIComponent(options.data));
+    this.detailData = data;
+
     console.log('this.detailData');
     console.log(this.detailData);
     //获取视频接口

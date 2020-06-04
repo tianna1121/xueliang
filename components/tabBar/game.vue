@@ -286,9 +286,14 @@ export default {
 		},
 	
 		videoDetail(item ) {
+			console.log(item);
 			let data = {
-				item:item
+				id:item.id,
+				address:item.address,
+				name:item.name,
+				logoUrl:item.logoUrl,
 			};
+			
 			if(item.id.length==0){
 				uni.showToast({
 					icon: 'none',
@@ -298,9 +303,10 @@ export default {
 				return
 			}
 			let url = 'video-details';
-
+        console.log('视频参数');
+		console.log(data);
 			uni.navigateTo({
-				url: `/pages/video-details/${url}?data=${JSON.stringify(data)}`
+				url: `/pages/video-details/${url}?data=${encodeURIComponent(JSON.stringify(data))}`
 			});
 		},
 		showPicker() {

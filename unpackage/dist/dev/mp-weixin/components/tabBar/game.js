@@ -418,8 +418,13 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 77));functi
     },
 
     videoDetail: function videoDetail(item) {
+      console.log(item);
       var data = {
-        item: item };
+        id: item.id,
+        address: item.address,
+        name: item.name,
+        logoUrl: item.logoUrl };
+
 
       if (item.id.length == 0) {
         uni.showToast({
@@ -430,9 +435,10 @@ var _json = _interopRequireDefault(__webpack_require__(/*! @/json */ 77));functi
         return;
       }
       var url = 'video-details';
-
+      console.log('视频参数');
+      console.log(data);
       uni.navigateTo({
-        url: "/pages/video-details/".concat(url, "?data=").concat(JSON.stringify(data)) });
+        url: "/pages/video-details/".concat(url, "?data=").concat(encodeURIComponent(JSON.stringify(data))) });
 
     },
     showPicker: function showPicker() {
