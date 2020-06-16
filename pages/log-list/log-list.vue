@@ -124,7 +124,7 @@ export default {
 				}
 				uni.showToast({
 					 title: res.data.msg,
-					 duration: 2000,
+					 duration: 2000, 
 					 icon:'none'
 				})
 			})
@@ -380,12 +380,12 @@ export default {
 		color: #000;
 		width: 540rpx;
 		font-weight: 500;
-		overflow: hidden;
-		word-break: break-all; /* break-all(允许在单词内换行。) */
-		text-overflow: ellipsis; /* 超出部分省略号 */
-		display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
-		-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
-		-webkit-line-clamp: 2; /** 显示的行数 **/
+		//overflow: hidden;
+		//word-break: break-all; /* break-all(允许在单词内换行。) */
+	//	text-overflow: ellipsis; /* 超出部分省略号 */
+		//display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+		//-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+		//-webkit-line-clamp: 2; /** 显示的行数 **/
 	}
 	.it33{
 		margin-left: 100rpx;
