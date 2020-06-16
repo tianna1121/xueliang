@@ -14,17 +14,17 @@
 							* 和nvue的区别只是需要把uni标签转为weex标签而已
 							* class 和 style的绑定限制了一些语法，其他并没有不同
 						-->
-						<view v-for="(item, index) in tabItem.newsList" :key="index" class="news-item" @click="navToDetails(item)">
+						<view v-for="(item, index) in tabItem.newsList" :key="index" class="news-item">
 							
 							<view class="items">
 								<text class="item-title" space="emsp">
 									填写时间:
-									<text class="it1">{{ item.address }}</text>
+									<text class="it1">{{ item.date }}</text>
 								</text>
 							</view>
 							<view class="items it4">
 								<text class="item-title item-title1" space="emsp">巡查日志:</text>
-								<text class="it3">{{ item.content }}</text>
+								<text class="it3">{{ item.inspection_log }}</text>
 							</view>
 						</view>
 
@@ -34,7 +34,19 @@
 				</swiper-item>
 			</swiper>
 		</mix-pulldown-refresh>
+	<!-- 填写日志按钮 -->
+	<button  type="primary"  class="btn-login"  @tap="confirmMsg">填写日志</button>
 	
+	<uni-popup ref="showtip" type="center" :mask-click="false">
+		<view class="uni-tip">
+			<text class="uni-tip-title">填写日志</text>
+			<textarea class="popup_textarea" placeholder="输入内容..." v-model="content"></textarea>
+			<view class="uni-tip-group-button">
+				<text class="uni-tip-button uni-tip-button1 " @click="cancel('tip')">关闭</text>
+				<text class="uni-tip-button" @click="submitMgs">提交</text>
+			</view>
+		</view>
+	</uni-popup>
 	</view>
 </template>
 
@@ -59,7 +71,8 @@ export default {
 			scrollLeft: 0, //顶部选项卡左滑距离
 			enableScroll: true,
 			tabBars: [],
-			pageNo:1
+			pageNo:1,
+			content:""
 		};
 	},
 
@@ -80,35 +93,47 @@ export default {
 				delta: 1
 			});
 		},
-		//打电话
-		callPhone(phone){
-			console.log(phone)
-			uni.makePhoneCall({
-			    phoneNumber: phone //仅为示例
+		//确认收到弹出框
+		confirmMsg() {
+			this.$nextTick(() => {
+				this.$refs.showtip.open();
 			});
 		},
-		statusChange(index) {
-			switch (index) {
-				case 0:
-					return '待处理';
-					break;
-				case 1:
-					return '待办';
-					break;
-				case 2:
-					return '待办结';
-					break;
-			
-				case 3:
-					return '已办结';
-					break;
-					case 4:
-						return '无效';
-						break;
-				default:
-					return '待处理';
-			}
-		},
+	cancel(type) {
+		this.$refs.showtip.close();
+	},
+	submitMgs() {
+		uni.showLoading({
+			title: 'loading'
+		});
+		var obj = { content: this.content};
+		//发起请求
+		this.$refs.showtip.close();
+		uni.showLoading({
+			title: 'loading'
+		});
+		this.$http
+			.post('/interface/rest/http/xlwb/xltzxt-xcx-txxcrz.htm', obj)
+			.then(res => {
+				uni.hideLoading();
+				console.log(res.data);
+				if (res.data.msgState == 1) {
+					this.onPulldownReresh()
+					this.content=''
+					
+				}
+				uni.showToast({
+					 title: res.data.msg,
+					 duration: 2000,
+					 icon:'none'
+				})
+			})
+			.catch(err => {
+				console.log(err);
+				uni.hideLoading();
+			});
+	},
+		
 		/**
 		 * 数据处理方法在vue和nvue中通用，可以直接用mixin混合
 		 * 这里直接写的
@@ -192,18 +217,7 @@ export default {
 					console.log(err);
 				});
 		},
-		//新闻详情
-		navToDetails(item) {
-			let data = {
-				id: item.id,
-				
-			};
-			
-
-			uni.navigateTo({
-				url: `/pages/my-report-detail/my-report-detail?data=${JSON.stringify(data)}`
-			});
-		},
+		
 
 		//下拉刷新
 		onPulldownReresh() {
@@ -429,4 +443,79 @@ export default {
 		width: 27%;
 	}
 
+
+.btn-login {
+	margin: 140rpx auto 44rpx;
+	color: #ffffff;
+	font-size: 36rpx;
+	width: 690rpx;
+	height: 94rpx;
+	background: #2256d8 !important;
+	border-radius: 10rpx;
+	position: fixed;
+	bottom: 4rpx;
+	left: 30rpx;
+}
+/* 提示窗口 */
+.uni-tip {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	flex-direction: column;
+	/* #endif */
+
+	width: 540rpx;
+	height: 424rpx;
+	background-color: #fff;
+	border-radius: 14rpx;
+}
+
+.uni-tip-title {
+	margin-top: 27rpx;
+	margin-bottom: 45rpx;
+	text-align: center;
+	font-size: 36rpx;
+	color: #000;
+}
+
+.popup_textarea {
+	width: 430rpx;
+	height: 195rpx;
+	font-size: 28rpx;
+	margin-left: 55rpx;
+	border: 1px #f1f1f1 solid;
+	margin-bottom: -15rpx;
+}
+
+.uni-tip-content {
+	/* padding: 15px;
+	 */
+	font-size: 30rpx;
+	color: #888888;
+	text-align: center;
+}
+
+.uni-tip-group-button {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	justify-content: center;
+	text-align: center;
+	margin-top: 40rpx;
+	height: 100rpx;
+	line-height: 100rpx;
+	border-top: 1rpx solid #f1f1f1;
+}
+
+.uni-tip-button {
+	flex: 1;
+	text-align: center;
+	font-size: 36rpx;
+	color: #4399fc;
+}
+
+.uni-tip-button1 {
+	color: #0a0a0a;
+	border-right: 1rpx solid #f1f1f1;
+}
 </style>

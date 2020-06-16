@@ -10,7 +10,8 @@
     "pages/notificationDetail/notificationDetail",
     "pages/change-phone/change-phone",
     "pages/my-report/my-report",
-    "pages/my-report-detail/my-report-detail"
+    "pages/my-report-detail/my-report-detail",
+    "pages/log-list/log-list"
   ],
   "subPackages": [],
   "window": {
@@ -24,6 +25,5 @@
       "desc": "小程序需要获取您的位置"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

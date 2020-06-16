@@ -1,5 +1,5 @@
 
-.uni-list.data-v-47a7ef72 {
+.uni-list.data-v-321dc3fe {
 
 		display: -webkit-box;
 		display: -webkit-flex;
@@ -18,10 +18,10 @@
 		/* border-bottom-width: 1px;
  */
 }
-.uni-list.data-v-47a7ef72:before {
+.uni-list.data-v-321dc3fe:before {
 		height: 0;
 }
-.uni-list.data-v-47a7ef72:after {
+.uni-list.data-v-321dc3fe:after {
 		height: 0;
 }
 

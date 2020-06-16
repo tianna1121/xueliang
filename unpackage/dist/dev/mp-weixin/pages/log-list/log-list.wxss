@@ -40,7 +40,8 @@ page,
   width: 750rpx;
   height: 90rpx;
   white-space: nowrap;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  -webkit-box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+          box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
   background-color: #fff;
 }
 .nav-bar .nav-item {
@@ -207,5 +208,82 @@ page,
   margin-right: 0;
   text-align: right;
   width: 27%;
+}
+.btn-login {
+  margin: 140rpx auto 44rpx;
+  color: #ffffff;
+  font-size: 36rpx;
+  width: 690rpx;
+  height: 94rpx;
+  background: #2256d8 !important;
+  border-radius: 10rpx;
+  position: fixed;
+  bottom: 4rpx;
+  left: 30rpx;
+}
+/* 提示窗口 */
+.uni-tip {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  width: 540rpx;
+  height: 424rpx;
+  background-color: #fff;
+  border-radius: 14rpx;
+}
+.uni-tip-title {
+  margin-top: 27rpx;
+  margin-bottom: 45rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color: #000;
+}
+.popup_textarea {
+  width: 430rpx;
+  height: 195rpx;
+  font-size: 28rpx;
+  margin-left: 55rpx;
+  border: 1px #f1f1f1 solid;
+  margin-bottom: -15rpx;
+}
+.uni-tip-content {
+  /* padding: 15px;
+	 */
+  font-size: 30rpx;
+  color: #888888;
+  text-align: center;
+}
+.uni-tip-group-button {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  text-align: center;
+  margin-top: 40rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-top: 1rpx solid #f1f1f1;
+}
+.uni-tip-button {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  text-align: center;
+  font-size: 36rpx;
+  color: #4399fc;
+}
+.uni-tip-button1 {
+  color: #0a0a0a;
+  border-right: 1rpx solid #f1f1f1;
 }
 

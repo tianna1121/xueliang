@@ -25,5 +25,6 @@
       "desc": "小程序需要获取您的位置"
     }
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap30.json"
 }
