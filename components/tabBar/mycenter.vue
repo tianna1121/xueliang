@@ -34,7 +34,9 @@
 			<view class="item-next">{{ userInfo.creatTime }}</view>
 		</view>
 		<view class="myrport" @tap="myUpdata">我的上报</view>
+		<view class="myrport" @tap="logList">巡查日志</view>
 		<view class="myrport myrport1" @tap="loginOut">退出登录</view>
+		<view class="end"></view>
 		<uni-popup ref="showtip" type="center" :mask-click="false">
 			<view class="uni-tip">
 				<text class="uni-tip-title">退出登录</text>
@@ -263,6 +265,13 @@ export default {
 			uni.navigateTo({
 				url: `/pages/my-report/my-report`
 			});
+		},
+		//巡查日志
+		logList(){
+			console.log("巡查日志")
+			uni.navigateTo({
+				url: `/pages/log-list/log-list`
+			});
 		}
 	}
 };
@@ -386,5 +395,9 @@ image {
 }
 .myrport1 {
 	color: #000000;
+}
+.end{
+	height: 125rpx;
+	//background-color: red;
 }
 </style>

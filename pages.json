@@ -67,8 +67,13 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
-		}
-	],
+		},{
+            "path" : "pages/log-list/log-list",
+            "style": {
+            	"navigationStyle": "custom"
+            }
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "实时监控",

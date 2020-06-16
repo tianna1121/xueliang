@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniIcons: function() {
-    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 154))
+    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 162))
   },
   wPicker: function() {
-    return __webpack_require__.e(/*! import() | components/w-picker/w-picker */ "components/w-picker/w-picker").then(__webpack_require__.bind(null, /*! @/components/w-picker/w-picker.vue */ 162))
+    return __webpack_require__.e(/*! import() | components/w-picker/w-picker */ "components/w-picker/w-picker").then(__webpack_require__.bind(null, /*! @/components/w-picker/w-picker.vue */ 170))
   }
 }
 var render = function() {
@@ -266,7 +266,7 @@ var _tool = __webpack_require__(/*! @/test/tool.js */ 22); //
 //
 //
 //
-var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-icons/uni-icons.vue */ 154));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { uniIcons: uniIcons }, data: function data() {return { imageList: [], value: ['请选择', '请选择', '请选择'], defaultProps1: { "label": "name", "value": "id", "children": "child" }, options: [], name: "", idCard: "", phone: "", array: ['请选择', '男', '女'], sexIndex: 0, workList: [], workIndex: 0, userInfo: { avatar: "", username: "", idcard: "", sex: "0", phone: "", unit: "请选择", x: '', z: "", c: "" } };}, onShow: function onShow() {uni.hideHomeButton();}, onLoad: function onLoad() {//获取上报类型
+var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-icons/uni-icons.vue */ 162));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { uniIcons: uniIcons }, data: function data() {return { imageList: [], value: ['请选择', '请选择', '请选择'], defaultProps1: { "label": "name", "value": "id", "children": "child" }, options: [], name: "", idCard: "", phone: "", array: ['请选择', '男', '女'], sexIndex: 0, workList: [], workIndex: 0, userInfo: { avatar: "", username: "", idcard: "", sex: "0", phone: "", unit: "请选择", x: '', z: "", c: "" } };}, onShow: function onShow() {uni.hideHomeButton();}, onLoad: function onLoad() {//获取上报类型
     this.getType();}, methods: { onConfirm: function onConfirm($event, val) {console.log($event);this.userInfo.unit = $event.result;console.log(val);this.userInfo.x = $event.value[0];this.userInfo.z = $event.value[1];this.userInfo.c = $event.value[2];console.log(this.userInfo);}, onCancel: function onCancel() {console.log('你取消了');}, showPicker: function showPicker() {this.$refs.linkage.show();}, jumpRegster: function jumpRegster() {
       uni.redirectTo({
         url: '../login/login' });
