@@ -1,4 +1,5 @@
 <script>
+	import {setOpenIdStorage} from '@/test/tool.js'
 export default {
 	onLaunch: function() {
 		console.log('App Launch');
@@ -7,6 +8,8 @@ export default {
 		console.log('App Show');
 		const that = this;
 		//#ifdef MP-WEIXIN
+		//获取openid
+		this.getUserInfo();
 		uni.getSetting({
 			success(res) {
 				console.log('地图位置');
@@ -33,6 +36,7 @@ export default {
 				}
 			}
 		});
+		
 		//#endif
 	},
 	onHide: function() {
@@ -82,6 +86,55 @@ export default {
 							});
 						});
 			    }
+			});
+		},
+		getUserInfo(){
+			console.log('获取用户信息')
+		var 	that =this
+			uni.login({
+			  provider: 'weixin',
+			  success: function (loginRes) {
+				   console.log('code')
+			    console.log(loginRes.code)
+				var upData={
+					code:loginRes.code,
+					
+				}
+				that.$http
+					.post('/interface/rest/http/platform_general/getOpenId.htm', upData, { params: {} })
+					.then(res => {
+						console.log("获取oppenid");
+						console.log(res);
+						if (res.data.msgState == 1) {
+							var openId=res.data.result
+							setOpenIdStorage(openId)
+						}else{
+							uni.showToast({
+								title: res.data.msg,
+								duration: 2000,
+								icon:"none"
+							});
+						}
+						
+					})
+					.catch(err => {
+						console.log(err);
+						uni.showToast({
+							title:"获取地理位置失败",
+							duration: 2000,
+							icon:"none"
+						});
+					});
+			    // 获取用户信息
+			    uni.getUserInfo({
+			      provider: 'weixin',
+			      success: function (infoRes) {
+					   console.log('2222222');
+					  console.log(infoRes.userInfo);
+			        console.log('用户昵称为：' + infoRes.userInfo.nickName);
+			      }
+			    });
+			  }
 			});
 		}
 	

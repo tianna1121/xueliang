@@ -50,6 +50,20 @@ const getPhoneIsNewStorage = () => {
   }
   return phone
 }
+// 设置openid
+const setOpenIdStorage = (openid) => {
+  uni.setStorageSync('openid', openid)
+}
+
+// 获取openid
+const getOpenIdStorage = () => {
+  let openid = ''
+  try {
+    openid = uni.getStorageSync('openid')
+  } catch (e) {
+  }
+  return openid
+}
 export {
   setTokenStorage,
   getTokenStorage,
@@ -57,5 +71,7 @@ export {
   setIsNewStorage,
   getIsNewStorage,
   setPhoneStorage,
-  getPhoneIsNewStorage
+  getPhoneIsNewStorage,
+  setOpenIdStorage,
+  getOpenIdStorage
 }

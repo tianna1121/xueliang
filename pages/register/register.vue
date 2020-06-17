@@ -66,7 +66,8 @@
 	import {
 	  setTokenStorage,
 	  getTokenStorage,
-	  configHandle
+	  configHandle,
+	  getOpenIdStorage
 	} from '@/test/tool.js'
 	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 
@@ -214,8 +215,10 @@
 				},
 
 			submitMsg(){
+				let openid=getOpenIdStorage();
+				console.log('openid')
+				console.log(openid)
 				console.log(this.userInfo)
-				
 				if(this.userInfo.avatar.length<1){
 					uni.showModal({
 						

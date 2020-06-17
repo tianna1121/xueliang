@@ -267,7 +267,8 @@ var _tool = __webpack_require__(/*! @/test/tool.js */ 26); //
 //
 //
 var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-icons/uni-icons.vue */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { uniIcons: uniIcons }, data: function data() {return { imageList: [], value: ['请选择', '请选择', '请选择'], defaultProps1: { "label": "name", "value": "id", "children": "child" }, options: [], name: "", idCard: "", phone: "", array: ['请选择', '男', '女'], sexIndex: 0, workList: [], workIndex: 0, userInfo: { avatar: "", username: "", idcard: "", sex: "0", phone: "", unit: "请选择", x: '', z: "", c: "" } };}, onShow: function onShow() {uni.hideHomeButton();}, onLoad: function onLoad() {//获取上报类型
-    this.getType();}, methods: { onConfirm: function onConfirm($event, val) {console.log($event);this.userInfo.unit = $event.result;console.log(val);this.userInfo.x = $event.value[0];this.userInfo.z = $event.value[1];this.userInfo.c = $event.value[2];console.log(this.userInfo);}, onCancel: function onCancel() {console.log('你取消了');}, showPicker: function showPicker() {this.$refs.linkage.show();}, jumpRegster: function jumpRegster() {
+    this.getType();}, methods: { onConfirm: function onConfirm($event, val) {console.log($event);this.userInfo.unit = $event.result;console.log(val);this.userInfo.x = $event.value[0];this.userInfo.z = $event.value[1];this.userInfo.c = $event.value[2];console.log(this.userInfo);}, onCancel: function onCancel() {console.log('你取消了');}, showPicker: function showPicker() {this.$refs.linkage.show();},
+    jumpRegster: function jumpRegster() {
       uni.redirectTo({
         url: '../login/login' });
 
@@ -353,8 +354,10 @@ var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/
     },
 
     submitMsg: function submitMsg() {
+      var openid = (0, _tool.getOpenIdStorage)();
+      console.log('openid');
+      console.log(openid);
       console.log(this.userInfo);
-
       if (this.userInfo.avatar.length < 1) {
         uni.showModal({
 

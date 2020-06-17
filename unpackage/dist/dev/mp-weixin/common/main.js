@@ -102,7 +102,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+var _tool = __webpack_require__(/*! @/test/tool.js */ 26);var _default =
 {
   onLaunch: function onLaunch() {
     console.log('App Launch');
@@ -111,6 +112,8 @@ __webpack_require__.r(__webpack_exports__);
     console.log('App Show');
     var that = this;
 
+    //获取openid
+    this.getUserInfo();
     uni.getSetting({
       success: function success(res) {
         console.log('地图位置');
@@ -136,6 +139,7 @@ __webpack_require__.r(__webpack_exports__);
           return;
         }
       } });
+
 
 
   },
@@ -185,6 +189,55 @@ __webpack_require__.r(__webpack_exports__);
               icon: "none" });
 
           });
+        } });
+
+    },
+    getUserInfo: function getUserInfo() {
+      console.log('获取用户信息');
+      var that = this;
+      uni.login({
+        provider: 'weixin',
+        success: function success(loginRes) {
+          console.log('code');
+          console.log(loginRes.code);
+          var upData = {
+            code: loginRes.code };
+
+
+          that.$http.
+          post('/interface/rest/http/platform_general/getOpenId.htm', upData, { params: {} }).
+          then(function (res) {
+            console.log("获取oppenid");
+            console.log(res);
+            if (res.data.msgState == 1) {
+              var openId = res.data.result;
+              (0, _tool.setOpenIdStorage)(openId);
+            } else {
+              uni.showToast({
+                title: res.data.msg,
+                duration: 2000,
+                icon: "none" });
+
+            }
+
+          }).
+          catch(function (err) {
+            console.log(err);
+            uni.showToast({
+              title: "获取地理位置失败",
+              duration: 2000,
+              icon: "none" });
+
+          });
+          // 获取用户信息
+          uni.getUserInfo({
+            provider: 'weixin',
+            success: function success(infoRes) {
+              console.log('2222222');
+              console.log(infoRes.userInfo);
+              console.log('用户昵称为：' + infoRes.userInfo.nickName);
+            } });
+
         } });
 
     } } };exports.default = _default;

@@ -178,8 +178,8 @@ var _tool = __webpack_require__(/*! @/test/tool.js */ 26); //
 //
 //import '@/components/shoyu-xxtea/shoyu-xxtea';
 //import md5 from '@/js_sdk/ccdzhang-dokey/md5.js'
-var _default = { data: function data() {return { logoObj: {}, userInfo: { username: "", password: "" } };}, components: {}, mounted: function mounted() {}, onReady: function onReady() {
-    this.getLogo();
+var _default = { data: function data() {return { logoObj: {}, userInfo: { username: "", password: "" } };}, components: {}, mounted: function mounted() {}, onReady: function onReady() {this.getLogo();
+
   },
   methods: {
     //获取logo
@@ -212,8 +212,10 @@ var _default = { data: function data() {return { logoObj: {}, userInfo: { userna
           icon: 'none' });
 
       });
+
     },
     jumpRegster: function jumpRegster() {
+
       var token = "281179305_eN2cdo2snJhvbJO2ZC3FzMUNLC2kloZWjJavbkak3cXOLC2abp6WbC3F3i3T3mZNbJ0ixc_T3maRZm92ZC3FzCwiloy8bJ5mlo2S3cXOLC2TbJdWbauWbpUixcEKx8f5z8_Kzs_JzM3T3mKhlm9NlpQixi3w3iwibpqRdUak3cX0zs_0zskOzMET3m5WnJSxnpKa3cXidGqMd8zKzcQO3iwijGhvbmUixi3iLC2wlpQixi3iLC2NZp6Tsm6SZt3F3YuajIQMys30zt3T3Y2vbGUixcQT3YyclG9vbE5hbpUixiLWmFrkRV7aSFoYV3TiLC2MZpyKjma0eqBhjIyIbI2k3cXizsQNzcQNx8_Oya9rt4ZHemyFsoWcyN3T3YyXbI20sm6SZt3F3YhTZJziLC20daqMZo22ZC3FzCwidp5WdC3F3m5KbGwiLC2KjJqNtpQixczKzcQT3YqMZo2xnpKa3cXidGqMd8zKzcQO3iwidIhKjJqNlpQixi20Zoy0zMUNy8EigQ";
       (0, _tool.setTokenStorage)(token);
       uni.redirectTo({
@@ -222,6 +224,7 @@ var _default = { data: function data() {return { logoObj: {}, userInfo: { userna
 
     },
     loginJump: function loginJump() {
+      var openid = (0, _tool.getOpenIdStorage)();
       (0, _tool.setTokenStorage)('');
       var that = this;
       console.log(this.userInfo);
