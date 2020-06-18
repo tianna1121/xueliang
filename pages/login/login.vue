@@ -114,7 +114,7 @@
 					})
 					return
 				};
-					
+					this.userInfo.openId=openid
 				var obj= Object.assign({}, this.userInfo);
 				//obj.password=md5(obj.password)
 				console.log(obj.password)

@@ -286,6 +286,7 @@
 					countyId:this.userInfo.x.toString(),
 					townId:this.userInfo.z.toString(),
 					villageId:this.userInfo.c.toString(),
+					openId:openid
 				}
 				
 				console.log(obj)

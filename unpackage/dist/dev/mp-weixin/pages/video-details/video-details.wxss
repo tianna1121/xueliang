@@ -179,8 +179,7 @@
   -webkit-transition: width 0.3s ease;
   transition: width 0.3s ease;
   z-index: 9999999;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   padding: 21rpx;
   overflow: hidden;
 }
@@ -198,8 +197,7 @@
   width: 100%;
 }
 .list-box {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   height: 100%;
   padding: 1rpx;
   overflow-y: scroll;

@@ -31,8 +31,7 @@
   width: 100vw;
   height: 100vh;
   padding-bottom: 130rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin-top: 84rpx;
 }
 .swiper-box {
