@@ -141,7 +141,7 @@
 							});
 							}else{
 						uni.showToast({
-							 title: res.data.msg,
+							 title: res.data.msg.split('。')[1],
 							 duration: 2000,
 							 icon:'none'
 						})
