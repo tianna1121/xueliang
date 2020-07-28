@@ -450,18 +450,18 @@ export default {
 	}
 }
 .videoPerson{
-	height: 120rpx;
+	height: 155rpx;
 	position: absolute;
 	bottom: 24rpx;
-	top: 45%;
+	top: 35%;
 	
 	width:100%;
 	z-index: 999;
-	padding-left: 20rpx;
+	padding-left: 10rpx;
 	padding-right: 20rpx;
 	flex-direction: column;
 	display: flex;
-	font-size: 50rpx;
+	font-size: 69rpx;
 	opacity: 0.2;
 
 	color: #fff;
