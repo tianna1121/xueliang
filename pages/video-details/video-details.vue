@@ -5,7 +5,7 @@
 			<!--顶部栏 竖屏-->
 			<cover-view class="video-control">
 				<cover-view class="video-control-back" @tap.native.stop="backup"><cover-image src="../../static/img/news/back.png"></cover-image></cover-view>
-				<cover-view class="video-control-text" @tap.native.stop="backup">{{ detailData.date }}</cover-view>
+				<cover-view class="video-control-text" @tap.native.stop="backup">{{ userInfo.unit+'【'+userInfo.username+'】正在观看' }}</cover-view>
 				<cover-view class="video-control-more" @tap="choosed">
 					<cover-view v-if="isMenu1">
 						<cover-image src="../../static/img/news/menu@2x.png"></cover-image>
@@ -14,6 +14,11 @@
 					 
 					<cover-view v-else></cover-view>
 				</cover-view>
+			</cover-view>
+			<cover-view class="videoPerson">
+			<cover-view class="videoPerson1">{{ userInfo.username}}</cover-view>
+			<cover-view class="videoPerson2">{{ userInfo.unit}}</cover-view>
+			
 			</cover-view>
 			<!-- 一键求助 -->
 			<cover-view class="sos-box" @tap="sosPopup"><cover-image class="sos-img" src="../../static/img/news/sos.png"></cover-image></cover-view>
@@ -69,7 +74,8 @@ export default {
 			isIos: true,
 			feedbackContent: '',
 			isPoster:true,
-			videoUrl:''
+			videoUrl:'',
+			userInfo:{}
 		};
 	},
 	onLoad(options) {
@@ -79,6 +85,7 @@ export default {
 		
 		console.log('this.detailData');
 		console.log(this.detailData);
+		
 		//获取视频接口
 		this.geturl()
 		//获取视频列表
@@ -86,6 +93,8 @@ export default {
 		
 	},
 	mounted(){
+		//获取个人信息
+		this.getMsg()
 		uni.showLoading({
 			title: 'loading'
 		});
@@ -126,6 +135,39 @@ export default {
 						icon: 'none',
 						title: '获取视频失败！',
 						duration: 2000
+					});
+				});
+		},
+		//获取个人中心基本信息
+		getMsg(){
+			
+			console.log("个人数据")
+			this.$http
+				.get('/interface/rest/http/xlwb/xlgc-wb-xcx-grzxsj.htm')
+				.then(res => {
+					
+					console.log(res);
+					if (res.data.msgState == 1) {
+						var userInfo=res.data.list[0]
+						this.userInfo=userInfo
+						this.userInfo.unit=this.userInfo.unit.split('-').join('')
+						
+						
+					}else{
+						uni.showToast({
+							title: res.data.msg,
+							duration: 2000,
+							icon:"none"
+						});
+					}
+					
+				})
+				.catch(err => {
+					console.log(err);
+					uni.showToast({
+						title: "请求失败",
+						duration: 2000,
+						icon:"none"
 					});
 				});
 		},
@@ -405,7 +447,24 @@ export default {
 		height: 120rpx;
 	}
 }
-
+.videoPerson{
+	height: 120rpx;
+	position: absolute;
+	bottom: 24rpx;
+	top: 45%;
+	left: 10%;
+	width: 90%;
+	z-index: 999;
+	flex-direction: column;
+	display: flex;
+	font-size: 40rpx;
+	color: #fff;
+	align-items: center;
+	.videoPerson1{
+		
+	}
+	
+}
 .adress-box {
 	background-color: rgba(0, 0, 0, 0.1);
 	height: 55rpx;
