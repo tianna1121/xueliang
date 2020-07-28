@@ -392,7 +392,7 @@ export default {
 }
 .video-control-text {
 	color: #ffffff;
-	width: 70%;
+	// width: 70%;
 	height: 100%;
 	text-align: left;
 	line-height: 100rpx;
@@ -403,6 +403,8 @@ export default {
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 1;
 	font-size: 32rpx;
+	flex: 1;
+
 }
 	
 .isPosterImg{
@@ -452,12 +454,16 @@ export default {
 	position: absolute;
 	bottom: 24rpx;
 	top: 45%;
-	left: 10%;
-	width: 90%;
+	
+	width:100%;
 	z-index: 999;
+	padding-left: 20rpx;
+	padding-right: 20rpx;
 	flex-direction: column;
 	display: flex;
-	font-size: 40rpx;
+	font-size: 50rpx;
+	opacity: 0.2;
+
 	color: #fff;
 	align-items: center;
 	.videoPerson1{

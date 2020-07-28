@@ -40,7 +40,8 @@ page,
   width: 750rpx;
   height: 90rpx;
   white-space: nowrap;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  -webkit-box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+          box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
   background-color: #fff;
 }
 .nav-bar .nav-item {
